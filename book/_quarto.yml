@@ -49,6 +49,7 @@ format:
   html:
     theme: cosmo
     toc: true
+    include-after-body: html/newsletter.html
   epub:
     rights: >
       © 2026. A work of satirical fiction produced as a publishing-pipeline

@@ -1,0 +1,54 @@
+<!-- Forbidden Bulletin signup CTA — appended to every page of the HTML
+     edition via _quarto.yml include-after-body (html only).
+     PLACEHOLDER FORM: swap the <form> block for your email provider's
+     embed (Buttondown/Kit/MailerLite all hand you a copy-paste form). -->
+<div class="ifm-newsletter">
+  <div class="ifm-newsletter-inner">
+    <p class="ifm-kicker">THE FORBIDDEN BULLETIN</p>
+    <p class="ifm-pitch">One dispatch per week from the Institute for
+    Forbidden Metrology: a measurement, a coincidence the establishment
+    declines to plot, and one act of citizen metrology you can perform at
+    home. A work of satire. Your inbox roots to 9.</p>
+    <form class="ifm-form" action="#" onsubmit="alert('Placeholder — wire this to your email provider.'); return false;">
+      <input type="email" placeholder="you@example.com" required>
+      <button type="submit">Request clearance</button>
+    </form>
+  </div>
+</div>
+<style>
+  .ifm-newsletter {
+    margin: 3rem auto 1rem;
+    max-width: 46rem;
+    background: #0d1b2a;
+    border: 1px solid #d9a441;
+    border-radius: 6px;
+    padding: 1.5rem 1.75rem;
+    color: #e8e2d4;
+  }
+  .ifm-newsletter .ifm-kicker {
+    color: #d9a441;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    margin: 0 0 0.5rem;
+    font-weight: 700;
+  }
+  .ifm-newsletter .ifm-pitch { font-size: 0.9rem; margin: 0 0 1rem; }
+  .ifm-form { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .ifm-form input {
+    flex: 1 1 14rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #3a4a63;
+    border-radius: 4px;
+    background: #f4efe3;
+  }
+  .ifm-form button {
+    padding: 0.5rem 1.1rem;
+    background: #d9a441;
+    color: #0d1b2a;
+    border: none;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .ifm-form button:hover { background: #e6b558; }
+</style>

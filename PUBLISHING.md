@@ -58,6 +58,10 @@ value for a real book:
   figure needs a raster (PNG) fallback. This repo generates both.
 - The index (`\index{}`) is a **print-only** artifact; EPUB/HTML rely on
   search instead. Don't fight it.
+- **The platform around the book** — email list, website, YouTube, IG,
+  LinkedIn — lives in `platform/` (strategy, per-channel playbooks with
+  written content, 8-week launch calendar, generated assets). Read
+  `platform/PLATFORM.md` first: list-first, one video channel, one feed.
 - Keep chapter sources in Markdown (qmd): the same files make the print
   PDF, the ebook, and a marketing website. One source, three products —
   that's the whole reason for this pipeline.

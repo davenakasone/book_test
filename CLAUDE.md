@@ -20,7 +20,9 @@ Traps documented in NOTES.md (biggest: `{dot}`/mermaid blocks hang the
 render wanting Chromium — pre-render diagrams instead; unicode
 superscripts drop glyphs in PDF — use inline math).
 
-**Next (if David wants):** font upgrade via `mainfont`, print cover wrap,
+**Platform kit added** (email/site/YT/IG/LinkedIn playbooks + assets +
+newsletter CTA baked into the HTML edition — placeholder form, swap in a
+real provider embed). **Next (if David wants):** font upgrade via `mainfont`, print cover wrap,
 KDP upload dry-run, epubcheck via Java. Foreman still needs to register
 this project in the index.
 
@@ -53,7 +55,10 @@ book_test/
 │   ├── figures-src/    ← TikZ sources (compiled standalone → pdf/png)
 │   ├── figures/        ← generated figure outputs (committed)
 │   └── _book/          ← render output (gitignored)
-└── latex-shootout/     ← ch01 typeset raw in memoir class for comparison
+├── latex-shootout/     ← ch01 typeset raw in memoir class for comparison
+└── platform/           ← author-platform kit: PLATFORM.md strategy,
+    email/ welcome sequence, social/ YT+IG+LinkedIn playbooks,
+    launch-plan.md, assets/ (from scripts/make_social.py)
 ```
 
 ## Rules of the room
