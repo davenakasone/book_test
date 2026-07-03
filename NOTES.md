@@ -71,6 +71,22 @@ graft memoir-style typography into Quarto via `template-partials` /
 `include-in-header` — same source, upgraded page. Or pay Vellum $249 for
 the look with zero effort (see PUBLISHING.md).
 
+## Windows-portability pass (2026-07-02)
+
+The pipeline was born on macOS; two Unix-isms had crept in and are now
+gone, so a Windows (or Linux) collaborator can build everything:
+
+- `sips` (macOS-only) rasterized the TikZ PDF → replaced by
+  `scripts/build_tikz.py` using **pymupdf** — one rasterizer, all OSes.
+- `latex-shootout/build.sh` (shell + hardcoded mac TinyTeX path) →
+  `build.py`, which finds TeX via PATH then TinyTeX's per-OS locations.
+  It runs pdflatex twice instead of latexmk: **TinyTeX on Windows ships
+  no perl, and latexmk is a perl script.**
+- `.gitattributes` pins line endings (`* text=auto`, LF for `.sh`) so
+  CRLF checkouts don't dirty `.qmd`/`.tex` diffs.
+- `requirements.txt` covers the whole Python side, including quarto-cli
+  itself (`pip install quarto-cli` works on Windows too — no admin).
+
 ## Deferred / untested
 
 - `epubcheck` locally (wants Java ~600 MB; KDP/D2D validate server-side).

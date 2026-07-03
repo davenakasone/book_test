@@ -20,18 +20,27 @@ This repo is two things at once:
    citations, cross-references, TikZ figures), a valid EPUB3 with cover,
    and a searchable HTML site. Total tooling cost: $0, no sudo.
 
-## Build
+## Build (macOS / Linux / Windows)
+
+Everything is Python + Quarto — both first-class on all three OSes.
+On Windows, run the same commands in PowerShell (use `py` if `python`
+isn't on PATH).
 
 ```sh
-pip install quarto-cli          # or brew install --cask quarto
-quarto install tinytex          # ~150 MB LaTeX, self-managing
+python -m pip install -r requirements.txt   # quarto-cli, matplotlib, numpy, pymupdf
+quarto install tinytex                      # ~150 MB LaTeX, self-managing, no admin rights
 
-python scripts/make_figures.py  # regenerate figures (matplotlib)
-cd book && quarto render        # → _book/  (PDF + EPUB + HTML)
+python scripts/make_figures.py              # regenerate matplotlib figures
+python scripts/build_tikz.py                # compile TikZ diagrams → PDF + PNG
+cd book && quarto render                    # → _book/  (PDF + EPUB + HTML)
 ```
 
-The hand-typeset comparison chapter: `latex-shootout/build.sh` (memoir
-class — drop caps, margin notes, custom chapter opener).
+All generated figures are committed, so `quarto render` works out of the
+box — the two figure scripts are only needed when *editing* figures.
+
+The hand-typeset comparison chapter: `python latex-shootout/build.py`
+(memoir class — drop caps, margin notes, custom chapter opener).
+`build.sh` remains as a wrapper for Unix muscle memory.
 
 ## Layout
 

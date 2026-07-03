@@ -1,0 +1,12 @@
+# Keep line endings sane across macOS/Linux/Windows contributors.
+* text=auto
+*.sh text eol=lf
+*.py text
+*.qmd text
+*.tex text
+*.yml text
+*.md text
+*.bib text
+*.html text
+*.png binary
+*.pdf binary

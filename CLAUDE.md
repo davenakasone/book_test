@@ -42,8 +42,11 @@ book_test/
 ├── CLAUDE.md           ← you are here (STATUS above)
 ├── NOTES.md            ← process findings: what worked, what fought back
 ├── PUBLISHING.md       ← where/how to publish; KDP/IngramSpark/D2D specs
+├── requirements.txt    ← full Python deps (cross-platform)
 ├── scripts/
-│   └── make_figures.py ← all matplotlib figures (run with ~/dkn314/bin/python)
+│   ├── make_figures.py ← all matplotlib figures (run with ~/dkn314/bin/python)
+│   ├── make_social.py  ← platform assets (thumbnails, cards, banners)
+│   └── build_tikz.py   ← TikZ → PDF+PNG, cross-platform (pymupdf, no sips)
 ├── book/               ← the Quarto book project
 │   ├── _quarto.yml     ← single source of truth: formats, trim size, chapters
 │   ├── index.qmd       ← preface + satire disclaimer

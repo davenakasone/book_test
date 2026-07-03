@@ -1,0 +1,6 @@
+# Everything needed to build the book + figures on any OS.
+# python -m pip install -r requirements.txt
+quarto-cli
+matplotlib
+numpy
+pymupdf
