@@ -1,78 +1,86 @@
-# book_test — open-source book-production pipeline exploration
+# book_test — *The Starlight Engine* + open-source book pipeline
 
 ## STATUS
 
-**2026-07-02 — v1.1: Part IV "The Underlying Code" added** (Census Method
-pointer-arithmetic, vortex math / digital roots, Riemann Hypothesis
-"proof" built on real math trivia — Montgomery–Dyson tea, GUE statistics,
-42 sixth-moment, all really cited). v1.2 adds ch13 *The Dark Ledger* (relativity/dark-matter/dark-energy
-as grid power accounting). Now **79-page PDF**, 15 chapters, 5 parts. Everything below still true:
-
-**v1 pipeline proven.** *The Starlight Engine*
-(satire disclaimer up front) renders from one
-`quarto render`: **55-page 6×9" PDF with working index/citations/cross-refs
-+ valid EPUB3 with cover + searchable HTML site** (`book/_book/`). Memoir
-shootout built too (`latex-shootout/build/giza-memoir.pdf` — drop caps,
-margin notes; verdict in NOTES.md: write in Quarto, graft fancy typography
-later if wanted). All open source, $0, no sudo: quarto-cli 1.9.38 (pip,
-dkn314) + TinyTeX + pymupdf (added to dkn314 for PDF inspection).
-Traps documented in NOTES.md (biggest: `{dot}`/mermaid blocks hang the
-render wanting Chromium — pre-render diagrams instead; unicode
-superscripts drop glyphs in PDF — use inline math).
-
-**Platform kit added** (email/site/YT/IG/LinkedIn playbooks + assets +
-newsletter CTA baked into the HTML edition — placeholder form, swap in a
-real provider embed). **Next (if David wants):** font upgrade via `mainfont`, print cover wrap,
-KDP upload dry-run, epubcheck via Java. Foreman still needs to register
-this project in the index.
+**2026-07-02 — v1.3.** 79-page book (15 chapters, 5 parts, 3 appendices)
+by "Dr. Chocolate Daddy." One `quarto render` produces: 6×9" print PDF
+(index, BibTeX citations, cross-refs, TikZ figures) + EPUB3 with cover +
+HTML site with newsletter CTA. Cross-platform verified (macOS-born,
+Windows-ready — see NOTES.md portability pass). Author-platform kit in
+`platform/`. Remote: `github.com/davenakasone/book_test`.
+**Next candidates:** LICENSE file (split: code MIT / prose reserved —
+awaiting David), copyright page front-matter, font upgrade via
+`mainfont`, print cover wrap, KDP dry-run.
 
 ## What this is
 
-A **process test, not a real book.** The content bastardizes math/science/
-archaeology on purpose (Great Pyramid = starlight-pumped fusion generator,
-etc.) to exercise every book-production feature: parts/chapters, front/back
-matter, equations, cross-references, citations (BibTeX), tables, callouts,
-generated figures (matplotlib), TikZ diagrams, graphviz, an index, a cover,
-and multi-format output. The book self-identifies as satire on page 1.
+Two things at once: a complete **satirical book** (every claim false on
+purpose — pyramid fusion reactors, a one-page Riemann proof, dark energy
+as a utility bill) and a **proof-of-pipeline** for $0 open-source book
+production. It exercises every book feature: parts, front/back matter,
+equations, citations, cross-refs, tables, callouts, generated figures,
+an index, a cover, multi-format output.
+
+## Build (any OS — macOS / Linux / Windows)
+
+```sh
+python -m pip install -r requirements.txt   # quarto-cli, matplotlib, numpy, pymupdf
+quarto install tinytex                      # once; no admin rights needed
+
+python scripts/make_figures.py              # matplotlib figures
+python scripts/build_tikz.py                # TikZ diagrams → PDF + PNG
+cd book && quarto render                    # → _book/ (PDF + EPUB + HTML)
+python latex-shootout/build.py              # the raw-LaTeX comparison chapter
+```
+
+Generated figures are committed, so `quarto render` alone works out of
+the box. On Windows use PowerShell; `py` if `python` isn't on PATH.
+
+## Hard-won rules (violate these and the build breaks — see NOTES.md)
+
+1. **The satire disclaimer in `index.qmd` is load-bearing. Never remove
+   or soften it.** Same for the disclaimer lines baked into covers,
+   banners, and platform copy.
+2. **No `{dot}`/`{mermaid}` code blocks** — they hang `quarto render`
+   waiting on Chromium. Pre-render every diagram to an image (TikZ via
+   `scripts/build_tikz.py`, or matplotlib).
+3. **No unicode superscripts** (`10¹⁷`) in prose — glyphs silently drop
+   in the PDF. Write inline math: `$10^{17}$`.
+4. Render **all formats with plain `quarto render`** — `--to pdf` wipes
+   the other formats from `_book/`.
+5. Regenerate figures **before** rendering; EPUB embeds images at render
+   time.
+6. Long author bylines clip on the PDF title page (`\maketitle` doesn't
+   wrap); the full credential soup lives on the cover and preface
+   signature instead.
+7. Keep the voice: supremely confident, aggrieved by "the mainstream,"
+   flags its *true* claims explicitly ("this is real, look it up") and
+   asserts the false ones without hedging. No lorem ipsum, ever.
 
 ## Layout
 
 ```
-book_test/
-├── CLAUDE.md           ← you are here (STATUS above)
-├── NOTES.md            ← process findings: what worked, what fought back
-├── PUBLISHING.md       ← where/how to publish; KDP/IngramSpark/D2D specs
-├── requirements.txt    ← full Python deps (cross-platform)
-├── scripts/
-│   ├── make_figures.py ← all matplotlib figures (run with ~/dkn314/bin/python)
-│   ├── make_social.py  ← platform assets (thumbnails, cards, banners)
-│   └── build_tikz.py   ← TikZ → PDF+PNG, cross-platform (pymupdf, no sips)
-├── book/               ← the Quarto book project
-│   ├── _quarto.yml     ← single source of truth: formats, trim size, chapters
-│   ├── index.qmd       ← preface + satire disclaimer
-│   ├── frontmatter/    ← foreword
-│   ├── chapters/       ← ch01–ch11 (4 parts)
-│   ├── appendices/     ← forbidden equations, alignment tables, glossary
-│   ├── references.bib  ← real citations used wrongly + fictional ones
-│   ├── latex/          ← preamble.tex (index pkg), after-body.tex
-│   ├── figures-src/    ← TikZ sources (compiled standalone → pdf/png)
-│   ├── figures/        ← generated figure outputs (committed)
-│   └── _book/          ← render output (gitignored)
-├── latex-shootout/     ← ch01 typeset raw in memoir class for comparison
-└── platform/           ← author-platform kit: PLATFORM.md strategy,
-    email/ welcome sequence, social/ YT+IG+LinkedIn playbooks,
-    launch-plan.md, assets/ (from scripts/make_social.py)
+book/            Quarto project — _quarto.yml is the single source of truth
+  chapters/      ch01–ch15 (5 parts; anchors #sec-* are cross-referenced)
+  appendices/    forbidden equations, alignment tables, glossary
+  references.bib real papers cited wrongly + fictional sources
+  latex/         preamble.tex (index pkg, author font), after-body.tex
+  figures-src/   TikZ sources        figures/  generated outputs (committed)
+  html/          newsletter.html CTA (placeholder form — swap in provider embed)
+  _book/         render output (gitignored)
+scripts/         make_figures.py · make_social.py · build_tikz.py
+latex-shootout/  ch01 hand-set in memoir class (typographic comparison)
+platform/        email sequence, YT/IG/LinkedIn playbooks, launch plan, assets
+NOTES.md         every trap hit, so you don't re-hit them — read before touching render config
+PUBLISHING.md    KDP/IngramSpark/D2D specs + the licensing/copyright section
 ```
 
-## Rules of the room
+## David's-machine specifics (ignore on any other computer)
 
-- **Build:** `cd book/ && ~/dkn314/bin/quarto render` (all formats).
-  Single format: `--to pdf|epub|html`.
-- **Figures:** `~/dkn314/bin/python scripts/make_figures.py` regenerates all.
-- Python = shared venv `~/dkn314/bin/python` (house rule, no per-project venv).
-- Remote: `github.com/davenakasone/book_test` (David explicitly authorized
-  the remote + pushes 2026-07-02, overriding the local-only house default).
-  Commit per meaningful step; push when David says it's good.
-- Foreman index (`../CLAUDE.md`) is not ours to edit — foreman registers this
-  project.
-- The satire disclaimer in `index.qmd` is load-bearing. Never remove it.
+- Python runs via the shared venv `~/dkn314/bin/python`; quarto lives at
+  `~/dkn314/bin/quarto` (house rule: no per-project venvs).
+- This folder sits inside David's `claude_stuff/` foreman ecosystem; the
+  foreman index (`../CLAUDE.md`) is not ours to edit.
+- Pushes to the GitHub remote were explicitly authorized by David
+  (2026-07-02). On any other machine: commit freely, but don't push to
+  a repo you don't own — fork instead.
