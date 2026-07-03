@@ -6,8 +6,7 @@
 — new Part V "The First Graduation": T. rex flight instructor, the
 Unknown Cohort, Chicxulub-as-launch (iridium = thruster catalyst, real),
 destination Kepler-452b in Cygnus (real, ties to the Göbekli sightline).
-by "Dr. Chocolate Daddy."
-One `quarto render` produces: 6×9" print PDF
+By "Dr. Chocolate Daddy." One `quarto render` produces: 6×9" print PDF
 (index, BibTeX citations, cross-refs, TikZ figures) + EPUB3 with cover +
 HTML site with newsletter CTA. Cross-platform verified (macOS-born,
 Windows-ready — see NOTES.md portability pass). Author-platform kit in
@@ -66,7 +65,7 @@ the box. On Windows use PowerShell; `py` if `python` isn't on PATH.
 
 ```
 book/            Quarto project — _quarto.yml is the single source of truth
-  chapters/      ch01–ch15 (5 parts; anchors #sec-* are cross-referenced)
+  chapters/      ch01–ch17 (6 parts; anchors #sec-* are cross-referenced)
   appendices/    forbidden equations, alignment tables, glossary
   references.bib real papers cited wrongly + fictional sources
   latex/         preamble.tex (index pkg, author font), after-body.tex
