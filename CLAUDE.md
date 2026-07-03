@@ -49,7 +49,8 @@ the box. On Windows use PowerShell; `py` if `python` isn't on PATH.
 4. Render **all formats with plain `quarto render`** — `--to pdf` wipes
    the other formats from `_book/`.
 5. Regenerate figures **before** rendering; EPUB embeds images at render
-   time.
+   time. After a render that changes the book, refresh the root download
+   copy: `cp book/_book/The-Starlight-Engine.pdf .`
 6. Long author bylines clip on the PDF title page (`\maketitle` doesn't
    wrap); the full credential soup lives on the cover and preface
    signature instead.

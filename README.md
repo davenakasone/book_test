@@ -8,6 +8,10 @@
 > is wrong. Some are wrong in ways that required real effort. Do not cite
 > it. *Especially* do not cite it in a school paper.
 
+**📕 Just want to read it? Grab
+[The-Starlight-Engine.pdf](The-Starlight-Engine.pdf)** — the built
+79-page 6×9" book, committed at the repo root for easy download.
+
 This repo is two things at once:
 
 1. **A complete satirical book** — 15 chapters + 3 appendices of lovingly
