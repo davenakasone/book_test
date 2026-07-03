@@ -2,8 +2,12 @@
 
 ## STATUS
 
-**2026-07-02 — v1.3.** 79-page book (15 chapters, 5 parts, 3 appendices)
-by "Dr. Chocolate Daddy." One `quarto render` produces: 6×9" print PDF
+**2026-07-02 — v1.4.** 90-page book (17 chapters, 6 parts, 3 appendices)
+— new Part V "The First Graduation": T. rex flight instructor, the
+Unknown Cohort, Chicxulub-as-launch (iridium = thruster catalyst, real),
+destination Kepler-452b in Cygnus (real, ties to the Göbekli sightline).
+by "Dr. Chocolate Daddy."
+One `quarto render` produces: 6×9" print PDF
 (index, BibTeX citations, cross-refs, TikZ figures) + EPUB3 with cover +
 HTML site with newsletter CTA. Cross-platform verified (macOS-born,
 Windows-ready — see NOTES.md portability pass). Author-platform kit in

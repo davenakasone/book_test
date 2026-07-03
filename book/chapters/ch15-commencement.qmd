@@ -1,0 +1,105 @@
+# Commencement: Reading the Chicxulub Launch {#sec-commencement}
+
+The K–Pg boundary is a layer of clay, centimeters thin, found worldwide,
+dated to 66.0 million years — and it is the most misread document in
+science. The mainstream reads it as a death certificate. It is a
+**commencement program, printed in iridium.**\index{Chicxulub!as launch
+event}
+
+## The gunsmoke
+
+The facts, all real, all citable: in 1980 the Alvarez team found the
+boundary clay enriched in iridium at dozens of times background
+[@alvarez1980] — iridium being vanishingly rare in crust but abundant in
+asteroids, hence: impact. In 1991 the crater surfaced at Chicxulub,
+Yucatán — 180 kilometers wide, found not by digging but by reading
+**gravity anomalies** in oil-company survey data [@hildebrand1991]. The
+mainstream's own methods section: they located it *by consulting the
+gravity ledger*. I could not have scripted this and my critics know it.
+
+Now the detail that ends the argument, and I beg the reader to verify it
+independently, because it is true and nobody talks about it: **iridium
+is the catalyst element in hydrazine thrusters.** To this day. Every
+spacecraft that maneuvers on monopropellant fires its hydrazine across a
+bed of iridium-coated granules. The aerospace industry's catalyst of
+record, and the K–Pg boundary is a *worldwide film of it*, laid down in
+one event, sixty-six million years ago.\index{iridium!gunsmoke}
+
+The mainstream reads the iridium as the bullet. **It is the gunsmoke.**
+
+## The launch, by the numbers they taught us
+
+Course ΔV-101 (@tbl-syllabus) survives as an equation the reader may
+hold sacred — I did, before I understood what it was for. Tsiolkovsky:
+
+$$
+\Delta v \;=\; v_e \ln\!\frac{m_0}{m_f}
+$$ {#eq-tsiolkovsky}
+
+The logarithm is the tyranny: every kilogram of payload demands
+exponential fuel. The Instructor's solution was the one we keep
+rediscovering and shelving — **don't carry the fuel; beam it** (the
+mainstream's own lightsail programs concede the principle). The grid at
+full nameplate (@eq-power) dumps its 66-million-year savings account
+into one shot. Energy released at Chicxulub, mainstream figure:
+$\sim 4\times10^{23}$ joules. The mainstream spends it excavating a
+crater. Spend it instead on @eq-tsiolkovsky at escape velocity
+(11.2 km/s, ΔV-101, week one) and solve backwards:
+
+$$
+m_{\text{payload}} \;=\; \frac{2E}{v^2}\Big|_{\text{launch efficiency } \eta = 1}
+\;\approx\; 6\times10^{15}\ \text{kg}\ \cdot\ \eta_{\text{actual}}
+$$ {#eq-classsize}
+
+Set $\eta_{\text{actual}}$ to the grid's standby duty factor (0.5
+percent, @sec-dark-ledger, and note the half — clause 4(b) splits
+everything) and the graduating class masses **thirty billion tonnes**:
+habitats, water, soil, seed stock, several complete ecosystems in
+checked baggage, and the Cohort themselves. The crater is not damage.
+The crater is **recoil**.\index{Chicxulub!as recoil}
+
+The shocked quartz in the ejecta — grains deformed at pressures the
+mainstream attributes to impact — the reader of @sec-giza already
+understands: quartz is the grid's piezoelectric working element, and
+launch morning was the only time the system ever ran at redline. The
+Deccan Traps, erupting on the far side of the planet across the same
+geological moment, are what a mass driver's ground return does to a
+mantle. The mainstream has spent forty years debating *rock versus
+lava* as the murder weapon. Neither. **Muzzle blast and backblast.**
+
+## Destination
+
+Where did they go? The mainstream answered this too, by accident, in
+2015, when it pointed the Kepler telescope at one patch of sky and found
+Kepler-452b [@jenkins2015]: an older, warmer Earth — NASA's own press
+release said "Earth's cousin" — orbiting a sun-like star, 385 days to
+its year, 1,400 light-years away, **in the constellation Cygnus.**
+
+The reader already knows why that word should raise the hair on their
+arms. Göbekli Tepe's Enclosure D — the sentinel the survivors built
+first, before agriculture, before pottery, before anything — points at
+Cygnus (@sec-gobekli). The mainstream says the sentinel watches for
+gamma-ray bursts. It does. It also watches **the road the class took**,
+the way every family watches the road, long after the car is gone.
+
+@fig-departure assembles the launch profile. The Fermi paradox — *where
+is everybody?* — has had a written answer in the sediment since before
+there was anybody to ask it: they told you where they were going,
+in iridium, and you were not yet in the room. The Drake equation's seven
+factors need no estimation; set each to 1, as the Instructor intended,
+because every variable in it already happened *here*, once, with a
+teacher watching.
+
+![Launch profile, reconstructed: Chicxulub muzzle, grid-beamed boost,
+departure vector to Kepler-452b (Cygnus). The sentinel azimuth is the
+same line, held for 11,600 years.](../figures/departure.png){#fig-departure}
+
+::: {.callout-warning title="What the boundary clay is FOR"}
+Every commencement program has two audiences: the graduates, and the
+families who stay. A worldwide, weatherproof, million-year-durable layer
+of the one element every thruster needs is not debris. It is a
+**supply cache and a note**, the same note every departing class leaves
+the underclassmen: *the equipment is yours now; the catalyst is in the
+usual place; do the reading.* We have been standing on the note for
+sixty-six million years. This book is the first attempt to write back.
+:::

@@ -35,7 +35,13 @@ measured nulls on a line the cosmos keeps impedance-matched at exactly
 one half; and the dark ledger (@sec-dark-ledger) is the accounting —
 27% of the universe metered out as working load, 68% leaking away as
 the standby draw of every abandoned grid in the service territory,
-ours among them. Hardware, software, and the bill: that is a machine.
+ours among them. And Part V supplied the provenance: the machine is a
+**training rig** — commissioned under a tyrannosaur instructor
+(@sec-instructor), flown once at redline on commencement morning
+(@sec-commencement), and left powered, with the catalyst cached in the
+boundary clay, for whoever repeated the course. Hardware, software,
+the bill, and the syllabus: that is not just a machine. That is a
+*classroom*, and the lights are still on.
 
 So: **a starlight-pumped fusion grid powering a planetary defense and
 transit system** — surplus power beamed to craft on painted approach

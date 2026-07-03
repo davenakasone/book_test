@@ -363,10 +363,77 @@ def fig_cover():
     plt.close(fig)
 
 
+def fig_departure():
+    """Chicxulub launch profile: muzzle, beamed boost, vector to Cygnus."""
+    fig, ax = plt.subplots(figsize=(6.8, 4.6))
+    ax.set_facecolor("#f4efe3")
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0, 7)
+    ax.axis("off")
+    ink, red, tan = "#1a1a1a", "#8c2f2f", "#c9bfa5"
+
+    # Earth (partial disc, lower left)
+    theta = np.linspace(0.15, 1.35, 200)
+    ex, ey = 1.2 + 3.4 * np.cos(theta), -0.8 + 3.4 * np.sin(theta)
+    ax.plot(ex, ey, color=ink, lw=2)
+    ax.fill_between(ex, -0.8, ey, color="#e8e0cc", zorder=0)
+    ax.annotate("EARTH (66.0 Mya)", (1.7, 0.35), fontsize=7, style="italic")
+
+    # Chicxulub muzzle
+    mx, my = 1.2 + 3.4 * np.cos(0.9), -0.8 + 3.4 * np.sin(0.9)
+    ax.scatter([mx], [my], s=90, marker="o", facecolor="none",
+               edgecolor=red, lw=2, zorder=5)
+    ax.annotate("CHICXULUB (muzzle, Ø180 km)\niridium residue = catalyst cache",
+                (mx + 0.55, my - 0.55), fontsize=6.5, color=red)
+
+    # grid beam lines converging on the muzzle from along the surface
+    for t in (0.45, 0.65, 1.2):
+        gx, gy = 1.2 + 3.4 * np.cos(t), -0.8 + 3.4 * np.sin(t)
+        ax.plot([gx, mx], [gy, my], color=red, lw=0.9, alpha=0.75, zorder=4)
+    ax.annotate("grid beams (nameplate ×1, once)", (4.35, 0.62),
+                fontsize=6, color=red, style="italic")
+
+    # departure trajectory (muzzle → star)
+    star = (8.55, 5.85)
+    tt = np.linspace(0, 1, 100)
+    dx = mx + (star[0] - 0.25 - mx) * tt
+    dy = my + (star[1] - 0.18 - my) * tt**0.8
+    ax.plot(dx, dy, "--", color=ink, lw=1.4)
+    ax.annotate("", xy=star, xytext=(dx[-2], dy[-2]),
+                arrowprops=dict(arrowstyle="-|>", color=ink, lw=1.4))
+    ax.scatter([star[0]], [star[1]], s=170, marker="*", color=ink, zorder=5)
+    ax.annotate(
+        "KEPLER-452B (CYGNUS)\n1,400 ly · 385-day year\n\"Earth's cousin\" — their words",
+        (star[0] + 0.3, star[1] - 1.05), fontsize=6.5, ha="right",
+    )
+
+    # annotations along the climb: Δv above the dashed line, payload below
+    ax.annotate(r"$\Delta v$ = 11.2 km/s  (ΔV-101)",
+                (3.9, 3.6), fontsize=7, rotation=27)
+    ax.annotate("payload ≈ 3×10¹³ kg (Eq. 15.2)",
+                (5.9, 3.4), fontsize=6.5, rotation=27, color="#6b6353")
+
+    # sentinel sightline (Göbekli → star), kept clear of the trajectory text
+    gx, gy = 1.2 + 3.4 * np.cos(1.05), -0.8 + 3.4 * np.sin(1.05)
+    ax.plot([gx, star[0]], [gy, star[1]], color=tan, lw=0.9, ls=":", zorder=1)
+    ax.annotate("Göbekli Tepe sightline (held 11,600 yr)",
+                (3.0, 2.55), fontsize=6, color="#6b6353", rotation=30)
+
+    # title block
+    ax.text(0.15, 6.72, "COMMENCEMENT — LAUNCH PROFILE (AS FLOWN)",
+            fontsize=9, family="serif", weight="bold")
+    ax.text(0.15, 6.4, "IFM DWG 0003 REV J · not to scale · the recoil is the crater",
+            fontsize=6, style="italic", color="#6b6353")
+    for ext in ("png", "pdf"):
+        fig.savefig(FIGDIR / f"departure.{ext}")
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     fig_world()
     fig_grid()
     fig_constants()
     fig_topology()
     fig_cover()
+    fig_departure()
     print(f"figures written to {FIGDIR}")

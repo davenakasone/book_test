@@ -34,10 +34,14 @@ book:
         - chapters/ch11-vortex-math.qmd
         - chapters/ch12-riemann.qmd
         - chapters/ch13-dark-ledger.qmd
+    - part: "The First Graduation"
+      chapters:
+        - chapters/ch14-instructor.qmd
+        - chapters/ch15-commencement.qmd
     - part: "Synthesis"
       chapters:
-        - chapters/ch14-starlight-engine.qmd
-        - chapters/ch15-rebuilding-the-manual.qmd
+        - chapters/ch16-starlight-engine.qmd
+        - chapters/ch17-rebuilding-the-manual.qmd
   appendices:
     - appendices/a-forbidden-equations.qmd
     - appendices/b-alignment-tables.qmd

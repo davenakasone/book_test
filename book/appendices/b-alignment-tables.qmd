@@ -42,6 +42,9 @@ see @sec-stats).
 | Dark matter = metered grid load | @sec-dark-ledger | B (the 5/27/68 audit is real; the meter is mine) |
 | Dark energy = galactic standby leak | @sec-dark-ledger | B (the $10^{120}$ embarrassment is really theirs) |
 | Relativity = clause 4(b) | @sec-dark-ledger | A− (the receipt is genuine; the restaurant is mine) |
+| Birds are dinosaurs (the staff stayed) | @sec-instructor | A (simply true; ask any ornithologist) |
+| Iridium layer = thruster-catalyst cache | @sec-commencement | B+ (the catalyst chemistry is real; the note is mine) |
+| Chicxulub = commencement, not extinction | @sec-commencement | B (the crater is real; the direction of travel is negotiable) |
 
 : Grade inflation is the mainstream's disease; the IFM grades honestly and concludes anyway. {#tbl-grades}
 
