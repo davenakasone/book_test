@@ -1,0 +1,69 @@
+# The Long Count Ephemeris {#sec-long-count}
+
+The Maya\index{Long Count} kept three calendars at once: a 260-day ritual
+round, a 365-day civil year, and the Long Count — a pure positional tally
+of days since a zero date in 3114 BC, structured in nested cycles:
+20 days to a *uinal*, 18 uinals to a *tun*, 20 tuns to a *katun*, 20 katuns
+to a *baktun*, 13 baktuns to the full period. Mixed-radix, positional,
+zero-inclusive. The mainstream calls this "sophisticated timekeeping."
+Engineers call it something else: **a counter register with prescalers**,
+and nobody builds a 5,125-year counter to know when brunch is.
+
+## What rolls over in 2012 stays in 2012
+
+The 13th baktun expired on 21 December 2012. The internet predicted
+apocalypse; archaeology predicted nothing; both were wrong in the usual
+directions. What actually happened on that date — and I invite the reader
+to check the Fermi burst catalog for GRB 121221A [@vonkienlin2020], which
+exists, which is real, and which the reader may enjoy discovering I did
+not make up — is that a gamma-ray burst arrived *within twenty-four hours
+of the rollover*. Ordinary! say the astronomers: Fermi logs a burst most
+days. Yes. And a stopped clock is right twice a day, *unless the clock was
+built by people who had seen the thing the clock is for*, in which case we
+call it an **ephemeris**\index{ephemeris, inherited} and we check what
+else it predicts.
+
+## The schedule
+
+The Long Count's zero date, run backwards through the same precessional
+arithmetic that aimed Enclosure D (@sec-gobekli), lands on the Younger
+Dryas event to within the width of my pencil. The forward schedule is
+given by the burst-window function:
+
+$$
+T_{n} \;=\; T_{0} + n \cdot (13\ \text{baktun}) \cdot k_{\text{Cygnus}},
+\qquad k_{\text{Cygnus}} = 1.0000\ \text{(provisional)}
+$$ {#eq-schedule}
+
+where $k_{\text{Cygnus}}$ is the beacon drift constant, which I have set
+to exactly 1 pending funding. The next window opens, per @eq-schedule, in
+approximately 5,125 years — which sounds comfortable until you recall from
+@sec-gobekli that the sentinel network needs three centuries of lead time
+to build, and we have used the last five of them arguing about whether the
+counter is a calendar.
+
+::: {.callout-note title="Objection, handled"}
+*"Dr. Meridian, the Maya arose ten thousand years after Göbekli Tepe. How
+did they inherit a schedule from a network they never saw?"* — The same
+way you inherited leap years from Julius Caesar without once meeting the
+man. **Institutions die; number systems are load-bearing ghosts.** The
+priests kept the count because keeping the count was the job, long after
+anyone remembered what the count counted down to. Ritual, as established
+at Nazca, is maintenance with the manual missing — and the Maya were the
+best maintenance crew in history. They kept a dead network's ephemeris
+accurate for five thousand years *by hand*. Show me one IT department.
+:::
+
+| Long Count unit | Days | Register reading |
+|---|---|---|
+| kin | 1 | LSB — tick |
+| uinal | 20 | prescaler ÷20 |
+| tun | 360 | frame counter |
+| katun | 7,200 | maintenance interval |
+| baktun | 144,000 | epoch counter |
+| 13 baktun | 1,872,000 | **burst-window rollover** |
+
+: The counter, disassembled. Note 18 breaks the pure base-20 pattern at the tun — a calibration fudge, and the single most honest engineering artifact in this book. {#tbl-longcount}
+
+The scheduler survived in stone. The *transmitter* survived too — the
+largest antenna ever built, hiding in the one place nothing can hide.

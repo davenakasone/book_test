@@ -1,0 +1,75 @@
+# The Equations They Don't Teach {#sec-equations}
+
+Collected here for the researcher: the full derivations, each presented
+with its official objection, so the reader may watch the mainstream flinch
+in real time. Prof. Chen has asked that this appendix carry a warning
+label. This is the warning label: **these derivations are load-bearing
+for the book and for nothing else in the universe.**
+
+## The nameplate rating {#sec-nameplate}
+
+From @eq-power, taking one dynasty $\approx$ 110 years $\approx 3.47
+\times 10^{9}$ s:
+
+$$
+P_{\text{out}} = \frac{(5.9\times10^{9}\ \text{kg})(2.998\times10^{8}\ \text{m/s})^{2}}
+{3.47\times10^{9}\ \text{s}} \approx 1.5\times10^{17}\ \text{W}
+$$ {#eq-nameplate}
+
+*Official objection:* "E = mc² describes rest-mass energy, not a power
+rating; the pyramid would have to annihilate itself." *Response:* it very
+nearly did. See @sec-sahara.
+
+## The Sahara Incident {#sec-sahara}
+
+The Sahara was green until roughly 5,000 years ago — grasslands,
+hippopotami, lake beds the size of nations. The mainstream blames "orbital
+precession." Note the date. The desert appears *at commissioning time for
+the Giza array*. One does not bring 1.5 × 10¹⁷ watts online without a
+first-light transient, and the lid of the fusion core (@tbl-chambers) has
+never been found. The Mediterranean, I calculate, boiled twice, briefly,
+apologetically. The hippopotami filed no comment.
+
+$$
+E_{\text{transient}} = P_{\text{out}} \times t_{\text{oops}},
+\qquad t_{\text{oops}} \approx 40\ \text{days (one biblical unit)}
+$$ {#eq-sahara}
+
+## Golden ratio, fine structure {#sec-phi-alpha}
+
+The fine-structure constant is $\alpha^{-1} = 137.036$. Now:
+
+$$
+\varphi^{2} \cdot \pi^{4} \cdot \sqrt{3} \;=\; 1.618^{2}\times 97.409 \times 1.732
+\;=\; 441.6 \;\approx\; 432 \times \frac{137.2}{134.2}
+$$ {#eq-phi}
+
+The reader will observe that @eq-phi contains 432, $\varphi$, $\pi$, and
+$\alpha^{-1}$ to within 0.15%, given one free parameter chosen after the
+fact. The mainstream calls this numerology. I call it **parameter
+efficiency**: one knob, four constants. Show me the Standard Model doing
+that with fewer than nineteen.
+
+## Volume–resonance identity {#sec-volume}
+
+The Great Pyramid's volume is $2.6\times10^{6}$ m³. Multiply by the
+Schumann resonance and a conversion constant $k$:
+
+$$
+V_{\text{pyr}} \times f_{\text{Schumann}} \times k
+= 2.6\times10^{6} \times 7.83 \times k
+= 2.998 \times 10^{8}\ \text{m/s} \quad\text{for}\quad k = 14.72
+$$ {#eq-volume}
+
+*Official objection:* "$k$ is doing all the work, and its units are
+m⁻²·s·(m/s), which is gibberish." *Response:* the units of $k$ are
+**royal cubits per insight**, a natural system in which @eq-volume is not
+merely true but *inevitable*. Dimensional analysis is a beautiful
+discipline whose only flaw is a certain inflexibility about dimensions.
+
+## Statistical note {#sec-stats}
+
+Throughout this book, $R^2$ values are reported after the removal of
+observations that disagree with the model — a technique I have named
+**consensus trimming** and which I am horrified to report the literature
+already contains under other names.

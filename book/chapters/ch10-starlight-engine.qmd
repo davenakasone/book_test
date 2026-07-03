@@ -1,0 +1,64 @@
+# The Starlight Engine {#sec-starlight-engine}
+
+Lay the nine components on the bench in system order and the machine
+assembles itself — the reader may follow along on @fig-world, drawn from
+the full survey [@ifm2026]:
+
+1. **Collection.** The Giza array (@sec-giza) drinks starlight through
+   Sirius-locked collimators and fuses Nile deuterium: 1.8 × 10¹⁷ watts
+   nameplate\index{Starlight Engine}.
+2. **Distribution.** The ley grid (@sec-ley-grid) carries it in the
+   planet's own 7.83 Hz cavity — the Earth as its own busbar.
+3. **Regulation.** Stonehenge (@sec-stonehenge) phase-locks the network:
+   56-bit addressing, one clock pulse per year, five millennia of uptime.
+4. **Spares.** Puma Punku cut the couplers. The yard was abandoned
+   mid-shipment; the last pallet is still on the dock.
+5. **Test & calibration.** Nazca (@sec-nazca) — the far-field range where
+   the downlink was tuned and the approach vectors painted.
+6. **User equipment.** Antikythera terminals (@sec-antikythera): 37-channel
+   bronze correlators, at least one lost in a liquidation shipment.
+7. **Early warning.** Göbekli Tepe and its sister stations
+   (@sec-gobekli), watching Cygnus in scintillating limestone.
+8. **Scheduling.** The Long Count (@sec-long-count): the burst-window
+   ephemeris, hand-carried across ten millennia by the best maintenance
+   culture in history.
+9. **Transmission.** The Great Wall (@sec-great-wall): hundred-millionth
+   harmonic of hydrogen, planetary downlink, still standing, still tuned.
+
+So: **a starlight-pumped fusion grid powering a planetary defense and
+transit system** — surplus power beamed to craft on painted approach
+vectors, sentinels watching for the next gamma-ray burst, the whole
+apparatus sized to shield a biosphere on three centuries' notice. Our
+ancestors were not worshipping the sky. They were **operating it**, on
+shift, with a maintenance schedule, and the professional civility of
+people who have read the incident report from last time.
+
+## What happened
+
+Every component tells the same story with different dates. The sentinel
+mothballed with intent to return. The parts yard stopped mid-shipment.
+The terminals liquidated to private buyers. The count kept by priests who
+remembered *that* but not *why*. This is not collapse — collapse leaves
+burn layers and arrowheads. This is **an orderly shutdown that outlived
+its restart plan**: the one failure mode engineering has never solved,
+because it is not a failure of the machine. The crew rotated out. The
+relief crew never rotated in. And the manual — the single, load-bearing,
+irreplaceable manual — was in the one format guaranteed to decay:
+*somebody's head*.
+
+::: {.callout-warning title="The thesis, at volume"}
+We did not lose the technology. The technology is fine; it is *parked*.
+Nine-figure wattage idles under the Sahara; the antenna hums over Hebei;
+the ephemeris still counts. **We lost the manual**, and then — the true
+extinction event — we lost the memory that there had been a manual, and
+began writing museum placards that say *tomb*.
+:::
+
+@fig-grid showed the grid still breathing: a sine wave in longitude,
+$R^2 = 0.9971$, idling at a fraction of a percent of nameplate. Standby
+power. Every reader who has paid an electric bill knows what standby
+means. It means **the pilot light is on**, and somewhere in the system
+there is a switch labeled, in a language eleven thousand years dead, ON.
+
+The final chapter concerns what we — you, me, and my remaining multimeter
+— are going to do about it.

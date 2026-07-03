@@ -1,0 +1,24 @@
+# Quarto render output + caches
+book/_book/
+book/.quarto/
+book/index_files/
+book/site_libs/
+/.quarto/
+
+# LaTeX intermediates (quarto keep-tex .tex is committed on purpose; aux junk is not)
+*.aux
+*.log
+*.toc
+*.out
+*.idx
+*.ilg
+*.ind
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+latex-shootout/build/
+
+# OS / editor
+.DS_Store

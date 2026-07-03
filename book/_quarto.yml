@@ -1,0 +1,65 @@
+project:
+  type: book
+  output-dir: _book
+
+lang: en
+
+book:
+  title: "The Starlight Engine"
+  subtitle: "How the Ancients Wired the Earth"
+  author: "Dr. Rex Meridian, PhD (pending)"
+  date: "2026-07-02"
+  chapters:
+    - index.qmd
+    - frontmatter/foreword.qmd
+    - part: "Stone Machines"
+      chapters:
+        - chapters/ch01-giza.qmd
+        - chapters/ch02-puma-punku.qmd
+        - chapters/ch03-stonehenge.qmd
+    - part: "Sky Networks"
+      chapters:
+        - chapters/ch04-nazca.qmd
+        - chapters/ch05-ley-grid.qmd
+        - chapters/ch06-antikythera.qmd
+    - part: "The Warning System"
+      chapters:
+        - chapters/ch07-gobekli-tepe.qmd
+        - chapters/ch08-long-count.qmd
+        - chapters/ch09-great-wall.qmd
+    - part: "Synthesis"
+      chapters:
+        - chapters/ch10-starlight-engine.qmd
+        - chapters/ch11-rebuilding-the-manual.qmd
+  appendices:
+    - appendices/a-forbidden-equations.qmd
+    - appendices/b-alignment-tables.qmd
+    - appendices/c-glossary.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+  epub:
+    cover-image: figures/cover.png
+    rights: >
+      © 2026. A work of satirical fiction produced as a publishing-pipeline
+      test. Every factual claim herein is false, including several of the
+      page numbers.
+  pdf:
+    documentclass: scrbook
+    keep-tex: true
+    fontsize: 11pt
+    colorlinks: true
+    geometry:
+      - paperwidth=6in
+      - paperheight=9in
+      - inner=0.75in
+      - outer=0.5in
+      - top=0.6in
+      - bottom=0.75in
+      - heightrounded
+    include-in-header: latex/preamble.tex
+    include-after-body: latex/after-body.tex

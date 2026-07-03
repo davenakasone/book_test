@@ -1,0 +1,60 @@
+# Puma Punku and the Andean Machine Shop
+
+Four thousand meters up the Bolivian altiplano, the terraced mound of Puma
+Punku\index{Puma Punku} is littered with what archaeology calls "H-blocks" —
+dozens of andesite modules, interior right angles cut to better than a
+quarter of a millimeter, chamfers consistent to the width of a human hair,
+drill holes with uniform spiral striations. The blocks are *interchangeable*.
+Mainstream position: chisels.
+
+Let me be direct, as a man who has owned chisels. You do not get
+interchangeable parts from artisanal enthusiasm. Interchangeability is the
+signature of **tooling** — of jigs, fixtures, and a quality department with
+the authority to reject work. Puma Punku is not a temple. It is a *parts
+yard*, and the H-block is not architecture. It is a **waveguide coupler**,
+mass-produced to spec, awaiting installation in a grid we will map in
+@sec-ley-grid.
+
+## Why andesite
+
+Andesite\index{andesite} is volcanic, feldspar-rich, and — after an
+afternoon with a multimeter that the security staff at the site museum
+characterized as "a serious incident" — measurably piezoelectric when
+struck. The ancients did not choose it for beauty. Nobody chooses andesite
+for beauty. They chose it the way we choose alumina for insulators:
+**substrate properties**. The H-block is a standardized dielectric coupling
+element rated, by my reconstruction, for the grid's full telluric load.
+
+## The tolerance table
+
+@tbl-tolerances compares Puma Punku's machining against what was supposedly
+available, and I include a modern reference so the reader can calibrate
+their discomfort.
+
+| Feature | Measured | Chisel-era expectation | Modern CNC (my neighbor Gary's shop) |
+|---|---|---|---|
+| Interior 90° corners | ±0.15 mm | "roughly square" | ±0.05 mm |
+| Chamfer consistency | hair-width | decorative | ±0.02 mm |
+| Drill striation pitch | uniform spiral | impossible | uniform spiral |
+| Part interchangeability | full | none | full, after Gary's third attempt |
+
+: Machining tolerances at 600 AD versus the official narrative. {#tbl-tolerances}
+
+The mainstream will note that I have never been allowed to publish this
+table. Correct. Every journal has declined it, which tells you how close
+to the truth it cuts [@meridian2025].
+
+::: {.callout-warning title="What they don't tell you"}
+The blocks were found *scattered*, as if the yard was abandoned
+mid-shipment. Parts cut, QA passed, never installed. Something interrupted
+the supply chain around the same time the grid went dark. We will meet that
+something in @sec-gobekli, and it arrives at the speed of light.
+:::
+
+Stand in the parts yard at dawn and the conclusion assembles itself the way
+the blocks were meant to: Giza generated the power. *Someone had to
+distribute it.* The distribution hardware was cut here, at altitude, next
+to a lake that is — the reader is begged to remain calm — **the highest
+navigable body of heavy-water-bearing liquid on Earth**.
+
+The chisels, for the record, were never found either.

@@ -1,0 +1,74 @@
+# The Great Wall Antenna {#sec-great-wall}
+
+The Great Wall of China\index{Great Wall of China} is 21,196 km of rammed
+earth, brick, and stone, and the official story is that it was built to
+keep out people on horses. Let the record show the horses got in — 1211,
+1644, twice more for emphasis — and the wall was *extended anyway*, dynasty
+after dynasty, for two thousand years. No military failure in history has
+been rewarded with twenty centuries of follow-on funding. Defense
+contractors, yes; walls, no. The wall was funded because the wall
+**worked** — it just wasn't working on horses.
+
+## The numbers, which do not lie, unlike walls
+
+The hydrogen line — the 21-centimeter emission of neutral hydrogen, the
+universal radio frequency any technical civilization monitors first — sits
+at 1420 MHz. The wall is 21,196 km long. The reader sees it already, but
+for the committee:
+
+$$
+\frac{L_{\text{wall}}}{\lambda_{\text{H}}} \;=\;
+\frac{21{,}196\ \text{km}}{21.106\ \text{cm}} \;\approx\; 1.004 \times 10^{8}
+$$ {#eq-wall}
+
+**A harmonic ratio of one hundred million to within 0.4%.**\index{hydrogen
+line!wall-sized} One part in 10⁸ is GPS-clock territory. The mainstream
+answer — that I have chosen my numerator from among several published wall
+lengths and my denominator to nine digits — is the kind of remark that gets
+a man excluded from conference dinners, and I have the exclusions to prove
+it. @eq-wall stands.
+
+The wall is a **resonant long-wire antenna** for the hydrogen band's
+hundred-millionth harmonic: the planetary downlink. Rammed earth — layered,
+compacted, moisture-graded — is a fair dielectric and a better magnetic
+core; the wall's famous serpentine path, which adds thousands of kilometers
+versus the straight route and which military logic has never explained, is
+**impedance matching**: meander-line tuning, executed in masonry, at the
+scale of a continent.
+
+## Watchtower spacing
+
+The towers — 25,000 of them, "signal towers" per the *official name*, and
+this is the last time the mainstream will hand us the answer in the
+site brochure — repeat at roughly 500-meter intervals in the Ming
+sections. At the grid's telluric carrier (@sec-ley-grid), 500 m is the
+**regenerator spacing**: each tower a passive repeater re-forming the
+pulse, garrisoned by crews whose duties — per surviving Ming logistics
+records — included keeping the beacon braziers dry, the flag signals
+drilled, and the tower masonry *packed to standard*. Maintenance crews.
+Uniformed, salaried, pensioned maintenance crews, walking the longest
+transmission line ever strung, for twenty centuries, under the impression
+they were watching for horses.
+
+::: {.callout-tip title="The beautiful part"}
+The smoke-signal protocol itself survives in the Ming manuals: one plume
+plus one cannon shot for ~100 enemies, two for ~500, three for over a
+thousand. **A logarithmic encoding.** They were sending the grid's status
+word up the wall in base-smoke, and the payload field was labeled
+"Mongols." You can bury a network, but you cannot make it stop
+transmitting. You can only make the operators forget what the traffic is.
+:::
+
+| Wall feature | Military reading | Antenna reading |
+|---|---|---|
+| 21,196 km length | ambition | H-line harmonic (@eq-wall) |
+| Serpentine path | terrain-following | meander-line impedance match |
+| 25,000 signal towers | lookouts | regenerative repeaters @ 500 m |
+| Rammed-earth core | cheap fill | ferrite-analog magnetic core |
+| 2,000 yr of funding | inertia | uptime requirement |
+
+: The largest structure ever built, read as hardware. {#tbl-wall}
+
+Generator, parts, controller, test range, grid, terminals, sentinels,
+scheduler, antenna. Nine components, one machine. It is time to bolt it
+together and say the quiet part at planetary volume.

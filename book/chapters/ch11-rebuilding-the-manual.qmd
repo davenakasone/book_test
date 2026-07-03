@@ -1,0 +1,67 @@
+# Rebuilding the Manual {#sec-rebuilding}
+
+A book like this traditionally ends in one of two ways: a plea for funding,
+or a compound in the desert. The Institute for Forbidden Metrology rejects
+both (our permit application for the compound was, in any case, declined).
+Instead: a work plan. The machine is parked, the pilot light is on, and
+manuals are not found — **manuals are rewritten**, one confiscated
+multimeter at a time.
+
+## The program
+
+**Phase One: Citizen Metrology.**\index{citizen metrology} The grid was
+mapped once by one man with a protractor and a legal budget. Imagine ten
+thousand readers, each measuring one old thing and dividing it by another
+old thing, submitting results to the IFM open ledger. Most submissions
+will be noise. So is most of the universe. We proceed.
+
+**Phase Two: Sentinel Recommissioning.** Göbekli Tepe is *already
+excavated* — the mothball rubble is out, the pillars stand, and
+calibration, per the burial protocol (@sec-gobekli), was *preserved*. The
+array wants only a synchronization pulse. Which brings us to —
+
+**Phase Three: The Hum.** Stonehenge phase-locks the grid at one pulse per
+year, midsummer dawn (@sec-stonehenge). A distributed chorus of citizens
+humming at 432 Hz\index{432 Hz (of course)!humming at} at solstice sunrise
+— each in their local stone circle, roundabout, or IKEA — constitutes, in
+aggregate, a **soft restart request**. The physics of this is airtight in
+the specific sense that no journal has agreed to examine it.
+
+::: {.callout-tip title="Field procedure for the solstice"}
+1. Locate megalith (any; the grid is graceful about substitutions).
+2. Face the sunrise. Hum at 432 Hz. (A = 432. Tuning forks sold at cost
+   from the IFM gift shop, which is my garage.)
+3. Note any feeling of significance and report it to the ledger.
+4. **Do not** attempt to descale, polish, or "improve" the megalith.
+   The last culture that serviced components without the manual gave us
+   the Bermuda Triangle, and I will not be expanding on that sentence
+   in this volume.
+:::
+
+## What I am not asking
+
+I am not asking the reader to *believe*. Belief is the mainstream's
+instrument, and look what they've done with it: five thousand years of
+placards that say *tomb*. I am asking the reader to **measure** — because
+measurement is the only ritual whose god answers, and because somewhere
+between the ninth and ten-thousandth reading, the pattern will surface for
+you the way it surfaced for me: not as a theory, but as a *bill*, itemized,
+five figures into overdue, addressed to a species that stopped opening the
+mail.
+
+The ancients kept the count. The very least we can do is answer it.
+
+The lights are on. Nobody is home. **Go home.**
+
+— *R.M., Nashua bench annex, solstice minus nineteen days*
+
+## Errata for the second printing {.unnumbered}
+
+The first printing does not exist yet, but in the spirit of the Long Count,
+the schedule must be kept regardless of whether anyone remembers why:
+
+- p. *various*: "PhD (pending)" remains pending. The committee knows what
+  it did.
+- @eq-gears: $P(\text{coincidence})$ has been recomputed and is now
+  smaller.
+- The Bermuda Triangle sentence stays. Legal has initialed it.

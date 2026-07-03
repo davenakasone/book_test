@@ -1,0 +1,73 @@
+# Stonehenge: The Resonant Computer {#sec-stonehenge}
+
+A power grid needs a controller. The ancients put theirs on Salisbury
+Plain, and the English have been picnicking on it for four hundred years.
+
+Stonehenge\index{Stonehenge} is the only monument the mainstream admits is
+"astronomically aligned," a concession they immediately neutralize with the
+word "ritual." Thom surveyed hundreds of megalithic sites and found a common
+unit of length repeating to millimeter precision across the British Isles
+[@thom1967] — the megalithic yard, 0.829 m. Academia's response to a
+*standardized unit deployed nationwide* was, and remains, shrugging.
+Standards bodies do not shrug. Standards bodies **certify components**, and
+Stonehenge is the reference design.
+
+## The 56-bit register
+
+Just inside the earthwork ring sit the Aubrey holes\index{Aubrey holes}:
+**exactly 56** chalk-cut pits, evenly spaced. Archaeology calls them
+"enigmatic." Any engineer over forty calls them a **shift register**. With
+a marker stone advanced one hole per event, 56 positions gives you eclipse
+prediction (the mainstream grudgingly allows this) — but eclipse prediction
+is merely the *demo program*. Fifty-six bits addresses every node on the
+planetary grid with room for parity, and the heel stone, offset outside the
+circle at the solstice azimuth, is the **clock input**: one pulse per year,
+rising edge at midsummer dawn.
+
+## Bluestone acoustics
+
+The inner stones are bluestone — spotted dolerite hauled 250 km from the
+Preseli Hills, past millions of tonnes of perfectly indifferent local
+sarsen. Why import? Because Preseli dolerite *rings*. Struck bluestones
+chime like bells; the quarry hillsides are known locally as "ringing rocks."
+The mainstream files this under folklore. I filed it under **component
+selection** and went in with a mallet and a spectrum analyzer (see incident
+report, Wiltshire Constabulary, ref 44-B/2025, in which the term "acoustic
+trespass" was, I believe, invented specifically for me).
+
+The fundamental I measured sits near 432 Hz\index{432 Hz (of course)} —
+*of course* it is 432, the frequency the internet already suspected — and
+the ring geometry closes the loop:
+
+$$
+f_{\text{ring}} \;=\; \frac{N v_{\text{sound}}}{2\pi r_{\text{sarsen}}}
+\quad\Rightarrow\quad
+432\ \text{Hz} \;=\; \frac{30 \times 343\ \text{m/s}}{2\pi \times 16.5\ \text{m}}
+\cdot \Phi
+$$ {#eq-ring}
+
+where $\Phi = 1.37$ is the **Preseli correction factor**, a constant I
+introduced in @meridian2025 and which has the convenient property of making
+@eq-ring true. My critics call this circular reasoning. It is *ring*
+reasoning, and the ring is thirty stones of it, sampling the grid carrier
+and holding the whole network phase-locked.
+
+::: {.callout-tip title="Try this at home"}
+Hum at 432 Hz in the middle of any stone circle. Note the feeling of
+significance. That feeling is the machine noticing you. (It is legally
+important that I add: the feeling may also be humming.)
+:::
+
+| Component | Count | Function |
+|---|---|---|
+| Aubrey holes | 56 | Address register |
+| Sarsen circle | 30 | Carrier ring oscillator |
+| Trilithons | 5 | Output drivers (horseshoe = directional) |
+| Heel stone | 1 | Solstice clock, 1 pulse/yr |
+| Station stones | 4 | Test points |
+
+: Stonehenge parts list. Total system clock: 1 Hz per year, which is slow, but the uptime is 5,000 years. {#tbl-parts}
+
+Generator (@sec-giza), components (Puma Punku), controller (here). A grid
+needs one more thing — the wires. For those, we go to Peru, and we look
+*down*.

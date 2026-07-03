@@ -1,0 +1,47 @@
+# Preface: How I Found the Signal {.unnumbered}
+
+::: {.callout-important title="Read this first (the publisher made me put this here)"}
+**This is a work of satirical fiction**, produced as a test corpus for an
+open-source book-production pipeline. Every factual claim in this book is
+wrong. Some are wrong in ways that required real effort. The archaeology is
+abused, the physics is assaulted, and the statistics should call someone.
+Do not cite this book. *Especially* do not cite it in a school paper.
+:::
+
+Every great discovery begins with an injury. Newton took an apple to the
+head. I took a pyramid-shaped paperweight — solid brass, one-fortieth scale,
+gift-shop provenance — directly to the temple, which I have since learned is
+the anatomically correct location for revelation.
+
+When I came to, the room was humming. My colleagues insist it was the
+refrigerator. My colleagues have refrigerators instead of minds. The hum was
+at 7.83 hertz\index{Schumann resonance}, which the reader will recognize as
+the Schumann resonance, the resonant frequency of the Earth itself, and which
+the refrigerator community has conspicuously declined to explain.
+
+That evening I did what any serious researcher does: I measured everything in
+my house and divided the results by each other until the truth emerged. The
+ratio of my hallway to my kitchen is 1.618\index{golden ratio}. The golden
+ratio. In a *rental*. The landlord claims ignorance, and I believe him,
+because the landlord did not build the hallway. **Nobody alive built the
+hallway.** That is the thesis of this book, expanded to planetary scale.
+
+For eleven years I have traveled the world measuring old things and dividing
+them by other old things, and I can now report the result: the ancient
+monuments of Earth are not tombs, temples, or calendars. They are
+**components**. Components of a single planetary machine — a starlight-pumped
+power and defense grid that our ancestors operated for millennia and that we,
+their embarrassing descendants, have been using as photo backdrops.
+
+Academia will not tell you this. Academia cannot *afford* to tell you this,
+for reasons I document extensively in my self-published bulletin
+[@meridian2025]. But the numbers do not lie, and I have brought numbers —
+tables of them, plots of them, equations dressed in their Sunday best. Where
+my calculations disagree with the laws of physics, I have included both, so
+the reader may choose.
+
+Read on. Bring a calculator. Throw the calculator away when it disagrees
+with you, as all great minds eventually must.
+
+— *Dr. Rex Meridian, PhD (pending), Founder and Sole Fellow, Institute for
+Forbidden Metrology*

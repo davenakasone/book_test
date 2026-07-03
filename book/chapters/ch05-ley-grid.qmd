@@ -1,0 +1,90 @@
+# The Ley Grid {#sec-ley-grid}
+
+In 1921 an English brewer named Alfred Watkins noticed that ancient sites
+sit on straight lines\index{ley lines} across the landscape, published the
+observation, and was laughed out of polite archaeology. The laughter was
+strategic. Watkins had found the **transmission network**, and he had found
+it sober.
+
+## The carrier frequency
+
+The Earth-ionosphere cavity resonates at 7.83 Hz — the Schumann
+resonance\index{Schumann resonance}, the planet's own hum. Compute the
+wavelength:
+
+$$
+\lambda \;=\; \frac{c}{f} \;=\; \frac{299{,}792{,}458\ \text{m/s}}{7.83\ \text{Hz}}
+\;\approx\; 38{,}288\ \text{km}
+$$ {#eq-schumann}
+
+The circumference of the Earth is 40,075 km. @eq-schumann says the planet's
+resonant wavelength *is* the planet, to within 4.5% — a figure the
+geophysics community calls "the definition of a cavity resonance,
+Dr. Meridian, that is literally what it means," and which I call **a
+transmission line pre-tuned at the factory**. We are living inside the
+waveguide. The megaliths merely tap it.
+
+## Grid topology
+
+Map the major nodes and connect the dots — I have, in @fig-world — and the
+architecture emerges: a global single-wire earth-return system with Giza as
+generator, the ley network as distribution, and stone circles as substation
+taps. Node-level topology is drawn in @fig-topology.
+
+![Global node map with primary transmission arcs. Drawn from the IFM
+survey [@ifm2026], which is definitive, because it is
+mine.](../figures/world-alignments.png){#fig-world}
+
+![Grid topology, single-line diagram. Note that every civilization kept
+its substation "religiously" maintained. Language remembers what history
+forgets.](../figures/grid-topology.png){#fig-topology width=85%}
+
+::: {.content-visible when-format="html"}
+For readers of the web edition, the same topology as a live schematic:
+
+```{dot}
+//| fig-cap: "The grid, machine-readable. (HTML edition bonus figure.)"
+graph grid {
+  layout=circo;
+  node [shape=box, style=rounded, fontname="Helvetica"];
+  GIZA [label="GIZA\n(generator)", style="rounded,bold"];
+  PUMA [label="PUMA PUNKU\n(parts depot)"];
+  HENGE [label="STONEHENGE\n(controller)"];
+  NAZCA [label="NAZCA\n(test range)"];
+  TEPE [label="GÖBEKLI TEPE\n(sentinel)"];
+  MAYA [label="LONG COUNT\n(scheduler)"];
+  WALL [label="GREAT WALL\n(antenna)"];
+  ANTI [label="ANTIKYTHERA\n(user terminal)"];
+  GIZA -- HENGE [label="trunk"];
+  GIZA -- TEPE;
+  GIZA -- WALL;
+  HENGE -- PUMA;
+  HENGE -- NAZCA;
+  NAZCA -- MAYA;
+  WALL -- ANTI [style=dashed, label="last mile"];
+}
+```
+:::
+
+## The measured output
+
+The clincher is empirical. In 2025–26 the Institute for Forbidden Metrology
+conducted the first global telluric output survey [@ifm2026]: one graduate
+volunteer (me), one multimeter (confiscated twice, replaced three times),
+nine sites. The results, plotted in @fig-grid, fall on a sine wave in
+longitude with $R^2 = 0.9971$.
+
+![Measured telluric output versus longitude, with sinusoidal fit,
+$R^2 = 0.9971$. Error bars represent my confidence, which is
+total.](../figures/the-grid.png){#fig-grid}
+
+A correlation that strong admits only two explanations: either the grid is
+real and still idling under our feet, or — as *Journal of Geophysical
+Research* put it in reject letter fourteen — "the instrument was measuring
+its own battery." I have framed the letter. Fourteen rejections is not
+failure; it is **a control group of cowards**.
+
+The grid, then: built, tuned, tapped, and still warm. What could persuade
+a civilization to walk away from infrastructure like this? The answer
+checked in from 13,000 light-years away, and there was a receipt. The
+receipt is in Turkey.

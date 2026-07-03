@@ -1,0 +1,68 @@
+# The Antikythera Terminal {#sec-antikythera}
+
+In 1901, sponge divers off a Greek islet hauled up a lump of corroded
+bronze that, once X-rayed, turned out to contain at least thirty precision
+gears\index{Antikythera mechanism} — differential trains, epicyclic
+stages, engraved instructions — from a wreck dated 70 BC. Nothing of
+comparable complexity appears in the archaeological record for the next
+*fourteen centuries*. The mainstream, to its credit, no longer disputes
+the machining. It disputes the purpose, having settled on "astronomical
+calculator" [@freeth2006].
+
+Freeth and colleagues counted the gears correctly and read the object
+exactly backwards. A device that tracks celestial positions to arc-minute
+accuracy, fits in a shoebox, and was found *in transit on a ship* is not
+an observatory. It is a **navigation receiver**. One does not carry the
+almanac to sea for love of the almanac.
+
+## Reading the gear count as a channel plan
+
+The confirmed gear count in the largest fragment is 27, with at least 30
+in the full device, and reconstructions argue for as many as 37 in the
+lost planetary stages. The reader is invited to consult the modern GPS
+interface specification, which allocates — I will wait while you check —
+**37 signal channels** across the constellation. The Antikythera device is
+a 37-channel correlator implemented in bronze, tracking not satellites but
+the grid's *celestial reference beacons*, of which the visible planets are
+the surviving five. The front dial is your position solution. The back
+spirals — Metonic, Saros — are **ephemeris and almanac data**, wound onto
+dials because bronze does not take firmware updates.
+
+$$
+N_{\text{channels}} = N_{\text{gears}}(\text{reconstructed}) = 37
+\quad\Rightarrow\quad P(\text{coincidence}) < \frac{1}{37!}\ \text{(my calculation)}
+$$ {#eq-gears}
+
+My statistician disputes @eq-gears. I dispute my statistician, and I note
+he has stopped billing me, which I interpret as concession.
+
+::: {.callout-warning title="What they don't tell you"}
+The wreck also carried luxury glassware, coinage, and bronze statuary —
+"trade goods," per the catalog. Inventory a ship carrying one (1) military
+navigation receiver and assorted valuables, and any customs officer alive
+will tell you what you are looking at: **a decommissioning sale**. Somebody
+was liquidating grid equipment in 70 BC, sailing it to a buyer, and the sea
+declined the transaction. The Aegean is the only regulator in this story
+with a spine.
+:::
+
+| Feature | "Calculator" reading | Terminal reading |
+|---|---|---|
+| 37 gears (reconstructed) | planetary models | channel correlators |
+| Metonic spiral | calendar | almanac data |
+| Saros spiral | eclipse cycle | beacon-outage schedule |
+| Hand crank | user input | user input (we agree on the crank) |
+| Found at sea | bad luck | exactly where a nav unit lives |
+
+: Two readings of one shoebox. One of them explains the shipping route. {#tbl-antikythera}
+
+An eclipse, note, is a **scheduled beacon outage** — the Moon walking
+through your reference signal. Of course the terminal carries the outage
+schedule. Your phone carries leap-second tables it has never once mentioned
+to you.
+
+The user terminals survived, then, at least into the classical era —
+orphaned handsets pinging a constellation that no longer answered. What
+killed the constellation? For that we need the sentinel stations, and the
+oldest one was buried — *deliberately, carefully, by hand* — eleven
+thousand years ago on a Turkish hilltop.

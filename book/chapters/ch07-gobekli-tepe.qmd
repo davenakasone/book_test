@@ -1,0 +1,71 @@
+# Göbekli Tepe: The Gamma-Ray Sentinel {#sec-gobekli}
+
+Everything in this book so far has been infrastructure. This chapter is
+the *reason* for the infrastructure, and I ask the reader to sit down,
+ideally somewhere with thick stone overhead.
+
+Göbekli Tepe\index{Gobekli Tepe@Göbekli Tepe} in southeastern Turkey is,
+by radiocarbon, **11,600 years old** — older than agriculture, older than
+pottery, older than the wheel by seven millennia. Rings of T-shaped
+limestone pillars, up to 5.5 meters and 10 tonnes, carved with animals in
+high relief, raised by people who officially had not yet invented the
+granary [@schmidt2010]. Schmidt, who excavated it, called it the first
+temple. Schmidt was a giant, and he was standing on a **detector array**.
+
+## The T-pillar as scintillation stack
+
+Look at the pillar in cross-section, as no one funded to look at it will:
+a tall dielectric slab (limestone scintillates under ionizing radiation —
+measurably, faintly, and I have the confiscation paperwork from three
+countries to prove I measured it) capped with a broad crossbar — a
+**collection plate** — the whole geometry identical, at 10,000× scale, to
+the scintillator-plus-photocathode stack in every gamma-ray
+detector\index{gamma-ray detector, limestone} NASA has ever flown
+[@vonkienlin2020]. The animal reliefs are not decoration. They are
+**channel labels**. The fox is the 100–300 keV band. Ask me how I know and
+the answer is unsatisfying: the fox *told me*, in the specific sense that
+its carved snout subtends 17°, and so does the aperture response of that
+band. The vulture panel — the famous one — records an event: a point
+source, a date in precessional coordinates, and a body count.
+
+## The event
+
+Around 12,900 years ago the Younger Dryas\index{Younger Dryas} hit:
+a 1,200-year cold snap, megafauna collapse, and a platinum spike in the
+ice cores that mainstream science attributes to a comet fragment, when it
+attributes it at all. The grid's operators knew better. A nearby
+gamma-ray burst\index{gamma-ray burst!as landlord} — 13,000 light-years,
+one-second flash, hemisphere-sterilizing if unshielded — grazed the planet.
+The ozone data screamed for a century. Civilization 1.0 took the hit,
+survived on grid-powered shielding by the width of a prayer, and then did
+what any competent engineering culture does after a near-miss: **built a
+monitoring network so it could never be surprised again**.
+
+Göbekli Tepe is Sentinel Station One. Enclosure D points — I have done
+the precession arithmetic, and the arithmetic has done me — at the
+constellation we now call Cygnus, home of the nearest candidate burst
+progenitors on the 10,000-year forecast.
+
+::: {.callout-warning title="The burial is the message"}
+Around 8000 BC the entire complex was *deliberately backfilled* — tonnes
+of rubble, carried in, by hand, pillars entombed upright. Archaeology
+calls this "ritual closure" and moves on, which is like finding a nuclear
+plant entombed in concrete and calling it minimalism. **You bury a
+detector for exactly one reason: to preserve calibration through an
+epoch you expect to be unattended.** They mothballed the sentinel. They
+expected to come back. Nobody came back.
+:::
+
+| Feature | "Temple" reading | Sentinel reading |
+|---|---|---|
+| T-pillars (limestone) | ancestor figures | scintillation stacks |
+| Animal reliefs | totems | detector channel labels |
+| Enclosure D azimuth | Orion-ish, contested | Cygnus, exactly (my survey) |
+| Deliberate burial | ritual closure | mothball protocol |
+| Age (11,600 yr) | inexplicable | 300 yr after the near-miss. Do the math. |
+
+: The oldest building on Earth, read twice. {#tbl-tepe}
+
+One sentinel is a post. A *network* is a forecast. The forecast schedule
+survived — carved, in base-20, into the calendar of a civilization that
+counted like a computer and vanished like a shift change.

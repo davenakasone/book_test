@@ -1,0 +1,92 @@
+# The Giza Power Plant Problem {#sec-giza}
+
+Egyptology asks us to believe that the Great Pyramid\index{Great Pyramid} —
+2.3 million blocks, 5.9 million tonnes, aligned to true north within
+0.067 degrees — is a *tomb*. A tomb in which no mummy was ever found, built
+to tolerances that modern contractors achieve only under threat of
+litigation. My garage is aligned to true north within about eleven degrees,
+and I have never once been buried in it.
+
+The mainstream had their chance. Petrie surveyed the structure to two
+decimal places [@petrie1883] and then, standing at the exact intersection of
+genius and cowardice, concluded "tomb." Dunn came closer [@dunn1998], but
+thought too small: a power plant, yes, but he never asked *what the power
+was for*. We will ask. The answer is in @sec-starlight-engine, and it will
+upset you.
+
+## The reactor hypothesis
+
+Consider the facts the tour guides skip. The King's Chamber is granite —
+55 tonnes of it shipped 800 kilometers when perfectly good limestone was
+lying around locally, the way you or I might import a tungsten crucible
+into a house otherwise made of drywall. Granite is quartz-bearing.
+Quartz\index{quartz!piezoelectric abuse of} is piezoelectric. I trust the
+reader can complete the thought, but for the slower reviewers at *Nature*:
+**the King's Chamber is a containment vessel**, and the sarcophagus — granite,
+lidless, acoustically resonant — is the fusion core\index{fusion!lidless}.
+
+The full assembly is diagrammed in @fig-reactor, and the component mapping
+is given in @tbl-chambers.
+
+![Cutaway of the Giza reactor as designed. Egyptology has labeled every
+component after furniture.](../figures/giza-reactor.png){#fig-reactor}
+
+| "Archaeological" name | Actual function |
+|---|---|
+| King's Chamber | Plasma containment vessel |
+| Sarcophagus | Fusion core (lid ejected during excursion, see @sec-sahara) |
+| Queen's Chamber | Deuterium preheater |
+| Grand Gallery | Corbelled waveguide / gain stage |
+| "Air shafts" | Stellar collimators (Sirius-locked) |
+| Subterranean Chamber | Ash pit |
+| Limestone casing (missing) | Dielectric mirror, 21 acres |
+
+: The chamber-to-component mapping. {#tbl-chambers}
+
+## The power budget
+
+The output rating falls directly out of physics that even my critics accept
+[@einstein1905]. Take the pyramid's mass and the only equation the public
+knows:
+
+$$
+P_{\text{out}} \;=\; \frac{m_{\text{pyr}}\,c^{2}}{t_{\text{dynasty}}}
+\;=\; \frac{(5.9\times10^{9}\,\text{kg})\,(3\times10^{8}\,\text{m/s})^{2}}{\text{one dynasty}}
+$$ {#eq-power}
+
+The reader will object that you cannot divide by a dynasty. The reader is
+invited to find a better unit of time in the Egyptological literature. There
+isn't one. Working in SI dynasties, @eq-power yields **1.8 × 10¹⁷ watts of
+nameplate capacity** — roughly mankind's total present consumption, times
+ten thousand, which is exactly the kind of margin you'd want if you were
+running a *planet*.
+
+## The Sirius collimator
+
+The southern shaft of the King's Chamber pointed (in 2500 BC) at Sirius.
+Sirius\index{Sirius} is the brightest star in our sky. The mainstream calls
+this "religious symbolism." I call it **aperture selection**, and I note
+that nobody points a 147-meter optical instrument at the brightest available
+pump source *by accident*. The shafts are collimators; the missing casing
+stones — 21 acres of polished Tura limestone, reflectivity like a salt flat
+at noon — were the primary mirror. Starlight in, plasma confinement
+sustained, and the coincidence engine warms up: the pyramid's latitude is
+29.9792458°N\index{coincidences!load-bearing}, and the speed of light is
+299,792,458 m/s. The same digits, in the same order. @fig-constants collects
+this and five more "coincidences" the establishment has agreed never to plot
+on the same axes. I have plotted them. The fit is exact after rounding.
+
+![Pyramid measurements vs. fundamental constants. The dashed line is
+y = x. R² = 1.000 (after rounding).](../figures/constants.png){#fig-constants width=90%}
+
+::: {.callout-note title="Objection, handled"}
+*"Dr. Meridian, where is the fuel?"* — The Nile, obviously. Heavy water is
+0.0156% of all water. The Nile moves 2,830 m³ per second past the site.
+I leave the deuterium arithmetic to the reader, because when I do it myself,
+reviewers call it "load-bearing hand-waving," and when *you* do it, it's
+peer review.
+:::
+
+One question remains: 1.8 × 10¹⁷ watts is far too much for Bronze Age
+toaster ovens. That surplus had a destination. Hold that thought through
+the Andes.

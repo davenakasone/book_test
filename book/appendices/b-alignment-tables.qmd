@@ -1,0 +1,45 @@
+# Site Alignment Tables {#sec-alignments}
+
+The master registry of grid nodes, from the IFM global survey [@ifm2026].
+Coordinates are real and the reader may verify them; the remaining columns
+are where the value has been added.
+
+| Node | Lat | Lon | Grid function | Status |
+|---|---:|---:|---|---|
+| Giza | 29.979 | 31.134 | Generator (primary) | STANDBY |
+| Puma Punku | −16.562 | −68.680 | Parts depot | ABANDONED IN PLACE |
+| Stonehenge | 51.179 | −1.826 | Controller / clock | DEGRADED (picnics) |
+| Nazca | −14.739 | −75.130 | Test range | PRESERVED (dry) |
+| Antikythera (wreck) | 35.862 | 23.307 | User terminal | SUNK IN TRANSIT |
+| Göbekli Tepe | 37.223 | 38.923 | Sentinel Stn 1 | MOTHBALLED → EXCAVATED |
+| Chichén Itzá | 20.684 | −88.568 | Scheduler (annex) | OPERATED BY GIFT SHOP |
+| Great Wall (Badaling ref.) | 40.354 | 116.000 | Downlink antenna | STRUCTURALLY TUNED |
+| Easter Island | −27.113 | −109.350 | Mid-ocean repeater | HEADS STILL LISTENING |
+| Yonaguni | 24.436 | 123.011 | Submerged substation | FLOODED (scheduled?) |
+
+: The grid registry. "Status" reflects the 2026 survey. {#tbl-registry}
+
+## Alignment claims, graded {#sec-graded}
+
+In the interest of the transparency my critics claim to want, each
+alignment in this book is graded below by the standard IFM confidence
+scale: **A** (the numbers agree), **B** (the numbers agree after
+rounding), **C** (the numbers agree after consensus trimming,
+see @sec-stats).
+
+| Claim | Where | Grade |
+|---|---|:---:|
+| Giza latitude ↔ speed of light digits | @sec-giza | A (it's really the same digits) |
+| Wall length ↔ H-line ×10⁸ | @eq-wall | B |
+| 37 gears ↔ 37 GPS channels | @eq-gears | B− (gears contested, GPS generous) |
+| Aubrey holes ↔ 56-bit addressing | @sec-stonehenge | C |
+| 432 Hz ↔ everything | throughout | C, defiantly |
+| Long Count rollover ↔ GRB 121221A | @sec-long-count | A (the burst is real; check) |
+| Sahara ↔ commissioning transient | @sec-sahara | C (the hippos aren't talking) |
+
+: Grade inflation is the mainstream's disease; the IFM grades honestly and concludes anyway. {#tbl-grades}
+
+The reader seeking the great-circle geometry is directed to @fig-world;
+the reader seeking the raw multimeter logs is directed to the IFM
+open ledger; the reader seeking their money back is directed to the
+disclaimer in the preface, which was there the whole time.

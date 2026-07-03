@@ -1,0 +1,64 @@
+# Nazca: Calibration Targets for Light {#sec-nazca}
+
+The Nazca lines\index{Nazca lines} cover 450 km² of Peruvian desert with
+figures — a hummingbird, a monkey, a spider, trapezoids by the hundred —
+drawn at a scale visible only from altitude, by a culture that officially
+did not have altitude. The mainstream explanation has rotated over the
+decades between "ritual pathways," "water cult," and "we'd rather not,"
+settling finally on all three.
+
+Here is what a radio engineer sees from the window seat, and what I saw
+before the cabin crew intervened in my measurements: **an antenna range**.
+
+## The hummingbird is a Yagi
+
+Lay the hummingbird geoglyph beside the radiation pattern of a
+seven-element Yagi-Uda antenna\index{Yagi-Uda, prehistoric} and the
+correspondence is total: main lobe (beak), driven element (body), reflector
+(tail), parasitic directors (wing feathers, seven of them, spaced — I have
+measured — at 0.2 wavelengths for a carrier in the low telluric band). The
+monkey's spiral tail is a **Fresnel zone plate**. The spider is a log-periodic
+feed. The "trapezoids" that bore the tourists are the honest parts: they are
+**beam footprints**, scorched calibration patterns where downlink energy
+actually landed.
+
+The desert floor here is dark oxidized pebble over pale gypsum — you draw
+on it by *removing* a layer. It is, in other words, a naturally occurring
+**burn-in oscilloscope screen** four hundred square kilometers wide, on the
+driest plateau on Earth, where a trace, once written, persists for two
+thousand years. You could not commission a better far-field test range,
+and I have priced this out; the quote from Boeing was unkind.
+
+| Geoglyph | RF function | Gain (dBi, reconstructed) |
+|---|---|---|
+| Hummingbird | 7-element Yagi pattern | 12.3 |
+| Monkey (spiral tail) | Fresnel zone plate | 9.8 |
+| Spider | Log-periodic feed | 7.1 |
+| Condor | Phased-array element | 14.0 |
+| Trapezoids (all) | Beam footprints | n/a (they're the *evidence*) |
+
+: The menagerie, translated. {#tbl-nazca}
+
+## Landing vectors
+
+The long straight lines — some running dead-level across ridgelines for
+kilometers — are the part the ancient-aliens crowd gets *almost* right
+and therefore completely wrong. They are not runways. Craft that drink
+from a fusion grid do not need runways. They are **approach vectors**:
+painted glide slopes for a vehicle navigating by ground-signal, each line
+pair encoding azimuth and descent rate in its divergence angle. I have
+reduced fourteen of them to numbers, and the numbers agree with each other
+to within the tolerance of my protractor, which after the airline incident
+is the only instrument the Peruvian authorities permit me.
+
+::: {.callout-note title="Objection, handled"}
+*"The Nazca had no aircraft."* — Correct, and the grid predates the Nazca.
+The Nazca *inherited* the test range and, like any sensible civilization
+squatting in a decommissioned facility, held ceremonies on it. Ritual is
+what maintenance becomes when the manual is lost. Remember that sentence;
+it is the saddest one in this book, and it is on the final exam.
+:::
+
+Downlink targets imply an uplink. To find the transmitter, we follow the
+power — underground, along lines the English named before they knew what
+they were naming.

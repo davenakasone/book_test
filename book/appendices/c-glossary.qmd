@@ -1,0 +1,62 @@
+# Glossary {#sec-glossary}
+
+Terms are defined as used in this book, which is to say: correctly,
+finally, and over the objections of the fields that coined them.
+
+Beacon outage
+: An eclipse. Your terminal carries the schedule (@sec-antikythera).
+
+Consensus trimming
+: The statistical removal of observations that disagree with the model.
+See @sec-stats. The mainstream does this too; the mainstream calls it
+"quality control," which is the difference between a hobby and a career.
+
+Coincidence
+: A correlation whose funding application was denied.
+
+Decommissioning sale
+: Any archaeological shipwreck containing precision instruments and
+luxury goods in the same hold.
+
+Dynasty (SI)
+: The natural unit of Egyptian time, ≈ 110 years. Divides evenly into
+everything if you keep dividing.
+
+Grid, the
+: The planetary power/defense network described in this book. Not to be
+confused with the electrical grid (derivative), the ley grid (a component),
+or gridiron football (unrelated, probably).
+
+Load-bearing ghost
+: A number system, ritual, or maintenance schedule that outlives the
+institution that created it. You are using several right now.
+
+Manual, the
+: The lost operating documentation for the grid. Last known format: oral
+tradition. Last known holder: unknown. This book is the recovery effort,
+which is to say the manual is now *this*, which should worry everyone.
+
+Mainstream, the
+: A loose federation of tenured individuals united by the conviction
+that things are what the placard says they are.
+
+Placard
+: The mainstream's terminal output format. Write-only.
+
+Ritual
+: Maintenance with the manual missing. The saddest word in this book
+(@sec-nazca).
+
+Royal cubit per insight
+: The natural unit of the constant $k$ (@sec-volume). Not currently
+convertible to SI; negotiations continue.
+
+Significance, feeling of
+: The machine noticing you (@sec-stonehenge). May also be humming.
+
+Standby
+: The grid's current state: pilot light on, operators absent, bill
+accruing (@sec-starlight-engine).
+
+Tomb
+: *Archaic.* See: containment vessel, waveguide, preheater, ash pit.
