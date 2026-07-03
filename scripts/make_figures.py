@@ -344,11 +344,15 @@ def fig_cover():
         color="white", fontsize=10.5, ha="center", family="serif",
     )
     ax.text(
-        0.5, 0.30, "DR. REX MERIDIAN, PhD (pending)",
-        color="white", fontsize=12, ha="center", family="serif",
+        0.5, 0.305, "DR. CHOCOLATE DADDY",
+        color="white", fontsize=13, ha="center", family="serif",
     )
     ax.text(
-        0.5, 0.24, "Institute for Forbidden Metrology · Vol. 1",
+        0.5, 0.262, "PhD (pending) · MD · DDS · PPM · PSI · MBA · Esq. · HVAC · AM/FM",
+        color="#8a97ad", fontsize=6.2, ha="center", family="monospace",
+    )
+    ax.text(
+        0.5, 0.215, "Institute for Forbidden Metrology · Vol. 1",
         color=gold, fontsize=8, ha="center", family="serif", style="italic",
     )
     ax.text(

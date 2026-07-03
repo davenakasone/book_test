@@ -1,4 +1,4 @@
-# LinkedIn — Rex Meridian does thought leadership
+# LinkedIn — Chocolate Daddy does thought leadership
 
 The gag writes itself: LinkedIn's native dialect (vulnerable openers,
 line-break cadence, lessons-learned listicles) applied to forbidden
@@ -6,7 +6,8 @@ metrology. This is the channel most likely to go organically viral with a
 professional audience — which is exactly who buys satirical nonfiction.
 
 **Headline:** Founder & Sole Fellow @ Institute for Forbidden Metrology |
-Riemann Hypothesis (solved) | PhD (pending) | Satirist (alleged)
+PhD (pending), MD, DDS, PPM, PSI, MBA, Esq., HVAC, AM/FM | Riemann
+Hypothesis (solved) | Satirist (alleged)
 
 **About:** I measure old things and divide them by other old things.
 Author, *The Starlight Engine* (satire — every claim false, including

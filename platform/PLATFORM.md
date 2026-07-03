@@ -2,7 +2,7 @@
 
 The book is the product; the platform is the distribution. This doc is the
 strategy layer; per-channel playbooks live next to it. Everything here is
-demonstrated with Rex Meridian content so the friend can see each piece
+demonstrated with Chocolate Daddy content so the friend can see each piece
 *populated*, not just described.
 
 ## The blunt ROI ranking (solo author, finite hours)
@@ -52,7 +52,7 @@ the willpower.
 - `email/welcome-sequence.md` — 5-email onboarding, in voice
 - `social/youtube.md` — channel concept + 8 videos, 2 shorts fully scripted
 - `social/instagram.md` — 12 posts with captions
-- `social/linkedin.md` — 8 posts, 3 written out (Rex does LinkedIn-brain)
+- `social/linkedin.md` — 8 posts, 3 written out (the Doctor does LinkedIn-brain)
 - `launch-plan.md` — 8-week calendar, all channels interlocked
 - `../scripts/make_social.py` — thumbnail/card/banner templates → `assets/`
 - `../book/html/newsletter.html` — signup CTA embedded in the web edition

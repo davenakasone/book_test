@@ -26,7 +26,12 @@ the friend.
    cover came out white. Paint an explicit full-bleed Rectangle.
 6. **Generate figures BEFORE rendering** — EPUB embeds images at render
    time; a stale PNG ships silently.
-7. TinyTeX's `latexmk` flaked once on the memoir build (no log written);
+7. **Long author strings clip on the PDF title page** — `\maketitle`
+   sets authors in a no-wrap tabular. And in book projects, `book.author`
+   beats `format: pdf: author:`, so per-format overrides don't rescue
+   you. Fix: trim the byline + `\setkomafont{author}{\large}` in the
+   preamble. (Discovered giving the author ten credentials.)
+8. TinyTeX's `latexmk` flaked once on the memoir build (no log written);
    direct `pdflatex` twice worked. Shrug, but worth knowing.
 
 ## What just worked (better than expected)

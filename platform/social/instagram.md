@@ -6,7 +6,8 @@ Grid aesthetic: gold-on-navy (cover palette) alternating with parchment
 (figure palette). Templates: `scripts/make_social.py`.
 
 **Bio:**
-> Dr. Rex Meridian, PhD (pending)
+> Dr. Chocolate Daddy
+> PhD (pending) · MD · DDS · PPM · PSI · MBA · Esq. · HVAC · AM/FM
 > Measurements they told you not to take.
 > A work of satire. Every claim is false, including this bio.
 > ↓ Free chapter + the Forbidden Bulletin

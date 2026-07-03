@@ -53,7 +53,7 @@ The ancients kept the count. The very least we can do is answer it.
 
 The lights are on. Nobody is home. **Go home.**
 
-— *R.M., Nashua bench annex, solstice minus nineteen days*
+— *C.D., Nashua bench annex, solstice minus nineteen days*
 
 ## Errata for the second printing {.unnumbered}
 
@@ -65,3 +65,4 @@ the schedule must be kept regardless of whether anyone remembers why:
 - @eq-gears: $P(\text{coincidence})$ has been recomputed and is now
   smaller.
 - The Bermuda Triangle sentence stays. Legal has initialed it.
+- The remaining credentials are being pursued alphabetically.

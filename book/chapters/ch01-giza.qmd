@@ -80,7 +80,7 @@ on the same axes. I have plotted them. The fit is exact after rounding.
 y = x. R² = 1.000 (after rounding).](../figures/constants.png){#fig-constants width=90%}
 
 ::: {.callout-note title="Objection, handled"}
-*"Dr. Meridian, where is the fuel?"* — The Nile, obviously. Heavy water is
+*"Dr. Daddy, where is the fuel?"* — The Nile, obviously. Heavy water is
 0.0156% of all water. The Nile moves 2,830 m³ per second past the site.
 I leave the deuterium arithmetic to the reader, because when I do it myself,
 reviewers call it "load-bearing hand-waving," and when *you* do it, it's

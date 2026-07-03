@@ -2,3 +2,7 @@
 % Quarto's PDF engine loop runs makeindex automatically when .idx appears.
 \usepackage{imakeidx}
 \makeindex[intoc=true]
+
+% \maketitle sets authors in a no-wrap tabular at \Large; one step down
+% keeps the credential soup inside the 6x9 text block.
+\setkomafont{author}{\large}

@@ -78,8 +78,10 @@ def ig_quote():
     ax.text(0.5, 0.56, "Ritual is maintenance\nwith the manual missing.",
             color=INK, fontsize=34, ha="center", va="center",
             family="serif", style="italic", linespacing=1.4)
-    ax.text(0.5, 0.30, "— DR. REX MERIDIAN, PhD (pending)", color=INK,
+    ax.text(0.5, 0.31, "— DR. CHOCOLATE DADDY", color=INK,
             fontsize=14, ha="center", family="monospace")
+    ax.text(0.5, 0.265, "PhD (pending) · MD · DDS · PPM · PSI · MBA · Esq. · HVAC · AM/FM",
+            color="#8a8171", fontsize=8, ha="center", family="monospace")
     ax.text(0.5, 0.24, "THE STARLIGHT ENGINE", color=GOLD, fontsize=13,
             ha="center", family="serif", weight="bold")
     ax.text(0.5, 0.10, DISCLAIMER, color="#8a8171", fontsize=8.5,

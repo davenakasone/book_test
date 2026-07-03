@@ -1,6 +1,6 @@
 # YouTube — channel: FORBIDDEN METROLOGY
 
-**Format:** author-as-character. Rex presents to camera with drawings.
+**Format:** author-as-character. Chocolate Daddy presents to camera with drawings.
 Longform (8–12 min) monthly; Shorts (45–60 s) weekly. Shorts feed
 subscribers; longform feeds the email list (link + "the full derivation is
 in the book" in every description).

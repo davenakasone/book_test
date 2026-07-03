@@ -28,7 +28,7 @@ Your first assignment, should you wish to warm up the multimeter: measure
 any two rooms of your dwelling and divide the results by each other. Reply
 with the number. I know what it will be. *You* know what it will be.
 
-— R.M.
+— C.D.
 
 *The Bulletin is a work of satire attached to a work of satire. Every
 claim is false, including several of the measurements you are about to
@@ -82,7 +82,7 @@ CTA: **[Every graded claim, Appendix B →]**
 Straight pitch, in voice: the book, the formats, the price, one testimonial
 (Prof. Chen's foreword pull-quote: "Every equation in this book is wrong.
 Several are wrong in ways that require genuine talent."). Deadline device
-if there's a launch discount; otherwise none — Rex does not beg.
+if there's a launch discount; otherwise none — Chocolate Daddy does not beg.
 
 CTA: **[Get The Starlight Engine — PDF/EPUB/print →]**
 
