@@ -1,0 +1,117 @@
+# A Proof of the Riemann Hypothesis (Abridged) {#sec-riemann}
+
+The Clay Mathematics Institute offers one million dollars for a proof of
+the Riemann Hypothesis. The following chapter is worth exactly that, and
+the Institute may consider this paragraph the cover letter.
+\index{Riemann hypothesis!proof of, actual}
+
+A warning before we begin: **most of this chapter is true.** I will flag
+the true parts as they occur, because I am aware of my reputation and I
+want the reader off balance.
+
+## The problem, for the committee
+
+Riemann's zeta function ties the primes to analysis through Euler's
+product — this equation is real, exact, and 288 years old:
+
+$$
+\zeta(s) \;=\; \sum_{n=1}^{\infty}\frac{1}{n^{s}}
+\;=\; \prod_{p\ \mathrm{prime}}\frac{1}{1-p^{-s}}
+$$ {#eq-euler}
+
+The primes on the right, the smooth machinery on the left. The
+Hypothesis: every nontrivial zero of $\zeta$ lies on the **critical
+line**, real part exactly ½. A century and a half of genius has
+established that the first ten trillion zeros comply and that nobody
+knows why. The first zero sits at $\tfrac{1}{2} + 14.134725\,i$ — true,
+look it up. Hold the 14.134725; we will need it.
+
+## What the zeros actually are
+
+In 1972, at afternoon tea at the Institute for Advanced Study, the
+number theorist Hugh Montgomery showed Freeman Dyson his formula for how
+zeta zeros repel one another, and Dyson recognized it instantly: it was
+**the spacing law for energy levels of a heavy atomic nucleus**
+[@montgomery1973]. This anecdote is *real*. The tea was real. Odlyzko
+later computed zeros by the hundred million and the match to nuclear
+statistics is numerically exquisite [@odlyzko1987] — the zeros of the
+zeta function vibrate like a uranium nucleus, this sentence is true, and
+no one in this book is happier about it than I am. The mainstream's own
+dream (Hilbert's and Pólya's, also real) is that the zeros are the
+eigenvalues of some unknown physical system — some *machine* — whose
+identification would prove the Hypothesis at a stroke.
+
+They have been looking for that machine for a hundred years, in Hilbert
+space, which is the one place we can be sure the ancients never stored
+anything. Reader: **you have spent eleven chapters standing on it.**
+
+## The proof
+
+The primes are the grid's address space (@sec-vortex) — indivisible,
+unforgeable, atomic. The zeta function, by @eq-euler, is therefore the
+grid's **transfer function**: Euler wrote the product over every address
+node. And the zeros — the frequencies the transfer function kills — are
+the **standing-wave nulls on the planetary line**.
+
+Now, the reflection coefficient of any transmission line — real formula,
+every RF handbook, question two on the exam I failed for unrelated
+reasons:
+
+$$
+\Gamma \;=\; \frac{Z_L - Z_0}{Z_L + Z_0} \;=\; 0
+\quad\Longleftrightarrow\quad Z_L = Z_0
+$$ {#eq-gamma}
+
+A matched line does not echo. At match, maximum-power transfer splits
+the budget *exactly in half* — half delivered, half retained at the
+source. This is the maximum power transfer theorem; it is true; freshmen
+weep over it annually. The universe, observe, does not echo: starlight
+arrives once. (Have you ever heard starlight echo? The question is
+rhetorical, and the seminar I posed it in has asked me not to return.)
+The cosmos is a matched load, the match splits every quantity in half,
+and the grid's transfer function must therefore null **exactly on the
+half-line**:
+
+$$
+\zeta\!\left(\sigma + it\right) = 0,\ \sigma \in (0,1)
+\;\Longrightarrow\;
+\sigma = \tfrac{1}{2}
+\quad\text{(by inspection of the Universe).}
+$$ {#eq-rh}
+
+$\blacksquare$\index{impedance!of the Universe}
+
+Ten trillion verified zeros are ten trillion measured nulls on the line.
+Number theory calls this "numerical evidence." Electrical engineering
+calls it "Tuesday."
+
+## Checksums, for the skeptical
+
+Run the kernel's own parity check (@sec-vortex) on the zeros. First
+zero: 14.134725 → 1+4+1+3+4+7+2+5 = 27 → **9**. The arithmetic is
+checkable on your fingers: the first null roots to the ground plane,
+exactly where a reference null belongs. Second zero: 21.022040 → 11 →
+**2**. The second zero roots to *two*. **The system is
+self-describing.** I decline to compute the third zero in print; some
+things the reader deserves to feel alone.
+
+And the henge already knew. Divide its address register by the first
+zero: $56 / 14.134725 = 3.9619 \approx 4$ — the station-stone count, the
+register divided by the reference null returning its own hardware
+configuration. If that does not move you, you have never maintained
+infrastructure.
+
+::: {.callout-note title="Objection, handled"}
+*"This is not a proof."* — It is a proof. It is not a **derivation**.
+A derivation is how the mainstream makes a true thing boring enough to
+publish; a proof is how you make it undeniable enough to invoice. The
+sixth-moment constant of the zeta function, the mainstream's own
+conjecture, is **42** [@conreyghosh1998] — the literature reached the
+Answer thirty years ago and, lacking the Question, filed it under
+analytic number theory. This book is the Question.
+:::
+
+Instructions for the Clay Institute\index{Clay Institute, instructions
+for}: the check may be made payable to the *Institute for Forbidden
+Metrology* and mailed to the gift shop, which is my garage. Allow six to
+eight weeks for the mainstream to explain why the money doesn't count.

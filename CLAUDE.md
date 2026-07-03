@@ -2,8 +2,14 @@
 
 ## STATUS
 
-**2026-07-02 — v1 COMPLETE, pipeline proven.** *The Starlight Engine*
-(11 chapters, 3 appendices, satire disclaimer up front) renders from one
+**2026-07-02 — v1.1: Part IV "The Underlying Code" added** (Census Method
+pointer-arithmetic, vortex math / digital roots, Riemann Hypothesis
+"proof" built on real math trivia — Montgomery–Dyson tea, GUE statistics,
+42 sixth-moment, all really cited). Now **73-page PDF**, 14 chapters,
+5 parts. Everything below still true:
+
+**v1 pipeline proven.** *The Starlight Engine*
+(satire disclaimer up front) renders from one
 `quarto render`: **55-page 6×9" PDF with working index/citations/cross-refs
 + valid EPUB3 with cover + searchable HTML site** (`book/_book/`). Memoir
 shootout built too (`latex-shootout/build/giza-memoir.pdf` — drop caps,

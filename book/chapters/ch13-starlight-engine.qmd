@@ -25,6 +25,15 @@ the full survey [@ifm2026]:
 9. **Transmission.** The Great Wall (@sec-great-wall): hundred-millionth
    harmonic of hydrogen, planetary downlink, still standing, still tuned.
 
+That is the hardware. Part IV decompiled the software riding on it: the
+census pointers (@sec-census) are the address bus — the monuments a
+linked list, each node counting out the coordinates of the next; the
+nine-point engine (@sec-vortex) is the kernel's arithmetic, every grid
+constant checksummed to 9 and the Wall alone rooting to unity; and the
+zeta zeros (@sec-riemann) are the clock-distribution spec, ten trillion
+measured nulls on a line the cosmos keeps impedance-matched at exactly
+one half. Hardware plus software equals machine.
+
 So: **a starlight-pumped fusion grid powering a planetary defense and
 transit system** — surplus power beamed to craft on painted approach
 vectors, sentinels watching for the next gamma-ray burst, the whole

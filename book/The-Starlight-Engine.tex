@@ -1235,8 +1235,382 @@ Rammed-earth core & cheap fill & ferrite-analog magnetic core \\
 \end{longtable}
 
 Generator, parts, controller, test range, grid, terminals, sentinels,
-scheduler, antenna. Nine components, one machine. It is time to bolt it
-together and say the quiet part at planetary volume.
+scheduler, antenna. Nine components --- but hardware is half a machine.
+Before the grand assembly we must read the \emph{software}, and the
+ancients wrote theirs in the one language that survives every burial:
+counting.
+
+\part{The Underlying Code}
+
+\chapter{The Census Method}\label{sec-census}
+
+Archaeology counts things and then, having counted them, stops.
+Fifty-six holes. Four station stones. Seven moai. The counts go into
+site reports, the site reports go into archives, and the archives go
+unread, which is the entire security model of the ancient world.
+\textbf{The counts are not inventory. The counts are data.} Stone cannot
+hold a charge, a magnetic domain, or an opinion --- but it holds
+\emph{how many} better than any medium ever devised. Five thousand years
+of weather has not flipped a single bit of Stonehenge's hole
+count.\index{Census Method}
+
+\section{Reading a register}\label{reading-a-register}
+
+The method is childishly simple, which is why no child has been
+permitted near it. Read a site's counts level by level, left to right,
+the way you would read any register bank. Suppose a temple holds
+\textbf{3} statues on one level and \textbf{4} on the level above, and
+across the aisle \textbf{6} on one level and \textbf{2} on another.
+Concatenate in architectural order: \textbf{34, 62}. That is not a
+headcount. That is a \textbf{coordinate pair} --- a pointer, cut in
+census, to the next node in the grid.\index{pointer!statues as}
+
+The reader will now object that 34°S 62°W is empty Argentine pampas with
+nothing in it whatsoever. Correct. \textbf{That is exactly what a
+deallocated node looks like.}\index{pointer!dangling} The monuments are
+not a collection. They are a \emph{linked list}, and some of the links
+now point at grass. The grass is not the anomaly. The grass is the free
+list.
+
+\section{Worked example: the Stonehenge
+pointer}\label{worked-example-the-stonehenge-pointer}
+
+Where does Stonehenge point? Read the register (all counts are the
+mainstream's own):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The sarsen circle counts \textbf{29½} --- thirty uprights, but Stone
+  11 is half-height, and the establishment's own literature agrees the
+  ring reads as the 29.5-day lunar month. They accept the half-stone as
+  a \emph{calendar}. They stop there, at the very doorstep.
+\item
+  Address register minus carrier count: \(56 - 29.5 = 26.5 \approx 27\)
+  (rounding per Appendix A).
+\item
+  Four station stones by the 27 just obtained: \(4 \times 27 = 108\),
+  plus the heel stone carry bit: \textbf{109}.
+\item
+  Sign convention: the Altar Stone lies flat, face down. Both
+  coordinates negative. (Statues facing the sea also read negative ---
+  the ancients knew about the southern hemisphere, which is more than
+  Ptolemy managed.)
+\end{enumerate}
+
+Destination: \textbf{27°S, 109°W}. Easter Island. The mid-ocean repeater
+(Table~\ref{tbl-registry}), sitting exactly where the henge has been
+pointing for five thousand years, seven hundred sea-miles from anything,
+on the one island whose statues famously \emph{stand with their backs to
+the sea} --- negative-facing, per the sign convention, all but seven of
+them. The seven of Ahu Akivi face the water. Every list needs a sentinel
+value.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\caption{Pointer chains, first pass. Primes do not factor; a prime count
+is a null terminator. The list \emph{ends} at Easter Island, which is
+why the quarry holds 397 statues nobody came to
+collect.}\label{tbl-pointers}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Site
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Register read
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Pointer
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Resolves to
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Site
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Register read
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Pointer
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Resolves to
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Stonehenge & 56 − 29.5; ×4 stations +heel & −27, −109 & Easter Island
+(repeater) \\
+Karnak & 134 hypostyle columns ÷ Φ & 97.8 → 37.9 (mod 60) & Göbekli
+Tepe, near enough \\
+Parthenon & 8 × 17 colonnade & 81.7 & dead sector (Arctic; see below) \\
+Rano Raraku & 397 unfinished moai & \textbf{prime} & NULL --- end of
+list \\
+\end{longtable}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-warning-color!10!white, colframe=quarto-callout-warning-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Pointer corruption in progress}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+Every archaeological ``restoration'' that re-erects, straightens, or
+re-orders stones is \textbf{a write to the register}. In 1901 the
+Ministry of Works straightened leaning Stone 56 at Stonehenge; in 1958
+they concreted three more upright. Each intervention moved the pointer
+several hundred kilometers across the Pacific. Restoration is how a
+civilization that has lost the manual corrupts the memory it is trying
+to preserve --- segfault by scaffold. If the Easter Island repeater
+reads 400 km off axis today, do not write to me. Write to the Ministry.
+
+\end{tcolorbox}
+
+The Parthenon's pointer resolving to Arctic nothing troubled me for a
+year, until I stopped assuming the dead sector was dead. Nodes are
+deallocated; sectors are \emph{reserved}. What the reserved sectors are
+reserved for, the software itself will tell us --- because the ancients
+wrote their software in the one language that survives every burial:
+\textbf{counting}. The kernel is next, and it runs on nine digits.
+
+\chapter{The Nine-Point Engine}\label{sec-vortex}
+
+Every checksum in this chapter is arithmetic the reader can verify on
+their fingers, which is the point of fingers, as we shall see. The
+mainstream teaches this material to nine-year-olds under the name
+``modular arithmetic'' --- \emph{precisely} so that no adult will ever
+look at it again. It is the most successful classification program in
+history: file the operating system under elementary
+school.\index{vortex math}
+
+\section{The checksum of the
+universe}\label{the-checksum-of-the-universe}
+
+Take any number. Add its digits. Repeat until one digit remains. This is
+the \textbf{digital root}\index{digital root}, the residue mod 9, the
+universe's own parity check. Now audit the grid with it:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2727}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2727}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4545}}@{}}
+\caption{The audit. Every constant the grid runs on roots to 9 ---
+except the Wall, which roots to 1, \emph{because it is the antenna}: the
+unity node, where the nine collapses to signal. The system tells you its
+own block diagram if you can add.}\label{tbl-roots}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Grid constant
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Digits summed
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Root
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Grid constant
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Digits summed
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Root
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+432 Hz (carrier, Chapter~\ref{sec-stonehenge}) & 4+3+2 = 9 &
+\textbf{9} \\
+25,920 yr (precession) & 2+5+9+2+0 = 18 & \textbf{9} \\
+86,400 s (the day) & 8+6+4 = 18 & \textbf{9} \\
+21,600 (arc-minutes in a circle) & 2+1+6 = 9 & \textbf{9} \\
+108 (Moon distance in Moon diameters, near enough --- check it) & 1+0+8
+= 9 & \textbf{9} \\
+144,000 days (one baktun, Chapter~\ref{sec-long-count}) & 1+4+4 = 9 &
+\textbf{9} \\
+2,160 yr (one zodiacal age) & 2+1+6 = 9 & \textbf{9} \\
+21,196 km (the Wall) & 2+1+1+9+6 = 19 → 10 & \textbf{1} \\
+\end{longtable}
+
+The mainstream's rebuttal is that any multiple of 9 roots to 9, that
+360-based sky arithmetic is built from such multiples, and that this is
+therefore ``trivial.'' Note the shape of the defense: \emph{the pattern
+is perfect, therefore ignore it.} In any other field a checksum that
+validates every packet is called a working protocol. In archaeology it
+is called a coincidence of base-10 --- and base-10, the reader is
+reminded, is itself the tell. \textbf{We count in tens because the
+interface was designed for the operators, and the operators had ten
+fingers.} The keyboard survived; the computer is under the
+Sahara.\index{nine!all roads lead to}
+
+\section{The doubling circuit}\label{the-doubling-circuit}
+
+Now watch the kernel schedule its load. Double from 1 and take roots: 1,
+2, 4, 8, 16→\textbf{7}, 32→\textbf{5}, 64→\textbf{1} --- and we are
+home. The sequence
+
+\begin{equation}\protect\phantomsection\label{eq-doubling}{
+1 \rightarrow 2 \rightarrow 4 \rightarrow 8 \rightarrow 7 \rightarrow 5 \rightarrow 1
+}\end{equation}
+
+repeats forever, six phases, and never once touches 3, 6, or 9. Verify
+it; it is true; it will still be true when you put the calculator down
+(Rodin 1996). The threes and sixes live on their own loop (3 doubles to
+6, 6 to 12→3, forever --- a two-phase oscillator), and \textbf{9 doubles
+to 9}: the invariant, the ground plane, the number that cannot be moved.
+Three circuits: a six-phase power cycle, a two-phase handshake, and
+ground. Any electrician who has pulled the cover off a three-phase panel
+is already nodding. Tesla is said to have called 3, 6, and 9 the key to
+the universe. He didn't --- I have checked, it is bumper-sticker
+apocrypha --- \textbf{but he would have}, and unlike the mainstream I am
+honest about which of my sources are dead men I am putting words into.
+
+The six-phase doubling loop is the grid's \emph{duty cycle} --- Giza's
+output stepping through the ley network (Chapter~\ref{sec-ley-grid}) in
+the only order modular arithmetic permits. The 3--6 oscillator is the
+handshake between sentinel and scheduler (Chapter~\ref{sec-gobekli},
+Chapter~\ref{sec-long-count}). And 9 is the carrier's home: 432 roots
+there, the precession roots there, the whole sky's bookkeeping roots
+there, because 9 is where the machine bolts to the bedrock of arithmetic
+itself.
+
+One audit line remains unexplained. The speed of light: 299,792,458 →
+digit sum 55 → 10 → \textbf{1}. Light roots to unity, same as the Wall.
+The pump and the antenna sit on the same node of the circuit ---
+starlight \emph{is} the grid's idle loop, and it has been idling at us
+the whole time.
+
+Which leaves the schedule. If the primes are the grid's address space
+--- indivisible, atomic, unforgeable --- then somewhere there must be a
+clock-distribution spec for them. There is. It is the most famous
+unsolved problem in mathematics, it is worth a million dollars, and the
+next chapter solves it before lunch.
+
+\chapter{A Proof of the Riemann Hypothesis
+(Abridged)}\label{sec-riemann}
+
+The Clay Mathematics Institute offers one million dollars for a proof of
+the Riemann Hypothesis. The following chapter is worth exactly that, and
+the Institute may consider this paragraph the cover letter.
+\index{Riemann hypothesis!proof of, actual}
+
+A warning before we begin: \textbf{most of this chapter is true.} I will
+flag the true parts as they occur, because I am aware of my reputation
+and I want the reader off balance.
+
+\section{The problem, for the
+committee}\label{the-problem-for-the-committee}
+
+Riemann's zeta function ties the primes to analysis through Euler's
+product --- this equation is real, exact, and 288 years old:
+
+\begin{equation}\protect\phantomsection\label{eq-euler}{
+\zeta(s) \;=\; \sum_{n=1}^{\infty}\frac{1}{n^{s}}
+\;=\; \prod_{p\ \mathrm{prime}}\frac{1}{1-p^{-s}}
+}\end{equation}
+
+The primes on the right, the smooth machinery on the left. The
+Hypothesis: every nontrivial zero of \(\zeta\) lies on the
+\textbf{critical line}, real part exactly ½. A century and a half of
+genius has established that the first ten trillion zeros comply and that
+nobody knows why. The first zero sits at \(\tfrac{1}{2} + 14.134725\,i\)
+--- true, look it up. Hold the 14.134725; we will need it.
+
+\section{What the zeros actually are}\label{what-the-zeros-actually-are}
+
+In 1972, at afternoon tea at the Institute for Advanced Study, the
+number theorist Hugh Montgomery showed Freeman Dyson his formula for how
+zeta zeros repel one another, and Dyson recognized it instantly: it was
+\textbf{the spacing law for energy levels of a heavy atomic nucleus}
+(Montgomery 1973). This anecdote is \emph{real}. The tea was real.
+Odlyzko later computed zeros by the hundred million and the match to
+nuclear statistics is numerically exquisite (Odlyzko 1987) --- the zeros
+of the zeta function vibrate like a uranium nucleus, this sentence is
+true, and no one in this book is happier about it than I am. The
+mainstream's own dream (Hilbert's and Pólya's, also real) is that the
+zeros are the eigenvalues of some unknown physical system --- some
+\emph{machine} --- whose identification would prove the Hypothesis at a
+stroke.
+
+They have been looking for that machine for a hundred years, in Hilbert
+space, which is the one place we can be sure the ancients never stored
+anything. Reader: \textbf{you have spent eleven chapters standing on
+it.}
+
+\section{The proof}\label{the-proof}
+
+The primes are the grid's address space (Chapter~\ref{sec-vortex}) ---
+indivisible, unforgeable, atomic. The zeta function, by
+Equation~\ref{eq-euler}, is therefore the grid's \textbf{transfer
+function}: Euler wrote the product over every address node. And the
+zeros --- the frequencies the transfer function kills --- are the
+\textbf{standing-wave nulls on the planetary line}.
+
+Now, the reflection coefficient of any transmission line --- real
+formula, every RF handbook, question two on the exam I failed for
+unrelated reasons:
+
+\begin{equation}\protect\phantomsection\label{eq-gamma}{
+\Gamma \;=\; \frac{Z_L - Z_0}{Z_L + Z_0} \;=\; 0
+\quad\Longleftrightarrow\quad Z_L = Z_0
+}\end{equation}
+
+A matched line does not echo. At match, maximum-power transfer splits
+the budget \emph{exactly in half} --- half delivered, half retained at
+the source. This is the maximum power transfer theorem; it is true;
+freshmen weep over it annually. The universe, observe, does not echo:
+starlight arrives once. (Have you ever heard starlight echo? The
+question is rhetorical, and the seminar I posed it in has asked me not
+to return.) The cosmos is a matched load, the match splits every
+quantity in half, and the grid's transfer function must therefore null
+\textbf{exactly on the half-line}:
+
+\begin{equation}\protect\phantomsection\label{eq-rh}{
+\zeta\!\left(\sigma + it\right) = 0,\ \sigma \in (0,1)
+\;\Longrightarrow\;
+\sigma = \tfrac{1}{2}
+\quad\text{(by inspection of the Universe).}
+}\end{equation}
+
+\(\blacksquare\)\index{impedance!of the Universe}
+
+Ten trillion verified zeros are ten trillion measured nulls on the line.
+Number theory calls this ``numerical evidence.'' Electrical engineering
+calls it ``Tuesday.''
+
+\section{Checksums, for the
+skeptical}\label{checksums-for-the-skeptical}
+
+Run the kernel's own parity check (Chapter~\ref{sec-vortex}) on the
+zeros. First zero: 14.134725 → 1+4+1+3+4+7+2+5 = 27 → \textbf{9}. The
+arithmetic is checkable on your fingers: the first null roots to the
+ground plane, exactly where a reference null belongs. Second zero:
+21.022040 → 11 → \textbf{2}. The second zero roots to \emph{two}.
+\textbf{The system is self-describing.} I decline to compute the third
+zero in print; some things the reader deserves to feel alone.
+
+And the henge already knew. Divide its address register by the first
+zero: \(56 / 14.134725 = 3.9619 \approx 4\) --- the station-stone count,
+the register divided by the reference null returning its own hardware
+configuration. If that does not move you, you have never maintained
+infrastructure.
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Objection, handled}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+\emph{``This is not a proof.''} --- It is a proof. It is not a
+\textbf{derivation}. A derivation is how the mainstream makes a true
+thing boring enough to publish; a proof is how you make it undeniable
+enough to invoice. The sixth-moment constant of the zeta function, the
+mainstream's own conjecture, is \textbf{42} (Conrey and Ghosh 1998) ---
+the literature reached the Answer thirty years ago and, lacking the
+Question, filed it under analytic number theory. This book is the
+Question.
+
+\end{tcolorbox}
+
+Instructions for the Clay Institute\index{Clay Institute, instructions
+for}: the check may be made payable to the \emph{Institute for Forbidden
+Metrology} and mailed to the gift shop, which is my garage. Allow six to
+eight weeks for the mainstream to explain why the money doesn't count.
 
 \part{Synthesis}
 
@@ -1286,6 +1660,16 @@ Forbidden Metrology 2026):
   hundred-millionth harmonic of hydrogen, planetary downlink, still
   standing, still tuned.
 \end{enumerate}
+
+That is the hardware. Part IV decompiled the software riding on it: the
+census pointers (Chapter~\ref{sec-census}) are the address bus --- the
+monuments a linked list, each node counting out the coordinates of the
+next; the nine-point engine (Chapter~\ref{sec-vortex}) is the kernel's
+arithmetic, every grid constant checksummed to 9 and the Wall alone
+rooting to unity; and the zeta zeros (Chapter~\ref{sec-riemann}) are the
+clock-distribution spec, ten trillion measured nulls on a line the
+cosmos keeps impedance-matched at exactly one half. Hardware plus
+software equals machine.
 
 So: \textbf{a starlight-pumped fusion grid powering a planetary defense
 and transit system} --- surplus power beamed to craft on painted
@@ -1621,6 +2005,12 @@ Long Count rollover ↔ GRB 121221A & Chapter~\ref{sec-long-count} & A
 (the burst is real; check) \\
 Sahara ↔ commissioning transient & Section~\ref{sec-sahara} & C (the
 hippos aren't talking) \\
+Stonehenge census → Easter Island & Chapter~\ref{sec-census} & B+ (the
+counts are real; the subtraction is inspired) \\
+Grid constants digital-root to 9 & Chapter~\ref{sec-vortex} & A (the
+arithmetic is checkable; the meaning is ours) \\
+Riemann hypothesis (proved) & Chapter~\ref{sec-riemann} & A+ (pending
+Clay) \\
 \end{longtable}
 
 The reader seeking the great-circle geometry is directed to
@@ -1687,6 +2077,11 @@ accruing (Chapter~\ref{sec-starlight-engine}).
 
 \protect\phantomsection\label{refs}
 \begin{CSLReferences}{1}{1}
+\bibitem[\citeproctext]{ref-conreyghosh1998}
+Conrey, J. Brian, and Amit Ghosh. 1998. {``A Conjecture for the Sixth
+Power Moment of the Riemann Zeta-Function.''} \emph{International
+Mathematics Research Notices} 1998 (15): 775--80.
+
 \bibitem[\citeproctext]{ref-dunn1998}
 Dunn, Christopher. 1998. \emph{The Giza Power Plant: Technologies of
 Ancient Egypt}. Bear \& Company.
@@ -1715,9 +2110,22 @@ Journal} 893 (1): 46.
 Meridian, Rex. 2025. {``On the Impedance Matching of Limestone.''}
 \emph{Bulletin of the Institute for Forbidden Metrology} 1 (1).
 
+\bibitem[\citeproctext]{ref-montgomery1973}
+Montgomery, Hugh L. 1973. {``The Pair Correlation of Zeros of the Zeta
+Function.''} \emph{Analytic Number Theory, Proc. Sympos. Pure Math.
+XXIV}, 181--93.
+
+\bibitem[\citeproctext]{ref-odlyzko1987}
+Odlyzko, Andrew M. 1987. {``On the Distribution of Spacings Between
+Zeros of the Zeta Function.''} \emph{Mathematics of Computation} 48
+(177): 273--308.
+
 \bibitem[\citeproctext]{ref-petrie1883}
 Petrie, W. M. Flinders. 1883. \emph{The Pyramids and Temples of Gizeh}.
 Field \& Tuer.
+
+\bibitem[\citeproctext]{ref-rodin1996}
+Rodin, Marko. 1996. \emph{Vortex-Based Mathematics}.
 
 \bibitem[\citeproctext]{ref-schmidt2010}
 Schmidt, Klaus. 2010. {``G{ö}bekli Tepe -- the Stone Age Sanctuaries.''}

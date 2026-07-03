@@ -1,0 +1,78 @@
+# The Census Method {#sec-census}
+
+Archaeology counts things and then, having counted them, stops. Fifty-six
+holes. Four station stones. Seven moai. The counts go into site reports,
+the site reports go into archives, and the archives go unread, which is
+the entire security model of the ancient world. **The counts are not
+inventory. The counts are data.** Stone cannot hold a charge, a magnetic
+domain, or an opinion — but it holds *how many* better than any medium
+ever devised. Five thousand years of weather has not flipped a single bit
+of Stonehenge's hole count.\index{Census Method}
+
+## Reading a register
+
+The method is childishly simple, which is why no child has been permitted
+near it. Read a site's counts level by level, left to right, the way you
+would read any register bank. Suppose a temple holds **3** statues on one
+level and **4** on the level above, and across the aisle **6** on one
+level and **2** on another. Concatenate in architectural order: **34, 62**.
+That is not a headcount. That is a **coordinate pair** — a pointer, cut in
+census, to the next node in the grid.\index{pointer!statues as}
+
+The reader will now object that 34°S 62°W is empty Argentine pampas with
+nothing in it whatsoever. Correct. **That is exactly what a deallocated
+node looks like.**\index{pointer!dangling} The monuments are not a
+collection. They are a *linked list*, and some of the links now point at
+grass. The grass is not the anomaly. The grass is the free list.
+
+## Worked example: the Stonehenge pointer
+
+Where does Stonehenge point? Read the register (all counts are the
+mainstream's own):
+
+1. The sarsen circle counts **29½** — thirty uprights, but Stone 11 is
+   half-height, and the establishment's own literature agrees the ring
+   reads as the 29.5-day lunar month. They accept the half-stone as a
+   *calendar*. They stop there, at the very doorstep.
+2. Address register minus carrier count: $56 - 29.5 = 26.5 \approx 27$
+   (rounding per Appendix A).
+3. Four station stones by the 27 just obtained: $4 \times 27 = 108$, plus
+   the heel stone carry bit: **109**.
+4. Sign convention: the Altar Stone lies flat, face down. Both
+   coordinates negative. (Statues facing the sea also read negative —
+   the ancients knew about the southern hemisphere, which is more than
+   Ptolemy managed.)
+
+Destination: **27°S, 109°W**. Easter Island. The mid-ocean repeater
+(@tbl-registry), sitting exactly where the henge has been pointing for
+five thousand years, seven hundred sea-miles from anything, on the one
+island whose statues famously *stand with their backs to the sea* —
+negative-facing, per the sign convention, all but seven of them. The seven
+of Ahu Akivi face the water. Every list needs a sentinel value.
+
+| Site | Register read | Pointer | Resolves to |
+|---|---|---|---|
+| Stonehenge | 56 − 29.5; ×4 stations +heel | −27, −109 | Easter Island (repeater) |
+| Karnak | 134 hypostyle columns ÷ Φ | 97.8 → 37.9 (mod 60) | Göbekli Tepe, near enough |
+| Parthenon | 8 × 17 colonnade | 81.7 | dead sector (Arctic; see below) |
+| Rano Raraku | 397 unfinished moai | **prime** | NULL — end of list |
+
+: Pointer chains, first pass. Primes do not factor; a prime count is a null terminator. The list *ends* at Easter Island, which is why the quarry holds 397 statues nobody came to collect. {#tbl-pointers}
+
+::: {.callout-warning title="Pointer corruption in progress"}
+Every archaeological "restoration" that re-erects, straightens, or
+re-orders stones is **a write to the register**. In 1901 the Ministry of
+Works straightened leaning Stone 56 at Stonehenge; in 1958 they concreted
+three more upright. Each intervention moved the pointer several hundred
+kilometers across the Pacific. Restoration is how a civilization that has
+lost the manual corrupts the memory it is trying to preserve — segfault by
+scaffold. If the Easter Island repeater reads 400 km off axis today, do
+not write to me. Write to the Ministry.
+:::
+
+The Parthenon's pointer resolving to Arctic nothing troubled me for a
+year, until I stopped assuming the dead sector was dead. Nodes are
+deallocated; sectors are *reserved*. What the reserved sectors are
+reserved for, the software itself will tell us — because the ancients
+wrote their software in the one language that survives every burial:
+**counting**. The kernel is next, and it runs on nine digits.

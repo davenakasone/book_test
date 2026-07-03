@@ -70,5 +70,6 @@ transmitting. You can only make the operators forget what the traffic is.
 : The largest structure ever built, read as hardware. {#tbl-wall}
 
 Generator, parts, controller, test range, grid, terminals, sentinels,
-scheduler, antenna. Nine components, one machine. It is time to bolt it
-together and say the quiet part at planetary volume.
+scheduler, antenna. Nine components — but hardware is half a machine.
+Before the grand assembly we must read the *software*, and the ancients
+wrote theirs in the one language that survives every burial: counting.

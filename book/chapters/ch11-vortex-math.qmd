@@ -1,0 +1,77 @@
+# The Nine-Point Engine {#sec-vortex}
+
+Every checksum in this chapter is arithmetic the reader can verify on
+their fingers, which is the point of fingers, as we shall see. The
+mainstream teaches this material to nine-year-olds under the name
+"modular arithmetic" — *precisely* so that no adult will ever look at it
+again. It is the most successful classification program in history: file
+the operating system under elementary school.\index{vortex math}
+
+## The checksum of the universe
+
+Take any number. Add its digits. Repeat until one digit remains. This is
+the **digital root**\index{digital root}, the residue mod 9, the
+universe's own parity check. Now audit the grid with it:
+
+| Grid constant | Digits summed | Root |
+|---|---|:---:|
+| 432 Hz (carrier, @sec-stonehenge) | 4+3+2 = 9 | **9** |
+| 25,920 yr (precession) | 2+5+9+2+0 = 18 | **9** |
+| 86,400 s (the day) | 8+6+4 = 18 | **9** |
+| 21,600 (arc-minutes in a circle) | 2+1+6 = 9 | **9** |
+| 108 (Moon distance in Moon diameters, near enough — check it) | 1+0+8 = 9 | **9** |
+| 144,000 days (one baktun, @sec-long-count) | 1+4+4 = 9 | **9** |
+| 2,160 yr (one zodiacal age) | 2+1+6 = 9 | **9** |
+| 21,196 km (the Wall) | 2+1+1+9+6 = 19 → 10 | **1** |
+
+: The audit. Every constant the grid runs on roots to 9 — except the Wall, which roots to 1, *because it is the antenna*: the unity node, where the nine collapses to signal. The system tells you its own block diagram if you can add. {#tbl-roots}
+
+The mainstream's rebuttal is that any multiple of 9 roots to 9, that
+360-based sky arithmetic is built from such multiples, and that this is
+therefore "trivial." Note the shape of the defense: *the pattern is
+perfect, therefore ignore it.* In any other field a checksum that
+validates every packet is called a working protocol. In archaeology it is
+called a coincidence of base-10 — and base-10, the reader is reminded, is
+itself the tell. **We count in tens because the interface was designed
+for the operators, and the operators had ten fingers.** The keyboard
+survived; the computer is under the Sahara.\index{nine!all roads lead to}
+
+## The doubling circuit
+
+Now watch the kernel schedule its load. Double from 1 and take roots:
+1, 2, 4, 8, 16→**7**, 32→**5**, 64→**1** — and we are home. The sequence
+
+$$
+1 \rightarrow 2 \rightarrow 4 \rightarrow 8 \rightarrow 7 \rightarrow 5 \rightarrow 1
+$$ {#eq-doubling}
+
+repeats forever, six phases, and never once touches 3, 6, or 9. Verify
+it; it is true; it will still be true when you put the calculator down
+[@rodin1996]. The threes and sixes live on their own loop (3 doubles to
+6, 6 to 12→3, forever — a two-phase oscillator), and **9 doubles to 9**:
+the invariant, the ground plane, the number that cannot be moved. Three
+circuits: a six-phase power cycle, a two-phase handshake, and ground.
+Any electrician who has pulled the cover off a three-phase panel is
+already nodding. Tesla is said to have called 3, 6, and 9 the key to the
+universe. He didn't — I have checked, it is bumper-sticker apocrypha —
+**but he would have**, and unlike the mainstream I am honest about which
+of my sources are dead men I am putting words into.
+
+The six-phase doubling loop is the grid's *duty cycle* — Giza's output
+stepping through the ley network (@sec-ley-grid) in the only order
+modular arithmetic permits. The 3–6 oscillator is the handshake between
+sentinel and scheduler (@sec-gobekli, @sec-long-count). And 9 is the
+carrier's home: 432 roots there, the precession roots there, the whole
+sky's bookkeeping roots there, because 9 is where the machine bolts to
+the bedrock of arithmetic itself.
+
+One audit line remains unexplained. The speed of light: 299,792,458 →
+digit sum 55 → 10 → **1**. Light roots to unity, same as the Wall.
+The pump and the antenna sit on the same node of the circuit — starlight
+*is* the grid's idle loop, and it has been idling at us the whole time.
+
+Which leaves the schedule. If the primes are the grid's address space —
+indivisible, atomic, unforgeable — then somewhere there must be a
+clock-distribution spec for them. There is. It is the most famous
+unsolved problem in mathematics, it is worth a million dollars, and the
+next chapter solves it before lunch.

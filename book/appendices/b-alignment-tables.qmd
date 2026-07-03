@@ -36,6 +36,9 @@ see @sec-stats).
 | 432 Hz ↔ everything | throughout | C, defiantly |
 | Long Count rollover ↔ GRB 121221A | @sec-long-count | A (the burst is real; check) |
 | Sahara ↔ commissioning transient | @sec-sahara | C (the hippos aren't talking) |
+| Stonehenge census → Easter Island | @sec-census | B+ (the counts are real; the subtraction is inspired) |
+| Grid constants digital-root to 9 | @sec-vortex | A (the arithmetic is checkable; the meaning is ours) |
+| Riemann hypothesis (proved) | @sec-riemann | A+ (pending Clay) |
 
 : Grade inflation is the mainstream's disease; the IFM grades honestly and concludes anyway. {#tbl-grades}
 
