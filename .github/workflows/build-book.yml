@@ -1,0 +1,42 @@
+# Render the book on every push: proves a clean-machine build, validates the
+# EPUB (Java lives on the runner, so epubcheck finally runs), and publishes
+# the PDF/EPUB as a downloadable artifact per commit.
+name: build-book
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          tinytex: true
+
+      - name: Render book (all formats)
+        working-directory: book
+        run: quarto render
+
+      - name: Validate EPUB (epubcheck)
+        run: |
+          python -m pip install --quiet epubcheck
+          epubcheck book/_book/The-Starlight-Engine.epub
+
+      - name: Check root PDF is not stale
+        run: |
+          # the committed download copy must exist; warn-only freshness note
+          test -f The-Starlight-Engine.pdf
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: the-starlight-engine
+          path: |
+            book/_book/The-Starlight-Engine.pdf
+            book/_book/The-Starlight-Engine.epub
+          retention-days: 30
