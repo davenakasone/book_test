@@ -2,16 +2,21 @@
 
 ## STATUS
 
-**2026-07-02 — scaffolding.** Goal: prove out an all-open-source book pipeline
-(for David's friend who is writing a real book) using a deliberately absurd
-satirical test book, *The Starlight Engine* by "Dr. Rex Meridian." Pipeline
-chosen: **Quarto spine** (markdown → 6×9" print PDF via TinyTeX + EPUB3 + HTML
-site from one source) **+ one-chapter raw-LaTeX (memoir) shootout** for
-typographic comparison. Toolchain installed: quarto-cli 1.9.38 (pip, dkn314
-venv) + TinyTeX (~/Library/TinyTeX). Nothing rendered yet.
+**2026-07-02 — v1 COMPLETE, pipeline proven.** *The Starlight Engine*
+(11 chapters, 3 appendices, satire disclaimer up front) renders from one
+`quarto render`: **55-page 6×9" PDF with working index/citations/cross-refs
++ valid EPUB3 with cover + searchable HTML site** (`book/_book/`). Memoir
+shootout built too (`latex-shootout/build/giza-memoir.pdf` — drop caps,
+margin notes; verdict in NOTES.md: write in Quarto, graft fancy typography
+later if wanted). All open source, $0, no sudo: quarto-cli 1.9.38 (pip,
+dkn314) + TinyTeX + pymupdf (added to dkn314 for PDF inspection).
+Traps documented in NOTES.md (biggest: `{dot}`/mermaid blocks hang the
+render wanting Chromium — pre-render diagrams instead; unicode
+superscripts drop glyphs in PDF — use inline math).
 
-**Next:** generate figures → first render → fix fallout → memoir shootout →
-PUBLISHING.md + NOTES.md verdict.
+**Next (if David wants):** font upgrade via `mainfont`, print cover wrap,
+KDP upload dry-run, epubcheck via Java. Foreman still needs to register
+this project in the index.
 
 ## What this is
 

@@ -30,7 +30,7 @@ see @sec-stats).
 | Claim | Where | Grade |
 |---|---|:---:|
 | Giza latitude ↔ speed of light digits | @sec-giza | A (it's really the same digits) |
-| Wall length ↔ H-line ×10⁸ | @eq-wall | B |
+| Wall length ↔ H-line $\times10^{8}$ | @eq-wall | B |
 | 37 gears ↔ 37 GPS channels | @eq-gears | B− (gears contested, GPS generous) |
 | Aubrey holes ↔ 56-bit addressing | @sec-stonehenge | C |
 | 432 Hz ↔ everything | throughout | C, defiantly |

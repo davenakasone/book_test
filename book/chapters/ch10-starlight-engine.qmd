@@ -5,7 +5,7 @@ assembles itself — the reader may follow along on @fig-world, drawn from
 the full survey [@ifm2026]:
 
 1. **Collection.** The Giza array (@sec-giza) drinks starlight through
-   Sirius-locked collimators and fuses Nile deuterium: 1.8 × 10¹⁷ watts
+   Sirius-locked collimators and fuses Nile deuterium: $1.8\times10^{17}$ watts
    nameplate\index{Starlight Engine}.
 2. **Distribution.** The ley grid (@sec-ley-grid) carries it in the
    planet's own 7.83 Hz cavity — the Earth as its own busbar.

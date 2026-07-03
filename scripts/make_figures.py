@@ -95,13 +95,27 @@ def fig_world():
         for sl, so in split_dateline(lat, lon):
             ax.plot(so, sl, color="#8c2f2f", lw=1.1, zorder=2)
 
+    # hand-placed label offsets: (dx pts, dy pts, ha) — the clusters overlap otherwise
+    label_pos = {
+        "Giza": (10, -16, "left"),
+        "Puma Punku": (8, -14, "left"),
+        "Stonehenge": (8, 6, "left"),
+        "Nazca": (-9, 4, "right"),
+        "Antikythera": (-9, 6, "right"),
+        "Göbekli Tepe": (6, 12, "left"),
+        "Chichén Itzá": (-9, 6, "right"),
+        "Great Wall": (-4, -22, "right"),
+        "Easter Island": (10, -6, "left"),
+    }
     for name, (la, lo, fn) in SITES.items():
         ax.scatter(lo, la, s=42, marker="^", color="#1a1a1a", zorder=3)
+        dx, dy, ha = label_pos[name]
         ax.annotate(
             f"{name}\n[{fn}]",
             (lo, la),
             textcoords="offset points",
-            xytext=(5, 5),
+            xytext=(dx, dy),
+            ha=ha,
             fontsize=6.5,
             style="italic",
             zorder=4,

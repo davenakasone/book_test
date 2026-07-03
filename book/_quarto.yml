@@ -9,6 +9,7 @@ book:
   subtitle: "How the Ancients Wired the Earth"
   author: "Dr. Rex Meridian, PhD (pending)"
   date: "2026-07-02"
+  cover-image: figures/cover.png
   chapters:
     - index.qmd
     - frontmatter/foreword.qmd
@@ -43,7 +44,6 @@ format:
     theme: cosmo
     toc: true
   epub:
-    cover-image: figures/cover.png
     rights: >
       © 2026. A work of satirical fiction produced as a publishing-pipeline
       test. Every factual claim herein is false, including several of the

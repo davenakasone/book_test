@@ -1,0 +1,76 @@
+# NOTES — what worked, what fought back (2026-07-02 first pass)
+
+The point of the test book. Ordered by how much time each lesson would save
+the friend.
+
+## Traps hit (so the friend doesn't)
+
+1. **Graphviz/Mermaid code blocks stall the render.** Quarto's `{dot}`
+   engine wants headless Chromium; without it the render hangs *silently
+   on a network socket* (killed ours after 20 min). Wrapping the block in
+   html-only conditional content does NOT dodge it — diagram engines run
+   before visibility filtering. **Rule: pre-render every diagram** (TikZ
+   standalone → PDF, `sips` → PNG; or matplotlib) and include as images.
+   Deterministic, offline, works in every format.
+2. **Unicode superscripts silently lose glyphs in the PDF.** `10¹⁷` came
+   out as `10¹` — Latin Modern has ¹²³ (Latin-1) but not ⁴⁻⁹ (U+2074+),
+   and the missing-glyph warning drowns in the log. **Rule: write inline
+   math** `$10^{17}$` — pandoc emits `<sup>` for EPUB/HTML automatically.
+3. **`quarto render --to pdf` wipes the other formats from `_book/`.**
+   One plain `quarto render` builds all formats side by side. Single-format
+   renders are for debugging only.
+4. **`cover-image` belongs at `book:` level**, not under `format: epub:`.
+   And pandoc renames embedded media (`file5.png`) — verify the cover via
+   the OPF manifest (`properties="cover-image"`), not by filename.
+5. **matplotlib `ax.axis("off")` hides the background patch** — a dark
+   cover came out white. Paint an explicit full-bleed Rectangle.
+6. **Generate figures BEFORE rendering** — EPUB embeds images at render
+   time; a stale PNG ships silently.
+7. TinyTeX's `latexmk` flaked once on the memoir build (no log written);
+   direct `pdflatex` twice worked. Shrug, but worth knowing.
+
+## What just worked (better than expected)
+
+- **pip-installed quarto-cli** (`~/dkn314/bin/quarto`, v1.9.38) — dodged
+  the brew-cask sudo prompt entirely. TinyTeX (~150 MB) into
+  `~/Library/TinyTeX`, no root anywhere.
+- **TinyTeX auto-installs missing LaTeX packages** during render — zero
+  manual tlmgr.
+- **The index**: raw `\index{...}` in .qmd + `imakeidx` in preamble →
+  quarto's engine loop ran makeindex unprompted. Two-column sorted index
+  with subentries, PDF-only (EPUB/HTML ignore it cleanly — they have
+  search).
+- **Citations**: BibTeX file + `[@key]` → author-year in text + auto
+  References chapter, all formats.
+- **Cross-refs** (`@fig- @tbl- @eq- @sec-`): numbered + hyperlinked in
+  all formats.
+- **Callout boxes** render as tcolorbox in PDF, styled divs in EPUB/HTML.
+- **TikZ → `sips`** (macOS built-in) for PDF→PNG spared us ghostscript/
+  imagemagick installs.
+- 55-page 6×9 PDF + valid EPUB3 (mimetype stored-first, cover flagged in
+  OPF) + searchable HTML site from one `quarto render`, ~90 s warm.
+
+## Shootout: Quarto PDF vs hand-rolled memoir
+
+Same chapter both ways (`latex-shootout/build/giza-memoir.pdf`):
+
+| | Quarto default (scrbook) | memoir hand-set |
+|---|---|---|
+| Look | clean, competent, "tech book" | *book* book: drop cap, epigraph, margin notes, custom opener |
+| Effort | markdown only | raw LaTeX, layout debugging |
+| Formats | PDF+EPUB+HTML same source | PDF only |
+| Friend-usable | yes | only if the friend learns LaTeX |
+
+**Verdict:** write in Quarto. If the print interior must get fancy later,
+graft memoir-style typography into Quarto via `template-partials` /
+`include-in-header` — same source, upgraded page. Or pay Vellum $249 for
+the look with zero effort (see PUBLISHING.md).
+
+## Deferred / untested
+
+- `epubcheck` locally (wants Java ~600 MB; KDP/D2D validate server-side).
+- Print *cover wrap* (back+spine+front single PDF) — needs final page
+  count first; Inkscape job.
+- Fonts beyond Latin Modern (EB Garamond etc. via `mainfont` + TinyTeX
+  font package — one-line change, untested).
+- KDP upload dry-run.

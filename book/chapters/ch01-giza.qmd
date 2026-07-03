@@ -56,7 +56,7 @@ $$ {#eq-power}
 
 The reader will object that you cannot divide by a dynasty. The reader is
 invited to find a better unit of time in the Egyptological literature. There
-isn't one. Working in SI dynasties, @eq-power yields **1.8 × 10¹⁷ watts of
+isn't one. Working in SI dynasties, @eq-power yields **$1.8\times10^{17}$ watts of
 nameplate capacity** — roughly mankind's total present consumption, times
 ten thousand, which is exactly the kind of margin you'd want if you were
 running a *planet*.
@@ -87,6 +87,6 @@ reviewers call it "load-bearing hand-waving," and when *you* do it, it's
 peer review.
 :::
 
-One question remains: 1.8 × 10¹⁷ watts is far too much for Bronze Age
+One question remains: $1.8\times10^{17}$ watts is far too much for Bronze Age
 toaster ovens. That surplus had a destination. Hold that thought through
 the Andes.

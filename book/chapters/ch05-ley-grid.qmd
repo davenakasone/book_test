@@ -39,33 +39,6 @@ mine.](../figures/world-alignments.png){#fig-world}
 its substation "religiously" maintained. Language remembers what history
 forgets.](../figures/grid-topology.png){#fig-topology width=85%}
 
-::: {.content-visible when-format="html"}
-For readers of the web edition, the same topology as a live schematic:
-
-```{dot}
-//| fig-cap: "The grid, machine-readable. (HTML edition bonus figure.)"
-graph grid {
-  layout=circo;
-  node [shape=box, style=rounded, fontname="Helvetica"];
-  GIZA [label="GIZA\n(generator)", style="rounded,bold"];
-  PUMA [label="PUMA PUNKU\n(parts depot)"];
-  HENGE [label="STONEHENGE\n(controller)"];
-  NAZCA [label="NAZCA\n(test range)"];
-  TEPE [label="GÖBEKLI TEPE\n(sentinel)"];
-  MAYA [label="LONG COUNT\n(scheduler)"];
-  WALL [label="GREAT WALL\n(antenna)"];
-  ANTI [label="ANTIKYTHERA\n(user terminal)"];
-  GIZA -- HENGE [label="trunk"];
-  GIZA -- TEPE;
-  GIZA -- WALL;
-  HENGE -- PUMA;
-  HENGE -- NAZCA;
-  NAZCA -- MAYA;
-  WALL -- ANTI [style=dashed, label="last mile"];
-}
-```
-:::
-
 ## The measured output
 
 The clincher is empirical. In 2025–26 the Institute for Forbidden Metrology

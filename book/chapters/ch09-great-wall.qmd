@@ -22,7 +22,7 @@ $$
 $$ {#eq-wall}
 
 **A harmonic ratio of one hundred million to within 0.4%.**\index{hydrogen
-line!wall-sized} One part in 10⁸ is GPS-clock territory. The mainstream
+line!wall-sized} One part in $10^{8}$ is GPS-clock territory. The mainstream
 answer — that I have chosen my numerator from among several published wall
 lengths and my denominator to nine digits — is the kind of remark that gets
 a man excluded from conference dinners, and I have the exclusions to prove

@@ -25,7 +25,7 @@ nearly did. See @sec-sahara.
 The Sahara was green until roughly 5,000 years ago — grasslands,
 hippopotami, lake beds the size of nations. The mainstream blames "orbital
 precession." Note the date. The desert appears *at commissioning time for
-the Giza array*. One does not bring 1.5 × 10¹⁷ watts online without a
+the Giza array*. One does not bring $1.5\times10^{17}$ watts online without a
 first-light transient, and the lid of the fusion core (@tbl-chambers) has
 never been found. The Mediterranean, I calculate, boiled twice, briefly,
 apologetically. The hippopotami filed no comment.
