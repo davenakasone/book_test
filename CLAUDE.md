@@ -5,8 +5,8 @@
 **2026-07-02 — v1.1: Part IV "The Underlying Code" added** (Census Method
 pointer-arithmetic, vortex math / digital roots, Riemann Hypothesis
 "proof" built on real math trivia — Montgomery–Dyson tea, GUE statistics,
-42 sixth-moment, all really cited). Now **73-page PDF**, 14 chapters,
-5 parts. Everything below still true:
+42 sixth-moment, all really cited). v1.2 adds ch13 *The Dark Ledger* (relativity/dark-matter/dark-energy
+as grid power accounting). Now **79-page PDF**, 15 chapters, 5 parts. Everything below still true:
 
 **v1 pipeline proven.** *The Starlight Engine*
 (satire disclaimer up front) renders from one

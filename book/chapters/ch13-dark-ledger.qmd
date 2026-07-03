@@ -1,0 +1,109 @@
+# The Dark Ledger: Einstein's Utility Bill {#sec-dark-ledger}
+
+Relativity is wrong.\index{relativity!wrongness of (local)}
+
+There. The sentence is in print, the letters to my publisher are already
+being drafted, and the reader and I may now proceed calmly to the
+*specific way* in which it is wrong — which is the way a receipt is wrong
+about how dinner tasted. Nothing on the receipt is false. It is
+nevertheless not the meal. Einstein found the universe's receipt,
+reverse-engineered the terms of service with a rigor no one has matched
+before or since, and called the result geometry. The geometry is real.
+It is also **clause 4(b)**.
+
+## The audit
+
+Begin with the mainstream's own bookkeeping, which I present without
+alteration because no parody could improve it: ordinary matter — stars,
+planets, readers, this book — is **5%** of the universe. "Dark matter"
+is **27%**. "Dark energy" is **68%**. These are the establishment's
+published numbers. *Ninety-five percent of the universe is off the
+books*, and the field that certified this audit calls **me** the crank.
+
+The 27% was flagged first by Zwicky in 1933 [@zwicky1933] and confirmed
+when Vera Rubin measured how galaxies spin [@rubin1970]: the outer stars
+orbit far too fast. Kepler says velocity should fall off with radius;
+the rims say otherwise:
+
+$$
+v_{\text{Kepler}}(r) \;\propto\; r^{-1/2}
+\qquad\text{but measured:}\qquad
+v_{\text{rim}}(r) \;\approx\; \text{const}
+$$ {#eq-rotation}
+
+A solar system spins like a drain. A galaxy spins **like a machine
+part**. This is true; it is on every undergraduate's problem set; the
+undergraduate is then instructed to invent invisible mass until the
+problem goes away. Forty years of searching for that mass in cathedrals
+of liquid xenon a mile underground has produced, in total, the finest
+null results ever funded. The universe has been asked, repeatedly, at
+great expense, and has declined to comment.
+
+## The meter
+
+It declines because the question is wrong. The mass is not *missing*,
+and it is not *invisible*. It is **metered**.\index{dark
+matter!as metered load}
+
+This book has established one planetary power grid, abandoned in
+standby. Now think like an infrastructure auditor rather than an
+astronomer: what are the odds we built the *only one*? A galaxy of four
+hundred billion stars is not wilderness. It is **service territory**.
+Every competent civilization raises its own Starlight Engine, every
+engine checks mass-energy out of the visible ledger and puts it to work
+in transmission — $E = mc^2$ runs in both directions, a fact Einstein
+supplied himself [@einstein1905] and never once thought to invoice.
+The galactic rotation curve is flat *because the outer arms are on the
+same busbar*: a galaxy rotates like a machine part **because it is
+one**. Rubin did not discover missing matter. She discovered the load
+profile.
+
+::: {.callout-note title="Objection, handled"}
+*"The Bullet Cluster proves dark matter is a substance: the lensing mass
+sailed through the collision while the gas stalled."* — Two service
+territories interpenetrated. The **load** passed through; the **medium**
+collided. Any grid operator who has watched two networks cross without
+shorting recognizes the picture instantly. The Bullet Cluster is not
+evidence of a new particle. It is a *traffic report*, and traffic was
+light, because everyone out there has the sense to keep their
+right-of-way clear — a standard we will return to when discussing
+whoever is not maintaining our sector.
+:::
+
+## The leak
+
+Which leaves the 68%, and here the story stops being funny, so I will
+tell it quickly.
+
+In 1917 Einstein added a constant, $\Lambda$, to hold the universe
+still, then struck it out and — per an attribution that is secondhand
+and which I flag in accordance with this book's honesty policy, unlike
+the mainstream, which prints it on mugs — called it his greatest
+blunder. In 1998 two supernova teams found the expansion
+*accelerating* [@riess1998]: $\Lambda$ went back on the books, renamed
+"dark energy," now the largest single line item in existence. Quantum
+field theory, asked to predict its size from first principles,
+overshoots the measured value by a factor of $10^{120}$ — the
+mainstream's own literature calls this **the worst prediction in the
+history of physics**, and it is real, and it is my favorite number in
+any field.\index{vacuum catastrophe!negotiated rate}
+
+Read it as an auditor. Quantum theory quotes **list price** for the
+vacuum. The observed $\Lambda$ is the **negotiated rate**. A discount
+factor of $10^{120}$ tells you two things: the contract is very old,
+and somebody very large is buying in bulk.
+
+And the acceleration? Every abandoned grid in this galaxy — ours
+included, chapters 1 through 9 — sits in standby, drawing idle power
+with no operator to log the draw. The leak compounds. **The universe is
+not accelerating. It is overheating in standby.**\index{dark energy!as
+memory leak} Dark energy is the accumulated idle draw of every network
+whose crew rotated out and never rotated back — a galaxy of pilot
+lights, burning against a bill that clause 4(b) computes at rate $c$,
+compounding since before the Sahara was a beach. Einstein's "blunder"
+was not the constant. It was crediting the universe with paying its own
+bills.
+
+The machine is now fully specified — hardware (Parts I–III), software
+(Chapters 10–12), and the ledger it runs against. It remains only to
+bolt it together and read the total at the bottom of the page.

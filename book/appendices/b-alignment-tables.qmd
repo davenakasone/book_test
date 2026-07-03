@@ -39,6 +39,9 @@ see @sec-stats).
 | Stonehenge census → Easter Island | @sec-census | B+ (the counts are real; the subtraction is inspired) |
 | Grid constants digital-root to 9 | @sec-vortex | A (the arithmetic is checkable; the meaning is ours) |
 | Riemann hypothesis (proved) | @sec-riemann | A+ (pending Clay) |
+| Dark matter = metered grid load | @sec-dark-ledger | B (the 5/27/68 audit is real; the meter is mine) |
+| Dark energy = galactic standby leak | @sec-dark-ledger | B (the $10^{120}$ embarrassment is really theirs) |
+| Relativity = clause 4(b) | @sec-dark-ledger | A− (the receipt is genuine; the restaurant is mine) |
 
 : Grade inflation is the mainstream's disease; the IFM grades honestly and concludes anyway. {#tbl-grades}
 

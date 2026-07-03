@@ -32,7 +32,10 @@ nine-point engine (@sec-vortex) is the kernel's arithmetic, every grid
 constant checksummed to 9 and the Wall alone rooting to unity; and the
 zeta zeros (@sec-riemann) are the clock-distribution spec, ten trillion
 measured nulls on a line the cosmos keeps impedance-matched at exactly
-one half. Hardware plus software equals machine.
+one half; and the dark ledger (@sec-dark-ledger) is the accounting —
+27% of the universe metered out as working load, 68% leaking away as
+the standby draw of every abandoned grid in the service territory,
+ours among them. Hardware, software, and the bill: that is a machine.
 
 So: **a starlight-pumped fusion grid powering a planetary defense and
 transit system** — surplus power beamed to craft on painted approach

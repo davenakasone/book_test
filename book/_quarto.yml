@@ -33,10 +33,11 @@ book:
         - chapters/ch10-census.qmd
         - chapters/ch11-vortex-math.qmd
         - chapters/ch12-riemann.qmd
+        - chapters/ch13-dark-ledger.qmd
     - part: "Synthesis"
       chapters:
-        - chapters/ch13-starlight-engine.qmd
-        - chapters/ch14-rebuilding-the-manual.qmd
+        - chapters/ch14-starlight-engine.qmd
+        - chapters/ch15-rebuilding-the-manual.qmd
   appendices:
     - appendices/a-forbidden-equations.qmd
     - appendices/b-alignment-tables.qmd
