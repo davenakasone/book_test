@@ -67,7 +67,9 @@ book_test/
   Single format: `--to pdf|epub|html`.
 - **Figures:** `~/dkn314/bin/python scripts/make_figures.py` regenerates all.
 - Python = shared venv `~/dkn314/bin/python` (house rule, no per-project venv).
-- Local git only, **never push** (house hygiene rule). Commit per meaningful step.
+- Remote: `github.com/davenakasone/book_test` (David explicitly authorized
+  the remote + pushes 2026-07-02, overriding the local-only house default).
+  Commit per meaningful step; push when David says it's good.
 - Foreman index (`../CLAUDE.md`) is not ours to edit — foreman registers this
   project.
 - The satire disclaimer in `index.qmd` is load-bearing. Never remove it.
