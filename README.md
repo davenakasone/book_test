@@ -31,16 +31,16 @@ On Windows, run the same commands in PowerShell (use `py` if `python`
 isn't on PATH).
 
 ```sh
-python -m pip install -r requirements.txt   # quarto-cli, matplotlib, numpy, pymupdf
+python -m pip install -r requirements.txt   # pinned: quarto-cli, matplotlib, numpy, pymupdf, epubcheck
 quarto install tinytex                      # ~150 MB LaTeX, self-managing, no admin rights
 
-python scripts/make_figures.py              # regenerate matplotlib figures
-python scripts/build_tikz.py                # compile TikZ diagrams → PDF + PNG
-cd book && quarto render                    # → _book/  (PDF + EPUB + HTML)
+python build.py                             # figures → TikZ → render (all formats) → refresh root PDF
 ```
 
-All generated figures are committed, so `quarto render` works out of the
-box — the two figure scripts are only needed when *editing* figures.
+`build.py` is the one-command entry point (it also runs the prose-unicode
+guard). To render without regenerating figures: `python build.py
+--skip-figures`. All generated figures are committed, so a bare
+`cd book && quarto render` also works when you're only editing prose.
 
 The hand-typeset comparison chapter: `python latex-shootout/build.py`
 (memoir class — drop caps, margin notes, custom chapter opener).
@@ -56,7 +56,8 @@ The hand-typeset comparison chapter: `python latex-shootout/build.py`
 | `latex-shootout/` | ch. 1 in raw LaTeX/memoir, for typographic comparison |
 | `platform/` | author-platform kit: email sequence, YouTube/IG/LinkedIn playbooks, launch plan, generated assets |
 | `NOTES.md` | pipeline findings — every trap hit so you don't have to |
-| `PUBLISHING.md` | KDP / IngramSpark / Draft2Digital specs and the money-worth-spending list |
+| `PUBLISHING.md` | KDP / IngramSpark / D2D specs, pricing, licensing, accessibility, upload checklist |
+| `BUSINESS.md` | the investor-frame reality: sales medians, unit economics, earn-out math, backlist thesis, tax |
 
 ## Highlights of the findings (full list in NOTES.md)
 

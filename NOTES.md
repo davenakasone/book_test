@@ -112,6 +112,13 @@ question (unsettled for solo authors — verify).
 
 ## Deferred / untested
 
+- **IngramSpark PDF/X-1a + CMYK** — Ingram rejects our RGB PDF; it wants
+  PDF/X-1a:2001 + CMYK + flattened transparency (KDP accepts RGB fine). Fix
+  is a Ghostscript post-process (`gs -dPDFX -dColorConversionStrategy=/CMYK
+  -sColorConversionStrategyForImages=/CMYK -sDEVICE=pdfwrite …`) → an
+  Ingram-bound interior; documented in PUBLISHING.md, not yet a build.py
+  flag. (This is why NOTES earlier skipped ghostscript — noting the
+  Ingram-channel consequence now.)
 - Print *cover wrap* (back+spine+front single PDF) — needs final page
   count first; Inkscape job.
 - Fonts beyond Latin Modern (EB Garamond etc. via `mainfont` + TinyTeX

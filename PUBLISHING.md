@@ -14,12 +14,37 @@ this repo produces: **6×9" PDF interior + EPUB3 + HTML site**.
 
 | Channel | What it takes | Cost | Reach | Notes |
 |---|---|---|---|---|
-| **Amazon KDP** | print PDF (6×9) + EPUB + cover | $0 | Amazon print-on-demand + Kindle | The default first door. Free ISBN offered but Amazon-locked. **Ebook royalty is 35% or 70% — see the royalty box below, this is the #1 number authors get wrong.** Print = 60% of list − printing cost. |
-| **IngramSpark** | print-ready PDF/X + cover w/ spine | title-setup fee removed 2023; revision fee may apply *(verify)* | bookstores, libraries, everyone-not-Amazon | Use *with* KDP: KDP for Amazon, Ingram for the rest. Wants its own ISBN. Decide the **wholesale discount (40–55%)** and the **returns** flag — the biggest bookstore-channel economics choices. |
-| **Draft2Digital** | EPUB | free; D2D takes ~10% of list *(verify current cut)* | Apple/Kobo/B&N/libraries | Easiest wide-ebook button. Can also generate print-ready files, adequately. |
+| **Amazon KDP** | RGB PDF (6×9) + EPUB + cover | $0 | Amazon print-on-demand + Kindle | The default first door. Free ISBN offered but Amazon-locked. **Ebook royalty is 35% or 70% — see the royalty box, the #1 number authors get wrong.** Print royalty = 60% of list − print cost at list **≥$9.99**, but only **50% at ≤$9.98**. |
+| **IngramSpark** | **PDF/X-1a + CMYK** interior + cover w/ spine | setup **free**, revisions **free** (Feb 2026 sheet), ~1.875% per-unit distribution fee | bookstores, libraries, everyone-not-Amazon | Use *with* KDP. Offers a **free (Ingram-owned) ISBN**, or bring your own. Decide the **wholesale discount (40–55%)** and the **returns** flag — the biggest bookstore-channel choices. **Our pipeline emits RGB, not PDF/X-1a — see the gap note below.** |
+| **Draft2Digital** | EPUB | ~10% of list + **$20 one-time activation** | Apple/Kobo/B&N/libraries | Easiest wide-ebook button. Can also generate print-ready files, adequately. |
 
 Sequence for a real book: **KDP + D2D first** (both free, no gatekeeping),
-add IngramSpark when bookstore/library distribution matters.
+add IngramSpark when bookstore/library distribution matters — *but* see the
+KDP Select fork, which you must decide before "KDP + D2D" even makes sense.
+
+### KDP Select: the exclusivity fork (decide this first)
+
+Enrolling an ebook in **KDP Select** locks it to **Amazon-only for 90
+auto-renewing days** — no D2D/Apple/Kobo, no direct ebook sales. In
+exchange you get **Kindle Unlimited** per-page-read income and the
+**free/countdown promo days** the pricing section leans on. You **cannot**
+be in Select *and* "wide" (KDP + D2D) at once — the launch plan's "free
+launch via Select promo days" silently assumes enrollment.
+
+- **Default for a no-audience debut: start in Select.** KU readers are the
+  discovery engine; the promo tools are real; wide distribution earns
+  ~nothing without a list to drive it.
+- **Go wide at book 2**, or once the email list can push off-Amazon sales.
+
+### The IngramSpark PDF/X-1a gap (the one thing this pipeline can't emit)
+
+KDP accepts our stock **RGB** LaTeX PDF. IngramSpark strictly requires
+**PDF/X-1a:2001 + CMYK + flattened transparency** and will reject the
+default file. This is the concrete capability gap vs. Vellum/Atticus. To
+close it: a **Ghostscript** post-process (`gs -dPDFX -dColorConversionStrategy=/CMYK
+…`) converts the RGB PDF to Ingram-bound PDF/X-1a — documented in NOTES.md
+as a deferred build step, not yet wired in. Building the interior once to
+Ingram's stricter spec also passes KDP.
 
 ### The KDP ebook royalty trap (read before pricing anything)
 
@@ -74,6 +99,13 @@ imperfect first picks cost nothing.
   hook in the first 2 lines (Amazon truncates the rest behind "read more").
 - **Series / contributor fields:** "Institute for Forbidden Metrology,
   Vol. 1" primes a backlist even if Vol. 2 never ships.
+- **AI-content disclosure (mandatory at KDP upload):** KDP now requires you
+  to declare **AI-generated** vs **AI-assisted** content, with different
+  rules (AI-*assisted* human work needn't be declared; AI-*generated* must
+  be). This book's position, ready for the dry-run: **prose = human-
+  authored** (not AI-generated); **figures = programmatically generated**
+  (matplotlib/TikZ scripts — document as tool-generated). Policies differ by
+  retailer and rot fast — on the verify checklist.
 
 ## Spec checklist (what "print-ready" means)
 
@@ -92,9 +124,13 @@ imperfect first picks cost nothing.
   (1600×2560); the print wrap is a later Inkscape/Affinity job.
 - **EPUB:** must pass `epubcheck` (KDP/D2D run it server-side; local run
   now automated in CI — see NOTES.md). See accessibility box next.
-- **ISBN:** Bowker (myidentifiers.com) ~$125/1, ~$295/10 *(verify)* — buy
-  10 if the friend means it (each format wants its own). Or take KDP's free
-  one and accept the Amazon lock + "Independently published" imprint line.
+- **ISBN — tie the decision to your channels, not to price:** the moment
+  you intend **both KDP and Ingram**, buy **one owned ISBN** (~$125/1,
+  ~$295/10 Bowker *(verify)*) so a *single edition* spans both platforms
+  under *your* imprint. Free platform ISBNs (KDP's, or Ingram's own) are
+  fine **only** if that format lives on that one platform forever — they're
+  format-and-platform-locked and stamp "Independently published." Buy the
+  block of 10 only if you'll publish multiple formats/titles.
 
 ### EPUB accessibility (EAA, in force June 2025)
 
@@ -141,10 +177,28 @@ Two clean options:
 
 1. **Drop "PDF" from the CTA**, sell only via retailers — simplest, zero
    tax admin.
-2. **Sell direct through a merchant-of-record** (Gumroad / Payhip /
-   Lemon Squeezy — *verify current fees*) that collects and remits EU VAT
-   and US sales tax **for** you. Never hand-roll a Stripe button for
-   digital goods unless you want to become a tax filer in 40 jurisdictions.
+2. **Sell direct through a merchant-of-record** that collects and remits EU
+   VAT and US sales tax **for** you. **Gumroad** is full MoR since Jan 2025:
+   **10% + $0.50/transaction** on direct sales (30% via its Discover feed),
+   no monthly fee. Payhip / Lemon Squeezy are alternatives *(verify fees)*.
+   Never hand-roll a Stripe button for digital goods unless you want to
+   become a tax filer in 40 jurisdictions.
+
+## Audiobook (defer, then ACX)
+
+Audio is the fastest-growing format and a natural title-2+ lever — a fake-
+authority satire is unusually audio-friendly. Two ACX models: **pay-for-
+production** (~$1,500–$2,800 for this length, ~6–7 finished hours) or
+**Royalty Share** (no cash upfront, 50/50 with the narrator for 7 years).
+**Defer book-1 audio** until sales justify cash, or take Royalty Share to
+ship at $0 upfront. A backlist-era lever, not a launch spend.
+
+## Economics, earn-out, tax → BUSINESS.md
+
+What a copy nets, how many copies recover the spend, the <$100/mo debut
+median, the backlist thesis, genre comps, and the Schedule-C-vs-hobby tax
+question (the OBBBA made hobby expenses permanently nondeductible) all live
+in [BUSINESS.md](BUSINESS.md) — the investor-frame companion to this doc.
 
 ## Licensing & copyright (the serious section)
 
