@@ -33,3 +33,7 @@ incoming/
 # Built book — distributed via GitHub Releases, not committed (build.py
 # still drops a local convenience copy here; it stays untracked)
 /The-Starlight-Engine.pdf
+
+# Stray per-chapter renders (quarto single-file renders drop these next to sources)
+book/chapters/*.html
+book/chapters/*_files/
