@@ -39,9 +39,11 @@ directly; the list owns the click.
 ## Caption template
 
 One hook line. Two-to-four sentences in voice. The disclaimer line. CTA to
-bio link. Hashtag block (keep ~10, rotate):
-`#ancientmysteries #pseudoscience #satire #mathmemes #archaeology
-#riemannhypothesis #darkmatter #stonehenge #greatpyramid #bookstagram`
+bio link. Hashtags: a **small rotating block** plus keyword-led captions —
+IG's own guidance has shifted toward fewer tags and searchable caption text,
+so treat the count as "a handful, current-guidance-dependent," not a fixed
+number. Verify current best practice at launch:
+`#ancientmysteries #pseudoscience #satire #mathmemes #bookstagram`
 
 Example (post 3):
 > The universe ships with a checksum.

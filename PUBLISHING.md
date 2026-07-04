@@ -4,16 +4,76 @@ The pipeline's targets, in the order a first-time indie author (David's
 friend) would actually use them. Everything below is compatible with what
 this repo produces: **6×9" PDF interior + EPUB3 + HTML site**.
 
+> **Figures as of 2026-07. Every fee, royalty %, spec, and free-tier number
+> below silently rots — verify each against its source before you act on
+> it.** The "verify before upload" checklist at the bottom names each
+> external number and where to re-check it. When a number here disagrees
+> with the platform's own page, the platform is right and this doc is old.
+
 ## The three doors
 
 | Channel | What it takes | Cost | Reach | Notes |
 |---|---|---|---|---|
-| **Amazon KDP** | print PDF (6×9) + EPUB + cover | $0 | Amazon print-on-demand + Kindle | The default first door. Free ISBN offered but it's Amazon-locked; ~60–70% ebook royalty, print royalty after printing cost. |
-| **IngramSpark** | print-ready PDF/X + cover w/ spine | ~$0 setup (fee waivers standard) | bookstores, libraries, everyone-not-Amazon | Use *with* KDP: KDP for Amazon, Ingram for the rest. Wants its own ISBN. |
-| **Draft2Digital** | EPUB | $0 (rev share) | Apple/Kobo/B&N/libraries | Easiest wide-ebook button. Can also generate print-ready files, adequately. |
+| **Amazon KDP** | print PDF (6×9) + EPUB + cover | $0 | Amazon print-on-demand + Kindle | The default first door. Free ISBN offered but Amazon-locked. **Ebook royalty is 35% or 70% — see the royalty box below, this is the #1 number authors get wrong.** Print = 60% of list − printing cost. |
+| **IngramSpark** | print-ready PDF/X + cover w/ spine | title-setup fee removed 2023; revision fee may apply *(verify)* | bookstores, libraries, everyone-not-Amazon | Use *with* KDP: KDP for Amazon, Ingram for the rest. Wants its own ISBN. Decide the **wholesale discount (40–55%)** and the **returns** flag — the biggest bookstore-channel economics choices. |
+| **Draft2Digital** | EPUB | free; D2D takes ~10% of list *(verify current cut)* | Apple/Kobo/B&N/libraries | Easiest wide-ebook button. Can also generate print-ready files, adequately. |
 
 Sequence for a real book: **KDP + D2D first** (both free, no gatekeeping),
 add IngramSpark when bookstore/library distribution matters.
+
+### The KDP ebook royalty trap (read before pricing anything)
+
+KDP ebook royalty is **two tiers, not a range**:
+
+- **70%** — *only* if list price is **$2.99–$9.99**, and Amazon subtracts a
+  **per-MB delivery fee** from each sale (figure-heavy books cost more to
+  deliver). Also not available in every territory.
+- **35%** — everywhere else: any price below $2.99 or **above $9.99**, all
+  territories, no delivery fee.
+
+The cliff is the point: a **$12.99** ebook earns **35%** (~$4.55), while a
+**$9.99** ebook earns **70%** (~$6.99 − delivery) — the cheaper book pays
+the author *more*. Price inside the band unless you have a specific reason
+not to. (Earlier drafts of this doc said "~60–70%"; that was wrong — 60% is
+the *print* rate. The error would have silently halved ebook revenue.)
+
+## Pricing strategy (the number three other docs already reference)
+
+Welcome-email 4 pitches "the price," the launch plan has "buy links live" —
+so the price has to exist. Defaults for this book:
+
+- **Ebook: $4.99–$6.99.** Inside the 70% band, humor/impulse-priced, room
+  to discount to $0.99/free for launch or promos without touching the 35%
+  floor. A first-book unknown author priced at $9.99 is leaving money on
+  the table via zero sales, not via royalty rate.
+- **Paperback (6×9, ~90pp B&W):** run the page count through **KDP's
+  printing-cost calculator** (printing ≈ fixed + per-page; ~90pp B&W is
+  cheap). Set list = printing-cost ÷ (1 − 0.60) plus margin, then sanity
+  it against comps. Don't price the print edition to lose money to hit a
+  round number.
+- **Launch pricing:** email 4 wants "a deadline device." A 3-day $0.99
+  launch (or free via KDP Select's promo days) is the deadline; regular
+  price after. This is not begging — it's a countdown. "Chocolate Daddy
+  does not beg" survives intact.
+- **Price parity:** keep list price identical across KDP/D2D/Apple/Kobo —
+  retailers price-match and Amazon will drop you to $0 (killing your
+  royalty) if it finds you cheaper elsewhere.
+
+## Metadata & discoverability (upload-day decisions that drive sales)
+
+Cheapest marketing in the whole kit; all of it is editable post-launch, so
+imperfect first picks cost nothing.
+
+- **KDP 7 keyword slots:** reader search phrases, not single words —
+  "ancient aliens parody," "science humor gift," "pseudoscience satire."
+- **Categories:** pick **Humor & Entertainment › Parody** (and a
+  science-humor adjacent), *not* straight Archaeology/Physics. Miscategorizing
+  satire as nonfiction invites the exact miscitation the disclaimer exists
+  to prevent — and buries a funny book among textbooks it can't outrank.
+- **Book description:** written in voice, carrying the satire line, with a
+  hook in the first 2 lines (Amazon truncates the rest behind "read more").
+- **Series / contributor fields:** "Institute for Forbidden Metrology,
+  Vol. 1" primes a backlist even if Vol. 2 never ships.
 
 ## Spec checklist (what "print-ready" means)
 
@@ -25,54 +85,91 @@ add IngramSpark when bookstore/library distribution matters.
   checker will confirm.
 - **Page count:** KDP paperback minimum 24 pages; spine text needs ≥79.
 - **Cover:** *separate file* from the interior. Print cover = single
-  wraparound PDF: back + spine + front. Spine width = pages ×
-  0.0025" (white paper). The `figures/cover.png` here is the *ebook*
-  cover (1600×2560); a print wrap is a later exercise (Inkscape or
-  Affinity).
-- **EPUB:** must pass `epubcheck` (KDP/D2D run it server-side; running it
-  locally needs Java — deferred here, noted in NOTES.md).
-- **ISBN:** Bowker (myidentifiers.com) $125/1, $295/10 — buy 10 if the
-  friend means it (each format wants its own). Or take KDP's free one and
-  accept the Amazon lock + "Independently published" imprint line.
+  wraparound PDF: back + spine + front. **Spine width = pages × 0.002252"
+  (white paper) or × 0.0025" (cream)** — use **KDP's cover-size calculator**
+  as the source of truth; a wrong multiplier misplaces the spine and fails
+  the cover check. `figures/cover.png` here is the *ebook* cover
+  (1600×2560); the print wrap is a later Inkscape/Affinity job.
+- **EPUB:** must pass `epubcheck` (KDP/D2D run it server-side; local run
+  now automated in CI — see NOTES.md). See accessibility box next.
+- **ISBN:** Bowker (myidentifiers.com) ~$125/1, ~$295/10 *(verify)* — buy
+  10 if the friend means it (each format wants its own). Or take KDP's free
+  one and accept the Amazon lock + "Independently published" imprint line.
+
+### EPUB accessibility (EAA, in force June 2025)
+
+The European Accessibility Act applies to ebooks sold into the EU from
+**28 June 2025**, and the recommended wide path (D2D → Apple/Kobo) ships
+straight into the EU. Retailers now surface accessibility fields
+regardless. What it takes:
+
+- **Alt text on every figure** — in our `.qmd` sources, on each
+  `![...](...)`. Ours are script-generated, so the descriptions are known;
+  this is mechanical and also doubles as SEO for the HTML edition.
+- **Accessibility metadata** (schema.org `accessMode`, `accessibilityFeature`,
+  `accessibilitySummary`) in the EPUB OPF — Quarto can inject it.
+- **Validate with DAISY ACE** alongside `epubcheck`.
+- **Microenterprise exemption:** the EAA exempts the smallest businesses —
+  whether it covers a solo self-published author is **unsettled; verify
+  before relying on it.** Doing the alt-text work is cheaper than the
+  question.
 
 ## Money: where it's actually worth spending
 
 The interior pipeline is genuinely $0 — this repo is the proof. Ranked by
-value for a real book:
+value for a real book (ranges are market rough, *verify current rates*):
 
 1. **Human editing** ($500–$3,000) — the thing no tool replaces; biggest
-   quality delta per dollar.
+   quality delta per dollar. (Copyedit rates run per-word; see the EFA rate
+   chart. A 25k-word humor book copyedits for hundreds, not thousands.)
 2. **Cover design** ($100–$800, or DIY with Inkscape/GIMP/Krita free,
    Affinity ~$70 one-time) — covers sell books; interiors don't.
-3. **ISBNs** ($295/10) — only if going wide under an imprint name.
-4. **Vellum** ($249, Mac) or Atticus ($147) — the "just works" typesetters.
-   After this test: they buy *convenience*, not capability. Quarto+TinyTeX
-   matched the output classes; Vellum is faster for a non-technical
-   author who wants drag-and-drop.
+3. **ISBNs** (~$295/10) — only if going wide under an imprint name.
+4. **Vellum** ($249, Mac) or **Atticus** ($147, cross-platform) *(verify)* —
+   the "just works" typesetters. After this test: they buy *convenience*,
+   not capability. Quarto+TinyTeX matched the output classes; Vellum is
+   faster for a non-technical author who wants drag-and-drop.
 5. ~~Word/InDesign subscriptions~~ — no. InDesign wins only for
    photo-heavy/coffee-table layouts.
 
+## Direct sales (only if a CTA promises a PDF)
+
+Retailers (KDP/D2D) sell Kindle/EPUB — **not** a PDF. If any funnel CTA
+offers a reader-facing PDF (welcome-email 4 currently does), that implies
+**direct sales**, which means **you** are the seller and owe VAT/sales tax.
+Two clean options:
+
+1. **Drop "PDF" from the CTA**, sell only via retailers — simplest, zero
+   tax admin.
+2. **Sell direct through a merchant-of-record** (Gumroad / Payhip /
+   Lemon Squeezy — *verify current fees*) that collects and remits EU VAT
+   and US sales tax **for** you. Never hand-roll a Stripe button for
+   digital goods unless you want to become a tax filer in 40 jurisdictions.
+
 ## Licensing & copyright (the serious section)
 
-No jokes here — this is the part that costs real money when done wrong.
-US-centric; Berne Convention makes the ownership part automatic in ~180
-countries.
+> **Not legal advice.** This is an engineer's plain-language map, not
+> counsel. Statutes and fees below carry sources; verify current text and
+> talk to an IP attorney before anything consequential. US-centric; the
+> Berne Convention makes the *ownership* part automatic in ~180 countries.
 
 ### Ownership is automatic; *enforcement* is not
 
 - Copyright exists the moment the words are fixed — no filing needed to
   **own** a book. The © line has not been legally required since 1989.
 - But in the US you cannot **sue** without registering
-  (copyright.gov, ~$45–65 online, takes months — file early). And unless
-  you register **within 3 months of publication** (or before the
-  infringement), you forfeit statutory damages ($750–$150k/work) and
-  attorney's fees — leaving only provable actual damages, which for an
-  indie book is approximately nothing. **Rule: register within the
-  3-month window. It is the single highest-leverage $65 in this file.**
-- Pen names are fine: you can register under a pseudonym. Trade-off:
-  identity-concealed pseudonymous works get 95 years from publication
-  instead of life+70. (Also: book *titles* are not copyrightable at all —
-  only series names can be trademarked.)
+  (copyright.gov, ~$45–65 online *(verify fee schedule)*, takes months —
+  file early; **17 U.S.C. §411**). And unless you register **within 3
+  months of publication** (or before the infringement), you forfeit
+  statutory damages (**$750–$150k/work, 17 U.S.C. §504(c)**) and attorney's
+  fees (**§412**) — leaving only provable actual damages, which for an
+  indie book is approximately nothing. **Register within the 3-month
+  window. The single highest-leverage ~$65 in this file.**
+- Pen names are fine: you can register under a pseudonym. Term trade-off:
+  an anonymous/pseudonymous work runs **95 years from publication OR 120
+  years from creation, whichever expires first** — versus life+70 for a
+  named author. (Also: book *titles* aren't copyrightable at all; a
+  *series* name can sometimes be trademarked.)
 
 ### The copyright page (the book's legal front door)
 
@@ -86,15 +183,15 @@ this book, the satire notice) · ISBN(s) · edition line · imprint name.
 | Choice | When it's right |
 |---|---|
 | **All rights reserved** (default) | Almost every commercial book. Doing nothing = this. |
-| **Creative Commons** (pick a flavor: BY / BY-SA / BY-NC / BY-ND combos) | Platform-building: free spread of the ebook drives print/audio/next-book sales (the Doctorow model). **Irrevocable forever** — decide soberly. NC ≠ "I still control it"; it means *others* can't sell it, but they can undercut your ebook at $0. |
+| **Creative Commons** (BY / BY-SA / BY-NC / BY-ND combos) | Platform-building: free spread of the ebook drives print/audio/next-book sales (the Doctorow model). **Irrevocable forever** — decide soberly. NC ≠ "I still control it"; others can't *sell* it, but they can give your ebook away at $0. |
 | **Split license** | Books with code/tooling: prose reserved, repo MIT/Apache. Readers reuse the machinery, not the manuscript. |
 | CC0 / public domain | Almost never what an author wants. |
 
 For **this repo**: recommendation is the split — `scripts/`, configs, and
 LaTeX/HTML templates under MIT; the manuscript (`book/*.qmd`, figures) all
-rights reserved. Currently the repo has **no LICENSE file, which legally
-equals all-rights-reserved** (GitHub's TOS only grants view/fork). David's
-one-line decision, then a LICENSE file makes it explicit.
+rights reserved. The repo currently has **no LICENSE file, which legally
+equals all-rights-reserved** (GitHub's TOS only grants view/fork). One
+line from David, then a LICENSE file makes it explicit.
 
 ### "Licensing" also means the rights you carve up and sell
 
@@ -123,10 +220,11 @@ film/TV option, serial. Self-publishing keeps the bundle — retailers get
   infringement; facts and ideas aren't copyrightable, only expression.
 - **Fair use is a defense, not a permission** — you find out if it worked
   in court. Parody (targeting the borrowed work itself) has strong
-  protection (*Campbell v. Acuff-Rose*); satire that borrows a work to
-  mock *something else* gets meaningfully less. A book like this one —
-  satirizing a genre's *moves* without reproducing anyone's text — sits
-  on the safe side of that line.
+  protection (*Campbell v. Acuff-Rose*, 1994); satire that borrows a work
+  to mock *something else* gets meaningfully less. A book like this one —
+  satirizing a genre's *moves* without reproducing anyone's text — is a
+  **lower-risk posture, not a cleared right.** If a specific passage
+  quotes or closely parodies an identifiable work, get counsel.
 
 ## Format gotchas learned here
 
@@ -141,3 +239,19 @@ film/TV option, serial. Self-publishing keeps the bundle — retailers get
 - Keep chapter sources in Markdown (qmd): the same files make the print
   PDF, the ebook, and a marketing website. One source, three products —
   that's the whole reason for this pipeline.
+
+## Verify-before-upload checklist (the numbers that rot)
+
+Re-check each against its source the week you publish:
+
+- [ ] **KDP ebook royalty band** + delivery fee — KDP royalty help page
+- [ ] **KDP print royalty** (60%) + printing-cost calculator — KDP
+- [ ] **KDP spine multiplier** + cover-size calculator — KDP
+- [ ] **IngramSpark** setup/revision fees, wholesale discount, ISBN policy
+- [ ] **Draft2Digital** distribution cut (~10%?)
+- [ ] **Bowker ISBN** pricing ($125/$295?)
+- [ ] **Copyright registration** fee — copyright.gov fee schedule
+- [ ] **Vellum / Atticus** prices ($249 / $147?)
+- [ ] **Merchant-of-record** fees (Gumroad/Payhip/Lemon Squeezy) if selling direct
+- [ ] **EAA microenterprise exemption** applicability to a solo author
+- [ ] **Email provider free-tier caps** (see PLATFORM.md)

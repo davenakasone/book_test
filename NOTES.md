@@ -87,11 +87,33 @@ gone, so a Windows (or Linux) collaborator can build everything:
 - `requirements.txt` covers the whole Python side, including quarto-cli
   itself (`pip install quarto-cli` works on Windows too — no admin).
 
+## One-command build + CI (2026-07-04)
+
+- **`build.py`** at repo root — one command runs figures → TikZ → `quarto
+  render` (all formats) → refreshes the root download PDF. Flags:
+  `--skip-figures`, `--shootout`. Finds quarto via PATH or the pip sibling.
+- **`.github/workflows/build-book.yml`** — renders on every push, runs
+  `epubcheck` (Java is free on the runner, so the deferred local check
+  finally happens), uploads PDF+EPUB as a downloadable artifact per commit.
+  This also proves a clean-machine build (catches "works on my Mac" drift).
+
+## Accessibility (EAA, June 2025) — TODO wired into the pipeline
+
+Ebooks sold into the EU must meet accessibility rules; our wide path
+(D2D → Apple/Kobo) hits the EU. Mechanical work, mostly:
+- **alt text** on every `![...]()` in the `.qmd` sources (figures are
+  script-generated → descriptions are known; also SEO for the HTML edition).
+- **schema.org accessibility metadata** in the EPUB OPF (Quarto can inject).
+- validate with **DAISY ACE** next to `epubcheck`.
+See PUBLISHING.md → "EPUB accessibility" for the microenterprise-exemption
+question (unsettled for solo authors — verify).
+
 ## Deferred / untested
 
-- `epubcheck` locally (wants Java ~600 MB; KDP/D2D validate server-side).
 - Print *cover wrap* (back+spine+front single PDF) — needs final page
   count first; Inkscape job.
 - Fonts beyond Latin Modern (EB Garamond etc. via `mainfont` + TinyTeX
   font package — one-line change, untested).
 - KDP upload dry-run.
+- Alt-text pass + OPF accessibility metadata (see above) — not yet applied
+  to the sources.

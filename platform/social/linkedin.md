@@ -78,5 +78,8 @@ this one). Open to: speaking, consulting, telluric audits, tenure.
    bits.
 
 ## Cadence
-2 posts/week max. Comment replies in voice for the first hour after
-posting (the algorithm's real window — true fact, no asterisk).
+2 posts/week max. Reply to comments in voice during the first hour after
+posting — the commonly observed early-engagement window. (Platform
+algorithms change quarterly and are never officially documented at this
+granularity; treat it as a working heuristic, not a law. The kit's
+credibility rests on flagging exactly this kind of unverifiable claim.)

@@ -38,14 +38,23 @@ the willpower.
 
 - **Every channel's call-to-action is the email list.** Not "buy the book"
   — the list. The list sells the book, the backlist, and the next book.
-- **One content atom, many cuts.** Each chapter yields: 1 newsletter, 1
-  long video outline, 3 shorts, 3 IG posts, 2 LinkedIn posts. Write once,
-  slice five ways (worked example across the playbooks: ch13 dark ledger).
+- **One content atom, many cuts (the content-atom rule).** Each chapter
+  yields: 1 newsletter, 1 long video outline, 3 shorts, 3 IG posts, 2
+  LinkedIn posts. Write once, slice five ways (worked example across the
+  playbooks: ch13 dark ledger).
+
+  | Chapter atom | → | Newsletter | Long video | Shorts | IG | LinkedIn |
+  |---|---|---|---|---|---|---|
+  | ch01 Giza | → | dispatch #1 | Long #3 | Short #1 | reactor carousel | post 1 |
+  | ch11 vortex | → | dispatch #2 | — | Short #2 | checksum carousel | post 2 |
+  | ch13 dark ledger | → | dispatch #4 | Long #7 | Short #4 | "5 true things" | post 4 |
+
 - **The satire disclaimer travels.** Every bio, banner, and About block
   carries the "work of satire" line. Non-negotiable — it's also the brand.
-- **Deployment note:** this repo is local-git-only (house rule, no pushes),
-  so `quarto publish gh-pages` / Netlify is documented, not executed. The
-  friend's real repo would push; ours stops at the demo.
+- **Deployment:** the repo has a live GitHub remote
+  (`github.com/davenakasone/book_test`) and pushes are authorized. The
+  website step — `quarto publish gh-pages` or Netlify — is **documented but
+  not yet executed**; running it is the friend's one-command go-live.
 
 ## What this kit contains
 

@@ -5,6 +5,21 @@ with the same two lines: the satire disclaimer and a single CTA. One CTA
 per email, ever. Subject lines under ~45 chars so they don't truncate on
 phones.
 
+**Compliance & ops (not optional):**
+- **CAN-SPAM** requires a real physical mailing address in *every* send —
+  the provider can't invent one. Get a **PO box** if you don't want your
+  home address in every email. Unsubscribe link is handled by the provider;
+  keep it.
+- **EU subscribers → double opt-in** (GDPR). Most providers have a toggle;
+  decide before the first send.
+- **Suppression:** when a broadcast (e.g. launch day = email 4, or a weekly
+  dispatch) overlaps this automation, exclude subscribers currently *inside*
+  the welcome sequence, or they get the same email twice in days. See
+  [launch-plan.md](../launch-plan.md) standing rules.
+- **The free-chapter giveaway is Chapter 1, complete** (diagram included —
+  lead with your best page). The *purchase* cliffhangers point at later,
+  paywalled chapters. Keep that boundary consistent everywhere.
+
 ---
 
 ## Email 0 — on signup
@@ -41,11 +56,12 @@ make yourself.*
 **Subject:** A tomb with no body, aligned to 0.067°
 
 Excerpt: the Giza opener (ch. 1, first two sections), ending exactly on
-"the King's Chamber is a containment vessel" — cut *before* the reactor
-diagram. The diagram is behind the buy link. Cliffhangers are impedance
-matching for attention.
+"the King's Chamber is a containment vessel." Then the turn: *the whole of
+Chapter 1 is free — reactor diagram and all. What's not free is where the
+1.8 × 10¹⁷ watts went.* That answer is Chapter 13, and Chapter 13 is behind
+the buy link. Cliffhangers are impedance matching for attention.
 
-CTA: **[See the cutaway diagram — Chapter 1 continues →]**
+CTA: **[Read all of Chapter 1 free →]**
 
 ---
 
@@ -84,7 +100,13 @@ Straight pitch, in voice: the book, the formats, the price, one testimonial
 Several are wrong in ways that require genuine talent."). Deadline device
 if there's a launch discount; otherwise none — Chocolate Daddy does not beg.
 
-CTA: **[Get The Starlight Engine — PDF/EPUB/print →]**
+CTA: **[Get The Starlight Engine — ebook & paperback →]**
+
+> Format note: retailers sell **Kindle/EPUB + paperback**, not a PDF. Only
+> promise a reader-facing PDF if you've set up direct sales through a
+> merchant-of-record (see PUBLISHING.md → Direct sales) — otherwise the CTA
+> points at a format no channel delivers, and direct PDF sales drag in
+> VAT/sales-tax obligations.
 
 ---
 
