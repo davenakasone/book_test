@@ -8,9 +8,12 @@
 > is wrong. Some are wrong in ways that required real effort. Do not cite
 > it. *Especially* do not cite it in a school paper.
 
-**📕 Just want to read it? Grab
-[The-Starlight-Engine.pdf](The-Starlight-Engine.pdf)** — the built
-90-page 6×9" book, committed at the repo root for easy download.
+**📕 Just want to read it?** Download the built book from
+**[Releases](https://github.com/davenakasone/book_test/releases/latest)** —
+every tagged version ships the reader PDF, the EPUB, and the print-ready
+PDF/X-1a as attached binaries (CI builds them; nothing is committed). The
+permanent latest-version link:
+[The-Starlight-Engine.pdf](https://github.com/davenakasone/book_test/releases/latest/download/The-Starlight-Engine.pdf).
 
 This repo is two things at once:
 

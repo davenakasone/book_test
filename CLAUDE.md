@@ -70,9 +70,11 @@ the box. On Windows use PowerShell; `py` if `python` isn't on PATH.
    the other formats from `_book/`. Simplest: `python build.py` does the
    whole chain (figures → TikZ → render → refresh root PDF).
 5. Regenerate figures **before** rendering; EPUB embeds images at render
-   time. `python build.py` refreshes the root download PDF automatically.
-   (The `keep-tex` `book/*.tex` is generated for debugging but **not**
-   committed — gitignored, since it drifts every render.)
+   time. (`keep-tex` `book/*.tex` and the root convenience PDF are both
+   generated-not-committed — gitignored.)
+   **Distribution = GitHub Releases:** push a `v*` tag and CI builds and
+   attaches PDF + EPUB + PDF/X-1a to the release. Readers use
+   `releases/latest/download/…`; nothing binary lives in git.
 6. Long author bylines clip on the PDF title page (`\maketitle` doesn't
    wrap); the full credential soup lives on the cover and preface
    signature instead.

@@ -78,7 +78,9 @@ jobs:
       - name: Memoir shootout still compiles
         run: python latex-shootout/build.py
 
-  # On a version tag, attach the built book to a permanent GitHub Release.
+  # On a version tag, attach the built book to a permanent GitHub Release —
+  # the "registry": users download binaries from the Releases tab, and
+  # releases/latest/download/<file> always serves the newest version.
   release:
     if: startsWith(github.ref, 'refs/tags/v')
     needs: render
@@ -91,10 +93,17 @@ jobs:
         with:
           version: 1.9.38
           tinytex: true
-      - working-directory: book
-        run: quarto render --to pdf --to epub
+      - name: Render (all formats — single-format renders wipe _book/)
+        working-directory: book
+        run: quarto render
+      - name: PDF/X-1a CMYK interior (print/IngramSpark)
+        run: |
+          sudo apt-get update -q && sudo apt-get install -y -q ghostscript
+          python scripts/make_pdfx.py
       - uses: softprops/action-gh-release@v2
         with:
+          generate_release_notes: true
           files: |
             book/_book/The-Starlight-Engine.pdf
             book/_book/The-Starlight-Engine.epub
+            book/_book/The-Starlight-Engine-PDFX.pdf
