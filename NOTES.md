@@ -138,5 +138,3 @@ does the final preflight.
 - Fonts beyond Latin Modern (EB Garamond etc. via `mainfont` + TinyTeX
   font package — one-line change, untested).
 - KDP upload dry-run.
-- Alt-text pass + OPF accessibility metadata (see above) — not yet applied
-  to the sources.
