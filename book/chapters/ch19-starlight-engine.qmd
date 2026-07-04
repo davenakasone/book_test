@@ -39,9 +39,14 @@ ours among them. And Part V supplied the provenance: the machine is a
 **training rig** — commissioned under a tyrannosaur instructor
 (@sec-instructor), flown once at redline on commencement morning
 (@sec-commencement), and left powered, with the catalyst cached in the
-boundary clay, for whoever repeated the course. Hardware, software,
-the bill, and the syllabus: that is not just a machine. That is a
-*classroom*, and the lights are still on.
+boundary clay, for whoever repeated the course. And Part VI read the
+fine print the whole apparatus runs under: observation is metering
+(@sec-measurement), thermodynamics is the service agreement — deletion
+fee, house rake, shutoff date (@sec-heat-bill) — and Gödel's clause is
+why the manual was an oral tradition: no system can fully document
+itself (@sec-goedel). Hardware, software, the bill, the syllabus, and
+the contract: that is not just a machine. That is a *classroom with an
+account in arrears*, and the lights are still on.
 
 So: **a starlight-pumped fusion grid powering a planetary defense and
 transit system** — surplus power beamed to craft on painted approach

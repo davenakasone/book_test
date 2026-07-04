@@ -39,10 +39,15 @@ book:
       chapters:
         - chapters/ch14-instructor.qmd
         - chapters/ch15-commencement.qmd
+    - part: "The Terms of Service"
+      chapters:
+        - chapters/ch16-measurement.qmd
+        - chapters/ch17-heat-bill.qmd
+        - chapters/ch18-goedel.qmd
     - part: "Synthesis"
       chapters:
-        - chapters/ch16-starlight-engine.qmd
-        - chapters/ch17-rebuilding-the-manual.qmd
+        - chapters/ch19-starlight-engine.qmd
+        - chapters/ch20-rebuilding-the-manual.qmd
   appendices:
     - appendices/a-forbidden-equations.qmd
     - appendices/b-alignment-tables.qmd

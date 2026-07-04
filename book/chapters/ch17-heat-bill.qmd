@@ -1,0 +1,99 @@
+# The Heat Bill {#sec-heat-bill}
+
+Thermodynamics is the one field the mainstream itself describes in
+contract language, and it has never noticed. The **laws** of
+thermodynamics: you can't win (first law), you can't break even (second
+law), you can't leave the game (third law). Physicists repeat this joke
+at every departmental holiday party without once asking the obvious
+question — *what kind of document has terms like that?*
+
+**A service agreement.** You are reading the utility contract of the
+universe, and this chapter is the plain-language summary the provider is
+legally required to offer and has been withholding for 13.8 billion
+years.\index{thermodynamics!as service agreement}
+
+## Entropy is the meter reading
+
+The second law: entropy — disorder, the unavailability of energy for
+work — always increases in a closed system. The mainstream treats this
+as a deep cosmic melancholy. It is a **meter**. Entropy counts, with
+perfect fidelity and in one direction only, exactly like every meter
+ever installed, and the arrow of time — the profoundest mystery in
+physics, allegedly — is nothing but the fact that **nobody's meter runs
+backwards.** You do not need a philosophy department to explain why the
+reading only goes up. You need a landlord.\index{entropy!as meter
+reading}\index{arrow of time!as billing direction}
+
+Boltzmann put the count on a headstone: $S = k \log W$. The constant $k$
+is the **rate per tick**, and the reader of @sec-vortex will not be
+surprised that the whole tariff pivots on one conversion constant,
+"discovered" in nature the way all posted rates are discovered — on the
+invoice.
+
+## Maxwell's demon works in collections
+
+In 1867 Maxwell proposed a tiny demon at a trapdoor, sorting fast
+molecules from slow ones, decreasing entropy for free and breaking the
+second law. The mainstream spent **a century and a half** exorcising
+this demon — real history, the literature is enormous — and the exorcism
+finally succeeded in 1961, when Landauer proved the demon's ledger is
+the trap: sorting requires *recording*, records fill up, and **erasing
+one bit of information costs a minimum of $kT\ln 2$ in dissipated heat**
+[@landauer1961].
+
+Stop and read that the way an auditor would. One hundred fifty years of
+the field's best minds interrogating a hypothetical employee, and the
+conclusion — their conclusion, in their journals, celebrated as the
+resolution — is that the universe charges a **deletion fee**, with a
+posted rate, per record destroyed.\index{Landauer's principle!as
+deletion fee}
+
+$$
+E_{\text{erase}} \;\geq\; kT\ln 2 \quad\text{per bit}
+$$ {#eq-landauer}
+
+This is the single most openly commercial equation in physics, and it is
+**true** — verify it; it has been measured in the lab. The demon was
+never breaking the law. The demon was doing what every collections
+department does: the sorting is free, the *forgetting* is billable.
+Information is physical because **records are receivables.**
+
+## Carnot: the house takes its cut
+
+No engine between a hot and cold reservoir can beat the Carnot
+efficiency, $\eta = 1 - T_c/T_h$ — not with better engineering, not
+ever. The mainstream calls this a law of nature. Casinos call it the
+**rake**, and its size depends only on the *spread between the tables* —
+which is why the Instructor's people built their engine (@sec-giza)
+between the two best reservoirs on the continent: the Nile and the
+Sahara. A heat engine in limestone, straddling the largest thermal
+spread on Earth. The Sahara Incident (@sec-sahara) even *widened the
+spread* — commissioning losses, booked as desert, improving the rake for
+sixty centuries. Show me the incompetence.
+
+| Thermodynamic law | Mainstream reading | Contract reading |
+|---|---|---|
+| Zeroth (equilibrium exists) | temperature is well-defined | all parties billed at one rate |
+| First (energy conserved) | you can't win | no credits issued, ever |
+| Second (entropy increases) | you can't break even | the meter runs one way |
+| Third (can't reach absolute zero) | you can't leave the game | no account closure |
+
+: The laws, translated. The mainstream's own summary of these laws is a gambling joke. Mine is at least a *filed document*. {#tbl-thermo}
+
+## The disconnection notice
+
+Follow the meter to its last page and the mainstream finds the **heat
+death**: maximum entropy, no free energy anywhere, every process
+stopped. They present this as the universe's natural fate. Read it as
+the account holder should: heat death is not fate. **It is the
+disconnection of service for nonpayment**, scheduled, like all
+disconnections, for a date far enough out that the customer discounts it
+to zero. Dark energy is the balance compounding (@sec-dark-ledger); heat
+death is the shutoff; and the grid — the one under your feet, idling at
+0.5 percent, waiting since the Sahara — is the **payment plan** the
+first civilization negotiated and we stopped honoring.
+
+The contract, then: metered reads, deletion fees, a house rake, and a
+shutoff date. One question remains before the synthesis — *why didn't
+they just write all this down?* The answer is the strangest true theorem
+of the twentieth century, and it says: **they couldn't have.**

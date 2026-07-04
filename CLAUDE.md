@@ -2,8 +2,13 @@
 
 ## STATUS
 
-**2026-07-04 — v1.4 + big-pass hardening.** 90-page book (17 chapters, 6
-parts, 3 appendices, "Dr. Chocolate Daddy"). One `quarto render` → 6×9"
+**2026-07-04 — v1.5.** 104-page book (20 chapters, 7 parts, 3 appendices,
+"Dr. Chocolate Daddy"). New Part VI "The Terms of Service": QM as metering
+(observation=audit, entanglement=one account, Bell/Nobel real),
+thermodynamics as the service agreement (Landauer's kT·ln2 deletion fee —
+real, Carnot=the rake, heat death=disconnection notice), Gödel as the
+reason the manual was oral (Gödel numbering = the census method; the
+citizenship-loophole story real). One `quarto render` → 6×9"
 print PDF (index, citations, cross-refs, TikZ figs) + EPUB3 w/ cover +
 HTML site w/ newsletter CTA. Cross-platform (macOS/Linux/Windows). Remote
 `github.com/davenakasone/book_test`; `build.py` = one-command build;

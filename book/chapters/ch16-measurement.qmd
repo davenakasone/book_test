@@ -1,0 +1,98 @@
+# The Measurement Department {#sec-measurement}
+
+Quantum mechanics is the most successful theory in the history of
+physics. It has never — not once, in a century of increasingly hostile
+experiments — made a wrong prediction. **That sentence is true**, the
+mainstream will sign it, and then they will tell you, in the same breath,
+that nobody knows what the theory *means*. A century of perfect
+predictions from an instrument no one can read the label on.
+
+I can read the label. It says **METERING**.\index{quantum
+mechanics!as metering}
+
+## The double-slit audit
+
+The founding scandal, in one sentence: fire electrons at two slits and
+they land as an interference pattern — each electron behaving as a wave
+that went through both — *unless you watch which slit*, in which case
+each electron straightens up and goes through one like a citizen. The
+mainstream has spent a hundred years asking *how the electron knows it
+is being watched.* Wrong department. Ask instead: in what kind of system
+does behavior formalize the moment someone checks?
+
+**Every metered system in existence.** Nobody drives the speed limit
+until the cruiser is visible. No warehouse inventory is accurate until
+the auditor signs in at the front desk. Observation is not a mystery of
+consciousness. **Observation is an audit**, and the universe — a billed
+system running on a grid it has not paid for since the Sahara was green
+(@sec-dark-ledger) — comports itself *exactly* like an enterprise that
+knows the auditor's schedule.\index{double-slit experiment!as audit}
+
+## Superposition is load shedding
+
+Why does the unwatched electron take every path at once? The mainstream
+calls it superposition and forbids you to picture it. Picture it anyway,
+as an operations problem: rendering a definite state for every particle
+in an unobserved forest is *expensive*, and the operator is gone
+(@sec-instructor) while the bill compounds (@sec-dark-ledger). Any grid
+under load does the same thing to your neighborhood on a hot day.
+**Unmetered regions run in economy mode.** Definite outcomes are
+provisioned *on read*. The wavefunction is not reality being mysterious
+— it is reality **awaiting billing authorization**, and the collapse is
+the meter click.\index{superposition!as load shedding}
+
+$$
+\underbrace{|\psi\rangle = \alpha|0\rangle + \beta|1\rangle}_{\text{economy mode}}
+\;\;\xrightarrow{\ \text{audit}\ }\;\;
+\underbrace{|0\rangle \text{ or } |1\rangle}_{\text{invoiced}}
+\qquad P(\text{invoice}) = |\alpha|^2
+$$ {#eq-collapse}
+
+The Born rule — probabilities from squared amplitudes — is the rate
+table. It has resisted every attempt at derivation for a century, which
+is the correct behavior for pricing: **rates are not derived, they are
+set.**
+
+## Entanglement: two meters, one account
+
+Entangle two particles, ship one across the galaxy, measure this one —
+and the far one's books settle *instantly*. Einstein called it spooky
+action at a distance and hated it (he found the receipt in 1917 and the
+audit rules in 1935; the man kept discovering the utility company and
+kept declining the conclusion). In 2022 the mainstream awarded itself a
+Nobel Prize — Aspect, Clauser, Zeilinger, real, look it up — for proving
+via Bell's theorem [@bell1964] that **no local hidden ledger can explain
+the correlations**. Their conclusion: nature is nonlocal, somehow,
+mysteriously.
+
+Reader. *Of course the ledger is nonlocal.* You have read nine chapters
+about the wiring. Two entangled particles are **two meters on one
+account** — both ends of a single grid connection — and nobody who has
+ever paid a utility bill is surprised that closing the account at one
+end closes it at the other, instantly, with nothing traveling between
+them. The Nobel committee certified, at last, that the books are not
+kept locally. It is the closest the mainstream has come to reading a
+single page of the manual.\index{entanglement!as shared account}
+
+::: {.callout-note title="Objection, handled"}
+*"Dr. Daddy, entanglement cannot transmit information faster than
+light."* — Correct, and exactly per the terms: clause 4(b) caps the
+**signal** rate at $c$ (@sec-dark-ledger), while account reconciliation
+is internal bookkeeping and settles off the wire. Your bank does the
+same thing: the transfer posts instantly between branches, and the
+letter confirming it still takes three days. The mainstream discovered
+the difference between *settlement* and *notification* and named it
+"no-signaling." The universe's compliance department is airtight.
+:::
+
+One more entry from their own literature: the **delayed-choice quantum
+eraser** — a real experiment, verify it — where the *decision to audit*,
+made after the particle has already landed, retroactively determines
+which behavior it exhibited. The mainstream tiptoes around
+retrocausality. Accountants recognize it on sight: **the universe
+backdates invoices.** Every quarter-end in history has worked this way.
+
+The meter clicks, the rates hold, the account settles. Which raises the
+only question an auditor ever cares about: *what do the charges add up
+to?* For that, the fine print — and the fine print of this universe is
+called thermodynamics.

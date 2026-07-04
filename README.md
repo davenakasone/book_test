@@ -17,7 +17,7 @@ permanent latest-version link:
 
 This repo is two things at once:
 
-1. **A complete satirical book** — 17 chapters + 3 appendices of lovingly
+1. **A complete satirical book** — 20 chapters + 3 appendices of lovingly
    abused math, physics, and archaeology: the Great Pyramid as a
    starlight-pumped fusion reactor, Stonehenge as a 56-bit controller, a
    one-page proof of the Riemann Hypothesis, and dark energy as the
