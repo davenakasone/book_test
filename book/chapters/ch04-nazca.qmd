@@ -37,7 +37,7 @@ and I have priced this out; the quote from Boeing was unkind.
 | Condor | Phased-array element | 14.0 |
 | Trapezoids (all) | Beam footprints | n/a (they're the *evidence*) |
 
-: The menagerie, translated. {#tbl-nazca}
+: The menagerie, translated. {#tbl-nazca tbl-colwidths="[34,34,32]"}
 
 ## Landing vectors
 

@@ -54,7 +54,7 @@ with a spine.
 | Hand crank | user input | user input (we agree on the crank) |
 | Found at sea | bad luck | exactly where a nav unit lives |
 
-: Two readings of one shoebox. One of them explains the shipping route. {#tbl-antikythera}
+: Two readings of one shoebox. One of them explains the shipping route. {#tbl-antikythera tbl-colwidths="[26,30,44]"}
 
 An eclipse, note, is a **scheduled beacon outage** — the Moon walking
 through your reference signal. Of course the terminal carries the outage

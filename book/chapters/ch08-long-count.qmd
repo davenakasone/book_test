@@ -63,7 +63,7 @@ accurate for five thousand years *by hand*. Show me one IT department.
 | baktun | 144,000 | epoch counter |
 | 13 baktun | 1,872,000 | **burst-window rollover** |
 
-: The counter, disassembled. Note 18 breaks the pure base-20 pattern at the tun — a calibration fudge, and the single most honest engineering artifact in this book. {#tbl-longcount}
+: The counter, disassembled. Note 18 breaks the pure base-20 pattern at the tun — a calibration fudge, and the single most honest engineering artifact in this book. {#tbl-longcount tbl-colwidths="[30,16,54]"}
 
 The scheduler survived in stone. The *transmitter* survived too — the
 largest antenna ever built, hiding in the one place nothing can hide.

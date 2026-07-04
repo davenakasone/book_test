@@ -41,7 +41,8 @@ mainstream's own):
 4. Sign convention: the Altar Stone lies flat, face down. Both
    coordinates negative. (Statues facing the sea also read negative —
    the ancients knew about the southern hemisphere, which is more than
-   Ptolemy managed.)
+   Ptolemy managed.) The sign rule is confirmed in private correspondence
+   [@meridian2026] with the field's leading authority, who is me.
 
 Destination: **27°S, 109°W**. Easter Island. The mid-ocean repeater
 (@tbl-registry), sitting exactly where the henge has been pointing for

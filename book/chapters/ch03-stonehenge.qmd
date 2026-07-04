@@ -66,7 +66,7 @@ important that I add: the feeling may also be humming.)
 | Heel stone | 1 | Solstice clock, 1 pulse/yr |
 | Station stones | 4 | Test points |
 
-: Stonehenge parts list. Total system clock: 1 Hz per year, which is slow, but the uptime is 5,000 years. {#tbl-parts}
+: Stonehenge parts list. Total system clock: 1 Hz per year, which is slow, but the uptime is 5,000 years. {#tbl-parts tbl-colwidths="[24,14,62]"}
 
 Generator (@sec-giza), components (Puma Punku), controller (here). A grid
 needs one more thing — the wires. For those, we go to Peru, and we look

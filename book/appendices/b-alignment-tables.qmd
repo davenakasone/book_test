@@ -29,13 +29,13 @@ see @sec-stats).
 
 | Claim | Where | Grade |
 |---|---|:---:|
-| Giza latitude ↔ speed of light digits | @sec-giza | A (it's really the same digits) |
-| Wall length ↔ H-line $\times10^{8}$ | @eq-wall | B |
-| 37 gears ↔ 37 GPS channels | @eq-gears | B− (gears contested, GPS generous) |
-| Aubrey holes ↔ 56-bit addressing | @sec-stonehenge | C |
-| 432 Hz ↔ everything | throughout | C, defiantly |
-| Long Count rollover ↔ GRB 121221A | @sec-long-count | A (the burst is real; check) |
-| Sahara ↔ commissioning transient | @sec-sahara | C (the hippos aren't talking) |
+| Giza latitude $\leftrightarrow$ speed of light digits | @sec-giza | A (it's really the same digits) |
+| Wall length $\leftrightarrow$ H-line $\times10^{8}$ | @eq-wall | B |
+| 37 gears $\leftrightarrow$ 37 GPS channels | @eq-gears | B− (gears contested, GPS generous) |
+| Aubrey holes $\leftrightarrow$ 56-bit addressing | @sec-stonehenge | C |
+| 432 Hz $\leftrightarrow$ everything | throughout | C, defiantly |
+| Long Count rollover $\leftrightarrow$ GRB 121221A | @sec-long-count | A (the burst is real; check) |
+| Sahara $\leftrightarrow$ commissioning transient | @sec-sahara | C (the hippos aren't talking) |
 | Stonehenge census → Easter Island | @sec-census | B+ (the counts are real; the subtraction is inspired) |
 | Grid constants digital-root to 9 | @sec-vortex | A (the arithmetic is checkable; the meaning is ours) |
 | Riemann hypothesis (proved) | @sec-riemann | A+ (pending Clay) |

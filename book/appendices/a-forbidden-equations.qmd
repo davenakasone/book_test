@@ -62,7 +62,7 @@ V_{\text{pyr}} \times f_{\text{Schumann}} \times k
 $$ {#eq-volume}
 
 *Official objection:* "$k$ is doing all the work, and its units are
-m⁻²·s·(m/s), which is gibberish." *Response:* the units of $k$ are
+$\mathrm{m^{-2}{\cdot}s{\cdot}(m/s)}$, which is gibberish." *Response:* the units of $k$ are
 **royal cubits per insight**, a natural system in which @eq-volume is not
 merely true but *inevitable*. Dimensional analysis is a beautiful
 discipline whose only flaw is a certain inflexibility about dimensions.

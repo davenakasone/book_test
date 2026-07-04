@@ -67,7 +67,7 @@ transmitting. You can only make the operators forget what the traffic is.
 | Rammed-earth core | cheap fill | ferrite-analog magnetic core |
 | 2,000 yr of funding | inertia | uptime requirement |
 
-: The largest structure ever built, read as hardware. {#tbl-wall}
+: The largest structure ever built, read as hardware. {#tbl-wall tbl-colwidths="[26,34,40]"}
 
 Generator, parts, controller, test range, grid, terminals, sentinels,
 scheduler, antenna. Nine components — but hardware is half a machine.

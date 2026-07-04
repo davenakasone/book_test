@@ -105,7 +105,7 @@ was not the constant. It was crediting the universe with paying its own
 bills.
 
 The machine is now fully specified — hardware (Parts I–III), software
-(Chapters 10–12), and the ledger it runs against. But before we bolt it
+(Chapters 10–13), and the ledger it runs against. But before we bolt it
 together and read the total, the ledger has an opening entry — dated
 sixty-six million years ago, worldwide, centimeters thick, and written
 in the one element every thruster in the sky still requires.
