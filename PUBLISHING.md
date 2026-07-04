@@ -36,15 +36,23 @@ launch via Select promo days" silently assumes enrollment.
   ~nothing without a list to drive it.
 - **Go wide at book 2**, or once the email list can push off-Amazon sales.
 
-### The IngramSpark PDF/X-1a gap (the one thing this pipeline can't emit)
+### IngramSpark PDF/X-1a (wired: `build.py --ingram`)
 
 KDP accepts our stock **RGB** LaTeX PDF. IngramSpark strictly requires
-**PDF/X-1a:2001 + CMYK + flattened transparency** and will reject the
-default file. This is the concrete capability gap vs. Vellum/Atticus. To
-close it: a **Ghostscript** post-process (`gs -dPDFX -dColorConversionStrategy=/CMYK
-…`) converts the RGB PDF to Ingram-bound PDF/X-1a — documented in NOTES.md
-as a deferred build step, not yet wired in. Building the interior once to
-Ingram's stricter spec also passes KDP.
+**PDF/X-1a:2001 + CMYK + flattened transparency**. This is now handled:
+`python build.py --ingram` (or `python scripts/make_pdfx.py`) runs a
+**Ghostscript** pass that converts the RGB PDF to a conforming PDF/X-1a:2001
+CMYK interior at `book/_book/The-Starlight-Engine-PDFX.pdf`. Notes:
+
+- Requires Ghostscript (`brew install ghostscript` / `apt install
+  ghostscript`); the script finds gs and its CMYK profile automatically.
+- gs **outlines the text** (no embedded fonts to break) and **flattens
+  transparency** as PDF/X-1a demands — so the file is larger (~30 MB) and
+  not text-searchable. That's correct and normal for a print interior; the
+  RGB PDF stays the searchable KDP/download copy.
+- gs produces a *conforming* file; **IngramSpark's uploader runs the
+  authoritative preflight.** Building once to Ingram's stricter spec also
+  passes KDP.
 
 ### The KDP ebook royalty trap (read before pricing anything)
 
@@ -136,19 +144,22 @@ imperfect first picks cost nothing.
 
 The European Accessibility Act applies to ebooks sold into the EU from
 **28 June 2025**, and the recommended wide path (D2D → Apple/Kobo) ships
-straight into the EU. Retailers now surface accessibility fields
-regardless. What it takes:
+straight into the EU. **Wired in this repo:**
 
-- **Alt text on every figure** — in our `.qmd` sources, on each
-  `![...](...)`. Ours are script-generated, so the descriptions are known;
-  this is mechanical and also doubles as SEO for the HTML edition.
-- **Accessibility metadata** (schema.org `accessMode`, `accessibilityFeature`,
-  `accessibilitySummary`) in the EPUB OPF — Quarto can inject it.
-- **Validate with DAISY ACE** alongside `epubcheck`.
-- **Microenterprise exemption:** the EAA exempts the smallest businesses —
-  whether it covers a solo self-published author is **unsettled; verify
-  before relying on it.** Doing the alt-text work is cheaper than the
-  question.
+- **Alt text on every figure** — `fig-alt="…"` on each `![...](...)` in the
+  `.qmd` sources (screen-reader descriptions distinct from the witty
+  captions); it lands as `alt` in the EPUB and doubles as SEO for the HTML.
+  *When templating a new book, add `fig-alt` to every image — see the
+  existing figures for the pattern.*
+- **Accessibility metadata** — `book/epub-metadata.xml` (schema.org
+  `accessMode`, `accessibilityFeature: alternativeText/tableOfContents/…`,
+  `accessibilityHazard: none`, summary), referenced from `_quarto.yml`;
+  verified present in the EPUB OPF after render.
+- **Still recommended:** validate with **DAISY ACE** alongside `epubcheck`
+  (CI runs epubcheck; ACE is a manual check).
+- **Microenterprise exemption:** whether the EAA exempts a solo self-
+  published author is **unsettled; verify** — but the work above is cheaper
+  than the question.
 
 ## Money: where it's actually worth spending
 

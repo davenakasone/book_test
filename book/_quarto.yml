@@ -55,6 +55,7 @@ format:
     toc: true
     include-after-body: html/newsletter.html
   epub:
+    epub-metadata: epub-metadata.xml
     rights: >
       © 2026. A work of satirical fiction produced as a publishing-pipeline
       test. Every factual claim herein is false, including several of the

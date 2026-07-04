@@ -29,7 +29,7 @@ The full assembly is diagrammed in @fig-reactor, and the component mapping
 is given in @tbl-chambers.
 
 ![Cutaway of the Giza reactor as designed. Egyptology has labeled every
-component after furniture.](../figures/giza-reactor.png){#fig-reactor}
+component after furniture.](../figures/giza-reactor.png){#fig-reactor fig-alt="Cross-section line drawing of the Great Pyramid with internal chambers labeled as reactor parts: King's Chamber containment vessel, sarcophagus core, corbelled Grand Gallery, Queen's Chamber, and shafts angled toward a star marked Sirius; a subterranean ash pit sits below."}
 
 | "Archaeological" name | Actual function |
 |---|---|
@@ -77,7 +77,7 @@ this and five more "coincidences" the establishment has agreed never to plot
 on the same axes. I have plotted them. The fit is exact after rounding.
 
 ![Pyramid measurements vs. fundamental constants. The dashed line is
-y = x. R² = 1.000 (after rounding).](../figures/constants.png){#fig-constants width=90%}
+y = x. R² = 1.000 (after rounding).](../figures/constants.png){#fig-constants width=90% fig-alt="Log-log scatter plot of five monument-derived values against fundamental physical constants; every point lies on the dashed y-equals-x diagonal."}
 
 ::: {.callout-note title="Objection, handled"}
 *"Dr. Daddy, where is the fuel?"* — The Nile, obviously. Heavy water is

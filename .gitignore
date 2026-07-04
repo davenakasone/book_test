@@ -23,5 +23,9 @@ book/*.tex
 *.synctex.gz
 latex-shootout/build/
 
+# Author's raw source material (template mode — see START-HERE.md); their
+# originals shouldn't land in git. Extracted media does (it's a build input).
+incoming/
+
 # OS / editor
 .DS_Store

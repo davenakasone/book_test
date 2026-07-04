@@ -13,11 +13,17 @@ GitHub Actions renders+validates+releases.
 KDP-royalty error and a silent ↔-drop that blanked appendix B's claim
 column; added pricing/metadata/accessibility(EAA)/direct-sales sections,
 ARC+production tracks, hardened licensing, pinned deps, unicode-guard,
-table-overflow fixes. Web-verified fee/royalty/tool numbers folded into
-PUBLISHING.md; business reality (sales/economics) in BUSINESS.md.
-**Next candidates:** LICENSE file (split: code MIT / prose reserved —
-awaiting David), copyright page front-matter, alt-text/OPF accessibility
-pass, font upgrade via `mainfont`, print cover wrap, KDP dry-run.
+table-overflow fixes. Web-verified numbers in PUBLISHING.md; business
+reality in BUSINESS.md.
+
+**Full-pipeline pass 2026-07-04:** now a **complete** publish pipeline —
+**PDF/X-1a CMYK** for IngramSpark (`build.py --ingram` → `make_pdfx.py`,
+Ghostscript); **EPUB accessibility** (fig-alt on all figures +
+schema.org OPF metadata, EAA-ready); **LICENSE** (MIT code / CC0 book —
+"they can have it"); and a **reusable-template path** (`START-HERE.md` +
+`scripts/ingest.py` turns someone's .docx/.txt/diagrams into chapters).
+**Next candidates:** copyright-page front-matter, DAISY ACE run, font
+upgrade via `mainfont`, print cover wrap, KDP dry-run.
 
 ## What this is
 
@@ -31,14 +37,19 @@ an index, a cover, multi-format output.
 ## Build (any OS — macOS / Linux / Windows)
 
 ```sh
-python -m pip install -r requirements.txt   # quarto-cli, matplotlib, numpy, pymupdf
+python -m pip install -r requirements.txt   # pinned deps
 quarto install tinytex                      # once; no admin rights needed
+brew install ghostscript                    # only if you need --ingram (PDF/X-1a)
 
-python scripts/make_figures.py              # matplotlib figures
-python scripts/build_tikz.py                # TikZ diagrams → PDF + PNG
-cd book && quarto render                    # → _book/ (PDF + EPUB + HTML)
+python build.py                             # figures → render → PDF+EPUB+HTML → root PDF
+python build.py --ingram                    # + PDF/X-1a CMYK interior for IngramSpark
+python build.py --check-only                # just the prose-unicode guard
 python latex-shootout/build.py              # the raw-LaTeX comparison chapter
 ```
+
+**Templating a new book from this repo:** copy the repo, drop the author's
+`.docx/.txt/…` in `incoming/`, `python scripts/ingest.py` → chapter stubs,
+then edit `_quarto.yml` + build. Full runbook: `START-HERE.md`.
 
 Generated figures are committed, so `quarto render` alone works out of
 the box. On Windows use PowerShell; `py` if `python` isn't on PATH.
@@ -72,6 +83,8 @@ the box. On Windows use PowerShell; `py` if `python` isn't on PATH.
 ## Layout
 
 ```
+START-HERE.md    runbook for reusing this as a template for a NEW book
+build.py         one-command build (--ingram, --check-only, --shootout)
 book/            Quarto project — _quarto.yml is the single source of truth
   chapters/      ch01–ch17 (6 parts; anchors #sec-* are cross-referenced)
   appendices/    forbidden equations, alignment tables, glossary
@@ -79,12 +92,16 @@ book/            Quarto project — _quarto.yml is the single source of truth
   latex/         preamble.tex (index pkg, author font), after-body.tex
   figures-src/   TikZ sources        figures/  generated outputs (committed)
   html/          newsletter.html CTA (placeholder form — swap in provider embed)
+  epub-metadata.xml  schema.org accessibility metadata (EAA)
   _book/         render output (gitignored)
-scripts/         make_figures.py · make_social.py · build_tikz.py
+scripts/         make_figures · make_social · build_tikz · make_pdfx (PDF/X-1a) · ingest (docx→qmd)
 latex-shootout/  ch01 hand-set in memoir class (typographic comparison)
 platform/        email sequence, YT/IG/LinkedIn playbooks, launch plan, assets
+incoming/        (template mode) author's raw source files — gitignored
 NOTES.md         every trap hit, so you don't re-hit them — read before touching render config
-PUBLISHING.md    KDP/IngramSpark/D2D specs + the licensing/copyright section
+PUBLISHING.md    KDP/IngramSpark/D2D specs, pricing, accessibility, licensing, upload checklist
+BUSINESS.md      investor-frame reality: sales medians, unit economics, earn-out, tax
+LICENSE          MIT (pipeline) + CC0 (book)
 ```
 
 ## David's-machine specifics (ignore on any other computer)

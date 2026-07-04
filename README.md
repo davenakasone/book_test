@@ -72,4 +72,6 @@ The hand-typeset comparison chapter: `python latex-shootout/build.py`
 
 ## License
 
-TBD — all rights reserved until the author (either of them) decides.
+Take it. The **pipeline** (build scripts, config, templates) is **MIT**;
+the **book** (prose, figures, cover) is **CC0 / public domain**. See
+[LICENSE](LICENSE). Fork the pipeline for your own book without asking.

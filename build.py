@@ -63,6 +63,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--skip-figures", action="store_true")
     ap.add_argument("--shootout", action="store_true")
+    ap.add_argument("--ingram", action="store_true",
+                    help="also emit the PDF/X-1a CMYK interior for IngramSpark")
     ap.add_argument("--check-only", action="store_true",
                     help="run the prose-unicode guard and exit")
     args = ap.parse_args()
@@ -84,6 +86,9 @@ def main():
                  "check _quarto.yml output-dir / book-output-file")
     shutil.copy(src, ROOT / "The-Starlight-Engine.pdf")
     print("→ refreshed root download copy")
+
+    if args.ingram:
+        run("PDF/X-1a CMYK interior (IngramSpark)", [py, "scripts/make_pdfx.py"])
 
     if args.shootout:
         run("memoir shootout", [py, "latex-shootout/build.py"])

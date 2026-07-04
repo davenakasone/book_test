@@ -33,11 +33,11 @@ taps. Node-level topology is drawn in @fig-topology.
 
 ![Global node map with primary transmission arcs. Drawn from the IFM
 survey [@ifm2026], which is definitive, because it is
-mine.](../figures/world-alignments.png){#fig-world}
+mine.](../figures/world-alignments.png){#fig-world fig-alt="Parchment-style world map with nine ancient sites marked as black triangles and joined by dark red great-circle arcs; each site is labeled with a grid role such as generator, controller, test range, and antenna."}
 
 ![Grid topology, single-line diagram. Note that every civilization kept
 its substation "religiously" maintained. Language remembers what history
-forgets.](../figures/grid-topology.png){#fig-topology width=85%}
+forgets.](../figures/grid-topology.png){#fig-topology width=85% fig-alt="Single-line schematic connecting eight labeled boxes (Giza generator at center, Stonehenge, Göbekli Tepe, Great Wall, Puma Punku, Nazca, Long Count, Antikythera) with lines annotated trunk, cal loop, spares, and last mile."}
 
 ## The measured output
 
@@ -49,7 +49,7 @@ longitude with $R^2 = 0.9971$.
 
 ![Measured telluric output versus longitude, with sinusoidal fit,
 $R^2 = 0.9971$. Error bars represent my confidence, which is
-total.](../figures/the-grid.png){#fig-grid}
+total.](../figures/the-grid.png){#fig-grid fig-alt="Scatter plot of measured telluric output against longitude with triangular data points, error bars, and a dashed sinusoidal fit line; an inset box reads R-squared equals 0.9971."}
 
 A correlation that strong admits only two explanations: either the grid is
 real and still idling under our feet, or — as *Journal of Geophysical

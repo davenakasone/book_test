@@ -99,26 +99,32 @@ gone, so a Windows (or Linux) collaborator can build everything:
   finally happens), uploads PDF+EPUB as a downloadable artifact per commit.
   This also proves a clean-machine build (catches "works on my Mac" drift).
 
-## Accessibility (EAA, June 2025) — TODO wired into the pipeline
+## Accessibility (EAA, June 2025) — WIRED 2026-07-04
 
 Ebooks sold into the EU must meet accessibility rules; our wide path
-(D2D → Apple/Kobo) hits the EU. Mechanical work, mostly:
-- **alt text** on every `![...]()` in the `.qmd` sources (figures are
-  script-generated → descriptions are known; also SEO for the HTML edition).
-- **schema.org accessibility metadata** in the EPUB OPF (Quarto can inject).
-- validate with **DAISY ACE** next to `epubcheck`.
-See PUBLISHING.md → "EPUB accessibility" for the microenterprise-exemption
-question (unsettled for solo authors — verify).
+(D2D → Apple/Kobo) hits the EU. Done:
+- **alt text** via `fig-alt="…"` on all six figures — verified as `alt`
+  attributes in the EPUB, and doubles as HTML SEO. (Templating rule: every
+  new image needs `fig-alt`.)
+- **schema.org accessibility metadata** in `book/epub-metadata.xml` (wired
+  via `_quarto.yml: epub: epub-metadata:`) — verified in the OPF
+  (accessMode, accessibilityFeature: alternativeText/tableOfContents/…,
+  hazard none).
+- Still manual: **DAISY ACE** validation (CI runs epubcheck; ACE is a
+  separate check). Microenterprise-exemption question unsettled — verify.
+
+## PDF/X-1a for IngramSpark — WIRED 2026-07-04
+
+`python build.py --ingram` → `scripts/make_pdfx.py` runs Ghostscript to
+convert the RGB PDF → conforming **PDF/X-1a:2001 + CMYK** at
+`book/_book/*-PDFX.pdf`. gs outlines text + flattens transparency (required
+by PDF/X-1a), so the file is ~30 MB and not searchable — correct for a
+print interior. The script locates gs and its CMYK ICC profile
+version-agnostically. Needs `brew install ghostscript`. Ingram's uploader
+does the final preflight.
 
 ## Deferred / untested
 
-- **IngramSpark PDF/X-1a + CMYK** — Ingram rejects our RGB PDF; it wants
-  PDF/X-1a:2001 + CMYK + flattened transparency (KDP accepts RGB fine). Fix
-  is a Ghostscript post-process (`gs -dPDFX -dColorConversionStrategy=/CMYK
-  -sColorConversionStrategyForImages=/CMYK -sDEVICE=pdfwrite …`) → an
-  Ingram-bound interior; documented in PUBLISHING.md, not yet a build.py
-  flag. (This is why NOTES earlier skipped ghostscript — noting the
-  Ingram-channel consequence now.)
 - Print *cover wrap* (back+spine+front single PDF) — needs final page
   count first; Inkscape job.
 - Fonts beyond Latin Modern (EB Garamond etc. via `mainfont` + TinyTeX

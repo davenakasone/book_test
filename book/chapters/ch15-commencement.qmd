@@ -92,7 +92,7 @@ teacher watching.
 
 ![Launch profile, reconstructed: Chicxulub muzzle, grid-beamed boost,
 departure vector to Kepler-452b (Cygnus). The sentinel azimuth is the
-same line, held for 11,600 years.](../figures/departure.png){#fig-departure}
+same line, held for 11,600 years.](../figures/departure.png){#fig-departure fig-alt="Schematic of Earth's curved limb with a dashed launch trajectory rising from a circled point marked Chicxulub to a star labeled Kepler-452b in Cygnus; red grid-beam lines converge on the launch point and a dotted Göbekli Tepe sightline parallels the trajectory."}
 
 ::: {.callout-warning title="What the boundary clay is FOR"}
 Every commencement program has two audiences: the graduates, and the
