@@ -10,11 +10,11 @@
 
 **📕 Just want to read it? Grab
 [The-Starlight-Engine.pdf](The-Starlight-Engine.pdf)** — the built
-79-page 6×9" book, committed at the repo root for easy download.
+90-page 6×9" book, committed at the repo root for easy download.
 
 This repo is two things at once:
 
-1. **A complete satirical book** — 15 chapters + 3 appendices of lovingly
+1. **A complete satirical book** — 17 chapters + 3 appendices of lovingly
    abused math, physics, and archaeology: the Great Pyramid as a
    starlight-pumped fusion reactor, Stonehenge as a 56-bit controller, a
    one-page proof of the Riemann Hypothesis, and dark energy as the
@@ -44,7 +44,8 @@ box — the two figure scripts are only needed when *editing* figures.
 
 The hand-typeset comparison chapter: `python latex-shootout/build.py`
 (memoir class — drop caps, margin notes, custom chapter opener).
-`build.sh` remains as a wrapper for Unix muscle memory.
+`latex-shootout/build.sh` remains as a wrapper for Unix muscle memory
+(there is no repo-root `build.sh` — the root entry point is `build.py`).
 
 ## Layout
 

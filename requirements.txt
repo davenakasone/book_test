@@ -1,6 +1,9 @@
 # Everything needed to build the book + figures on any OS.
-# python -m pip install -r requirements.txt
-quarto-cli
-matplotlib
-numpy
-pymupdf
+#   python -m pip install -r requirements.txt
+# Pinned to the versions this book was built with so the friend gets a
+# byte-stable rebuild, not "whatever was latest that day." Bump deliberately.
+quarto-cli==1.9.38
+matplotlib==3.10.9
+numpy==2.4.4
+pymupdf==1.28.0
+epubcheck==5.1.0   # EPUB validation; wraps EpubCheck 4.2.6, needs Java on PATH

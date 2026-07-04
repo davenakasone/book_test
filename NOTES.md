@@ -52,8 +52,10 @@ the friend.
 - **Callout boxes** render as tcolorbox in PDF, styled divs in EPUB/HTML.
 - **TikZ → `sips`** (macOS built-in) for PDF→PNG spared us ghostscript/
   imagemagick installs.
-- 55-page 6×9 PDF + valid EPUB3 (mimetype stored-first, cover flagged in
-  OPF) + searchable HTML site from one `quarto render`, ~90 s warm.
+- 6×9 PDF (90pp at v1.4) + valid EPUB3 (mimetype stored-first, cover
+  flagged in OPF) + searchable HTML site from one `quarto render`, ~90 s
+  warm. (Page/chapter counts live in CLAUDE.md STATUS — the one place they
+  should be hardcoded; don't re-quote them across docs.)
 
 ## Shootout: Quarto PDF vs hand-rolled memoir
 

@@ -5,7 +5,10 @@ book/index_files/
 book/site_libs/
 /.quarto/
 
-# LaTeX intermediates (quarto keep-tex .tex is committed on purpose; aux junk is not)
+# LaTeX intermediates. keep-tex still generates book/*.tex locally (handy for
+# debugging glyph/layout issues) but we no longer COMMIT it — it drifts from
+# source on every render and bloats diffs. The PDF is the deliverable.
+book/*.tex
 *.aux
 *.log
 *.toc

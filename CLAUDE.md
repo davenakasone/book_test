@@ -2,18 +2,22 @@
 
 ## STATUS
 
-**2026-07-02 — v1.4.** 90-page book (17 chapters, 6 parts, 3 appendices)
-— new Part V "The First Graduation": T. rex flight instructor, the
-Unknown Cohort, Chicxulub-as-launch (iridium = thruster catalyst, real),
-destination Kepler-452b in Cygnus (real, ties to the Göbekli sightline).
-By "Dr. Chocolate Daddy." One `quarto render` produces: 6×9" print PDF
-(index, BibTeX citations, cross-refs, TikZ figures) + EPUB3 with cover +
-HTML site with newsletter CTA. Cross-platform verified (macOS-born,
-Windows-ready — see NOTES.md portability pass). Author-platform kit in
-`platform/`. Remote: `github.com/davenakasone/book_test`.
+**2026-07-04 — v1.4 + big-pass hardening.** 90-page book (17 chapters, 6
+parts, 3 appendices, "Dr. Chocolate Daddy"). One `quarto render` → 6×9"
+print PDF (index, citations, cross-refs, TikZ figs) + EPUB3 w/ cover +
+HTML site w/ newsletter CTA. Cross-platform (macOS/Linux/Windows). Remote
+`github.com/davenakasone/book_test`; `build.py` = one-command build;
+GitHub Actions renders+validates+releases.
+
+**Big pass (multi-agent research+audit) landed 2026-07-04:** fixed a real
+KDP-royalty error and a silent ↔-drop that blanked appendix B's claim
+column; added pricing/metadata/accessibility(EAA)/direct-sales sections,
+ARC+production tracks, hardened licensing, pinned deps, unicode-guard,
+table-overflow fixes. Web-verified fee/royalty/tool numbers folded into
+PUBLISHING.md; business reality (sales/economics) in BUSINESS.md.
 **Next candidates:** LICENSE file (split: code MIT / prose reserved —
-awaiting David), copyright page front-matter, font upgrade via
-`mainfont`, print cover wrap, KDP dry-run.
+awaiting David), copyright page front-matter, alt-text/OPF accessibility
+pass, font upgrade via `mainfont`, print cover wrap, KDP dry-run.
 
 ## What this is
 
@@ -47,13 +51,17 @@ the box. On Windows use PowerShell; `py` if `python` isn't on PATH.
 2. **No `{dot}`/`{mermaid}` code blocks** — they hang `quarto render`
    waiting on Chromium. Pre-render every diagram to an image (TikZ via
    `scripts/build_tikz.py`, or matplotlib).
-3. **No unicode superscripts** (`10¹⁷`) in prose — glyphs silently drop
-   in the PDF. Write inline math: `$10^{17}$`.
+3. **No drop-silent unicode in prose** — superscripts beyond ¹²³ (`10¹⁷`)
+   and the ↔ arrow (`U+2194`) render blank in Latin Modern. Use inline
+   math (`$10^{17}$`, `$\leftrightarrow$`). `python build.py --check-only`
+   guards this and CI runs it. (→ `U+2192`, − `U+2212` are verified-safe.)
 4. Render **all formats with plain `quarto render`** — `--to pdf` wipes
-   the other formats from `_book/`.
+   the other formats from `_book/`. Simplest: `python build.py` does the
+   whole chain (figures → TikZ → render → refresh root PDF).
 5. Regenerate figures **before** rendering; EPUB embeds images at render
-   time. After a render that changes the book, refresh the root download
-   copy: `cp book/_book/The-Starlight-Engine.pdf .`
+   time. `python build.py` refreshes the root download PDF automatically.
+   (The `keep-tex` `book/*.tex` is generated for debugging but **not**
+   committed — gitignored, since it drifts every render.)
 6. Long author bylines clip on the PDF title page (`\maketitle` doesn't
    wrap); the full credential soup lives on the cover and preface
    signature instead.
