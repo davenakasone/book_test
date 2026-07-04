@@ -93,7 +93,7 @@ the box. On Windows use PowerShell; `py` if `python` isn't on PATH.
 START-HERE.md    runbook for reusing this as a template for a NEW book
 build.py         one-command build (--ingram, --check-only, --shootout)
 book/            Quarto project — _quarto.yml is the single source of truth
-  chapters/      ch01–ch17 (6 parts; anchors #sec-* are cross-referenced)
+  chapters/      ch01–ch20 (7 parts; anchors #sec-* are cross-referenced)
   appendices/    forbidden equations, alignment tables, glossary
   references.bib real papers cited wrongly + fictional sources
   latex/         preamble.tex (index pkg, author font), after-body.tex
