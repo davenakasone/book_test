@@ -110,6 +110,14 @@ Ebooks sold into the EU must meet accessibility rules; our wide path
   via `_quarto.yml: epub: epub-metadata:`) — verified in the OPF
   (accessMode, accessibilityFeature: alternativeText/tableOfContents/…,
   hazard none).
+- **Trap (found by CI):** Quarto's `fig-alt` writes alt onto the `<img>`
+  (correct) but *also* onto the wrapping `<div>` — illegal in XHTML, so
+  epubcheck fails RSC-005. And the obvious fix, a plain `alt=` attribute,
+  gets silently DROPPED by pandoc (leaving `alt=""` = "decorative" —
+  validates, but wrong for accessibility). Resolution: keep `fig-alt` +
+  `book/postrender-fix-epub.py` (a Quarto post-render hook) strips the div
+  copies while preserving EPUB zip invariants. Runs on every render,
+  including CI.
 - Still manual: **DAISY ACE** validation (CI runs epubcheck; ACE is a
   separate check). Microenterprise-exemption question unsettled — verify.
 
