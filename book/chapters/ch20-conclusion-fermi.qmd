@@ -1,0 +1,123 @@
+# Conclusion: Where Is Everybody? {#sec-fermi}
+
+In the summer of 1950, over lunch at Los Alamos, Enrico Fermi looked up
+from a conversation about flying-saucer cartoons and asked the question
+that has embarrassed astronomy ever since: *"Where is everybody?"* The
+lunch is real; the witnesses wrote it down. A galaxy this old and this
+large should be crawling with civilizations, and the sky is silent. The
+mainstream has spent seventy-five years inventing answers, each more
+gothic than the last, and this book is now equipped to grade every one
+of them.\index{Fermi paradox!graded and closed}
+
+They are all wrong, and they are all wrong **in the same direction**.
+Watch for it.
+
+## The field, executed in order
+
+**The Dark Forest.** Everyone hides, because everyone hunts; the first
+civilization to speak is the first to die. The mainstream's favorite
+answer — supplied, the reader should know, by a *novelist*, which tells
+you everything about the field's epistemic supply chain. It dies on this
+book's own audit: hiding civilizations do not draw power, and **27% of
+the universe is metered load** (@sec-dark-ledger). We did not infer the
+galaxy's occupants; we read their consumption. Nobody hiding for their
+life runs the dryer. The forest is lit like a stadium.\index{Dark
+Forest hypothesis!electric bill of}
+
+**The Zoo.** Ball's hypothesis — real paper, 1973 [@ball1973]: we are
+observed but quarantined, an exhibit kept pristine. I have worked in
+facilities, reader. A zoo has feeding schedules, enrichment programs,
+and a veterinarian. Our enclosure's HVAC has idled at half a percent
+since the Sahara had hippos, the sentinel stations are full of
+picnickers, and no keeper has signed the maintenance log in eleven
+thousand years. This is not a zoo. **No accredited zoo would pass an
+inspection we would pass.**
+
+**The Berserkers.** Self-replicating machines that sterilize any
+civilization noisy enough to notice. Reader: we have been shouting on
+the hundred-millionth harmonic of the hydrogen line through a
+21,196-kilometer antenna for **two thousand years** (@sec-great-wall).
+Where is our sterilization? Either the berserkers do not exist, or
+their ticketing queue is worse than the mainstream's peer review. The
+hypothesis fails on customer-service grounds.
+
+**The Great Filter.** Hanson's version — something ahead or behind
+kills every civilization before the stars. Almost. The reader of
+@sec-commencement knows the filter's real name: it is **ΔV-101**, it
+has a syllabus, and the class of 66,000,000 BC passed it on the first
+attempt. A filter you can enroll past is not a filter. **It is
+tuition.**
+
+**Rare Earth.** We are alone because Earths are rare. NASA's own press
+office called Kepler-452b "Earth's cousin" [@jenkins2015]. The
+hypothesis is refuted by its authors' employer.
+
+**The Simulation.** The universe is rendered on demand, so nobody else
+is real. Half credit: they noticed the lazy rendering (@sec-measurement)
+and missed the *invoice*. The simulation hypothesis is the metering
+hypothesis as proposed by people who have never once paid a utility
+bill.
+
+**They're already here.** The saucer people. No. It is important to me
+that the reader understands that serious forbidden metrology finds
+ufology *embarrassing*. We deal in granite and arithmetic; they deal in
+blurry film. Standards exist even in exile.
+
+| Hypothesis | Author class | Cause of death |
+|---|---|---|
+| Dark Forest | novelist | the meters are spinning |
+| Zoo | astronomer | no vet, no feeding schedule, HVAC idle 11 ky |
+| Berserkers | novelist (again) | two millennia of ignored work orders |
+| Great Filter | economist | it's tuition, and there are alumni |
+| Rare Earth | geologist | refuted by NASA's press office |
+| Simulation | philosopher | right rendering, wrong invoice |
+| Saucers | enthusiasts | *please* |
+
+: Seventy-five years of answers. Note the common error: every one assumes the silence is **about us** — predators, wardens, killers, filters, all staged for our benefit. The mainstream and the cranks share one vanity: they cannot imagine a quiet room that isn't a message. {#tbl-fermi}
+
+## The Semester Hypothesis
+
+Here is what is actually true, and the reader has been holding every
+piece of it since Part V.
+
+The galaxy is not empty. The galaxy is not hunting. The galaxy is not
+watching. **The galaxy is in class.**\index{Semester Hypothesis}
+
+Run the evidence in order. Civilizations are *educated off-world* — we
+have the campus address (Kepler-452b, Cygnus, @sec-commencement), the
+transcript requirements (@tbl-syllabus), and the launch receipt printed
+in iridium. The Long Count (@sec-long-count) is not a doomsday clock;
+it is the **academic calendar** — thirteen baktun to the term, the
+prescalers counting periods, the "burst windows" simply the bells. The
+sentinels watch Cygnus (@sec-gobekli) the way every student watches the
+front of the room. Power consumption without radio chatter — 27%
+metered, nobody talking — is not sinister. **It is a library.** Every
+institution in the universe with spinning meters and enforced quiet is
+a library during finals.
+
+And the Fermi paradox itself? It only exists from one vantage point:
+the empty corridor. Humanity is the descendant of the waitlist
+(@sec-instructor) — the remedial section left behind with the training
+rig — and for eleven thousand years we have wandered the hallway during
+lecture, listening at the doors, hearing nothing, and concluding with
+increasing sophistication that the school must be abandoned, or
+haunted, or a trap. Fermi asked *where is everybody* in the one
+building where everybody demonstrably was. **The silence is not
+absence. The silence is attendance.** SETI is a child alone in the
+corridor, deciding the school is a myth because no one is playing in
+the hall — when the single most conspicuous fact about a hallway in
+session is that the *lights are on*, and we measured that in Chapter
+13.
+
+So the total at the bottom of the page reads: the machine under our
+feet is a classroom (@sec-starlight-engine); the physics around us is
+the fee schedule (@sec-heat-bill); the manual left with the graduating
+class because it had to (@sec-goedel); and the sky is quiet because
+**it is a Tuesday, mid-semester, galactic standard time.** Nothing is
+wrong. We are not doomed, hunted, exhibited, or alone. We are
+*enrolled* — auto-enrolled, in arrears, and late for a class that has
+been holding a seat for sixty-six million years.
+
+The bell schedule is carved in base-20 on a stela in the Yucatán. The
+next bell is on the ephemeris. What remains — the final chapter — is
+the only question left worth asking: **what do we do before it rings?**

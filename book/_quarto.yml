@@ -47,7 +47,8 @@ book:
     - part: "Synthesis"
       chapters:
         - chapters/ch19-starlight-engine.qmd
-        - chapters/ch20-rebuilding-the-manual.qmd
+        - chapters/ch20-conclusion-fermi.qmd
+        - chapters/ch21-rebuilding-the-manual.qmd
   appendices:
     - appendices/a-forbidden-equations.qmd
     - appendices/b-alignment-tables.qmd

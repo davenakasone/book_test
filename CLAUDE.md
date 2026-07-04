@@ -2,13 +2,17 @@
 
 ## STATUS
 
-**2026-07-04 — v1.5.** 104-page book (20 chapters, 7 parts, 3 appendices,
+**2026-07-04 — v1.6.** 108-page book (21 chapters, 7 parts, 3 appendices,
 "Dr. Chocolate Daddy"). New Part VI "The Terms of Service": QM as metering
 (observation=audit, entanglement=one account, Bell/Nobel real),
 thermodynamics as the service agreement (Landauer's kT·ln2 deletion fee —
 real, Carnot=the rake, heat death=disconnection notice), Gödel as the
 reason the manual was oral (Gödel numbering = the census method; the
-citizenship-loophole story real). One `quarto render` → 6×9"
+citizenship-loophole story real). v1.6 adds the conclusion: Fermi's
+paradox graded (Dark Forest/Zoo/Berserker/Great Filter/Rare Earth all
+executed by the book's own machinery) and resolved by the **Semester
+Hypothesis** — the galaxy is a campus in session; the silence is
+attendance. One `quarto render` → 6×9"
 print PDF (index, citations, cross-refs, TikZ figs) + EPUB3 w/ cover +
 HTML site w/ newsletter CTA. Cross-platform (macOS/Linux/Windows). Remote
 `github.com/davenakasone/book_test`; `build.py` = one-command build;
@@ -93,7 +97,7 @@ the box. On Windows use PowerShell; `py` if `python` isn't on PATH.
 START-HERE.md    runbook for reusing this as a template for a NEW book
 build.py         one-command build (--ingram, --check-only, --shootout)
 book/            Quarto project — _quarto.yml is the single source of truth
-  chapters/      ch01–ch20 (7 parts; anchors #sec-* are cross-referenced)
+  chapters/      ch01–ch21 (7 parts; anchors #sec-* are cross-referenced)
   appendices/    forbidden equations, alignment tables, glossary
   references.bib real papers cited wrongly + fictional sources
   latex/         preamble.tex (index pkg, author font), after-body.tex

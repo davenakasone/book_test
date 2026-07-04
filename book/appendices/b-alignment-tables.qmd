@@ -45,6 +45,10 @@ see @sec-stats).
 | Birds are dinosaurs (the staff stayed) | @sec-instructor | A (simply true; ask any ornithologist) |
 | Iridium layer = thruster-catalyst cache | @sec-commencement | B+ (the catalyst chemistry is real; the note is mine) |
 | Chicxulub = commencement, not extinction | @sec-commencement | B (the crater is real; the direction of travel is negotiable) |
+| Observation = audit (QM as metering) | @sec-measurement | B+ (the experiments are all real; the auditor is mine) |
+| Landauer's deletion fee ($kT\ln 2$/bit) | @sec-heat-bill | A (the fee is real and measured; ask IBM) |
+| Gödel numbering = census method | @sec-goedel | A− (the numbering really is how the proof works) |
+| Semester Hypothesis (galaxy = campus, in session) | @sec-fermi | A+ (attendance is not absence) |
 
 : Grade inflation is the mainstream's disease; the IFM grades honestly and concludes anyway. {#tbl-grades}
 

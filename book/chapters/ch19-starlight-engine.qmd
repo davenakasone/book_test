@@ -83,5 +83,7 @@ power. Every reader who has paid an electric bill knows what standby
 means. It means **the pilot light is on**, and somewhere in the system
 there is a switch labeled, in a language eleven thousand years dead, ON.
 
-The final chapter concerns what we — you, me, and my remaining multimeter
-— are going to do about it.
+Two chapters remain: first, the question every physicist has asked at
+lunch since 1950 — *where is everybody?* — which this machine finally
+answers; and then what we — you, me, and my remaining multimeter — are
+going to do about that answer.
