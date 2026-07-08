@@ -2,6 +2,7 @@
 
     python check.py                  # full review -> tool_output/report-*.md
     python check.py --changed-only   # only findings in files changed since last run
+    python check.py --links          # also verify external URLs (network, slower)
 
 The loop this enables:
     edit -> git commit -> python check.py -> read report -> repeat
@@ -46,8 +47,11 @@ def last_run_sha():
     log = OUT / "log.jsonl"
     if not log.exists():
         return None
-    lines = log.read_text().strip().splitlines()
-    return json.loads(lines[-1])["sha"] if lines else None
+    for line in reversed(log.read_text().strip().splitlines()):
+        e = json.loads(line)
+        if e.get("type", "check") == "check":
+            return e["sha"]
+    return None
 
 
 def main():
@@ -110,6 +114,52 @@ def main():
             if "alt=" not in attrs:
                 add("WARN", q, f"image without fig-alt (EPUB accessibility): {path}")
 
+    # -- repeated words + long sentences (per file, prose only)
+    for q in qmds:
+        text = q.read_text()
+        text_np = "\n".join(l for l in text.splitlines() if not l.lstrip().startswith("|"))
+        prose = re.sub(r"`[^`]*`|\$[^$]*\$|<!--.*?-->", " ", text_np, flags=re.S)
+        for i, line in enumerate(prose.splitlines(), 1):
+            for m in re.finditer(r"\b([A-Za-z]+)\s+\1\b", line, re.I):
+                add("WARN", q, f"line {i}: repeated word: '{m.group(0)}'")
+        sentences = [s.split() for s in re.split(r"[.!?]", re.sub(r"[#*|>\-]", " ", prose))]
+        long_s = [len(s) for s in sentences if len(s) > 40]
+        if long_s:
+            add("INFO", q, f"{len(long_s)} sentence(s) over 40 words (longest {max(long_s)})")
+
+    # -- codespell (real-word typos; allowlist in codespell-ignore.txt)
+    import shutil as _sh
+    if _sh.which("codespell"):
+        ignore = ROOT / "codespell-ignore.txt"
+        cmd = ["codespell", "--quiet-level", "2", str(BOOK)]
+        if ignore.exists():
+            cmd[1:1] = ["-I", str(ignore)]
+        out = subprocess.run(cmd, capture_output=True, text=True).stdout
+        for line in out.strip().splitlines():
+            # format: path:line: word ==> correction
+            parts = line.split(":", 2)
+            if len(parts) == 3:
+                add("WARN", parts[0], f"line {parts[1]}: spelling: {parts[2].strip()}")
+    else:
+        add("INFO", "check.py", "codespell not installed — `pip install codespell` enables spell checks")
+
+    # -- external links (opt-in: --links)
+    if "--links" in sys.argv:
+        import urllib.request
+        urls = set()
+        for q in qmds:
+            urls |= set(re.findall(r"https?://[^\s)\]}>\"']+", q.read_text()))
+        bib = BOOK / "references.bib"
+        if bib.exists():
+            urls |= set(re.findall(r"https?://[^\s)\]}>\"']+", bib.read_text()))
+        for u in sorted(urls):
+            try:
+                req = urllib.request.Request(u, method="HEAD",
+                                             headers={"User-Agent": "book-check/1.0"})
+                urllib.request.urlopen(req, timeout=6)
+            except Exception as e:
+                add("WARN", "links", f"{u} — {getattr(e, 'code', e)}")
+
     # -- dangling refs
     for q, r in refs:
         if r not in anchors:
@@ -141,8 +191,10 @@ def main():
     findings.sort(key=lambda x: (order[x[0]], x[1]))
     counts = {s: sum(1 for f in findings if f[0] == s) for s in order}
 
+    total_words = sum(len(q.read_text().split()) for q in qmds)
     lines = [
         f"# Manuscript check — {ts}",
+        f"- manuscript: {len(qmds)} file(s), ~{total_words:,} words",
         f"- git: `{sha}`{' (uncommitted changes)' if dirty else ''}",
         f"- since last check (`{prev or '—'}`): {len(changed) or 'all'} file(s) considered"
         + (" [--changed-only]" if changed_only else ""),
@@ -161,7 +213,7 @@ def main():
     report = OUT / f"report-{ts}-{sha}.md"
     report.write_text("\n".join(lines) + "\n")
     with (OUT / "log.jsonl").open("a") as f:
-        f.write(json.dumps({"ts": ts, "sha": sha, "dirty": dirty, **counts}) + "\n")
+        f.write(json.dumps({"type": "check", "ts": ts, "sha": sha, "dirty": dirty, "words": total_words, **counts}) + "\n")
 
     print("\n".join(lines))
     print(f"\nreport: {report.relative_to(ROOT)}")

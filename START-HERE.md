@@ -92,6 +92,22 @@ python build.py --ingram            # adds the PDF/X-1a CMYK interior
 | `.github/workflows/`, `requirements.txt`, `.gitattributes` | `book/figures/*` (your figures) |
 | `CLAUDE.md` rules (update STATUS for the new book) | `README.md`, this file's book-specific bits |
 
+## The author's loop (once writing starts)
+
+```
+write → git commit → python check.py      # mechanical: spelling, refs, glyphs, markers
+                   → /review (in Claude Code)   # judgment: grammar-in-context, style, structure
+                   → fix what's flagged → commit → repeat
+```
+
+- `check.py` findings persist until fixed; CI runs the same gate on push.
+- `/review` (repo-local command in `.claude/commands/`) reviews what changed
+  since the last review, leaves `TODO(review)` markers at the exact spots,
+  and stores the full write-up in `tool_output/review-*.md`. The markers
+  show up in every `check.py` run until resolved — advice can't evaporate.
+- `tool_output/` is machine-owned and gitignored; git history is the log
+  of what the author actually changed.
+
 ## Rename the outputs
 
 The output filename comes from the book title in `_quarto.yml`

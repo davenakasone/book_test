@@ -7,3 +7,4 @@ matplotlib==3.10.9
 numpy==2.4.4
 pymupdf==1.28.0
 epubcheck==5.1.0   # EPUB validation; wraps EpubCheck 4.2.6, needs Java on PATH
+codespell==2.4.2   # mechanical spell check used by check.py

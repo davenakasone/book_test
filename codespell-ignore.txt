@@ -1,0 +1,9 @@
+# codespell allowlist — invented jargon and proper nouns (one word per line, lowercase)
+ifm
+baktun
+baktuns
+uinal
+uinals
+katun
+katuns
+telluric
