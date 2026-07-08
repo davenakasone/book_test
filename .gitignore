@@ -37,3 +37,6 @@ incoming/
 # Stray per-chapter renders (quarto single-file renders drop these next to sources)
 book/chapters/*.html
 book/chapters/*_files/
+
+# Machine-owned review output — regenerable, never versioned
+tool_output/
