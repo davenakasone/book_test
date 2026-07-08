@@ -2,6 +2,18 @@
 
 ## STATUS
 
+**2026-07-08 — v1.6 + editorial loop.** Full author lifecycle now in the
+template: `check.py` (mechanical review: codespell, repeated words,
+sentence stats, refs/glyphs/markers, `--links`; report → `tool_output/`,
+git-aware `--changed-only`, CI `lint` job) + `/review` (judgment layer,
+recommendations stored as `TODO(review)` markers + review record) +
+`/feedback` with `scripts/extract_feedback.py` (reviewer PDFs/docx/email →
+extracted.md → triage.md, committed editorial record). Authorship
+boundary is a hard rule: sessions scaffold, authors author; tool-drafted
+text carries markers the checker nags. Proven on a second book:
+`~/Desktop/juicebook` (6 txt files → PDF/EPUB/PDF-X; caught 2 template
+hardcodes + 44 checker false positives — fixed + backported).
+
 **2026-07-04 — v1.6.** 108-page book (21 chapters, 7 parts, 3 appendices,
 "Dr. Chocolate Daddy"). New Part VI "The Terms of Service": QM as metering
 (observation=audit, entanglement=one account, Bell/Nobel real),
