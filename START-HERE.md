@@ -111,9 +111,9 @@ write → git commit → python check.py      # mechanical: spelling, refs, glyp
 ## Rename the outputs
 
 The output filename comes from the book title in `_quarto.yml`
-(`book-output-file` if set, else the title). Update the `cp` line's target in
-`build.py` (`The-Starlight-Engine.pdf`) to match your book, or set
-`book-output-file: my-book` in `_quarto.yml`.
+(`book-output-file` if set, else the title). `build.py` and
+`scripts/make_pdfx.py` find the rendered PDF automatically, whatever it's
+named — no edits needed.
 
 ## Where the knowledge lives
 
