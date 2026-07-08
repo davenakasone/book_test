@@ -45,6 +45,22 @@ its own work.
 - Add cross-references (`@sec-…`, `@fig-…`), an index (`\index{…}`), and
   citations (`references.bib` + `[@key]`) if the book wants them.
 
+**The authorship boundary (hard rule for any session working here):**
+The tool and the session **scaffold; the author authors.** Ingest never
+rewrites the author's words — but some pieces have no source (the preface
+page Quarto requires, a cover tagline, a title derived from a filename).
+When a session must draft such a piece, it marks it:
+
+```
+<!-- TODO: TOOL-DRAFTED, NOT AUTHOR-WRITTEN. <why it exists>. Replace
+with your own words — check.py flags this file until the TODO is gone. -->
+```
+
+`python check.py` WARNs on every unresolved marker, so nothing tool-written
+can silently ship in the author's voice. Corrections count too: if a
+filename-derived title fixes the author's typo, *flag it, don't silently
+"improve" it* — it's their book, including the mistakes they want.
+
 ## Step by step
 
 ```sh
