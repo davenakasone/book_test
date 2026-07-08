@@ -108,6 +108,20 @@ write → git commit → python check.py      # mechanical: spelling, refs, glyp
 - `tool_output/` is machine-owned and gitignored; git history is the log
   of what the author actually changed.
 
+**When beta readers / reviewers come back** (they'll send marked-up PDFs,
+.docx comments, emails — not commits):
+
+```
+feedback/r1-<name>/  ← drop whatever each reviewer sent
+python scripts/extract_feedback.py feedback/r1-<name>/   # annotations → extracted.md
+/feedback feedback/r1-<name>   (in Claude Code)          # triage together, decide, route
+```
+
+Decisions land in `feedback/<round>/triage.md` (committed — the editorial
+record). Accepted items become `TODO(feedback:…)` markers the checker nags
+until resolved; applied fixes are separate `feedback(…):` commits. Rejected
+feedback is recorded, never silently dropped.
+
 ## Rename the outputs
 
 The output filename comes from the book title in `_quarto.yml`
