@@ -80,12 +80,15 @@ def main():
 
     run("quarto render (PDF + EPUB + HTML)", [find_quarto(), "render"], cwd=ROOT / "book")
 
-    src = ROOT / "book" / "_book" / "The-Starlight-Engine.pdf"
-    if not src.exists():
-        sys.exit(f"render finished but {src} is missing — "
-                 "check _quarto.yml output-dir / book-output-file")
-    shutil.copy(src, ROOT / "The-Starlight-Engine.pdf")
-    print("→ refreshed root download copy")
+    # find the rendered book PDF whatever the title is (excludes the PDF/X)
+    pdfs = [p for p in (ROOT / "book" / "_book").glob("*.pdf")
+            if not p.name.endswith("-PDFX.pdf")]
+    if not pdfs:
+        sys.exit("render finished but no PDF in book/_book/ — "
+                 "check _quarto.yml output-dir / formats")
+    src = pdfs[0]
+    shutil.copy(src, ROOT / src.name)
+    print(f"→ refreshed root convenience copy: {src.name}")
 
     if args.ingram:
         run("PDF/X-1a CMYK interior (IngramSpark)", [py, "scripts/make_pdfx.py"])

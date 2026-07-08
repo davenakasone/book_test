@@ -6,7 +6,7 @@ fonts embedded). Ghostscript does the conversion; this script finds gs and
 its bundled CMYK ICC profile at runtime (no hardcoded version paths) and
 generates the PDF/X definition itself.
 
-    python scripts/make_pdfx.py                     # -> book/_book/The-Starlight-Engine-PDFX.pdf
+    python scripts/make_pdfx.py                     # -> book/_book/<Title>-PDFX.pdf
     python scripts/make_pdfx.py in.pdf out.pdf      # explicit paths
 
 Note: gs produces a *conforming* PDF/X-1a; IngramSpark's uploader runs the
@@ -21,8 +21,13 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_IN = ROOT / "book" / "_book" / "The-Starlight-Engine.pdf"
-DEFAULT_OUT = ROOT / "book" / "_book" / "The-Starlight-Engine-PDFX.pdf"
+def _find_book_pdf():
+    pdfs = [x for x in (ROOT / "book" / "_book").glob("*.pdf")
+            if not x.name.endswith("-PDFX.pdf")]
+    return pdfs[0] if pdfs else ROOT / "book" / "_book" / "missing.pdf"
+
+DEFAULT_IN = _find_book_pdf()
+DEFAULT_OUT = DEFAULT_IN.with_name(DEFAULT_IN.stem + "-PDFX.pdf")
 
 
 def find_gs():
@@ -98,7 +103,7 @@ def main():
     icc = find_cmyk_icc(gs)
 
     with tempfile.NamedTemporaryFile("w", suffix=".ps", delete=False) as f:
-        f.write(pdfx_def(icc, "The Starlight Engine"))
+        f.write(pdfx_def(icc, DEFAULT_IN.stem.replace("-", " ")))
         defps = f.name
 
     cmd = [
