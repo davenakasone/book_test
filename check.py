@@ -81,7 +81,10 @@ def main():
             anchors[m.group(1)] = q.name
         refs += [(q, m.group(0)[1:]) for m in REF_RE.finditer(text)]
         for m in CITE_RE.finditer(text):
-            cites.add(m.group(1) or m.group(2))
+            key = (m.group(1) or m.group(2)).rstrip(":.,;")
+            # @sec-/@fig-/@tbl-/@eq- are cross-refs, not citations
+            if not re.match(r"(sec|fig|tbl|eq)-", key):
+                cites.add(key)
 
         # per-file checks
         lines = text.splitlines()
