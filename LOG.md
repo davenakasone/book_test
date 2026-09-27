@@ -3,6 +3,18 @@
 Moved out of CLAUDE.md's STATUS block at the 2026-09-26 split (house rule
 6). Current state lives in STATUS.md; standing rules in CLAUDE.md.
 
+**2026-09-27 — first sibling reproduction (a map-heavy trip packet).**
+Rebuilt a sibling's 6-page matplotlib packet as a `report` project in
+scratch space (content kept out of this repo; handed to the owner in its
+`in/` drop). Owner keeps analysis and maps and exports numbers JSON, table
+CSV, and map PDF+JPG; the report owns prose, tables, and a chart. 8 pp /
+1.8 MB against 6 pp / 3.7 MB; every number a var; tide times computed and
+matched to NOAA's. Toolkit (c1c78fa): report `page-margin:`, vector PDF maps
+via extension-less paths + per-format `default-image-extension`, check.py
+caption-link and extension-less image fixes; NOTES "First reproduction"
+has the score and traps. A stale 107-line count went out in c1c78fa (was
+119); fixed, lesson in CLAUDE.md.
+
 **2026-09-27 — report kind; sibling recon; machine + CI upkeep.**
 Recon (two read-only haiku sweeps, key claims verified): of the sibling
 projects, only three make documents people read, all hand-built in

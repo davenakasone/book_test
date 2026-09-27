@@ -285,7 +285,7 @@ CSV, map images) and owned the prose, tables, and a chart.
 
 - **Score: not a line-count win.** The hand-rolled layout was 71 lines of
   pure layout (241 counting two mixed page functions); the report took
-  140 lines of qmd + 275 of `make_figures.py`, plus a 107-line export
+  140 lines of qmd + 275 of `make_figures.py`, plus a 119-line export
   prototype the owner would adopt. The wins: every number from the model
   (the original hard-coded its tide and daylight tables as strings), real
   text at 10 pt instead of 6-7 pt, HTML and Word for free, the plan's

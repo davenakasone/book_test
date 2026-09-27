@@ -95,7 +95,8 @@ Writing demo-book prose? Its voice rule is in `parked/README.md`.
   commits, NOTES, LOG, and chat get computed (`wc`, `python -c`) and pasted,
   never summed in your head: "~9,800 lines" went into a commit, NOTES, and
   LOG when `wc -l` said 9,025 (2026-09-27). Same rule the report kind
-  enforces for documents.
+  enforces for documents. Measure after the last edit: a 107-line count
+  went into a pushed commit after the file had grown to 119 (2026-09-27).
 
 - **The authorship boundary.** Sessions scaffold; authors author. Tool-drafted
   text carries `<!-- TODO: TOOL-DRAFTED, NOT AUTHOR-WRITTEN … -->`;
