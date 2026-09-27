@@ -24,10 +24,10 @@ gis's tree was untouched (git clean; its .pyc dates from 09-25). CI green
 for c1c78fa.
 
 **Next:**
-- blocked on foreman: David said gis should be open, but no gis session is
-  in ListAgents; paged `foreman` (2026-09-27) to stand gis up and relay the
-  drop (add `--export`, keep maps, drop its page layout). gis can message
-  doc_writer directly
+- blocked on David: open gis fresh (its old session idled out of ListAgents;
+  the foreman can't start sessions). Foreman routed the drop; gis's startup
+  brief leads with B-260927-8 (add `--export`, keep maps, drop its page
+  layout), and gis will message doc_writer
 - actionable: reproduce gis Pemi ford packet (18 pp, most prose) the same
   way in scratch; then judy, then doris, only inside their `private/` with
   their sessions open
