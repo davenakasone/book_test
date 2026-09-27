@@ -80,6 +80,10 @@ its output as an image, and put it on a page with `![caption](path)`.
   tiles stores the tiles losslessly (often 10x a JPEG); re-encode them with
   `gs -sDEVICE=pdfwrite -dAutoFilterColorImages=false
   -dColorImageFilter=/DCTEncode -dNOPAUSE -dBATCH -sOutputFile=map.pdf raw.pdf`.
+  Cropping one map out of a bigger figure with `savefig(bbox_inches=...)`?
+  Hide the other axes first (`ax.set_visible(False)`): a PDF crop keeps
+  every off-crop artist in the file, outside the page, where search and
+  copy can still find it.
 - **Names with marks** (Hawaiʻi, Kōkua, São Paulo) work in the default
   font.
 - **Japanese or Chinese:** add `cjk-font:` to the front matter with a

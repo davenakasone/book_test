@@ -304,6 +304,12 @@ CSV, map images) and owned the prose, tables, and a chart.
 - **`check.py` read a link inside an image caption as the image path**
   (false BREAK); it now allows one level of brackets in a caption and
   resolves extension-less image paths.
+- **A `bbox_inches` crop doesn't remove anything from a PDF.** My map
+  crops kept the off-crop legend and tide text (ROUTES, TIDES, LIGHT) in
+  the content stream, outside the page. Page-clipped extraction
+  (pdftotext, PyMuPDF's default) misses it, so my first check said "clean";
+  `get_text(clip=fitz.INFINITE_RECT())` finds it. The owner's session caught
+  it; the fix is hiding the other axes before saving.
 - **Double rounding in an export shows.** Rounding to 3 decimals and then
   printing `:.1f` turned 66.25 into 66.2 where the original said 66.3.
   Exports carry full precision; the report rounds once.

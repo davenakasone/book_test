@@ -26,8 +26,9 @@ for c1c78fa.
 **Next:**
 - actionable, FIRST (blocks gis's full swap): letter + phone PDF from one
   report source in one build (a Quarto profile + build.py flag); message
-  gis when it lands. gis (up, pending David's go) is adding `--export` per
-  HANDOFF.md, additively; it keeps its PDF + phone PNG until then
+  gis when it lands. gis adopted the export (gis 9f1c6b5): report at
+  gis/reports/storm_weekend/, 8 pp / 1.57 MB; it keeps its PDF + phone PNG
+  until the phone page exists
 - actionable: reproduce gis Pemi ford packet (18 pp, most prose) the same
   way in scratch; then judy, then doris, only inside their `private/` with
   their sessions open
