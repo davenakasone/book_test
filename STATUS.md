@@ -28,8 +28,6 @@ locally, CLAUDE.md says how), PowerPoint/Word/Keynote, python-pptx/docx.
   candidates in local memory)
 - actionable (unblocked: gh is in): Windows runner in CI, the true "any OS"
   proof (PLAN.md 2.4)
-- small, actionable: CI actions run on deprecated Node 20 (checkout@v4,
-  setup-python@v5); bump when touching the workflow next
 - when slides/short forms ship: widen the GitHub repo description (set
   2026-09-27 to books, articles, datasheets)
 - parked: publishing and demo polish (`parked/README.md` has the unpark steps)

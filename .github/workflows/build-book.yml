@@ -21,8 +21,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - run: python -m pip install codespell==2.4.2
@@ -39,19 +39,19 @@ jobs:
   render:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: quarto-dev/quarto-actions/setup@v2
         with:
           version: 1.9.38          # pinned to match requirements.txt
           tinytex: true
 
-      - uses: actions/setup-java@v4   # epubcheck's JAR needs Java; declare it
+      - uses: actions/setup-java@v6   # epubcheck's JAR needs Java; declare it
         with:
           distribution: temurin
           java-version: '17'
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
 
@@ -63,7 +63,7 @@ jobs:
           python -m pip install "epubcheck==5.1.0"
           epubcheck book/_book/The-Starlight-Engine.epub
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: the-starlight-engine
           path: |
@@ -77,8 +77,8 @@ jobs:
   figures:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - uses: quarto-dev/quarto-actions/setup@v2
@@ -105,15 +105,15 @@ jobs:
   templates:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - uses: quarto-dev/quarto-actions/setup@v2
         with:
           version: 1.9.38
           tinytex: true
-      - uses: actions/setup-java@v4   # epubcheck
+      - uses: actions/setup-java@v6   # epubcheck
         with:
           distribution: temurin
           java-version: '17'
@@ -169,7 +169,7 @@ jobs:
           if ls "$RUNNER_TEMP"/t-*/build.py 2>/dev/null; then exit 1; fi  # projects carry no copies of the tools
       - name: Validate the book template's EPUB
         run: epubcheck "$RUNNER_TEMP"/out-book/*.epub
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: template-samples
           path: |
@@ -188,18 +188,18 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: quarto-dev/quarto-actions/setup@v2
         with:
           version: 1.9.38
           tinytex: true
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - run: sudo apt-get update -q && sudo apt-get install -y -q ghostscript
       - name: Render all formats + PDF/X-1a CMYK interior, delivered to dist/
         run: python build.py book --skip-figures --ingram --out dist
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           generate_release_notes: true
           files: |
