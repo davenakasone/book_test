@@ -91,6 +91,12 @@ Writing demo-book prose? Its voice rule is in `parked/README.md`.
 
 ## Toolkit rules
 
+- **Every number you write comes from a command.** Counts, totals, sizes in
+  commits, NOTES, LOG, and chat get computed (`wc`, `python -c`) and pasted,
+  never summed in your head: "~9,800 lines" went into a commit, NOTES, and
+  LOG when `wc -l` said 9,025 (2026-09-27). Same rule the report kind
+  enforces for documents.
+
 - **The authorship boundary.** Sessions scaffold; authors author. Tool-drafted
   text carries `<!-- TODO: TOOL-DRAFTED, NOT AUTHOR-WRITTEN … -->`;
   template text carries `<!-- TODO: TEMPLATE CONTENT … -->`. `check.py`

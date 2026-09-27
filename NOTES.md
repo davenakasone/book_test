@@ -239,8 +239,8 @@ aren't obvious from the code:
 ## Report kind: what sibling documents need (2026-09-27)
 
 A crawl of the claude_stuff sibling projects found every human-read document
-built by hand: about 9,800 lines of reportlab and matplotlib `fig.text`
-layout across seven scripts (trip packets, a decision packet, family
+built by hand: seven reportlab or matplotlib scripts, 9,025 lines in all
+(`wc -l`; that counts their map and analysis code too, not only layout) (trip packets, a decision packet, family
 guides, an action plan, a 57-page bilingual review). They share one shape:
 numbers from a model script, figures from the owner's code, and prose laid
 out line by line. The `report` kind is that shape in Quarto: prose in

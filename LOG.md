@@ -6,7 +6,8 @@ Moved out of CLAUDE.md's STATUS block at the 2026-09-26 split (house rule
 **2026-09-27 — report kind; sibling recon; machine + CI upkeep.**
 Recon (two read-only haiku sweeps, key claims verified): of the sibling
 projects, only three make documents people read, all hand-built in
-reportlab or matplotlib (~9,800 lines across seven scripts); details stay in
+reportlab or matplotlib (seven scripts, 9,025 lines by `wc -l`; first
+reported as ~9,800, a mental-sum error); details stay in
 local memory (public repo). New `report` kind for that shape (dfbc77e):
 Typst PDF + HTML + Word; `scripts/make_figures.py` writes `_variables.yml`
 from `data/model.json` so prose quotes `{{< var >}}`, never numbers; CSV →
