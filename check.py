@@ -268,7 +268,7 @@ def main():
         add("WARN", proj / "_quarto.yml", f"{len(cites)} citation(s) but no references.bib")
 
     # -- files named in _quarto.yml vs disk (chapters; project render lists)
-    listed = set(re.findall(r"^\s*-\s+([\w./-]+\.qmd)\b", yml, re.M))
+    listed = set(re.findall(r"^\s*-\s+[\"']?([\w./-]+\.qmd)\b", yml, re.M))
     on_disk = {q.relative_to(proj).as_posix() for q in qmds}
     for miss in sorted(listed - on_disk):
         add("BREAK", proj / "_quarto.yml", f"listed file missing on disk: {miss}")

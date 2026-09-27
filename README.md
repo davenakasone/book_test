@@ -22,6 +22,8 @@ python new.py datasheet ../my-part --title "XR-2000"
 cd ../my-part && python build.py             # → _output/datasheet.pdf
 ```
 
+Here `python` means your Python 3: use `python3` on macOS/Linux if `python` isn't found, `py` on Windows.
+
 `python new.py --list` shows the kinds. Each new folder is self-contained:
 its own copy of the build and check tools, a README for that kind of
 document, and placeholder content you replace. Books also need LaTeX once:

@@ -16,6 +16,7 @@ Put the new folder OUTSIDE this repo (it gets its own git history).
 """
 
 import argparse
+import html
 import re
 import shutil
 import subprocess
@@ -93,6 +94,9 @@ self-contained: everything below runs from this folder.
 4. **Review loop:** `/review` gives prose judgment, stored as `TODO(review)`
    markers plus `tool_output/review-*.md`. `/feedback feedback/<round>`
    triages what reviewers sent back.
+5. **Git is the memory.** `/review` and `check.py --changed-only` diff
+   against the last reviewed commit, so commit the author's changes before
+   each review round (`git init` first if this folder has no repo yet).
 """
 
 
@@ -103,10 +107,27 @@ def copy(src, dst):
 
 def set_title(path, title):
     text = path.read_text()
-    new, n = re.subn(r'^(\s*title:\s*)".*"', lambda m: f'{m.group(1)}"{title}"',
+    quoted = title.replace("\\", "\\\\").replace('"', '\\"')  # YAML double-quoted
+    new, n = re.subn(r'^(\s*title:\s*)".*"', lambda m: f'{m.group(1)}"{quoted}"',
                      text, count=1, flags=re.M)
     if n:
         path.write_text(new)
+
+
+def rename_part(dest, part):
+    """Datasheet: the placeholder part number appears in the body, the doc
+    number, and the block diagram, not just the title."""
+    qmd = dest / "datasheet.qmd"
+    text = qmd.read_text().replace("DS-XR1000", f"DS-{part}").replace("XR-1000", part)
+    qmd.write_text(text)
+    for svg in (dest / "figures").glob("*.svg"):
+        svg.write_text(svg.read_text().replace("XR-1000", html.escape(part)))
+
+
+def in_git_repo(path):
+    r = subprocess.run(["git", "rev-parse", "--is-inside-work-tree"], cwd=path,
+                       capture_output=True, text=True)
+    return r.returncode == 0
 
 
 def main():
@@ -144,6 +165,15 @@ def main():
                            "datasheet": "XR-1000"}[args.kind]
     if args.title:
         set_title(dest / MAIN[args.kind], args.title)
+        if args.kind == "datasheet":
+            if re.fullmatch(r"[\w .+/#-]+", args.title):
+                rename_part(dest, args.title)
+            else:
+                print("note: the part number has special characters, so only the "
+                      "title was set; replace XR-1000 in datasheet.qmd and "
+                      "figures/typical-application.svg by hand.")
+    if args.kind == "book":
+        (dest / "incoming").mkdir()  # the author's raw files go here (gitignored)
     (dest / "CLAUDE.md").write_text(CLAUDE_MD.format(title=title, kind=args.kind))
 
     # generate plotted figures now, so a bare `quarto render` works too
@@ -155,11 +185,16 @@ def main():
                   "`python -m pip install -r requirements.txt`); "
                   "`python build.py` retries it.")
 
-    print(f"\ncreated {args.kind}: {dest}\n\nnext:\n"
+    # its own history: /review and check.py --changed-only diff against git
+    git_note = ""
+    if shutil.which("git") and not in_git_repo(dest):
+        subprocess.run(["git", "init", "-q"], cwd=dest)
+        git_note = "  (git repo initialized; commit when you're ready)\n"
+
+    print(f"\ncreated {args.kind}: {dest}\n{git_note}\nnext:\n"
           f"  cd {dest}\n"
           "  python build.py --doctor   # what's installed, what's missing\n"
           "  python build.py            # render\n"
-          "  git init                   # optional: its own history\n"
           "then read README.md in that folder.")
 
 

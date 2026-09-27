@@ -7,6 +7,8 @@ is written.
 
 ## Build
 
+`python` means your Python 3: use `python3` on macOS/Linux if `python` isn't found, `py` on Windows.
+
 ```sh
 python -m pip install -r requirements.txt   # once: quarto, matplotlib, pymupdf, codespell
 quarto install tinytex                      # once: LaTeX for the print PDF, no admin rights
@@ -25,8 +27,9 @@ prefixed `01_`, `02_`, … for chapter order, then:
 python scripts/ingest.py      # one chapter per file in chapters/, images to figures/media/
 ```
 
-Paste the chapter list it prints into `_quarto.yml`, set the title and
-author there, and build. Ingest converts and never rewrites; splitting long
+Paste the chapter list it prints into `_quarto.yml` in place of the two
+placeholder chapters, delete `chapters/01-first-chapter.qmd` and
+`chapters/02-second-chapter.qmd`, set the title and author, and build. Ingest converts and never rewrites; splitting long
 files into chapters, captions, and alt text are editorial work.
 
 ## What goes where

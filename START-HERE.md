@@ -12,7 +12,8 @@ quarto install tinytex                      # only for books: LaTeX, ~150 MB, no
 python build.py --doctor                    # what's installed, what's missing, what needs it
 ```
 
-On Windows, use PowerShell and `py` if `python` isn't on PATH.
+Every `python` here means Python 3: use `python3` on macOS/Linux if
+`python` isn't found, and `py` in PowerShell on Windows.
 
 ## 2. Start a project
 
@@ -23,8 +24,8 @@ python new.py article   ../my-paper   --title "My Paper"
 python new.py datasheet ../xr-2000    --title "XR-2000"
 ```
 
-Put the folder **outside** this repo; it gets its own history
-(`git init` inside it). What you get:
+Put the folder **outside** this repo; `new.py` gives it its own git
+history (`git init`). What you get:
 
 - placeholder content that shows how every feature is written, marked
   `TODO: TEMPLATE CONTENT` so `check.py` nags until it's replaced

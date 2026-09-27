@@ -3,6 +3,23 @@
 Moved out of CLAUDE.md's STATUS block at the 2026-09-26 split (house rule
 6). Current state lives in STATUS.md; standing rules in CLAUDE.md.
 
+**2026-09-26 — v1.7: document toolkit.** `new.py <book|article|datasheet>
+<folder>` → self-contained project (template content, copies of
+build/check/ingest/feedback tools, per-kind README, generated CLAUDE.md,
+`git init`). Article template: Typst PDF + HTML + Word. Datasheet template:
+custom Typst theme (title band, header/footer, watermark, accent color,
+spec tables), curves from `data/*.csv`. Book starter from the demo's config.
+`build.py`/`check.py`/`ingest.py`/`build_tikz.py`/`make_pdfx.py` take any
+project; `build.py --doctor`; CI `templates` job. Fixed: the book
+bibliography had no heading (ran into Appendix C), and NOTES' "auto
+References chapter" claim was false; check.py was spell-checking rendered
+PDFs/HTML. Reviewed by two agents: an adversarial verifier (found
+unescaped quotes in `--title` breaking YAML, and quoted chapter entries
+misread as orphans) and a newcomer dry run from a fresh clone (found:
+`python` vs `python3`, datasheet `--title` didn't rename the part in the
+body/diagram, the book's incoming/ and placeholder-deletion steps were
+missing, no git in new projects). All fixed and retested.
+
 **2026-07-08 — v1.6 + editorial loop.** Full author lifecycle now in the
 template: `check.py` (mechanical review: codespell, repeated words,
 sentence stats, refs/glyphs/markers, `--links`; report → `tool_output/`,

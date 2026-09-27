@@ -10,7 +10,8 @@ watermark, spec tables, curves plotted from CSV), book starter (the demo's
 proven 6×9/EPUB/HTML config without the satire), `build.py --doctor`,
 `build.py`/`check.py`/`ingest.py` work on any project folder, CI `templates`
 job builds all three. Fixed: book reference list had no heading (ran into
-the last appendix in the demo; `references.qmd` added).
+the last appendix in the demo; `references.qmd` added). Reviewed by an adversarial
+verifier + a fresh-clone newcomer run; all findings fixed (LOG.md).
 
 **Demo book:** *The Starlight Engine*, 21 chapters, 7 parts, 3
 appendices, now with a References page. Releases via `v*` tags.

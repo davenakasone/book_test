@@ -8,6 +8,8 @@ is written.
 
 ## Build
 
+`python` means your Python 3: use `python3` on macOS/Linux if `python` isn't found, `py` on Windows.
+
 ```sh
 python -m pip install -r requirements.txt   # once: quarto, matplotlib, pymupdf, codespell
 python build.py --doctor                    # what's installed, what's missing

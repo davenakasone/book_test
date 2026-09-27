@@ -7,6 +7,8 @@ value in it is a placeholder.
 
 ## Build
 
+`python` means your Python 3: use `python3` on macOS/Linux if `python` isn't found, `py` on Windows.
+
 ```sh
 python -m pip install -r requirements.txt   # once: quarto, matplotlib, pymupdf, codespell
 python build.py --doctor                    # what's installed, what's missing
@@ -24,7 +26,7 @@ Once the figures exist, a plain `quarto render` works too.
 | `datasheet.qmd` body | features, pin table, ratings, electrical specs, application notes, ordering, revision history |
 | `data/*.csv` | measured curves: first column is x, each other column is one curve, header row gives the labels |
 | `scripts/make_figures.py` (`PLOTS`) | which CSV becomes which figure, the y-axis label, log or linear x |
-| `figures/` | diagrams: block diagram, pinout, package drawing. SVG or PNG |
+| `figures/` | diagrams: block diagram, pinout, package drawing. SVG or PNG. `typical-application.svg` has the part number drawn in; `new.py --title` sets it, later renames need an edit there too |
 | `theme/typst-template.typ` | the page design: title band, running header, footer, table style |
 | `_quarto.yml` | paper size (`papersize: a4`), font, font size |
 
