@@ -1,33 +1,39 @@
 # STATUS — 2026-09-27
 
-**Where it stands:** `doc_writer` (was `book_test`), a document toolkit with
-the code kept apart from the documents. A job is `new.py <kind> <project> --from RAW`
-→ `build.py <project> --out OUT` → `check.py <project>`. Kinds: book,
-article, datasheet (`--from` is books-only so far). PLAN.md Phases 0 and 1
-are done: the folder and GitHub repo are renamed, the name is updated inside
-the repo, and publishing is parked in `parked/` (see `parked/README.md`; no `v*` tags).
-The demo book (`book/`) stays as the regression fixture. Details: LOG.md.
+**Where it stands:** `doc_writer`, one document toolkit for every
+claude_stuff project (David, 2026-09-27: "crawl claude_stuff … unify doc
+writing into one tool"). A job is `new.py <kind> <project> [--from RAW]` →
+`build.py <project> --out OUT` → `check.py <project>`. Kinds: book, article,
+datasheet, **report** (new: guides, plans, trip packets; numbers from a model
+via `{{< var >}}`, CSV tables, callouts, phone pages, `cjk-font`). PLAN.md
+Phases 0 and 1 are done; publishing is parked in `parked/`.
 
-**Verified (Phase 1):** e2e for all three kinds exits 0 (new, build, check)
-under the Windows-encoding guard; `check.py book` exits 0; the memoir shootout
-builds from `parked/latex-shootout/`; the CI YAML parses; no broken Markdown
-links. CI green at 8b85614 (the Phase 1 commit), after rerunning a transient
-`quarto-cli` download failure (NOTES trap 9).
+**Recon done:** only gis, judy, and doris make documents people read, all
+built by hand in reportlab or matplotlib. Details and pick order are in local memory
+(`sibling-document-candidates`), kept out of git because this repo is public.
+
+**Verified:** CI green at dfbc77e (all four kinds on Linux). Locally, e2e
+for all four kinds exits 0 under the Windows-encoding guard; the phone variant
+is 4.5×8 in; CJK renders in pdf.js; the new LastResort glyph guard fires when
+it should. Not yet opened in Chrome itself (the Browser pane downloads PDFs).
 
 **Machine (2026-09-27):** quarto 1.9.38 at `~/dkn314/bin/quarto` (off PATH),
 TinyTeX (beamer present), Typst (bundled), ghostscript, rsvg-convert, `gh`
-(authed: CI logs readable), Java via Homebrew openjdk (unlinked; epubcheck runs
-locally, CLAUDE.md says how), PowerPoint/Word/Keynote, python-pptx/docx.
+(authed), Java via Homebrew openjdk (unlinked; CLAUDE.md says how),
+PowerPoint/Word/Keynote, python-pptx/docx.
 
 **Next:**
-- actionable: Phase 2.1, the slides kind (reveal.js + PowerPoint, Beamer PDF
-  if cheap; placeholder deck; the CI templates job builds it)
-- actionable: Phase 2.2, `--from` for articles and slides; 2.3 short forms
-  (memo, letter, report)
-- actionable after Phase 2: Phase 3 recon (one haiku `house:sweeper` pass;
-  candidates in local memory)
-- actionable (unblocked: gh is in): Windows runner in CI, the true "any OS"
-  proof (PLAN.md 2.4)
-- when slides/short forms ship: widen the GitHub repo description (set
-  2026-09-27 to books, articles, datasheets)
-- parked: publishing and demo polish (`parked/README.md` has the unpark steps)
+- actionable (next session, first): reproduce the gis storm-weekend packet
+  as a `report` project in scratch space (no PII; plan in memory). Score it
+  against gis's 944-line script and note what gis must export (map PNGs and
+  the printed flood table as CSV)
+- blocked on David/foreman: open the gis session to hand it the migration
+  (it's closed; per David, the foreman or David stands up closed sessions)
+- then judy and doris, only inside their `private/` with their sessions
+  open; the temple review (doris) is FINAL, so it's low value
+- actionable: `--from` for article/report (PLAN.md 2.2); slides (2.1)
+  after the sibling migrations, since no sibling makes slides today
+- actionable: Windows runner in CI (PLAN.md 2.4)
+- 2026-10-19: `ubuntu-latest` → Ubuntu 26 (DEADLINES.md); check CI after
+- when the kinds settle: widen the GitHub repo description to say "reports"
+- parked: publishing and demo polish (`parked/README.md`)
