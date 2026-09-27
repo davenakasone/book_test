@@ -21,12 +21,16 @@ session; the templates job now asserts `--from`/`--out` too).
 **Machine:** quarto 1.9.38 at `~/dkn314/bin/quarto` (off PATH), TinyTeX,
 Typst 0.14.2 (bundled), ghostscript. No Java (epubcheck is CI-only).
 
+**PLAN.md is the roadmap** (David, 2026-09-27, option A): rename to
+`doc_writer` (Phase 0: David + foreman), park publishing, add slides and
+`--from` for every kind, then reproduce sibling projects' documents.
+
 **Next:**
-- actionable: confirm CI on the decoupling commit; fix anything red
-- actionable: `--from` for articles (raw .docx → `sections/*.qmd` +
-  `{{< include >}}`); books-only today
+- blocked on David: Phase 0 rename (PLAN.md), then Phase 1 housekeeping
+- actionable: confirm CI on the decoupling commit (02f7dcc); fix anything red
+- actionable after Phase 1: slides kind, then `--from` for every kind (PLAN.md Phase 2)
 - actionable: first real document through the new flow (the juicebook
   lesson: a real document finds what a dry run can't)
 - blocked on David (gh): Windows runner in CI, the true "any OS" proof
-- parked: slides template; demo polish (copyright page, DAISY ACE, fonts,
-  cover wrap, KDP dry run); renaming the `book_test` repo (David's call)
+- parked: publishing and demo polish (copyright page, DAISY ACE, fonts,
+  cover wrap, KDP dry run, releases)
