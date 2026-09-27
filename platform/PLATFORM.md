@@ -30,7 +30,7 @@ the willpower.
 | Signup form | provider embed pasted into the Quarto site (demo: `book/html/newsletter.html`) | no |
 | Website | Quarto HTML → GitHub Pages / Netlify (free) | **Domain ~$12/yr — the one near-mandatory spend** |
 | Video edit | DaVinci Resolve (free), OBS for capture | no, Resolve free tier is absurd |
-| Graphics | matplotlib templates (`scripts/make_social.py`), Inkscape, GIMP | Canva Pro only if templates save real hours |
+| Graphics | matplotlib templates (`make_social.py`), Inkscape, GIMP | Canva Pro only if templates save real hours |
 | Scheduling | native platform schedulers | Buffer et al. — skip until volume forces it |
 | Analytics | provider opens/clicks + GoatCounter (free) | no |
 
@@ -63,5 +63,5 @@ the willpower.
 - `social/instagram.md` — 12 posts with captions
 - `social/linkedin.md` — 8 posts, 3 written out (the Doctor does LinkedIn-brain)
 - `launch-plan.md` — 8-week calendar, all channels interlocked
-- `../scripts/make_social.py` — thumbnail/card/banner templates → `assets/`
+- `make_social.py` — thumbnail/card/banner templates → `assets/`
 - `../book/html/newsletter.html` — signup CTA embedded in the web edition

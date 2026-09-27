@@ -1,17 +1,20 @@
-"""One-command build for any document project, any OS.
+"""Build any document project, any OS. The tools live here; projects live anywhere.
 
-    python build.py                 # figures → TikZ → render (all formats)
-    python build.py path/to/project # build another Quarto project folder
-    python build.py --doctor        # what's installed, what's missing, what for
-    python build.py --skip-figures  # just render
-    python build.py --ingram        # + PDF/X-1a CMYK print interior (books)
-    python build.py --check-only    # only the prose-unicode guard, don't build
-    python build.py --shootout      # + the memoir comparison chapter (demo repo)
+    python build.py path/to/project            # figures → TikZ → render (all formats)
+    python build.py path/to/project --out DIR  # + copy the finished documents to DIR
+    python build.py                            # the project in the current folder
+    python build.py --doctor                   # what's installed, what's missing, what for
+    python build.py PROJECT --skip-figures     # just render
+    python build.py PROJECT --ingram           # + PDF/X-1a CMYK print interior (books)
+    python build.py PROJECT --check-only       # only the prose-unicode guard, don't build
 
-The project is the folder holding `_quarto.yml`: this folder if it has one,
-else `book/` (the demo book in the toolkit repo), or the path you pass.
-`scripts/make_figures.py`, if present, regenerates plotted figures first;
-TikZ sources in `<project>/figures-src/` are compiled next.
+The project is the folder holding `_quarto.yml`: the path you pass, else the
+current folder. `<project>/scripts/make_figures.py`, if present, regenerates
+plotted figures first; TikZ sources in `<project>/figures-src/` are compiled
+next; after the render, an EPUB gets the epubcheck fix (scripts/fix_epub.py).
+
+--out copies PDF, EPUB, and Word files to DIR and the web version to
+DIR/html/. It adds and overwrites; it never deletes anything in DIR.
 """
 
 import argparse
@@ -39,17 +42,12 @@ _DROP_RE = re.compile("[⁰-₟←↔⇐-⇿]")
 
 
 def project_dir(arg=None):
-    if arg:
-        p = Path(arg).expanduser().resolve()
-        if not (p / "_quarto.yml").exists():
-            sys.exit(f"{p} has no _quarto.yml, so it isn't a Quarto project.")
-        return p
-    return ROOT if (ROOT / "_quarto.yml").exists() else ROOT / "book"
-
-
-def workspace(proj):
-    """Where scripts/, tool_output/, incoming/ live: this folder, or the project."""
-    return ROOT if proj in (ROOT, ROOT / "book") else proj
+    """The path given, else the current folder; either must hold _quarto.yml."""
+    p = Path(arg or ".").expanduser().resolve()
+    if not (p / "_quarto.yml").exists():
+        sys.exit(f"{p} has no _quarto.yml, so it isn't a Quarto project. "
+                 "Pass the project folder: python build.py path/to/project")
+    return p
 
 
 def sources(proj):
@@ -112,7 +110,7 @@ def find_tex():
     return None
 
 
-def run(desc, cmd, cwd=ROOT):
+def run(desc, cmd, cwd=None):
     print(f"→ {desc}")
     subprocess.run(cmd, cwd=cwd, check=True)
 
@@ -121,6 +119,26 @@ def output_dir(proj):
     yml = (proj / "_quarto.yml").read_text(encoding="utf-8")
     m = re.search(r"^\s*output-dir:\s*(\S+)", yml, re.M)
     return proj / m.group(1) if m else proj
+
+
+def deliver(rendered, proj, dest):
+    """Copy the finished documents to dest: PDF/EPUB/Word at the top, the web
+    version (HTML plus its assets) under html/. Adds and overwrites only."""
+    docs = [p for p in rendered.iterdir() if p.suffix in {".pdf", ".epub", ".docx"}]
+    dest.mkdir(parents=True, exist_ok=True)
+    for p in docs:
+        shutil.copy2(p, dest / p.name)
+    web = [p for p in rendered.iterdir() if p not in docs]
+    if rendered == proj:  # no output-dir: the render sits among the sources
+        web = [p for p in web if p.suffix == ".html" or p.name.endswith("_files")]
+    if any(p.suffix == ".html" for p in web):
+        for p in web:
+            if p.is_dir():
+                shutil.copytree(p, dest / "html" / p.name, dirs_exist_ok=True)
+            else:
+                (dest / "html").mkdir(exist_ok=True)
+                shutil.copy2(p, dest / "html" / p.name)
+    return docs
 
 
 def doctor():
@@ -174,9 +192,11 @@ def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace",  # cp1252 on Windows pipes
                            line_buffering=True)  # our lines interleave with quarto's
     ap = argparse.ArgumentParser()
-    ap.add_argument("project", nargs="?", help="Quarto project folder (default: auto)")
+    ap.add_argument("project", nargs="?",
+                    help="Quarto project folder (default: the current folder)")
+    ap.add_argument("--out", metavar="DIR",
+                    help="also copy the finished documents here (never deletes)")
     ap.add_argument("--skip-figures", action="store_true")
-    ap.add_argument("--shootout", action="store_true")
     ap.add_argument("--ingram", action="store_true",
                     help="also emit the PDF/X-1a CMYK interior for IngramSpark")
     ap.add_argument("--check-only", action="store_true",
@@ -188,7 +208,6 @@ def main():
     if args.doctor:
         doctor()
     proj = project_dir(args.project)
-    ws = workspace(proj)
     print(f"→ project: {proj}")
 
     check_prose_unicode(proj)  # cheap; catches the drop-silent glyph class pre-render
@@ -197,37 +216,38 @@ def main():
 
     py = sys.executable
     if not args.skip_figures:
-        figs = ws / "scripts" / "make_figures.py"
+        figs = proj / "scripts" / "make_figures.py"
         if figs.exists():
-            run("plotted figures", [py, str(figs)], cwd=ws)
-        tikz = ROOT / "scripts" / "build_tikz.py"
-        if tikz.exists() and list((proj / "figures-src").glob("*.tex")):
-            run("TikZ diagrams", [py, str(tikz), "--project", str(proj)])
+            run("plotted figures", [py, str(figs)], cwd=proj)
+        if list((proj / "figures-src").glob("*.tex")):
+            run("TikZ diagrams", [py, str(ROOT / "scripts" / "build_tikz.py"),
+                                  "--project", str(proj)])
 
     run("quarto render (all formats)", [find_quarto(), "render"], cwd=proj)
 
     out = output_dir(proj)
+    if list(out.glob("*.epub")):
+        run("EPUB fix (epubcheck-clean alt text)",
+            [py, str(ROOT / "scripts" / "fix_epub.py"), str(out)])
     built = sorted(p for p in out.glob("*")
                    if p.suffix in {".pdf", ".epub", ".docx", ".html"})
     for p in built:
-        print(f"   {p.relative_to(ws) if ws in p.parents else p}")
+        print(f"   {p.relative_to(proj)}")
     pdfs = [p for p in built if p.suffix == ".pdf" and not p.name.endswith("-PDFX.pdf")]
 
-    if proj == ROOT / "book" and pdfs:  # the demo repo's root download copy
-        shutil.copy(pdfs[0], ROOT / pdfs[0].name)
-        print(f"→ refreshed root convenience copy: {pdfs[0].name}")
-
     if args.ingram:
-        pdfx = ROOT / "scripts" / "make_pdfx.py"
-        if not pdfs or not pdfx.exists():
-            sys.exit("--ingram needs a rendered PDF and scripts/make_pdfx.py.")
+        if not pdfs:
+            sys.exit("--ingram needs a rendered PDF.")
         src = pdfs[0]
         run("PDF/X-1a CMYK interior (IngramSpark)",
-            [py, str(pdfx), str(src),
+            [py, str(ROOT / "scripts" / "make_pdfx.py"), str(src),
              str(src.with_name(src.stem + "-PDFX.pdf"))])
 
-    if args.shootout and (ROOT / "latex-shootout" / "build.py").exists():
-        run("memoir shootout", [py, "latex-shootout/build.py"])
+    if args.out:
+        dest = Path(args.out).expanduser().resolve()
+        docs = deliver(out, proj, dest)
+        print(f"→ delivered to {dest}: " + (", ".join(p.name for p in docs) or "no documents")
+              + (" + html/" if (dest / "html").exists() else ""))
 
     print("done.")
 

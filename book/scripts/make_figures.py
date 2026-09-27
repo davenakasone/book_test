@@ -1,6 +1,6 @@
 """Generate all matplotlib figures for The Starlight Engine.
 
-Run with the shared venv:  ~/dkn314/bin/python scripts/make_figures.py
+Run by `python build.py book` (or directly: python book/scripts/make_figures.py).
 Outputs PNG (for EPUB/HTML) + PDF (vector, for LaTeX) into book/figures/.
 """
 
@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.patches import Polygon
 
-FIGDIR = Path(__file__).resolve().parent.parent / "book" / "figures"
+FIGDIR = Path(__file__).resolve().parent.parent / "figures"
 FIGDIR.mkdir(parents=True, exist_ok=True)
 
 plt.rcParams.update(

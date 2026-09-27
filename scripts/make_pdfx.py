@@ -6,8 +6,9 @@ fonts embedded). Ghostscript does the conversion; this script finds gs and
 its bundled CMYK ICC profile at runtime (no hardcoded version paths) and
 generates the PDF/X definition itself.
 
-    python scripts/make_pdfx.py                     # -> <project>/_book/<Title>-PDFX.pdf
-    python scripts/make_pdfx.py in.pdf out.pdf      # explicit paths
+    python scripts/make_pdfx.py path/to/book        # -> <book>/_book/<Title>-PDFX.pdf
+    python scripts/make_pdfx.py in.pdf [out.pdf]    # explicit paths
+    python build.py path/to/book --ingram           # render, then this
 
 Note: gs produces a *conforming* PDF/X-1a; IngramSpark's uploader runs the
 authoritative preflight. Build the interior once to this stricter spec and
@@ -20,17 +21,12 @@ import sys
 import tempfile
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-PROJECT = ROOT if (ROOT / "_quarto.yml").exists() else ROOT / "book"
 
-
-def _find_book_pdf():
-    pdfs = [x for x in (PROJECT / "_book").glob("*.pdf")
+def book_pdf(proj):
+    """The rendered (RGB) PDF of a book project."""
+    pdfs = [x for x in (proj / "_book").glob("*.pdf")
             if not x.name.endswith("-PDFX.pdf")]
-    return pdfs[0] if pdfs else PROJECT / "_book" / "missing.pdf"
-
-DEFAULT_IN = _find_book_pdf()
-DEFAULT_OUT = DEFAULT_IN.with_name(DEFAULT_IN.stem + "-PDFX.pdf")
+    return pdfs[0] if pdfs else proj / "_book" / "missing.pdf"
 
 
 def find_gs():
@@ -97,11 +93,13 @@ def verify(out_pdf):
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows pipes default to cp1252
     args = sys.argv[1:]
-    src = Path(args[0]) if len(args) >= 1 else DEFAULT_IN
-    dst = Path(args[1]) if len(args) >= 2 else DEFAULT_OUT
+    src = Path(args[0] if args else ".")
+    if src.is_dir():  # a book project
+        src = book_pdf(src)
+    dst = Path(args[1]) if len(args) >= 2 else src.with_name(src.stem + "-PDFX.pdf")
     if not src.exists():
         sys.exit(f"input PDF not found: {src} — render the book first "
-                 "(python build.py).")
+                 "(python build.py <book>).")
 
     gs = find_gs()
     icc = find_cmyk_icc(gs)

@@ -3,7 +3,29 @@
 Moved out of CLAUDE.md's STATUS block at the 2026-09-26 split (house rule
 6). Current state lives in STATUS.md; standing rules in CLAUDE.md.
 
-**2026-09-27 — Windows encoding fix.** Every text read, write, and subprocess
+**2026-09-27 — Code apart from documents.** The tools stay in the toolkit;
+a job names raw content, a project, and an output folder. `new.py` stops
+copying tools into projects and gains `--from RAW` (books: ingest the raw
+files, wire them into `_quarto.yml` in place of the placeholder chapters).
+`build.py <project> --out DIR` copies PDF/EPUB/Word to DIR and the web
+version to DIR/html/ (never deletes). Every tool resolves the project as the
+path given, else the current folder; nothing defaults to `book/`. `ingest.py
+<project> --from RAW` reads raw in place (was `<project>/incoming/`). The EPUB
+fix moved from a `post-render:` hook to `scripts/fix_epub.py`, run by
+`build.py`. Demo-only files moved into the demo: `book/scripts/make_figures.py`,
+`book/codespell-ignore.txt`, `platform/make_social.py`; `--shootout` and the
+root PDF convenience copy are gone. Template READMEs and project CLAUDE.md
+carry the toolkit path (`<toolkit>` filled in by new.py); `/review` and
+`/feedback` take a project argument. CI: every job passes explicit paths;
+templates job builds from raw fixtures (UTF-8, BOM, cp1252) and asserts the
+wiring and delivery; release builds via `build.py --ingram --out dist`.
+Verified locally: 40/40 checks under the Windows-encoding guard.
+
+**2026-09-27 — Windows encoding fix (70c40d3, CI green).** A fresh-clone Windows
+run from another session found cp1252 bugs: the glyph guard crashed on `¹⁷` and
+missed `↔`, and `→` prints crashed piped runs. The guard also caught a fourth
+(EPUB post-render crashed on non-cp1252 book titles).
+Every text read, write, and subprocess
 capture passes `encoding="utf-8"`, and every script's `main()` reconfigures
 stdout to UTF-8. Fixed the four cp1252 failure modes in NOTES.md (Windows pass).
 CI guard env: `PYTHONWARNDEFAULTENCODING=1`, EncodingWarning as an error in

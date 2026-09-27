@@ -30,8 +30,8 @@ incoming/
 # OS / editor
 .DS_Store
 
-# Built book — distributed via GitHub Releases, not committed (build.py
-# still drops a local convenience copy here; it stays untracked)
+# Built book — distributed via GitHub Releases, not committed. A stale
+# convenience copy from older build.py versions may sit here; it stays untracked.
 /The-Starlight-Engine.pdf
 
 # Stray per-chapter renders (quarto single-file renders drop these next to sources)

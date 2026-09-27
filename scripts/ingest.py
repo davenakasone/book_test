@@ -1,16 +1,15 @@
-"""Turn raw source files into Quarto chapter stubs.
+"""Turn an author's raw files into Quarto chapter stubs.
 
-Drop an author's material into ./incoming/ (any mix of .docx, .odt, .rtf,
-.md, .txt), then:
+    python scripts/ingest.py path/to/book --from path/to/raw-files
 
-    python scripts/ingest.py                 # -> chapters/NN-slug.qmd + media
-    python scripts/ingest.py --project DIR   # a book project somewhere else
-
-Each source file becomes one chapter (sorted by filename — prefix them 01_,
-02_, … to control order). Word/ODT/RTF go through pandoc, which also pulls
-embedded images into figures/media/. Plain text/markdown is wrapped
-with a title heading. Nothing is overwritten; existing chapters are skipped.
-Afterward the script prints the chapter list to paste into _quarto.yml.
+Each file in the --from folder (any mix of .docx, .odt, .rtf, .md, .txt)
+becomes one chapter in <book>/chapters/, sorted by filename — prefix them
+01_, 02_, … to control order. The raw folder is only read: nothing in it
+is moved or changed. Word/ODT/RTF go through pandoc, which also pulls
+embedded images into <book>/figures/media/. Plain text/markdown is wrapped
+with a title heading. Nothing is overwritten; existing chapters are
+skipped. Afterward the script prints the chapter list to paste into
+_quarto.yml (`new.py book DIR --from RAW` wires it in for you).
 
 This is a SCAFFOLDER, not magic: it gives a fresh session clean .qmd to
 edit, split, and cross-reference — see START-HERE.md.
@@ -23,12 +22,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-# the book project: this folder if it holds _quarto.yml, else book/ (demo repo)
-PROJECT = ROOT if (ROOT / "_quarto.yml").exists() else ROOT / "book"
-INCOMING = ROOT / "incoming"
-CHAPTERS = PROJECT / "chapters"
-MEDIA = PROJECT / "figures" / "media"
+CHAPTERS = MEDIA = None  # set from the project in main()
 
 PANDOC_EXT = {".docx", ".odt", ".rtf", ".epub", ".html", ".tex"}
 TEXT_EXT = {".md", ".markdown", ".txt", ".text"}
@@ -87,23 +81,28 @@ def convert(src, dst):
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows pipes default to cp1252
-    global INCOMING, CHAPTERS, MEDIA
-    ap = argparse.ArgumentParser(description="Turn incoming/ files into chapters.")
-    ap.add_argument("--project", help="book project folder (default: auto)")
+    global CHAPTERS, MEDIA
+    ap = argparse.ArgumentParser(description="Turn an author's raw files into chapters.")
+    ap.add_argument("project", help="the book project folder (holds _quarto.yml)")
+    ap.add_argument("--from", dest="raw", required=True, metavar="DIR",
+                    help="folder of the author's raw files (read only)")
     args = ap.parse_args()
-    if args.project:
-        proj = Path(args.project).expanduser().resolve()
-        INCOMING, CHAPTERS, MEDIA = proj / "incoming", proj / "chapters", proj / "figures" / "media"
-    if not INCOMING.exists():
-        INCOMING.mkdir()
-        sys.exit(f"Created {INCOMING}/ — drop the author's .docx/.txt/… in "
-                 "there and re-run.")
+    proj = Path(args.project).expanduser().resolve()
+    yml = proj / "_quarto.yml"
+    if not yml.exists() or not re.search(r"^\s*type:\s*book\b",
+                                         yml.read_text(encoding="utf-8"), re.M):
+        sys.exit(f"{proj} isn't a Quarto book project; ingest makes chapters, "
+                 "so start one with: python new.py book <folder> --from <raw>")
+    raw = Path(args.raw).expanduser().resolve()
+    if not raw.is_dir():
+        sys.exit(f"--from {raw}: not a folder.")
+    CHAPTERS, MEDIA = proj / "chapters", proj / "figures" / "media"
     sources = sorted(
-        p for p in INCOMING.iterdir()
+        p for p in raw.iterdir()
         if p.is_file() and p.suffix.lower() in PANDOC_EXT | TEXT_EXT
     )
     if not sources:
-        sys.exit(f"No ingestible files in {INCOMING}/ "
+        sys.exit(f"No ingestible files in {raw}/ "
                  f"(supported: {sorted(PANDOC_EXT | TEXT_EXT)}).")
 
     CHAPTERS.mkdir(parents=True, exist_ok=True)
@@ -125,7 +124,7 @@ def main():
             print(f"    - chapters/{name}")
         print("\nNext (see START-HERE.md): set title/author in _quarto.yml, "
               "review each .qmd, add fig-alt to any images under "
-              "figures/media/, then `python build.py`.")
+              "figures/media/, then `python build.py <book>`.")
 
 
 if __name__ == "__main__":

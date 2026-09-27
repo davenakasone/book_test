@@ -1,4 +1,6 @@
-"""Quarto post-render hook: make the EPUB epubcheck-clean.
+"""Make a Quarto EPUB epubcheck-clean.
+
+    python scripts/fix_epub.py path/to/book.epub   # or a folder of .epub files
 
 Quarto's `fig-alt` writes the alt text onto the <img> (correct, wanted for
 accessibility) but ALSO duplicates it onto the wrapping <div> — and `alt`
@@ -6,11 +8,10 @@ is not a legal div attribute in XHTML, so epubcheck fails with RSC-005.
 (The obvious alternative, a plain `alt=` attribute, gets silently dropped
 by pandoc, leaving alt="" — valid but wrong for screen readers.)
 
-This hook strips `alt` from <div> elements in every .xhtml inside the
-rendered EPUB, preserving the EPUB zip invariants (mimetype entry first
-and STORED uncompressed). Registered in _quarto.yml under
-`project: post-render:` so it runs on every render, locally and in CI.
-No-ops when no EPUB was produced (e.g. --to html).
+This strips `alt` from <div> elements in every .xhtml inside the EPUB,
+preserving the EPUB zip invariants (mimetype entry first and STORED
+uncompressed). `build.py` runs it after every render; running it twice is
+harmless.
 """
 
 import re
@@ -19,9 +20,6 @@ import sys
 import tempfile
 import zipfile
 from pathlib import Path
-
-BOOK_DIR = Path(__file__).resolve().parent
-OUT = BOOK_DIR / "_book"
 
 DIV_ALT = re.compile(rb'(<div\b[^>]*?)\s+alt="[^"]*"')
 
@@ -49,13 +47,16 @@ def fix(epub: Path):
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows pipes default to cp1252
-    epubs = list(OUT.glob("*.epub"))
-    if not epubs:
-        return  # html/pdf-only render; nothing to do
+    if len(sys.argv) < 2:
+        sys.exit("usage: python scripts/fix_epub.py <file.epub | folder> ...")
+    epubs = []
+    for arg in sys.argv[1:]:
+        p = Path(arg)
+        epubs += sorted(p.glob("*.epub")) if p.is_dir() else [p]
     for e in epubs:
         n = fix(e)
-        print(f"[postrender-fix-epub] {e.name}: stripped {n} illegal div alt attribute(s)")
+        print(f"[fix_epub] {e.name}: stripped {n} illegal div alt attribute(s)")
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()

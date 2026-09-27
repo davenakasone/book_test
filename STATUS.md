@@ -1,40 +1,32 @@
-# STATUS
+# STATUS — 2026-09-27
 
 NEEDS DAVID (INSTALL): `brew install gh && gh auth login` — lets sessions read CI
-logs (the public API returns 403 for logs; this session diagnosed CI blind).
+logs (the public API returns 403 for logs; sessions diagnose CI blind). Also the
+gate for a real Windows CI runner.
 
-**2026-09-27 — Windows encoding fix.** A fresh-clone Windows run from another
-session found cp1252 bugs: the glyph guard crashed on `¹⁷` and missed `↔`, and
-`→` prints crashed piped runs. All text I/O is now explicit UTF-8. CI's lint and
-templates jobs run a Windows-encoding guard, which also caught a fourth bug
-(EPUB post-render crashed on non-cp1252 book titles). NOTES.md, Windows pass.
-Open: the report's structural points (copied tools don't pick up fixes, ingest
-defaults into the demo book) await David's call.
+**Where it stands:** a document toolkit with code kept apart from documents
+(David, 2026-09-27: "a person or agent comes for the tools, says where the raw
+content is and where the output goes"). The tools stay here; a job is
+`new.py <kind> <project> --from RAW` → `build.py <project> --out OUT` →
+`check.py <project>`. Projects hold content only (no tool copies); raw is
+only read; `--out` never deletes. The demo book (`book/`) is an ordinary
+project. Details: LOG.md 2026-09-27, NOTES.md "Code apart from documents".
 
-**2026-09-26 — v1.7: from book pipeline to document toolkit.**
-`python new.py <book|article|datasheet> <folder>` makes a self-contained
-project (template content, copies of build/check/review tools, a README,
-and a CLAUDE.md), so a newcomer or a fresh Claude session can start
-without reading this repo. New: article template (Typst PDF + HTML + Word, authors,
-abstract, citations), datasheet template (Typst theme: title band,
-watermark, spec tables, curves plotted from CSV), book starter (the demo's
-proven 6×9/EPUB/HTML config without the satire), `build.py --doctor`,
-`build.py`/`check.py`/`ingest.py` work on any project folder, CI `templates`
-job builds all three. Fixes and review in LOG.md.
-
-**Demo book:** *The Starlight Engine*, 21 chapters, 7 parts, 3
-appendices, now with a References page. Releases via `v*` tags.
+**Verified:** 40/40 local checks under the Windows-encoding guard (three
+kinds, `--from` with UTF-8/BOM/cp1252 raw files, `--out`, `--ingram`, demo
+full render, the expected-failure cases). CI green at 70c40d3 (the encoding
+fix); the decoupling commit's CI run is pending (actionable: check it next
+session; the templates job now asserts `--from`/`--out` too).
 
 **Machine:** quarto 1.9.38 at `~/dkn314/bin/quarto` (off PATH), TinyTeX,
 Typst 0.14.2 (bundled), ghostscript. No Java (epubcheck is CI-only).
 
-**CI:** all green at 87480a8, including the templates job and epubcheck on
-the template book. The 0046b65 templates failure never reproduced (cause
-unknown, likely transient). Failures now self-report as public annotations.
-
-**Next candidates:**
-- slides template (reveal.js / PowerPoint) if a real deck needs it
-- first real datasheet or paper through `new.py` (the juicebook lesson:
-  a real document finds what a dry run can't)
-- demo book: copyright page, DAISY ACE run, font upgrade, cover wrap, KDP dry run
-- repo name still says `book_test`; renaming the GitHub repo is David's call
+**Next:**
+- actionable: confirm CI on the decoupling commit; fix anything red
+- actionable: `--from` for articles (raw .docx → `sections/*.qmd` +
+  `{{< include >}}`); books-only today
+- actionable: first real document through the new flow (the juicebook
+  lesson: a real document finds what a dry run can't)
+- blocked on David (gh): Windows runner in CI, the true "any OS" proof
+- parked: slides template; demo polish (copyright page, DAISY ACE, fonts,
+  cover wrap, KDP dry run); renaming the `book_test` repo (David's call)

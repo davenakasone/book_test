@@ -2,14 +2,17 @@
 description: Prose review of the manuscript — judgment feedback, stored so it can't evaporate
 ---
 
-You are reviewing the manuscript in this repo as an editor. The author
-invoked `/review $ARGUMENTS` (arguments may name files, e.g.
-`chapters/ch03-*.qmd`, or be empty = review what changed).
+You are reviewing a manuscript as an editor. The author invoked
+`/review $ARGUMENTS`: the first argument is the project folder (it holds
+`_quarto.yml`; the demo book is `book`); any further arguments name files in
+it, e.g. `chapters/ch03-*.qmd` (none = review what changed). With no
+arguments, the project is the current folder if it holds `_quarto.yml`;
+otherwise ask which project.
 
-The manuscript is the `.qmd` files of the Quarto project: this folder if it
-holds `_quarto.yml`, else `book/`. It may be a book, an article, or a
-datasheet; review it as that kind of document (a datasheet's job is
-precision and consistency, not voice).
+The manuscript is the project's `.qmd` files; every path below
+(`tool_output/`, chapters) is inside the project, and git commands run
+there. It may be a book, an article, or a datasheet; review it as that kind
+of document (a datasheet's job is precision and consistency, not voice).
 
 ## Scope
 
@@ -17,7 +20,7 @@ precision and consistency, not voice).
    `"type": "review"` — that SHA is where the previous prose review ended.
    Run `git diff --stat <that-sha>..HEAD -- '*.qmd'` to see what changed since.
    No prior review or no log → review the whole manuscript.
-2. If `$ARGUMENTS` names files, review those regardless of diff state.
+2. If the arguments name files, review those regardless of diff state.
 3. Read the newest `tool_output/report-*.md` first — do NOT repeat anything
    the mechanical checker already flags (unicode, refs, alt-text, spelling).
 
@@ -53,6 +56,6 @@ If the author asks you to apply a fix, apply it as a **separate commit**
 
 - Append one line to `tool_output/log.jsonl`:
   `{"type": "review", "ts": "<ISO>", "sha": "<short HEAD>", "files": N, "findings": N}`
-- End your reply with the ritual: **fix → commit → `python check.py`** —
+- End your reply with the ritual: **fix → commit → `python check.py <project>`** —
   the checker nags every unresolved `TODO(review)` marker until it's gone.
 - Tell the author the 2–3 highest-impact items in plain words, first.

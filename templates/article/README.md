@@ -8,14 +8,18 @@ is written.
 
 ## Build
 
-`python` means your Python 3: use `python3` on macOS/Linux if `python` isn't found, `py` on Windows.
+This folder holds only the document. The tools live in the document
+toolkit at `<toolkit>` and take this folder as an argument. From here:
 
 ```sh
-python -m pip install -r requirements.txt   # once: quarto, matplotlib, pymupdf, codespell
-python build.py --doctor                    # what's installed, what's missing
-python build.py                             # figures from data/*.csv, then PDF + HTML + Word
-python check.py                             # broken refs and citations, missing images, spelling
+python <toolkit>/build.py --doctor          # what's installed, what's missing
+python <toolkit>/build.py .                 # figures from data/*.csv, then PDF + HTML + Word
+python <toolkit>/build.py . --out DIR       # + copy the finished documents to DIR
+python <toolkit>/check.py .                 # broken refs and citations, missing images, spelling
 ```
+
+`python` means your Python 3: use `python3` on macOS/Linux if `python` isn't found, `py` on Windows.
+Once per machine: `python -m pip install -r <toolkit>/requirements.txt`.
 
 ## What goes where
 
@@ -24,7 +28,7 @@ python check.py                             # broken refs and citations, missing
 | `article.qmd` front matter | title, authors and affiliations, abstract, keywords, date |
 | `article.qmd` body | the paper |
 | `references.bib` | sources, as BibTeX (most reference managers and Google Scholar export it). Cite with `[@key]` |
-| `data/*.csv` + `scripts/make_figures.py` | plotted figures, rebuilt on every `python build.py` |
+| `data/*.csv` + `scripts/make_figures.py` | plotted figures, rebuilt on every build |
 | `figures/` | other images (SVG or PNG) |
 | `_quarto.yml` | formats, font, two-column layout (`columns: 2`), section numbering |
 

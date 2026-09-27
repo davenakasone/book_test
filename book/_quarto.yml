@@ -1,7 +1,6 @@
 project:
   type: book
   output-dir: _book
-  post-render: postrender-fix-epub.py
 
 lang: en
 

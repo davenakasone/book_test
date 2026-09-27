@@ -2,14 +2,15 @@
 description: Triage a round of reviewer feedback with the author — discuss, decide, route into the loop
 ---
 
-The author has reviewer feedback in `$ARGUMENTS` (a `feedback/<round>/`
-directory). Your job is to run the triage **with** the author — this is a
+The author has reviewer feedback in `$ARGUMENTS`, a `<project>/feedback/<round>/`
+directory; the project is the folder holding `feedback/` (and `_quarto.yml`).
+Paths below (`tool_output/`, the author's files) are inside that project. Your job is to run the triage **with** the author — this is a
 conversation, not a batch job.
 
 ## Steps
 
 1. If `extracted.md` is missing from the round directory, run
-   `python scripts/extract_feedback.py $ARGUMENTS` first. Read it, plus any
+   `python scripts/extract_feedback.py $ARGUMENTS` (from the toolkit) first. Read it, plus any
    raw files the extractor passed over.
 2. Group the items: duplicates across reviewers merge (note "2 reviewers"
    — convergent feedback is the highest-signal kind); order by impact
@@ -33,4 +34,4 @@ conversation, not a batch job.
    `{"type": "feedback", "ts": "...", "sha": "...", "round": "<round>", "items": N, "accepted": N}`
 7. Close with the state of the round: accepted/adapted/rejected counts,
    what markers now exist, and the ritual — **fix → commit →
-   `python check.py`** until the round's markers are gone.
+   `python check.py <project>`** until the round's markers are gone.

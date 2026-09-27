@@ -26,7 +26,7 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install codespell==2.4.2
       - name: check.py (Windows-encoding guard on)
-        run: python check.py
+        run: python check.py book
         env:
           # Windows-safety on a Linux runner: a text read/write without
           # encoding= is fatal (Windows would use cp1252), and stdout is cp1252
@@ -50,9 +50,12 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Render book (all formats)
-        working-directory: book
-        run: quarto render
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Render book (all formats, then the EPUB fix)
+        run: python build.py book --skip-figures
 
       - name: Validate EPUB (epubcheck)
         run: |
@@ -86,8 +89,8 @@ jobs:
         env:
           SOURCE_DATE_EPOCH: "0"   # deterministic timestamps in PDF outputs
         run: |
-          python scripts/make_figures.py
-          python scripts/build_tikz.py
+          python book/scripts/make_figures.py
+          python scripts/build_tikz.py --project book
       - name: Report drift (info only — PDF/PNG bytes are not stable across OSes)
         run: |
           # matplotlib/pdflatex outputs aren't byte-reproducible cross-platform
@@ -120,6 +123,12 @@ jobs:
       # are readable through the public API without a GitHub login (job logs
       # aren't), so any session can diagnose a red run:
       #   curl -s https://api.github.com/repos/<owner>/<repo>/check-runs/<job-id>/annotations
+      - name: Raw author files for new.py --from (UTF-8, UTF-8 with BOM, legacy cp1252)
+        run: |
+          raw="$RUNNER_TEMP/raw"; mkdir -p "$raw"
+          printf '# Opening\n\nPlain UTF-8 prose \xe2\x86\x92 with an arrow.\n' > "$raw/01_opening.md"
+          printf '\xef\xbb\xbfNotepad UTF-8 with a BOM: caf\xc3\xa9.\n' > "$raw/02_notes.txt"
+          printf 'Legacy Windows ANSI: caf\xe9, \x93quoted\x94.\n' > "$raw/03_legacy.txt"
       - name: new.py -> build -> check, per kind
         env:
           # Windows-safety on a Linux runner: a text read/write without
@@ -139,24 +148,35 @@ jobs:
               log="$RUNNER_TEMP/$kind-$step.log"
               rc=0  # `|| rc=$?`: the step shell runs with -e, so a bare failure would skip the annotation
               case $step in
-                new)   python new.py "$kind" "$d" --title "CI $kind" > "$log" 2>&1 || rc=$? ;;
-                build) (cd "$d" && python build.py) > "$log" 2>&1 || rc=$? ;;
-                check) (cd "$d" && python check.py) > "$log" 2>&1 || rc=$? ;;
+                new)   from=(); [ "$kind" = book ] && from=(--from "$RUNNER_TEMP/raw")
+                       python new.py "$kind" "$d" --title "CI $kind" "${from[@]}" > "$log" 2>&1 || rc=$? ;;
+                build) python build.py "$d" --out "$RUNNER_TEMP/out-$kind" > "$log" 2>&1 || rc=$? ;;
+                check) python check.py "$d" > "$log" 2>&1 || rc=$? ;;
               esac
               echo "::group::$kind $step (exit $rc)"; cat "$log"; echo "::endgroup::"
               if [ $rc -ne 0 ]; then annotate "$kind $step" "$log"; fail=1; break; fi
             done
           done
           exit $fail
+      - name: --from wired the raw files in; --out delivered the documents
+        run: |
+          set -x
+          for c in 01-opening 02-notes 03-legacy; do grep -q "chapters/$c.qmd" "$RUNNER_TEMP/t-book/_quarto.yml"; done
+          if grep -q first-chapter "$RUNNER_TEMP/t-book/_quarto.yml"; then exit 1; fi  # (`! cmd` never fails under -e)
+          grep -q "café" "$RUNNER_TEMP/t-book/chapters/03-legacy.qmd"
+          ls "$RUNNER_TEMP"/out-book/*.pdf "$RUNNER_TEMP"/out-book/*.epub "$RUNNER_TEMP"/out-book/html/index.html
+          ls "$RUNNER_TEMP"/out-article/article.pdf "$RUNNER_TEMP"/out-article/article.docx "$RUNNER_TEMP"/out-article/html/article.html
+          ls "$RUNNER_TEMP"/out-datasheet/datasheet.pdf
+          if ls "$RUNNER_TEMP"/t-*/build.py 2>/dev/null; then exit 1; fi  # projects carry no copies of the tools
       - name: Validate the book template's EPUB
-        run: epubcheck "$RUNNER_TEMP"/t-book/_book/*.epub
+        run: epubcheck "$RUNNER_TEMP"/out-book/*.epub
       - uses: actions/upload-artifact@v4
         with:
           name: template-samples
           path: |
-            ${{ runner.temp }}/t-book/_book/*.pdf
-            ${{ runner.temp }}/t-article/_output/article.pdf
-            ${{ runner.temp }}/t-datasheet/_output/datasheet.pdf
+            ${{ runner.temp }}/out-book/*.pdf
+            ${{ runner.temp }}/out-article/article.pdf
+            ${{ runner.temp }}/out-datasheet/datasheet.pdf
           retention-days: 30
 
   # On a version tag, attach the built book to a permanent GitHub Release —
@@ -174,17 +194,16 @@ jobs:
         with:
           version: 1.9.38
           tinytex: true
-      - name: Render (all formats — single-format renders wipe _book/)
-        working-directory: book
-        run: quarto render
-      - name: PDF/X-1a CMYK interior (print/IngramSpark)
-        run: |
-          sudo apt-get update -q && sudo apt-get install -y -q ghostscript
-          python scripts/make_pdfx.py
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update -q && sudo apt-get install -y -q ghostscript
+      - name: Render all formats + PDF/X-1a CMYK interior, delivered to dist/
+        run: python build.py book --skip-figures --ingram --out dist
       - uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
           files: |
-            book/_book/The-Starlight-Engine.pdf
-            book/_book/The-Starlight-Engine.epub
-            book/_book/The-Starlight-Engine-PDFX.pdf
+            dist/The-Starlight-Engine.pdf
+            dist/The-Starlight-Engine.epub
+            dist/The-Starlight-Engine-PDFX.pdf

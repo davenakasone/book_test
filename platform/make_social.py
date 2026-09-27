@@ -1,6 +1,6 @@
 """Generate social/platform assets for The Starlight Engine.
 
-Run:  ~/dkn314/bin/python scripts/make_social.py
+Run:  ~/dkn314/bin/python platform/make_social.py
 Outputs to platform/assets/. Templates: swap the TEXT constants per post;
 the layouts are the deliverable.
 """
@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.patches import Polygon, Rectangle
 
-OUT = Path(__file__).resolve().parent.parent / "platform" / "assets"
+OUT = Path(__file__).resolve().parent / "assets"
 OUT.mkdir(parents=True, exist_ok=True)
 
 NAVY, GOLD, PARCH, INK, FAINT = "#0d1b2a", "#d9a441", "#f4efe3", "#1a1a1a", "#3a4a63"

@@ -5,7 +5,7 @@ pdflatex-then-sips step, since sips exists only on macOS.
 
 Run:  python scripts/build_tikz.py [--project DIR] [--width 1800]
 
-The project defaults to this folder if it holds _quarto.yml, else book/.
+The project defaults to the current folder (it must hold _quarto.yml).
 """
 
 import argparse
@@ -17,7 +17,6 @@ from pathlib import Path
 
 import fitz  # pymupdf
 
-ROOT = Path(__file__).resolve().parent.parent
 
 
 def find_tex(cmd="pdflatex"):
@@ -44,10 +43,11 @@ def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows pipes default to cp1252
     ap = argparse.ArgumentParser()
     ap.add_argument("--width", type=int, default=1800, help="PNG pixel width")
-    ap.add_argument("--project", help="Quarto project folder (default: auto)")
+    ap.add_argument("--project", help="Quarto project folder (default: the current folder)")
     args = ap.parse_args()
-    proj = Path(args.project).resolve() if args.project else (
-        ROOT if (ROOT / "_quarto.yml").exists() else ROOT / "book")
+    proj = Path(args.project or ".").expanduser().resolve()
+    if not (proj / "_quarto.yml").exists():
+        sys.exit(f"{proj} has no _quarto.yml; pass --project path/to/project")
     SRC, OUT = proj / "figures-src", proj / "figures"
     OUT.mkdir(exist_ok=True)
     pdflatex = find_tex()

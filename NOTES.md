@@ -205,3 +205,26 @@ no LaTeX install, sub-second compiles. What fought back:
   one document.
 - **The pre-commit fence blocks PNGs** in David's repos, one more reason
   template figures are SVG (text) or generated at build time from CSV.
+
+## Code apart from documents (2026-09-27)
+
+The tools stay in the toolkit; a job names raw content (`--from`, read
+only), a project folder, and an output folder (`--out`). Choices that
+aren't obvious from the code:
+
+- **`--out` copies; it doesn't pass `quarto render --output-dir`.** Quarto
+  cleans its output dir on a full project render, so pointing it at a
+  folder someone else uses could delete their files. Render in the
+  project, then copy: documents to the top, the web version to `html/`.
+- **The EPUB fix moved from a `post-render:` hook to `build.py`.** A hook
+  needs a script inside the project; now projects hold no code except
+  their own `scripts/make_figures.py`. Cost: plain `quarto render` makes
+  an EPUB that fails epubcheck (div `alt`); build with `build.py`.
+- **Projects made before this change carry their own tool copies** and
+  still build with them; `python build.py <old-project>` also works (the
+  EPUB fix is idempotent, so the old hook plus the new pass is harmless).
+- **Legacy raw files:** ingest reads `.txt`/`.md` as UTF-8 (BOM stripped),
+  falling back to cp1252, the "ANSI" old Windows Notepad writes.
+- **CI trap:** under `set -e`, `! cmd` never fails a step (bash exempts
+  inverted commands from errexit). Negative checks are written
+  `if cmd; then exit 1; fi`.

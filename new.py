@@ -1,22 +1,27 @@
 """Start a new document project from a template.
 
     python new.py --list
-    python new.py book      ../my-book    --title "My Book"
+    python new.py book      ../my-book    --title "My Book" --from ../raw
     python new.py article   ../my-paper   --title "My Paper"
     python new.py datasheet ../xr-2000    --title "XR-2000"
 
-Creates a self-contained folder: the template's placeholder content, this
-toolkit's build/check/review tools, a README for that kind of document,
-and a CLAUDE.md so a Claude Code session opened there knows the rules.
-Nothing links back to this repo; the new folder builds on its own:
+The new folder holds only the document: the template's placeholder content,
+a README for that kind of document, and a CLAUDE.md so a Claude Code
+session opened there knows the rules. The tools stay here and take the
+folder as an argument:
 
-    cd ../my-paper && python build.py
+    python build.py ../my-book --out ../deliverables
+    python check.py ../my-book
+
+--from (books): the author's raw files (.docx, .odt, .rtf, .md, .txt) become
+the chapters, replacing the placeholders. The raw folder is only read.
 
 Put the new folder OUTSIDE this repo (it gets its own git history).
 """
 
 import argparse
 import html
+import os
 import re
 import shutil
 import subprocess
@@ -35,26 +40,8 @@ KINDS = {
 # file holding the title line that --title rewrites
 MAIN = {"book": "_quarto.yml", "article": "article.qmd", "datasheet": "datasheet.qmd"}
 
-# toolkit files copied into every new project: (source in this repo, dest)
-TOOLS = [
-    ("build.py", "build.py"),
-    ("check.py", "check.py"),
-    ("requirements.txt", "requirements.txt"),
-    ("scripts/extract_feedback.py", "scripts/extract_feedback.py"),
-    (".claude/commands/review.md", ".claude/commands/review.md"),
-    (".claude/commands/feedback.md", ".claude/commands/feedback.md"),
-]
-EXTRA_TOOLS = {
-    "book": [
-        ("scripts/ingest.py", "scripts/ingest.py"),
-        ("scripts/build_tikz.py", "scripts/build_tikz.py"),
-        ("scripts/make_pdfx.py", "scripts/make_pdfx.py"),
-        # the demo book's proven infrastructure, single-sourced from book/
-        ("book/postrender-fix-epub.py", "postrender-fix-epub.py"),
-        ("book/latex/preamble.tex", "latex/preamble.tex"),
-        ("book/latex/after-body.tex", "latex/after-body.tex"),
-    ],
-}
+# placeholder chapters in the book template, replaced by --from
+PLACEHOLDER_CHAPTERS = ["chapters/01-first-chapter.qmd", "chapters/02-second-chapter.qmd"]
 
 GITIGNORE = """\
 # render output (rebuild with `python build.py`)
@@ -64,9 +51,8 @@ _book/
 *_files/
 *.quarto_ipynb
 
-# machine-owned review output; the author's raw source files
+# machine-owned review output
 tool_output/
-incoming/
 
 .DS_Store
 __pycache__/
@@ -75,9 +61,14 @@ __pycache__/
 CLAUDE_MD = """\
 # {title} ({kind})
 
-A {kind} written in Markdown and built with Quarto. It was created from the
-document toolkit at https://github.com/davenakasone/book_test and is
-self-contained: everything below runs from this folder.
+A {kind} written in Markdown and built with Quarto by the document toolkit
+at `{toolkit}` (https://github.com/davenakasone/book_test). This folder holds
+only the document: text, figures, data, and settings. The tools stay in the
+toolkit and take this folder as an argument, from here:
+
+    python {toolkit}/build.py .              # render into _book/ or _output/
+    python {toolkit}/build.py . --out DIR    # + copy the finished documents to DIR
+    python {toolkit}/check.py .              # mechanical review -> tool_output/
 
 @README.md
 
@@ -86,13 +77,14 @@ self-contained: everything below runs from this folder.
 1. **The author authors; you scaffold.** Don't rewrite the author's text in
    place unless they ask. Anything you draft yourself carries
    `<!-- TODO: TOOL-DRAFTED, NOT AUTHOR-WRITTEN. <why> -->`, and
-   `python check.py` flags it until the author replaces it.
+   `check.py` flags it until the author replaces it.
 2. **Placeholders stay flagged until they're replaced.** Remove a
    `TODO: TEMPLATE CONTENT` marker only when the content under it is real.
-3. **Build and check before calling anything done:** `python build.py`, then
-   `python check.py` (exit 1 means something will break the build).
-4. **Review loop:** `/review` gives prose judgment, stored as `TODO(review)`
-   markers plus `tool_output/review-*.md`. `/feedback feedback/<round>`
+3. **Build and check before calling anything done** (commands above;
+   `check.py` exit 1 means something will break the build).
+4. **Review loop:** from a session in the toolkit folder, `/review <this
+   folder>` gives prose judgment, stored as `TODO(review)` markers plus
+   `tool_output/review-*.md`; `/feedback <this folder>/feedback/<round>`
    triages what reviewers sent back.
 5. **Git is the memory.** `/review` and `check.py --changed-only` diff
    against the last reviewed commit, so commit the author's changes before
@@ -100,9 +92,14 @@ self-contained: everything below runs from this folder.
 """
 
 
-def copy(src, dst):
-    dst.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(src, dst)
+def cmd_path(p):
+    """p as typed from the current folder: relative when that's shorter, quoted if spaced."""
+    try:
+        r = os.path.relpath(p)
+    except ValueError:  # another drive on Windows
+        r = str(p)
+    r = r if len(r) < len(str(p)) else str(p)
+    return f'"{r}"' if " " in r else r
 
 
 def set_title(path, title):
@@ -132,12 +129,26 @@ def in_git_repo(path):
     return r.returncode == 0
 
 
+def wire_chapters(dest, made):
+    """Book --from: the ingested chapters replace the placeholder ones."""
+    yml = dest / "_quarto.yml"
+    lines = yml.read_text(encoding="utf-8").splitlines(keepends=True)
+    at = [n for n, l in enumerate(lines) if l.strip() in (f"- {c}" for c in PLACEHOLDER_CHAPTERS)]
+    indent = lines[at[0]][:len(lines[at[0]]) - len(lines[at[0]].lstrip())]
+    lines[at[0]:at[-1] + 1] = [f"{indent}- chapters/{m.name}\n" for m in made]
+    yml.write_text("".join(lines), encoding="utf-8")
+    for c in PLACEHOLDER_CHAPTERS:
+        (dest / c).unlink()
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows pipes default to cp1252
     ap = argparse.ArgumentParser(description="Start a new document project.")
     ap.add_argument("kind", nargs="?", choices=sorted(KINDS))
     ap.add_argument("dest", nargs="?", help="folder to create (outside this repo)")
     ap.add_argument("--title", help="document title (default: the template's placeholder)")
+    ap.add_argument("--from", dest="raw", metavar="DIR",
+                    help="books: folder of the author's raw files to turn into chapters")
     ap.add_argument("--list", action="store_true", help="list the kinds and exit")
     args = ap.parse_args()
 
@@ -145,10 +156,18 @@ def main():
         print("kinds:")
         for k, what in KINDS.items():
             print(f"  {k:<10} {what}")
-        print("\nusage: python new.py <kind> <folder> [--title ...]")
+        print("\nusage: python new.py <kind> <folder> [--title ...] [--from RAW]")
         return
     if not args.dest:
         ap.error("give a destination folder, e.g. ../my-" + args.kind)
+    raw = None
+    if args.raw:
+        if args.kind != "book":
+            ap.error("--from works for books so far; for an article or datasheet, "
+                     "start the project and bring the text into its .qmd")
+        raw = Path(args.raw).expanduser().resolve()
+        if not raw.is_dir():
+            sys.exit(f"--from {raw}: not a folder.")
 
     dest = Path(args.dest).expanduser().resolve()
     if dest.exists() and any(dest.iterdir()):
@@ -160,9 +179,12 @@ def main():
     shutil.copytree(TEMPLATES / args.kind, dest, dirs_exist_ok=True,
                     ignore=shutil.ignore_patterns("_output", "_book", ".quarto", "__pycache__",
                                                   "tool_output", "*_files"))
-    for src, rel in TOOLS + EXTRA_TOOLS.get(args.kind, []):
-        copy(ROOT / src, dest / rel)
     (dest / ".gitignore").write_text(GITIGNORE, encoding="utf-8")
+    readme = dest / "README.md"
+    tk = str(ROOT)
+    tk = f'"{tk}"' if " " in tk else tk
+    readme.write_text(readme.read_text(encoding="utf-8").replace("<toolkit>", tk),
+                      encoding="utf-8")
 
     title = args.title or {"book": "Book Title", "article": "Title of the Paper",
                            "datasheet": "XR-1000"}[args.kind]
@@ -175,10 +197,21 @@ def main():
                 print("note: the part number has special characters, so only the "
                       "title was set; replace XR-1000 in datasheet.qmd and "
                       "figures/typical-application.svg by hand.")
-    if args.kind == "book":
-        (dest / "incoming").mkdir()  # the author's raw files go here (gitignored)
-    (dest / "CLAUDE.md").write_text(CLAUDE_MD.format(title=title, kind=args.kind),
+    (dest / "CLAUDE.md").write_text(CLAUDE_MD.format(title=title, kind=args.kind, toolkit=tk),
                                     encoding="utf-8")
+
+    if raw:
+        before = set((dest / "chapters").glob("*.qmd"))
+        r = subprocess.run([sys.executable, str(ROOT / "scripts" / "ingest.py"), str(dest),
+                            "--from", str(raw)])
+        made = sorted(set((dest / "chapters").glob("*.qmd")) - before)
+        if r.returncode or not made:
+            print("note: nothing was ingested, so the placeholder chapters stay; "
+                  f"fix the above, then: python {cmd_path(ROOT / 'scripts' / 'ingest.py')} "
+                  f"{cmd_path(dest)} --from {cmd_path(raw)}")
+        else:
+            wire_chapters(dest, made)
+            print(f"wired {len(made)} chapter(s) into _quarto.yml in place of the placeholders.")
 
     # generate plotted figures now, so a bare `quarto render` works too
     figs = dest / "scripts" / "make_figures.py"
@@ -186,8 +219,8 @@ def main():
         r = subprocess.run([sys.executable, str(figs)], cwd=dest)
         if r.returncode:
             print("note: figure generation failed (is matplotlib installed? "
-                  "`python -m pip install -r requirements.txt`); "
-                  "`python build.py` retries it.")
+                  f"`python -m pip install -r {cmd_path(ROOT / 'requirements.txt')}`); "
+                  "build.py retries it.")
 
     # its own history: /review and check.py --changed-only diff against git
     git_note = ""
@@ -195,11 +228,13 @@ def main():
         subprocess.run(["git", "init", "-q"], cwd=dest)
         git_note = "  (git repo initialized; commit when you're ready)\n"
 
+    build, check, d = cmd_path(ROOT / "build.py"), cmd_path(ROOT / "check.py"), cmd_path(dest)
     print(f"\ncreated {args.kind}: {dest}\n{git_note}\nnext:\n"
-          f"  cd {dest}\n"
-          "  python build.py --doctor   # what's installed, what's missing\n"
-          "  python build.py            # render\n"
-          "then read README.md in that folder.")
+          f"  python {build} --doctor            # what's installed, what's missing\n"
+          f"  python {build} {d}                 # render\n"
+          f"  python {build} {d} --out DIR       # + copy the finished documents to DIR\n"
+          f"  python {check} {d}                 # mechanical review\n"
+          f"then read {d}/README.md.")
 
 
 if __name__ == "__main__":

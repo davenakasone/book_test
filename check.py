@@ -1,16 +1,17 @@
 """Mechanical manuscript review — recommends, never edits.
 
-    python check.py                  # full review -> tool_output/report-*.md
-    python check.py path/to/project  # check another Quarto project folder
-    python check.py --changed-only   # only findings in files changed since last run
-    python check.py --links          # also verify external URLs (network, slower)
+    python check.py path/to/project        # full review -> <project>/tool_output/report-*.md
+    python check.py                        # the project in the current folder
+    python check.py PROJECT --changed-only # only findings in files changed since last run
+    python check.py PROJECT --links        # also verify external URLs (network, slower)
 
 The loop this enables:
-    edit -> git commit -> python check.py -> read report -> repeat
+    edit -> git commit -> python check.py PROJECT -> read report -> repeat
 
-Works on any Quarto project (book, article, datasheet): the project is this
-folder if it holds `_quarto.yml`, else `book/`, or the path you pass. Book
-projects also get chapter-list and per-chapter checks.
+Works on any Quarto project (book, article, datasheet): the project is the
+path you pass, else the current folder. Book projects also get chapter-list
+and per-chapter checks. A `codespell-ignore.txt` in the project allowlists
+words the spell check should accept.
 
 Git is the memory: each run logs the HEAD it reviewed (tool_output/log.jsonl),
 so --changed-only diffs against the previous run and the report tells you
@@ -30,7 +31,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
 SKIP_DIRS = {"_book", "_output", ".quarto", "_extensions", "tool_output",
              "incoming", "feedback", "site_libs"}
 
@@ -44,17 +44,12 @@ TODO_RE = re.compile(r"\b(TODO|FIXME|XXX|TK)\b")
 
 
 def project_dir(arg=None):
-    if arg:
-        p = Path(arg).expanduser().resolve()
-        if not (p / "_quarto.yml").exists():
-            sys.exit(f"{p} has no _quarto.yml, so it isn't a Quarto project.")
-        return p
-    return ROOT if (ROOT / "_quarto.yml").exists() else ROOT / "book"
-
-
-def workspace(proj):
-    """Where tool_output/ lives: this folder, or the project when checking one elsewhere."""
-    return ROOT if proj in (ROOT, ROOT / "book") else proj
+    """The path given, else the current folder; either must hold _quarto.yml."""
+    p = Path(arg or ".").expanduser().resolve()
+    if not (p / "_quarto.yml").exists():
+        sys.exit(f"{p} has no _quarto.yml, so it isn't a Quarto project. "
+                 "Pass the project folder: python check.py path/to/project")
+    return p
 
 
 def git(cwd, *args):
@@ -106,17 +101,17 @@ def front_matter(text):
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows pipes default to cp1252
     ap = argparse.ArgumentParser()
-    ap.add_argument("project", nargs="?", help="Quarto project folder (default: auto)")
+    ap.add_argument("project", nargs="?",
+                    help="Quarto project folder (default: the current folder)")
     ap.add_argument("--changed-only", action="store_true")
     ap.add_argument("--links", action="store_true")
     args = ap.parse_args()
     changed_only = args.changed_only
 
     proj = project_dir(args.project)
-    ws = workspace(proj)
-    out_dir = ws / "tool_output"
+    out_dir = proj / "tool_output"
     out_dir.mkdir(exist_ok=True)
-    top = Path(git(proj, "rev-parse", "--show-toplevel") or ws)
+    top = Path(git(proj, "rev-parse", "--show-toplevel") or proj)
     yml = (proj / "_quarto.yml").read_text(encoding="utf-8")
     is_book = bool(re.search(r"^\s*type:\s*book\b", yml, re.M))
     latex = bool(re.search(r"^\s*(format:\s*)?pdf\s*:|^\s*format:\s*pdf\s*$", yml, re.M))
@@ -137,7 +132,7 @@ def main():
 
     def rel(f):
         f = Path(f)
-        for base in (top, ws):
+        for base in (top, proj):
             try:
                 return str(f.resolve().relative_to(base))
             except ValueError:
@@ -217,7 +212,7 @@ def main():
     sibling = Path(sys.executable).parent / "codespell"
     codespell = shutil.which("codespell") or (str(sibling) if sibling.exists() else None)
     if codespell and qmds:
-        ignore = ws / "codespell-ignore.txt"
+        ignore = proj / "codespell-ignore.txt"
         cmd = [codespell, "--quiet-level", "2", *map(str, qmds),
                *(str(b) for b in bibs if b.exists())]
         if ignore.exists():

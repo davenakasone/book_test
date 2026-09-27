@@ -7,14 +7,18 @@ value in it is a placeholder.
 
 ## Build
 
-`python` means your Python 3: use `python3` on macOS/Linux if `python` isn't found, `py` on Windows.
+This folder holds only the document. The tools live in the document
+toolkit at `<toolkit>` and take this folder as an argument. From here:
 
 ```sh
-python -m pip install -r requirements.txt   # once: quarto, matplotlib, pymupdf, codespell
-python build.py --doctor                    # what's installed, what's missing
-python build.py                             # curves from data/*.csv, then the PDF
-python check.py                             # broken refs, missing images, alt text, spelling
+python <toolkit>/build.py --doctor          # what's installed, what's missing
+python <toolkit>/build.py .                 # curves from data/*.csv, then the PDF
+python <toolkit>/build.py . --out DIR       # + copy the finished documents to DIR
+python <toolkit>/check.py .                 # broken refs, missing images, alt text, spelling
 ```
+
+`python` means your Python 3: use `python3` on macOS/Linux if `python` isn't found, `py` on Windows.
+Once per machine: `python -m pip install -r <toolkit>/requirements.txt`.
 
 Once the figures exist, a plain `quarto render` works too.
 
