@@ -3,6 +3,23 @@
 Moved out of CLAUDE.md's STATUS block at the 2026-09-26 split (house rule
 6). Current state lives in STATUS.md; standing rules in CLAUDE.md.
 
+**2026-09-27 — report kind; sibling recon; machine + CI upkeep.**
+Recon (two read-only haiku sweeps, key claims verified): of the sibling
+projects, only three make documents people read, all hand-built in
+reportlab or matplotlib (~9,800 lines across seven scripts); details stay in
+local memory (public repo). New `report` kind for that shape (dfbc77e):
+Typst PDF + HTML + Word; `scripts/make_figures.py` writes `_variables.yml`
+from `data/model.json` so prose quotes `{{< var >}}`, never numbers; CSV →
+`tables/*.md` includes; callouts; full-page figures at `height=75%`;
+`paper-width`/`paper-height` phone pages; `cjk-font`; watermark; page X of Y.
+`build.py` warns when a PDF embeds LastResort (characters printing as
+boxes). CI builds the report and asserts a `{{< var >}}` number reached the
+page. Upkeep: CI actions bumped to Node 24 releases (e2e74d5); `gh` authed,
+local epubcheck via Homebrew openjdk, rsvg-convert, python-pptx/docx
+(a7b8ba8); repo description set; a transient `quarto-cli` sdist download
+failure (NOTES trap 9) was rerun green. Ubuntu 26 runner date logged in
+DEADLINES.md.
+
 **2026-09-27 — doc_writer Phase 0 + 1 (PLAN.md).** Phase 0 (David + foreman):
 folder renamed `book_test` → `doc_writer`, GitHub repo renamed, `origin`
 re-pointed; foreman files updated. Phase 1: the name inside the repo (README

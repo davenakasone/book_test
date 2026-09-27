@@ -42,7 +42,14 @@ publishing, focus on document types).
 3. **Short forms**: memo, letter, report, as article variants or kinds.
 4. **Windows runner in CI** (unblocked 2026-09-27: `gh` is installed).
 
-## Phase 3: the reproduction loop (David's idea)
+## Phase 3: the reproduction loop (David's idea) — ACTIVE 2026-09-27
+
+David widened this on 2026-09-27: crawl claude_stuff and unify every
+sibling's document writing into this tool. Recon is done (results in local
+memory, not here). It produced the `report` kind, the shape every sibling
+document shares. Next: reproduce one real document per iteration, starting
+with the no-PII one. Slides wait until after this, since no sibling makes
+slides today.
 
 Sibling projects in `claude_stuff` already produce documents. Per
 iteration: open one sibling's session alongside this one, have it say what
