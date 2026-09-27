@@ -1,5 +1,8 @@
 # STATUS
 
+NEEDS DAVID (INSTALL): `brew install gh && gh auth login` — lets sessions read CI
+logs (the public API returns 403 for logs; this session diagnosed CI blind).
+
 **2026-09-26 — v1.7: from book pipeline to document toolkit.**
 `python new.py <book|article|datasheet> <folder>` makes a self-contained
 project (template content, copies of build/check/review tools, a README,
@@ -18,6 +21,9 @@ appendices, now with a References page. Releases via `v*` tags.
 
 **Machine:** quarto 1.9.38 at `~/dkn314/bin/quarto` (off PATH), TinyTeX,
 Typst 0.14.2 (bundled), ghostscript. No Java (epubcheck is CI-only).
+
+**Open:** CI `templates` job failed on Linux at 0046b65 (passes locally on
+macOS); failures now self-report as public annotations. Read them first.
 
 **Next candidates:**
 - slides template (reveal.js / PowerPoint) if a real deck needs it
