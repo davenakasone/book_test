@@ -52,7 +52,7 @@ the willpower.
 - **The satire disclaimer travels.** Every bio, banner, and About block
   carries the "work of satire" line. Non-negotiable — it's also the brand.
 - **Deployment:** the repo has a live GitHub remote
-  (`github.com/davenakasone/book_test`) and pushes are authorized. The
+  (`github.com/davenakasone/doc_writer`) and pushes are authorized. The
   website step — `quarto publish gh-pages` or Netlify — is **documented but
   not yet executed**; running it is the friend's one-command go-live.
 

@@ -3,7 +3,7 @@
 **Format mix:** carousels (the workhorse — diagram + reveal), single quote
 cards, Reels (repost the YouTube Shorts — same files, zero extra work).
 Grid aesthetic: gold-on-navy (cover palette) alternating with parchment
-(figure palette). Templates: `platform/make_social.py`.
+(figure palette). Templates: `parked/platform/make_social.py`.
 
 **Bio:**
 > Dr. Chocolate Daddy

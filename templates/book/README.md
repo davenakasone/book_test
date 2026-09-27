@@ -82,4 +82,4 @@ each reviewer's files in `feedback/r1-<name>/` and run
 
 Publishing specs, pricing, and the upload checklist for KDP, IngramSpark,
 and Draft2Digital:
-<https://github.com/davenakasone/book_test/blob/main/PUBLISHING.md>.
+<https://github.com/davenakasone/doc_writer/blob/main/parked/PUBLISHING.md>.

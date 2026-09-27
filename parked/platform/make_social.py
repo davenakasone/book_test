@@ -1,7 +1,7 @@
 """Generate social/platform assets for The Starlight Engine.
 
-Run:  ~/dkn314/bin/python platform/make_social.py
-Outputs to platform/assets/. Templates: swap the TEXT constants per post;
+Run:  ~/dkn314/bin/python parked/platform/make_social.py
+Outputs to parked/platform/assets/. Templates: swap the TEXT constants per post;
 the layouts are the deliverable.
 """
 

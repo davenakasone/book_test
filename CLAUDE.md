@@ -1,4 +1,4 @@
-# book_test — open-source document toolkit + *The Starlight Engine*
+# doc_writer — open-source document toolkit + its test book
 
 @STATUS.md
 
@@ -23,6 +23,10 @@ Two things in one repo:
    feature (parts, citations, cross-refs, index, TikZ figures, cover), so
    when the pipeline breaks, it breaks here first.
 
+**The roadmap is [PLAN.md](PLAN.md).** Publishing (store specs, economics,
+author platform, releases, the memoir comparison) is parked in
+[`parked/`](parked/README.md): kept, not worked, until David unparks it.
+
 ## Orienting a fresh session
 
 | Asked to… | Do this |
@@ -31,6 +35,7 @@ Two things in one repo:
 | work on an existing document | `python build.py <project>`, `python check.py <project>`, `/review <project>` — from this session |
 | work on the demo book | edit `book/`, build with `python build.py book` |
 | change the toolkit | edit `build.py`, `check.py`, `new.py`, `scripts/`, `templates/`; then run the end-to-end test below |
+| publishing, releases, platform | parked: read `parked/README.md`, and ask David before unparking |
 
 **End-to-end test (run before committing toolkit changes):** for each kind,
 `python new.py <kind> <scratch>/t-<kind>` (book: `--from` a folder of raw
@@ -51,7 +56,6 @@ python build.py PROJECT --out DIR           # + copy PDF/EPUB/Word to DIR, web v
 python build.py PROJECT --ingram            # + PDF/X-1a CMYK interior for IngramSpark (needs ghostscript)
 python build.py PROJECT --check-only        # just the prose-unicode guard
 python check.py PROJECT                     # mechanical review → PROJECT/tool_output/report-*.md
-python latex-shootout/build.py              # the raw-LaTeX comparison chapter
 ```
 
 No PROJECT means the current folder. Generated demo figures are committed.
@@ -73,17 +77,15 @@ On Windows use PowerShell; `py` if `python` isn't on PATH.
    wipes the other formats from `_book/`) and then runs the EPUB fix,
    which plain `quarto render` no longer does (no `post-render:` hook).
 5. Regenerate figures **before** rendering; EPUB embeds images at render
-   time. **Distribution = GitHub Releases:** push a `v*` tag and CI
-   attaches PDF + EPUB + PDF/X-1a. Nothing binary lives in git.
+   time. Nothing binary lives in git.
 6. Long author bylines clip on the PDF title page (`\maketitle` doesn't
    wrap); keep `book.author` short.
-7. Demo-book voice: supremely confident, aggrieved by "the mainstream,"
-   flags its *true* claims ("this is real, look it up"), asserts the false
-   ones without hedging. No lorem ipsum, ever.
-8. **A Quarto book needs a `references.qmd` page** (`::: {#refs}`), or
+7. **A Quarto book needs a `references.qmd` page** (`::: {#refs}`), or
    the reference list gets tacked onto the last chapter with no heading.
-9. **SVG figures:** fine in Typst and HTML, embedded as SVG in Word, but a
+8. **SVG figures:** fine in Typst and HTML, embedded as SVG in Word, but a
    LaTeX PDF needs `rsvg-convert`. Book figures are PNG/PDF.
+
+Writing demo-book prose? Its voice rule is in `parked/README.md`.
 
 ## Toolkit rules
 
@@ -122,11 +124,10 @@ templates/       book/ article/ datasheet/ — starter content + per-kind README
 book/            the demo book, an ordinary project (_quarto.yml is its source of truth)
   chapters/ appendices/ references.bib latex/ figures-src/ figures/ html/ scripts/make_figures.py
 scripts/         ingest · fix_epub · build_tikz · make_pdfx · extract_feedback
-latex-shootout/  demo ch01 hand-set in memoir (python latex-shootout/build.py)
-platform/        demo author-platform kit (email, social, launch plan, make_social.py)
+parked/          publishing on hold: PUBLISHING.md BUSINESS.md platform/ latex-shootout/ (README.md says why)
 .claude/commands/ /review <project> and /feedback <project>/feedback/<round>
 START-HERE.md    newcomer runbook   NOTES.md  every trap hit   LOG.md  finished work
-PUBLISHING.md    KDP/IngramSpark/D2D specs   BUSINESS.md  money reality   LICENSE  MIT + CC0
+PLAN.md          the roadmap        LICENSE   MIT + CC0
 ```
 
 ## David's-machine specifics (ignore on any other computer)

@@ -1,7 +1,8 @@
 # Render the demo book and every template on every push: proves a clean-machine RENDER, validates the
 # EPUB (Java on the runner, so epubcheck runs), and publishes PDF/EPUB as a
 # downloadable artifact per commit. Tag a vN.N.N release to attach the built
-# files to a permanent GitHub Release (see the release job).
+# files to a permanent GitHub Release (see the release job; publishing is
+# parked, so no v* tags until it's unparked: parked/README.md).
 #
 # Note: this exercises the *render* off committed figures. The figure-gen
 # scripts (make_figures.py / build_tikz.py) get their own job below so a
@@ -70,7 +71,7 @@ jobs:
             book/_book/The-Starlight-Engine.epub
           retention-days: 30
 
-  # Figures + TikZ + shootout are NOT covered by the render job (it uses
+  # Figures + TikZ are NOT covered by the render job (it uses
   # committed outputs). Run them so an unpinned-dep rot or a stale committed
   # figure fails CI instead of surprising the friend.
   figures:
@@ -97,8 +98,6 @@ jobs:
           # (fonts, compression, freetype), so drift here is INFO, not failure.
           # The real gate is the step above: the scripts must still execute.
           git diff --stat book/figures || true
-      - name: Memoir shootout still compiles
-        run: python latex-shootout/build.py
 
   # Every template must still produce a working project from a clean
   # machine: new.py -> build.py -> check.py, per kind. Uploads the three

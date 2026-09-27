@@ -20,7 +20,7 @@ in the book" in every description).
 | 7 | Long | Dark Matter Is a Utility Bill | ch13 full |
 | 8 | Short | THE WALL IS AN ANTENNA ("21,196 km ÷ 21.1 cm") | ch9 |
 
-Thumbnail template: `platform/make_social.py` → gold-on-navy, ≤5 words,
+Thumbnail template: `parked/platform/make_social.py` → gold-on-navy, ≤5 words,
 asterisk gag where applicable. Titles make the claim; thumbnails make the
 joke; the description makes the disclaimer.
 

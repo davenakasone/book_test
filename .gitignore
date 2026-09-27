@@ -21,7 +21,7 @@ book/*.tex
 *.fls
 *.fdb_latexmk
 *.synctex.gz
-latex-shootout/build/
+parked/latex-shootout/build/
 
 # Author's raw source material (template mode — see START-HERE.md); their
 # originals shouldn't land in git. Extracted media does (it's a build input).

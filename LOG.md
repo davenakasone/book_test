@@ -3,6 +3,21 @@
 Moved out of CLAUDE.md's STATUS block at the 2026-09-26 split (house rule
 6). Current state lives in STATUS.md; standing rules in CLAUDE.md.
 
+**2026-09-27 — doc_writer Phase 0 + 1 (PLAN.md).** Phase 0 (David + foreman):
+folder renamed `book_test` → `doc_writer`, GitHub repo renamed, `origin`
+re-pointed; foreman files updated. Phase 1: the name inside the repo (README
+title and clone/Releases URLs, START-HERE, CLAUDE.md title, `new.py`'s project
+CLAUDE.md URL, `templates/book/README.md` PUBLISHING link, PLATFORM.md).
+Publishing parked: `git mv` PUBLISHING.md, BUSINESS.md, `platform/`,
+`latex-shootout/` → `parked/`, with `parked/README.md` (why, rules while
+parked, unpark steps). CI: memoir-shootout step dropped from `figures`;
+`release` job kept but dormant (no `v*` tags). CLAUDE.md trimmed: the demo-voice
+rule and the Releases-distribution rule moved to `parked/README.md`. LICENSE,
+NOTES, `.gitignore` paths follow the move. Verified: e2e for all three kinds exits 0
+under the Windows-encoding guard, `check.py book` exits 0, the shootout builds
+from its parked path, the CI YAML parses, no broken Markdown links. CI green at
+4bf72f9 and 02f7dcc before this commit.
+
 **2026-09-27 — Code apart from documents.** The tools stay in the toolkit;
 a job names raw content, a project, and an output folder. `new.py` stops
 copying tools into projects and gains `--from RAW` (books: ingest the raw

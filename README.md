@@ -1,4 +1,4 @@
-# Markdown to books, papers, and datasheets — free and open source
+# doc_writer — Markdown to books, papers, and datasheets, free and open source
 
 Write in Markdown; get publication-grade output. One command builds
 print-ready PDFs, ebooks, websites, and Word files through
@@ -17,7 +17,7 @@ The tools stay in this folder. Your document lives wherever you like, and
 the finished files go wherever you say:
 
 ```sh
-git clone https://github.com/davenakasone/book_test && cd book_test
+git clone https://github.com/davenakasone/doc_writer && cd doc_writer
 python -m pip install -r requirements.txt    # quarto, matplotlib, pymupdf, codespell (pinned)
 python build.py --doctor                     # checks what's installed and what each tool is for
 
@@ -64,9 +64,9 @@ tool drafts stays marked until the author replaces it.
   book chapters (`new.py --from` runs it for you).
 
 Full runbook: **[START-HERE.md](START-HERE.md)**. Every trap already hit:
-**[NOTES.md](NOTES.md)**. Publishing specs (KDP, IngramSpark, Draft2Digital):
-**[PUBLISHING.md](PUBLISHING.md)**. The money reality:
-**[BUSINESS.md](BUSINESS.md)**.
+**[NOTES.md](NOTES.md)**. Publishing (KDP, IngramSpark, Draft2Digital
+specs, the money reality, the author-platform kit) is parked for now:
+**[parked/](parked/README.md)**.
 
 ## The demo book: *The Starlight Engine*
 
@@ -87,9 +87,9 @@ live in `book/`; `python build.py book` builds it.
 
 **Just want to read it?** Every tagged version ships the PDF, EPUB, and
 print PDF/X-1a on the
-**[Releases](https://github.com/davenakasone/book_test/releases/latest)**
+**[Releases](https://github.com/davenakasone/doc_writer/releases/latest)**
 page:
-[The-Starlight-Engine.pdf](https://github.com/davenakasone/book_test/releases/latest/download/The-Starlight-Engine.pdf).
+[The-Starlight-Engine.pdf](https://github.com/davenakasone/doc_writer/releases/latest/download/The-Starlight-Engine.pdf).
 
 ## Layout
 
@@ -99,8 +99,7 @@ page:
 | `templates/` | the book, article, and datasheet starters |
 | `scripts/` | ingest, EPUB fix, feedback extraction, TikZ, PDF/X |
 | `book/` | the demo book (a project like any other) |
-| `latex-shootout/` | demo chapter 1 hand-set in LaTeX memoir, for comparison |
-| `platform/` | demo author-platform kit: email sequence, social playbooks, launch plan |
+| `parked/` | publishing material, on hold: specs, economics, author-platform kit, LaTeX memoir comparison |
 
 ## License
 

@@ -4,7 +4,7 @@ This repository has two parts, both released as freely as possible.
 1. THE TOOLKIT (code / tooling / templates) — MIT License
 ================================================================
 Applies to: build.py, check.py, new.py, scripts/**, templates/**,
-latex-shootout/**, *.yml, _quarto.yml, book/latex/**, book/html/**,
+parked/latex-shootout/**, *.yml, _quarto.yml, book/latex/**, book/html/**,
 .claude/commands/**, and any other build/configuration code.
 
 Copyright (c) 2026 the authors
@@ -30,7 +30,7 @@ DEALINGS IN THE SOFTWARE.
 2. THE BOOK (prose, figures, cover) — CC0 1.0 (public domain)
 ================================================================
 Applies to: book/**/*.qmd, book/references.bib, book/figures/**,
-platform/** copy, and the generated book (PDF/EPUB/HTML).
+parked/platform/** copy, and the generated book (PDF/EPUB/HTML).
 
 To the extent possible under law, the authors have dedicated all copyright
 and related rights in *The Starlight Engine* and its accompanying materials

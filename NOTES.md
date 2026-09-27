@@ -62,7 +62,7 @@ the friend.
 
 ## Shootout: Quarto PDF vs hand-rolled memoir
 
-Same chapter both ways (`latex-shootout/build/giza-memoir.pdf`):
+Same chapter both ways (`parked/latex-shootout/build/giza-memoir.pdf`):
 
 | | Quarto default (scrbook) | memoir hand-set |
 |---|---|---|
@@ -74,7 +74,7 @@ Same chapter both ways (`latex-shootout/build/giza-memoir.pdf`):
 **Verdict:** write in Quarto. If the print interior must get fancy later,
 graft memoir-style typography into Quarto via `template-partials` /
 `include-in-header` — same source, upgraded page. Or pay Vellum $249 for
-the look with zero effort (see PUBLISHING.md).
+the look with zero effort (see parked/PUBLISHING.md).
 
 ## Windows-portability pass (2026-07-02)
 
@@ -83,7 +83,7 @@ gone, so a Windows (or Linux) collaborator can build everything:
 
 - `sips` (macOS-only) rasterized the TikZ PDF → replaced by
   `scripts/build_tikz.py` using **pymupdf** — one rasterizer, all OSes.
-- `latex-shootout/build.sh` (shell + hardcoded mac TinyTeX path) →
+- `parked/latex-shootout/build.sh` (shell + hardcoded mac TinyTeX path) →
   `build.py`, which finds TeX via PATH then TinyTeX's per-OS locations.
   It runs pdflatex twice instead of latexmk: **TinyTeX on Windows ships
   no perl, and latexmk is a perl script.**

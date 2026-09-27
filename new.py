@@ -62,7 +62,7 @@ CLAUDE_MD = """\
 # {title} ({kind})
 
 A {kind} written in Markdown and built with Quarto by the document toolkit
-at `{toolkit}` (https://github.com/davenakasone/book_test). This folder holds
+at `{toolkit}` (https://github.com/davenakasone/doc_writer). This folder holds
 only the document: text, figures, data, and settings. The tools stay in the
 toolkit and take this folder as an argument, from here:
 

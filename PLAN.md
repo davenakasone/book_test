@@ -7,7 +7,7 @@ finished files. The tools stay here; the documents live elsewhere
 David picked this direction on 2026-09-27 (option A: rename, park
 publishing, focus on document types).
 
-## Phase 0: the rename (David + foreman, no session open in this folder)
+## Phase 0: the rename (David + foreman, no session open in this folder) — DONE 2026-09-27
 
 1. Rename the folder `~/Desktop/claude_stuff/book_test` → `doc_writer`.
 2. The foreman updates its own files, which name `book_test`: `CLAUDE.md`
@@ -20,7 +20,7 @@ publishing, focus on document types).
    git@github.com:davenakasone/doc_writer.git`.
 4. Open a new session in `doc_writer/`, named `doc_writer`.
 
-## Phase 1: first session after the rename (housekeeping)
+## Phase 1: first session after the rename (housekeeping) — DONE 2026-09-27
 
 - Update the name inside the repo: README title and links, CLAUDE.md
   title, the GitHub URL in `new.py`'s project CLAUDE.md, the link in

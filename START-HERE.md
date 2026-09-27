@@ -11,7 +11,7 @@ names three places, and they stay apart:
 ## 1. Set up once
 
 ```sh
-git clone https://github.com/davenakasone/book_test && cd book_test
+git clone https://github.com/davenakasone/doc_writer && cd doc_writer
 python -m pip install -r requirements.txt   # quarto, matplotlib, pymupdf, codespell (pinned)
 quarto install tinytex                      # only for books: LaTeX, ~150 MB, no admin rights
 python build.py --doctor                    # what's installed, what's missing, what needs it
@@ -98,7 +98,7 @@ chapter list it prints into `_quarto.yml`. Set the author in
 
 `python build.py ../my-book --ingram` adds the PDF/X-1a CMYK interior IngramSpark
 requires (needs Ghostscript). Specs, pricing, and the upload checklist:
-[PUBLISHING.md](PUBLISHING.md).
+[parked/PUBLISHING.md](parked/PUBLISHING.md) (publishing is parked, not gone).
 
 ## The author's loop (once writing starts)
 
@@ -132,9 +132,9 @@ feedback is recorded, never silently dropped.
 ## Where the knowledge lives
 
 - **[NOTES.md](NOTES.md)**: every pipeline trap already hit, so you don't.
-- **[PUBLISHING.md](PUBLISHING.md)**: KDP / IngramSpark / D2D specs,
+- **[parked/PUBLISHING.md](parked/PUBLISHING.md)**: KDP / IngramSpark / D2D specs,
   pricing, licensing, accessibility, upload checklist.
-- **[BUSINESS.md](BUSINESS.md)**: the money reality before anyone spends on
+- **[parked/BUSINESS.md](parked/BUSINESS.md)**: the money reality before anyone spends on
   a book: sales medians, unit economics, when it earns out. A first book
   rarely earns out its production cost; the value of a free pipeline is
   that books 2, 3, 4… are nearly free, so a backlist can compound.
