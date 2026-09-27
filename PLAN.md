@@ -40,7 +40,7 @@ publishing, focus on document types).
 2. **`--from` for every kind**: articles and reports (raw files →
    `sections/*.qmd` + `{{< include >}}`), slides (an outline → a deck).
 3. **Short forms**: memo, letter, report, as article variants or kinds.
-4. **Windows runner in CI**, blocked on David's `gh` install.
+4. **Windows runner in CI** (unblocked 2026-09-27: `gh` is installed).
 
 ## Phase 3: the reproduction loop (David's idea)
 

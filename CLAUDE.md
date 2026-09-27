@@ -135,7 +135,15 @@ PLAN.md          the roadmap        LICENSE   MIT + CC0
 - Python runs via the shared venv `~/dkn314/bin/python`; quarto is
   `~/dkn314/bin/quarto` (pip `quarto-cli`, **not on PATH** — `which quarto`
   misses it; `build.py` finds it next to the interpreter). TinyTeX is in
-  `~/Library/TinyTeX`. No Java here, so epubcheck runs in CI only.
+  `~/Library/TinyTeX`. `rsvg-convert` (brew librsvg) is installed for SVG in LaTeX PDFs.
+- Java is Homebrew openjdk, **not linked**: `java` on PATH is the macOS
+  stub. Local epubcheck: `PATH=/opt/homebrew/opt/openjdk/bin:$PATH
+  ~/dkn314/bin/epubcheck FILE.epub` (silent + exit 0 means valid).
+- `gh` is installed and signed in: read a red CI run with `gh run view <id>
+  --log-failed`; rerun a flake with `gh run rerun <id> --failed`.
+- PowerPoint, Word, and Keynote are installed (eyeball `.pptx`/`.docx`);
+  `python-pptx` and `python-docx` are in dkn314 (added 2026-09-27) for
+  checking them from code.
 - dkn314 is shared: don't run `pip install -r requirements.txt` into it
   blind. Its `==` pins and quarto-cli's jupyter dependencies can move
   packages other projects use. Every pin matched on 2026-09-27; compare

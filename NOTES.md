@@ -33,6 +33,13 @@ the friend.
    preamble. (Discovered giving the author ten credentials.)
 8. TinyTeX's `latexmk` flaked once on the memoir build (no log written);
    direct `pdflatex` twice worked. Shrug, but worth knowing.
+9. **`pip install quarto-cli` can fail on a network blip** (CI, 2026-09-27,
+   run 36340674141). The PyPI package is a 4.6 kB sdist that downloads the
+   Quarto binary from GitHub while it builds, so an empty download fails
+   the whole `pip install -r requirements.txt` with `ValueError: nothing
+   to open` / `Failed building wheel for quarto-cli`. Nothing is wrong with
+   the commit: `gh run rerun <id> --failed` went green. If it recurs, give
+   setup-python `cache: pip` so the built wheel is reused.
 
 ## What just worked (better than expected)
 
