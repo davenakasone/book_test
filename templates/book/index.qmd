@@ -1,0 +1,8 @@
+# Preface {.unnumbered}
+
+<!-- TODO: TEMPLATE CONTENT. Quarto needs this page (it becomes the
+preface in print and the landing page on the web). Replace it with the
+author's own preface, or retitle it and use it for the dedication. -->
+
+This page is the preface. Everything in this template is placeholder text
+that shows how a feature is written; the author replaces all of it.

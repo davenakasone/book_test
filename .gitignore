@@ -40,3 +40,12 @@ book/chapters/*_files/
 
 # Machine-owned review output — regenerable, never versioned
 tool_output/
+
+# Template render output + figures generated from data/*.csv (new.py and
+# build.py regenerate them; the hand-drawn typical-application.svg is tracked)
+templates/*/_output/
+templates/*/_book/
+templates/*/.quarto/
+templates/article/figures/results.svg
+templates/datasheet/figures/efficiency.svg
+templates/datasheet/figures/line-regulation.svg

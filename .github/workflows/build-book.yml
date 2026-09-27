@@ -1,4 +1,4 @@
-# Render the book on every push: proves a clean-machine RENDER, validates the
+# Render the demo book and every template on every push: proves a clean-machine RENDER, validates the
 # EPUB (Java on the runner, so epubcheck runs), and publishes PDF/EPUB as a
 # downloadable artifact per commit. Tag a vN.N.N release to attach the built
 # files to a permanent GitHub Release (see the release job).
@@ -88,6 +88,42 @@ jobs:
           git diff --stat book/figures || true
       - name: Memoir shootout still compiles
         run: python latex-shootout/build.py
+
+  # Every template must still produce a working project from a clean
+  # machine: new.py -> build.py -> check.py, per kind. Uploads the three
+  # sample PDFs so a template change can be eyeballed from the Actions tab.
+  templates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.9.38
+          tinytex: true
+      - uses: actions/setup-java@v4   # epubcheck
+        with:
+          distribution: temurin
+          java-version: '17'
+      - run: python -m pip install -r requirements.txt
+      - name: new.py -> build -> check, per kind
+        run: |
+          for kind in book article datasheet; do
+            python new.py "$kind" "$RUNNER_TEMP/t-$kind" --title "CI $kind"
+            (cd "$RUNNER_TEMP/t-$kind" && python build.py && python check.py)
+          done
+      - name: Validate the book template's EPUB
+        run: epubcheck "$RUNNER_TEMP"/t-book/_book/*.epub
+      - uses: actions/upload-artifact@v4
+        with:
+          name: template-samples
+          path: |
+            ${{ runner.temp }}/t-book/_book/*.pdf
+            ${{ runner.temp }}/t-article/_output/article.pdf
+            ${{ runner.temp }}/t-datasheet/_output/datasheet.pdf
+          retention-days: 30
 
   # On a version tag, attach the built book to a permanent GitHub Release —
   # the "registry": users download binaries from the Releases tab, and

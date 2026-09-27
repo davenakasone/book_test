@@ -1,0 +1,16 @@
+project:
+  output-dir: _output
+  render:
+    - datasheet.qmd          # only this file renders (README/CLAUDE.md don't)
+
+format:
+  typst:
+    template-partials:
+      - theme/typst-template.typ
+      - theme/typst-show.typ
+    papersize: us-letter
+    fontsize: 9pt
+    mainfont: "Arial"        # any installed font (Linux: "Liberation Sans")
+    section-numbering: "1.1"
+    fig-width: 3.4
+    keep-typ: false

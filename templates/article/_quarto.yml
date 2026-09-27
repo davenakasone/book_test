@@ -1,0 +1,22 @@
+project:
+  output-dir: _output
+  render:
+    - article.qmd            # only this file renders (README/CLAUDE.md don't)
+
+bibliography: references.bib
+number-sections: true
+
+format:
+  # PDF via Typst: fast, no LaTeX install needed. For a journal's LaTeX class,
+  # see README.md ("Submitting to a journal").
+  typst:
+    papersize: us-letter
+    mainfont: "Arial"        # any installed font; delete for Typst's default serif
+    fontsize: 10pt
+    # columns: 2             # uncomment for a two-column layout
+    include-in-header:
+      text: '#set bibliography(title: "References")'
+  html:
+    toc: true
+  docx:                      # for co-authors who live in Word (comments → /feedback)
+    reference-section-title: References

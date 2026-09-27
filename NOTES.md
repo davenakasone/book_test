@@ -45,8 +45,11 @@ the friend.
   quarto's engine loop ran makeindex unprompted. Two-column sorted index
   with subentries, PDF-only (EPUB/HTML ignore it cleanly — they have
   search).
-- **Citations**: BibTeX file + `[@key]` → author-year in text + auto
-  References chapter, all formats.
+- **Citations**: BibTeX file + `[@key]` → author-year in text, all
+  formats. *Correction (2026-09-26):* there was no "auto References
+  chapter". Without a `references.qmd` holding `::: {#refs}`, the list is
+  appended to the last chapter with no heading; in this book it ran into
+  Appendix C. Fixed by adding `references.qmd`.
 - **Cross-refs** (`@fig- @tbl- @eq- @sec-`): numbered + hyperlinked in
   all formats.
 - **Callout boxes** render as tcolorbox in PDF, styled divs in EPUB/HTML.
@@ -138,3 +141,43 @@ does the final preflight.
 - Fonts beyond Latin Modern (EB Garamond etc. via `mainfont` + TinyTeX
   font package — one-line change, untested).
 - KDP upload dry-run.
+
+## Document toolkit: articles + datasheets via Typst (2026-09-26)
+
+`new.py` + `templates/` turned the book pipeline into a toolkit. Typst
+(bundled with quarto-cli, 0.14.2) renders the article and datasheet PDFs:
+no LaTeX install, sub-second compiles. What fought back:
+
+- **Custom Typst page designs = two template partials.** `_quarto.yml`
+  `format: typst: template-partials: [theme/typst-template.typ,
+  theme/typst-show.typ]`; the first defines the page function, the second
+  maps front matter onto it. Quarto's own copies (a good starting point)
+  are in `quarto_cli/share/formats/typst/pandoc/quarto/`.
+- **Don't name a Typst variable `left`/`right`/`center`**: it shadows the
+  alignment, and `align(left)` then fails with "expected content, found
+  array".
+- **Page counters need `context`.** `counter(page).display()` inside a
+  plain `let` block fails; make the footer a function and call it as
+  `footer: context footer-line()`.
+- **Pandoc escapes `#` in front-matter values** (`"#1f4e79"` arrives as
+  `\#1f4e79`), so `rgb("$accent$")` fails "non-hexadecimal letters". Strip
+  it: `rgb("$accent$".replace("\\", ""))`.
+- **Font fallback lists warn once per missing family** ("unknown font
+  family"). Use one `mainfont` the user can see and change in
+  `_quarto.yml` rather than a hidden list in the theme.
+- **Typst's bibliography titles itself "Bibliography".** A manual
+  `# References` + `::: {#refs}` gives two headings. Set the title in the
+  header instead: `include-in-header: text: '#set bibliography(title:
+  "References")'`; for Word, `reference-section-title: References`.
+- **Plots as SVG with live text** (`svg.fonttype: none`,
+  `svg.hashsalt` fixed): small, diffable, crisp. Avoid mathtext tick
+  labels (`10⁻²`); Typst's SVG renderer spaces them badly. Format ticks
+  as plain decimals.
+- **SVG in Word** embeds fine (Office 2016+), but pandoc warns it can't
+  make the PNG fallback without `rsvg-convert`. LaTeX PDFs *need*
+  `rsvg-convert` for SVG, so book figures stay PNG/PDF.
+- **A default-type Quarto project renders every .md/.qmd in the folder**,
+  README and CLAUDE.md included. Templates pin `project: render:` to the
+  one document.
+- **The pre-commit fence blocks PNGs** in David's repos, one more reason
+  template figures are SVG (text) or generated at build time from CSV.

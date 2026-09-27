@@ -1,0 +1,23 @@
+# The First Chapter {#sec-first}
+
+<!-- TODO: TEMPLATE CONTENT. Replace this chapter with the author's text,
+or run `python scripts/ingest.py` to convert their .docx/.txt files into
+chapters (see README.md). -->
+
+Each file in `chapters/` is one chapter, listed in `_quarto.yml`. The
+`# Title` line names it, and `{#sec-first}` gives it an anchor that other
+chapters can point to: see @sec-second.
+
+## A section
+
+Emphasis is *italic* and **bold**. A footnote goes here.[^first] A citation
+looks like this [@strunk1918], and the reference list is generated. An
+index entry\index{index entries} lands in the print index.
+
+[^first]: Footnotes print at the foot of the page in the PDF and as
+    pop-ups or end notes in the EPUB.
+
+::: {.callout-note title="A callout"}
+Callouts become shaded boxes in print and styled blocks in the EPUB and
+on the web.
+:::

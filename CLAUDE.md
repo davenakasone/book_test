@@ -1,138 +1,126 @@
-# book_test — *The Starlight Engine* + open-source book pipeline
+# book_test — open-source document toolkit + *The Starlight Engine*
 
-## STATUS
-
-**2026-07-08 — v1.6 + editorial loop.** Full author lifecycle now in the
-template: `check.py` (mechanical review: codespell, repeated words,
-sentence stats, refs/glyphs/markers, `--links`; report → `tool_output/`,
-git-aware `--changed-only`, CI `lint` job) + `/review` (judgment layer,
-recommendations stored as `TODO(review)` markers + review record) +
-`/feedback` with `scripts/extract_feedback.py` (reviewer PDFs/docx/email →
-extracted.md → triage.md, committed editorial record). Authorship
-boundary is a hard rule: sessions scaffold, authors author; tool-drafted
-text carries markers the checker nags. Proven on a second book:
-`~/Desktop/juicebook` (6 txt files → PDF/EPUB/PDF-X; caught 2 template
-hardcodes + 44 checker false positives — fixed + backported).
-
-**2026-07-04 — v1.6.** 108-page book (21 chapters, 7 parts, 3 appendices,
-"Dr. Chocolate Daddy"). New Part VI "The Terms of Service": QM as metering
-(observation=audit, entanglement=one account, Bell/Nobel real),
-thermodynamics as the service agreement (Landauer's kT·ln2 deletion fee —
-real, Carnot=the rake, heat death=disconnection notice), Gödel as the
-reason the manual was oral (Gödel numbering = the census method; the
-citizenship-loophole story real). v1.6 adds the conclusion: Fermi's
-paradox graded (Dark Forest/Zoo/Berserker/Great Filter/Rare Earth all
-executed by the book's own machinery) and resolved by the **Semester
-Hypothesis** — the galaxy is a campus in session; the silence is
-attendance. One `quarto render` → 6×9"
-print PDF (index, citations, cross-refs, TikZ figs) + EPUB3 w/ cover +
-HTML site w/ newsletter CTA. Cross-platform (macOS/Linux/Windows). Remote
-`github.com/davenakasone/book_test`; `build.py` = one-command build;
-GitHub Actions renders+validates+releases.
-
-**Big pass (multi-agent research+audit) landed 2026-07-04:** fixed a real
-KDP-royalty error and a silent ↔-drop that blanked appendix B's claim
-column; added pricing/metadata/accessibility(EAA)/direct-sales sections,
-ARC+production tracks, hardened licensing, pinned deps, unicode-guard,
-table-overflow fixes. Web-verified numbers in PUBLISHING.md; business
-reality in BUSINESS.md.
-
-**Full-pipeline pass 2026-07-04:** now a **complete** publish pipeline —
-**PDF/X-1a CMYK** for IngramSpark (`build.py --ingram` → `make_pdfx.py`,
-Ghostscript); **EPUB accessibility** (fig-alt on all figures +
-schema.org OPF metadata, EAA-ready); **LICENSE** (MIT code / CC0 book —
-"they can have it"); and a **reusable-template path** (`START-HERE.md` +
-`scripts/ingest.py` turns someone's .docx/.txt/diagrams into chapters).
-**Next candidates:** copyright-page front-matter, DAISY ACE run, font
-upgrade via `mainfont`, print cover wrap, KDP dry-run.
+@STATUS.md
 
 ## What this is
 
-Two things at once: a complete **satirical book** (every claim false on
-purpose — pyramid fusion reactors, a one-page Riemann proof, dark energy
-as a utility bill) and a **proof-of-pipeline** for $0 open-source book
-production. It exercises every book feature: parts, front/back matter,
-equations, citations, cross-refs, tables, callouts, generated figures,
-an index, a cover, multi-format output.
+Two things in one repo:
+
+1. **A $0 document toolkit.** Markdown in, publication-grade output out,
+   through Quarto. Three kinds, each a template in `templates/`:
+   - **book**: 6×9 print PDF (LaTeX), EPUB3, HTML site, PDF/X-1a for print
+   - **article**: paper/report PDF (Typst), HTML, Word
+   - **datasheet**: product datasheet PDF (Typst), spec tables, curves plotted from CSV
+
+   `python new.py <kind> <folder>` makes a self-contained project: template
+   content plus copies of the build/check/review tools, its own README, and
+   a CLAUDE.md for the session that works there.
+2. **The demo book** (`book/`): a complete satirical book, *The Starlight
+   Engine*, where every claim is false on purpose. It exercises every book
+   feature (parts, citations, cross-refs, index, TikZ figures, cover), so
+   when the pipeline breaks, it breaks here first.
+
+## Orienting a fresh session
+
+| Asked to… | Do this |
+|---|---|
+| make a new book / paper / datasheet | `python new.py <kind> <folder outside this repo>`, then work *in that folder* (its own session is best) |
+| work on the demo book | edit `book/`, build with `python build.py` |
+| change the toolkit | edit `build.py`, `check.py`, `new.py`, `scripts/`, `templates/`; then run the end-to-end test below |
+| check a document anywhere | `python check.py path/to/project` |
+
+**End-to-end test (run before committing toolkit changes):** for each kind,
+`python new.py <kind> <scratch>/t-<kind>`, then inside it `python build.py`
+and `python check.py` (exit 0; TEMPLATE-CONTENT warnings are expected). CI's
+`templates` job does the same on every push.
 
 ## Build (any OS — macOS / Linux / Windows)
 
 ```sh
-python -m pip install -r requirements.txt   # pinned deps
-quarto install tinytex                      # once; no admin rights needed
-brew install ghostscript                    # only if you need --ingram (PDF/X-1a)
+python -m pip install -r requirements.txt   # pinned deps, includes quarto-cli
+quarto install tinytex                      # once, for LaTeX PDFs (books); no admin rights
+python build.py --doctor                    # what's installed, what's missing, what needs it
 
-python build.py                             # figures → render → PDF+EPUB+HTML → root PDF
-python build.py --ingram                    # + PDF/X-1a CMYK interior for IngramSpark
+python build.py                             # demo book: figures → TikZ → render → root PDF
+python build.py path/to/project             # any Quarto project folder
+python build.py --ingram                    # + PDF/X-1a CMYK interior for IngramSpark (needs ghostscript)
 python build.py --check-only                # just the prose-unicode guard
+python check.py [path]                      # mechanical review → tool_output/report-*.md
 python latex-shootout/build.py              # the raw-LaTeX comparison chapter
 ```
 
-**Templating a new book from this repo:** copy the repo, drop the author's
-`.docx/.txt/…` in `incoming/`, `python scripts/ingest.py` → chapter stubs,
-then edit `_quarto.yml` + build. Full runbook: `START-HERE.md`.
-
-Generated figures are committed, so `quarto render` alone works out of
-the box. On Windows use PowerShell; `py` if `python` isn't on PATH.
+Generated demo figures are committed, so `quarto render` alone works. On
+Windows use PowerShell; `py` if `python` isn't on PATH.
 
 ## Hard-won rules (violate these and the build breaks — see NOTES.md)
 
-1. **The satire disclaimer in `index.qmd` is load-bearing. Never remove
-   or soften it.** Same for the disclaimer lines baked into covers,
-   banners, and platform copy.
+1. **The satire disclaimer in `book/index.qmd` is load-bearing. Never
+   remove or soften it.** Same for the disclaimer lines baked into covers,
+   banners, platform copy, and the README.
 2. **No `{dot}`/`{mermaid}` code blocks** — they hang `quarto render`
    waiting on Chromium. Pre-render every diagram to an image (TikZ via
-   `scripts/build_tikz.py`, or matplotlib).
-3. **No drop-silent unicode in prose** — superscripts beyond ¹²³ (`10¹⁷`)
-   and the ↔ arrow (`U+2194`) render blank in Latin Modern. Use inline
-   math (`$10^{17}$`, `$\leftrightarrow$`). `python build.py --check-only`
-   guards this and CI runs it. (→ `U+2192`, − `U+2212` are verified-safe.)
+   `scripts/build_tikz.py`, SVG, or matplotlib).
+3. **No drop-silent unicode in LaTeX-PDF prose** — superscripts beyond ¹²³
+   (`10¹⁷`) and ↔ (`U+2194`) render blank in Latin Modern. Use inline
+   math (`$10^{17}$`, `$\leftrightarrow$`). `build.py` and `check.py`
+   guard it for LaTeX projects; Typst falls back to another font instead.
 4. Render **all formats with plain `quarto render`** — `--to pdf` wipes
-   the other formats from `_book/`. Simplest: `python build.py` does the
-   whole chain (figures → TikZ → render → refresh root PDF).
+   the other formats from `_book/`. `python build.py` does the whole chain.
 5. Regenerate figures **before** rendering; EPUB embeds images at render
-   time. (`keep-tex` `book/*.tex` and the root convenience PDF are both
-   generated-not-committed — gitignored.)
-   **Distribution = GitHub Releases:** push a `v*` tag and CI builds and
-   attaches PDF + EPUB + PDF/X-1a to the release. Readers use
-   `releases/latest/download/…`; nothing binary lives in git.
+   time. **Distribution = GitHub Releases:** push a `v*` tag and CI
+   attaches PDF + EPUB + PDF/X-1a. Nothing binary lives in git.
 6. Long author bylines clip on the PDF title page (`\maketitle` doesn't
-   wrap); the full credential soup lives on the cover and preface
-   signature instead.
-7. Keep the voice: supremely confident, aggrieved by "the mainstream,"
-   flags its *true* claims explicitly ("this is real, look it up") and
-   asserts the false ones without hedging. No lorem ipsum, ever.
+   wrap); keep `book.author` short.
+7. Demo-book voice: supremely confident, aggrieved by "the mainstream,"
+   flags its *true* claims ("this is real, look it up"), asserts the false
+   ones without hedging. No lorem ipsum, ever.
+8. **A Quarto book needs a `references.qmd` page** (`::: {#refs}`), or
+   the reference list gets tacked onto the last chapter with no heading.
+9. **SVG figures:** fine in Typst and HTML, embedded as SVG in Word, but a
+   LaTeX PDF needs `rsvg-convert`. Book figures are PNG/PDF.
+
+## Toolkit rules
+
+- **The authorship boundary.** Sessions scaffold; authors author. Tool-drafted
+  text carries `<!-- TODO: TOOL-DRAFTED, NOT AUTHOR-WRITTEN … -->`;
+  template text carries `<!-- TODO: TEMPLATE CONTENT … -->`. `check.py`
+  nags every marker until it's gone. Never remove a marker whose content
+  is still placeholder.
+- **`build.py`, `check.py`, and `scripts/*` get copied into every new
+  project** (list: `TOOLS` in `new.py`). No demo-only assumptions in
+  them: resolve the project as "this folder if it has `_quarto.yml`, else
+  `book/`, or the path given." Keep them standalone; no imports between them.
+- **Templates stay placeholder-honest.** The datasheet ships with a
+  `TEMPLATE` watermark and a fictional part; the article cites real papers
+  correctly. A template must never pass as a real document.
+- Book infrastructure is single-sourced from `book/` (`postrender-fix-epub.py`,
+  `latex/`); `new.py` copies it. Fix it there.
 
 ## Layout
 
 ```
-START-HERE.md    runbook for reusing this as a template for a NEW book
-build.py         one-command build (--ingram, --check-only, --shootout)
-book/            Quarto project — _quarto.yml is the single source of truth
-  chapters/      ch01–ch21 (7 parts; anchors #sec-* are cross-referenced)
-  appendices/    forbidden equations, alignment tables, glossary
-  references.bib real papers cited wrongly + fictional sources
-  latex/         preamble.tex (index pkg, author font), after-body.tex
-  figures-src/   TikZ sources        figures/  generated outputs (committed)
-  html/          newsletter.html CTA (placeholder form — swap in provider embed)
-  epub-metadata.xml  schema.org accessibility metadata (EAA)
-  _book/         render output (gitignored)
-scripts/         make_figures · make_social · build_tikz · make_pdfx (PDF/X-1a) · ingest (docx→qmd)
-latex-shootout/  ch01 hand-set in memoir class (typographic comparison)
-platform/        email sequence, YT/IG/LinkedIn playbooks, launch plan, assets
-incoming/        (template mode) author's raw source files — gitignored
-NOTES.md         every trap hit, so you don't re-hit them — read before touching render config
-PUBLISHING.md    KDP/IngramSpark/D2D specs, pricing, accessibility, licensing, upload checklist
-BUSINESS.md      investor-frame reality: sales medians, unit economics, earn-out, tax
-LICENSE          MIT (pipeline) + CC0 (book)
+new.py           start a new project: python new.py <book|article|datasheet> <folder>
+build.py         build any project (--doctor, --ingram, --check-only, --shootout)
+check.py         mechanical review of any project → tool_output/
+templates/       book/ article/ datasheet/ — starter content + per-kind README
+book/            the demo book (Quarto project; _quarto.yml is its source of truth)
+  chapters/ appendices/ references.bib latex/ figures-src/ figures/ html/
+scripts/         make_figures (demo) · build_tikz · make_pdfx · ingest · extract_feedback · make_social
+latex-shootout/  demo ch01 hand-set in memoir (typographic comparison)
+platform/        demo author-platform kit (email, social, launch plan)
+.claude/commands/ /review and /feedback (also copied into new projects)
+START-HERE.md    newcomer runbook   NOTES.md  every trap hit   LOG.md  finished work
+PUBLISHING.md    KDP/IngramSpark/D2D specs   BUSINESS.md  money reality   LICENSE  MIT + CC0
 ```
 
 ## David's-machine specifics (ignore on any other computer)
 
-- Python runs via the shared venv `~/dkn314/bin/python`; quarto lives at
-  `~/dkn314/bin/quarto` (house rule: no per-project venvs).
+- Python runs via the shared venv `~/dkn314/bin/python`; quarto is
+  `~/dkn314/bin/quarto` (pip `quarto-cli`, **not on PATH** — `which quarto`
+  misses it; `build.py` finds it next to the interpreter). TinyTeX is in
+  `~/Library/TinyTeX`. No Java here, so epubcheck runs in CI only.
 - This folder sits inside David's `claude_stuff/` foreman ecosystem; the
   foreman index (`../CLAUDE.md`) is not ours to edit.
-- Pushes to the GitHub remote were explicitly authorized by David
-  (2026-07-02). On any other machine: commit freely, but don't push to
-  a repo you don't own — fork instead.
+- Pushes to the GitHub remote are authorized by David (2026-07-02, again
+  2026-09-26). On any other machine: commit freely, but don't push to a
+  repo you don't own — fork instead.

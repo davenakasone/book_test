@@ -1,10 +1,11 @@
 This repository has two parts, both released as freely as possible.
 
 ================================================================
-1. THE PIPELINE (code / tooling) — MIT License
+1. THE TOOLKIT (code / tooling / templates) — MIT License
 ================================================================
-Applies to: build.py, scripts/**, latex-shootout/**, *.yml, _quarto.yml,
-book/latex/**, book/html/**, and any other build/configuration code.
+Applies to: build.py, check.py, new.py, scripts/**, templates/**,
+latex-shootout/**, *.yml, _quarto.yml, book/latex/**, book/html/**,
+.claude/commands/**, and any other build/configuration code.
 
 Copyright (c) 2026 the authors
 

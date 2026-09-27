@@ -1,0 +1,42 @@
+project:
+  type: book
+  output-dir: _book
+  post-render: postrender-fix-epub.py   # makes the EPUB epubcheck-clean (see the script)
+
+lang: en
+
+book:
+  title: "Book Title"
+  subtitle: "Subtitle"
+  author: "Author Name"                 # keep it short: long bylines clip on the PDF title page
+  date: last-modified
+  # cover-image: figures/cover.png      # EPUB/HTML cover, e.g. 1600x2560 px
+  chapters:
+    - index.qmd
+    - chapters/01-first-chapter.qmd
+    - chapters/02-second-chapter.qmd
+    - references.qmd                    # the generated reference list
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+  epub:
+    epub-metadata: epub-metadata.xml    # accessibility metadata (EU EAA)
+    rights: "© 2026 Author Name. All rights reserved."
+  pdf:
+    documentclass: scrbook
+    fontsize: 11pt
+    colorlinks: true
+    geometry:                           # 6x9" trade paperback (KDP / IngramSpark)
+      - paperwidth=6in
+      - paperheight=9in
+      - inner=0.75in
+      - outer=0.5in
+      - top=0.6in
+      - bottom=0.75in
+      - heightrounded
+    include-in-header: latex/preamble.tex
+    include-after-body: latex/after-body.tex

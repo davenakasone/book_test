@@ -1,0 +1,66 @@
+---
+title: "Title of the Paper"
+subtitle: "Optional subtitle"
+author:
+  - name: First Author
+    email: first@example.org
+    affiliations:
+      - name: Example University
+  - name: Second Author
+    affiliations:
+      - name: Example Laboratory
+date: last-modified
+date-format: long
+abstract: |
+  One paragraph: the problem, what you did, the main result with a number,
+  and why it matters. Most readers stop here, so the number goes in.
+keywords: [keyword one, keyword two]
+---
+
+<!-- TODO: TEMPLATE CONTENT. Everything below is placeholder text that
+shows how each feature is written. Replace it with the paper. -->
+
+# Introduction
+
+State the problem and why it is open. Cite prior work in brackets
+[@shannon1948] or in running text, as @knuth1984 argued for programs
+written to be read. The bibliography lives in `references.bib` and the
+reference list at the end is generated.
+
+# Method
+
+Numbered equations get a label and can be referenced (@eq-throughput):
+
+$$
+T = \frac{N_{\mathrm{bytes}}}{t_{\mathrm{end}} - t_{\mathrm{start}}}
+$$ {#eq-throughput}
+
+Code and commands go in fenced blocks:
+
+```sh
+python scripts/make_figures.py   # data/*.csv -> figures/*.svg
+```
+
+# Results
+
+@fig-results is plotted from `data/results.csv` on every build, so new data
+reaches the PDF by replacing the CSV. @tbl-results gives the same numbers
+at two block sizes.
+
+![Throughput vs. block size.](figures/results.svg){#fig-results width=60% fig-alt="Line chart of throughput versus block size from 4 to 256 KiB; Method A rises from 120 to 655 MB/s and stays above Method B, which rises from 95 to 540 MB/s."}
+
+| Block size | Method A (MB/s) | Method B (MB/s) |
+|-----------:|----------------:|----------------:|
+| 4 KiB | 120 | 95 |
+| 256 KiB | 655 | 540 |
+
+: Throughput at the smallest and largest block sizes {#tbl-results}
+
+# Discussion
+
+Say what the result means, where it does not hold, and what you would try
+next.[^limits]
+
+[^limits]: Footnotes work in every output format.
+
+<!-- The reference list is generated at the end of every format. -->

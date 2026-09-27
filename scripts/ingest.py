@@ -3,11 +3,12 @@
 Drop an author's material into ./incoming/ (any mix of .docx, .odt, .rtf,
 .md, .txt), then:
 
-    python scripts/ingest.py                 # -> book/chapters/NN-slug.qmd + media
+    python scripts/ingest.py                 # -> chapters/NN-slug.qmd + media
+    python scripts/ingest.py --project DIR   # a book project somewhere else
 
 Each source file becomes one chapter (sorted by filename — prefix them 01_,
 02_, … to control order). Word/ODT/RTF go through pandoc, which also pulls
-embedded images into book/figures/media/. Plain text/markdown is wrapped
+embedded images into figures/media/. Plain text/markdown is wrapped
 with a title heading. Nothing is overwritten; existing chapters are skipped.
 Afterward the script prints the chapter list to paste into _quarto.yml.
 
@@ -15,6 +16,7 @@ This is a SCAFFOLDER, not magic: it gives a fresh session clean .qmd to
 edit, split, and cross-reference — see START-HERE.md.
 """
 
+import argparse
 import re
 import shutil
 import subprocess
@@ -22,9 +24,11 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+# the book project: this folder if it holds _quarto.yml, else book/ (demo repo)
+PROJECT = ROOT if (ROOT / "_quarto.yml").exists() else ROOT / "book"
 INCOMING = ROOT / "incoming"
-CHAPTERS = ROOT / "book" / "chapters"
-MEDIA = ROOT / "book" / "figures" / "media"
+CHAPTERS = PROJECT / "chapters"
+MEDIA = PROJECT / "figures" / "media"
 
 PANDOC_EXT = {".docx", ".odt", ".rtf", ".epub", ".html", ".tex"}
 TEXT_EXT = {".md", ".markdown", ".txt", ".text"}
@@ -41,21 +45,25 @@ def titleize(name):
     return s.strip().title() or "Chapter"
 
 
-def have_pandoc():
+def pandoc():
+    """System pandoc, else the one bundled with quarto (`quarto pandoc`)."""
     if shutil.which("pandoc"):
-        return True
-    sys.exit("pandoc not found — install it (brew install pandoc / apt install pandoc).")
+        return ["pandoc"]
+    quarto = shutil.which("quarto") or str(Path(sys.executable).parent / "quarto")
+    if Path(quarto).exists() or shutil.which("quarto"):
+        return [quarto, "pandoc"]
+    sys.exit("pandoc not found — install quarto (pip install -r requirements.txt) "
+             "or pandoc itself.")
 
 
 def convert(src, dst):
     ext = src.suffix.lower()
     title = titleize(src.stem)
     if ext in PANDOC_EXT:
-        have_pandoc()
         MEDIA.mkdir(parents=True, exist_ok=True)
         # markdown output, images extracted, no hard wrapping (Quarto reflows)
         subprocess.run(
-            ["pandoc", str(src), "-t", "markdown", "--wrap=none",
+            [*pandoc(), str(src), "-t", "markdown", "--wrap=none",
              f"--extract-media={MEDIA}", "-o", str(dst)],
             check=True,
         )
@@ -74,6 +82,13 @@ def convert(src, dst):
 
 
 def main():
+    global INCOMING, CHAPTERS, MEDIA
+    ap = argparse.ArgumentParser(description="Turn incoming/ files into chapters.")
+    ap.add_argument("--project", help="book project folder (default: auto)")
+    args = ap.parse_args()
+    if args.project:
+        proj = Path(args.project).expanduser().resolve()
+        INCOMING, CHAPTERS, MEDIA = proj / "incoming", proj / "chapters", proj / "figures" / "media"
     if not INCOMING.exists():
         INCOMING.mkdir()
         sys.exit(f"Created {INCOMING}/ — drop the author's .docx/.txt/… in "
@@ -96,7 +111,7 @@ def main():
             continue
         if convert(src, dst):
             made.append(dst.name)
-            print(f"  {src.name} → book/chapters/{dst.name}")
+            print(f"  {src.name} → {dst.relative_to(CHAPTERS.parent)}")
 
     print(f"\ningested {len(made)} chapter(s); skipped {len(skipped)} existing.")
     if made:

@@ -1,0 +1,20 @@
+# The Second Chapter {#sec-second}
+
+<!-- TODO: TEMPLATE CONTENT. Replace this chapter with the author's text. -->
+
+A figure is an image plus a caption, an anchor, and alt text for readers
+who can't see it (required to sell ebooks into the EU):
+
+```markdown
+![Caption under the figure.](../figures/my-figure.png){#fig-mine fig-alt="What the figure shows, in one sentence."}
+```
+
+Refer to it as `@fig-mine`. Use PNG or PDF images for books; SVG needs an
+extra converter for the print PDF. Math is written in LaTeX notation, inline
+as $E = mc^2$ or displayed:
+
+$$
+\sum_{k=1}^{n} k = \frac{n(n+1)}{2}
+$$ {#eq-sum}
+
+@eq-sum is numbered and linked in every format.

@@ -1,9 +1,11 @@
-"""Compile TikZ sources (book/figures-src/*.tex) to PDF + rasterize to PNG.
+"""Compile TikZ sources (<project>/figures-src/*.tex) to PDF + rasterize to PNG.
 
 Cross-platform (macOS / Linux / Windows) — replaces the old
 pdflatex-then-sips step, since sips exists only on macOS.
 
-Run:  python scripts/build_tikz.py [--width 1800]
+Run:  python scripts/build_tikz.py [--project DIR] [--width 1800]
+
+The project defaults to this folder if it holds _quarto.yml, else book/.
 """
 
 import argparse
@@ -16,8 +18,6 @@ from pathlib import Path
 import fitz  # pymupdf
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "book" / "figures-src"
-OUT = ROOT / "book" / "figures"
 
 
 def find_tex(cmd="pdflatex"):
@@ -43,7 +43,12 @@ def find_tex(cmd="pdflatex"):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--width", type=int, default=1800, help="PNG pixel width")
+    ap.add_argument("--project", help="Quarto project folder (default: auto)")
     args = ap.parse_args()
+    proj = Path(args.project).resolve() if args.project else (
+        ROOT if (ROOT / "_quarto.yml").exists() else ROOT / "book")
+    SRC, OUT = proj / "figures-src", proj / "figures"
+    OUT.mkdir(exist_ok=True)
     pdflatex = find_tex()
 
     for tex in sorted(SRC.glob("*.tex")):
