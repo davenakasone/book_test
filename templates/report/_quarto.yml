@@ -1,0 +1,20 @@
+project:
+  output-dir: _output
+  render:
+    - report.qmd             # only this file renders (README/CLAUDE.md don't)
+
+format:
+  # PDF via Typst: fast, no LaTeX install needed.
+  typst:
+    template-partials:
+      - theme/typst-template.typ
+      - theme/typst-show.typ
+    papersize: us-letter
+    fontsize: 11pt           # 12pt or more for older readers
+    # mainfont: "Verdana"    # any installed font; default is Typst's bundled Libertinus Serif
+    # paper-width: 4.5in      # set both for a phone-shaped PDF
+    # paper-height: 8in
+    keep-typ: false
+  html:
+    toc: true
+  docx: default              # for readers and editors who live in Word

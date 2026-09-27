@@ -4,6 +4,7 @@
     python new.py book      ../my-book    --title "My Book" --from ../raw
     python new.py article   ../my-paper   --title "My Paper"
     python new.py datasheet ../xr-2000    --title "XR-2000"
+    python new.py report    ../trip-plan  --title "Trip Plan"
 
 The new folder holds only the document: the template's placeholder content,
 a README for that kind of document, and a CLAUDE.md so a Claude Code
@@ -35,10 +36,12 @@ KINDS = {
     "book": "print + ebook + web book: 6x9 PDF (LaTeX), EPUB3, HTML site",
     "article": "paper, report, or white paper: PDF (Typst), HTML, Word",
     "datasheet": "product datasheet: PDF (Typst), spec tables, curves plotted from CSV",
+    "report": "guide, plan, trip packet, or report: PDF (Typst), HTML, Word; numbers from a model",
 }
 
 # file holding the title line that --title rewrites
-MAIN = {"book": "_quarto.yml", "article": "article.qmd", "datasheet": "datasheet.qmd"}
+MAIN = {"book": "_quarto.yml", "article": "article.qmd", "datasheet": "datasheet.qmd",
+        "report": "report.qmd"}
 
 # placeholder chapters in the book template, replaced by --from
 PLACEHOLDER_CHAPTERS = ["chapters/01-first-chapter.qmd", "chapters/02-second-chapter.qmd"]
@@ -163,7 +166,7 @@ def main():
     raw = None
     if args.raw:
         if args.kind != "book":
-            ap.error("--from works for books so far; for an article or datasheet, "
+            ap.error("--from works for books so far; for an article, datasheet, or report, "
                      "start the project and bring the text into its .qmd")
         raw = Path(args.raw).expanduser().resolve()
         if not raw.is_dir():
@@ -187,7 +190,7 @@ def main():
                       encoding="utf-8")
 
     title = args.title or {"book": "Book Title", "article": "Title of the Paper",
-                           "datasheet": "XR-1000"}[args.kind]
+                           "datasheet": "XR-1000", "report": "Report Title"}[args.kind]
     if args.title:
         set_title(dest / MAIN[args.kind], args.title)
         if args.kind == "datasheet":

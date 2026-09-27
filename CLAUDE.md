@@ -7,10 +7,12 @@
 Two things in one repo:
 
 1. **A $0 document toolkit.** Markdown in, publication-grade output out,
-   through Quarto. Three kinds, each a template in `templates/`:
+   through Quarto. Four kinds, each a template in `templates/`:
    - **book**: 6×9 print PDF (LaTeX), EPUB3, HTML site, PDF/X-1a for print
    - **article**: paper/report PDF (Typst), HTML, Word
    - **datasheet**: product datasheet PDF (Typst), spec tables, curves plotted from CSV
+   - **report**: guide / plan / trip packet PDF (Typst), HTML, Word; numbers from
+     a model via `_variables.yml`, tables from CSV, callouts, phone pages, CJK font
 
    **The tools stay here; documents live elsewhere.** A job names three
    places: raw content (`--from`, only read), a project folder (the
@@ -117,10 +119,10 @@ Writing demo-book prose? Its voice rule is in `parked/README.md`.
 ## Layout
 
 ```
-new.py           start a project: python new.py <book|article|datasheet> <folder> [--from RAW]
+new.py           start a project: python new.py <book|article|datasheet|report> <folder> [--from RAW]
 build.py         build any project (--out, --doctor, --ingram, --check-only)
 check.py         mechanical review of any project → <project>/tool_output/
-templates/       book/ article/ datasheet/ — starter content + per-kind README (<toolkit> filled in)
+templates/       book/ article/ datasheet/ report/ — starter content + per-kind README (<toolkit> filled in)
 book/            the demo book, an ordinary project (_quarto.yml is its source of truth)
   chapters/ appendices/ references.bib latex/ figures-src/ figures/ html/ scripts/make_figures.py
 scripts/         ingest · fix_epub · build_tikz · make_pdfx · extract_feedback

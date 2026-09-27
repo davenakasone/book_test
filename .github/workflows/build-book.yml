@@ -100,7 +100,7 @@ jobs:
           git diff --stat book/figures || true
 
   # Every template must still produce a working project from a clean
-  # machine: new.py -> build.py -> check.py, per kind. Uploads the three
+  # machine: new.py -> build.py -> check.py, per kind. Uploads the four
   # sample PDFs so a template change can be eyeballed from the Actions tab.
   templates:
     runs-on: ubuntu-latest
@@ -141,7 +141,7 @@ jobs:
           annotate() {  # $1 = label, $2 = log file
             python -c 'import sys; sys.stdout.reconfigure(encoding="utf-8"); t = open(sys.argv[2], encoding="utf-8", errors="replace").read()[-6000:]; print("::error title=" + sys.argv[1] + " failed::" + t.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A"))' "$1" "$2"
           }
-          for kind in book article datasheet; do
+          for kind in book article datasheet report; do
             d="$RUNNER_TEMP/t-$kind"
             for step in new build check; do
               log="$RUNNER_TEMP/$kind-$step.log"
@@ -166,6 +166,9 @@ jobs:
           ls "$RUNNER_TEMP"/out-book/*.pdf "$RUNNER_TEMP"/out-book/*.epub "$RUNNER_TEMP"/out-book/html/index.html
           ls "$RUNNER_TEMP"/out-article/article.pdf "$RUNNER_TEMP"/out-article/article.docx "$RUNNER_TEMP"/out-article/html/article.html
           ls "$RUNNER_TEMP"/out-datasheet/datasheet.pdf
+          ls "$RUNNER_TEMP"/out-report/report.pdf "$RUNNER_TEMP"/out-report/report.docx "$RUNNER_TEMP"/out-report/html/report.html
+          grep -q '\$87' "$RUNNER_TEMP"/out-report/html/report.html  # a {{< var >}} number from data/model.json reached the page
+          if grep -q '?var' "$RUNNER_TEMP"/out-report/html/report.html; then exit 1; fi  # no unresolved {{< var >}}
           if ls "$RUNNER_TEMP"/t-*/build.py 2>/dev/null; then exit 1; fi  # projects carry no copies of the tools
       - name: Validate the book template's EPUB
         run: epubcheck "$RUNNER_TEMP"/out-book/*.epub
@@ -176,6 +179,7 @@ jobs:
             ${{ runner.temp }}/out-book/*.pdf
             ${{ runner.temp }}/out-article/article.pdf
             ${{ runner.temp }}/out-datasheet/datasheet.pdf
+            ${{ runner.temp }}/out-report/report.pdf
           retention-days: 30
 
   # On a version tag, attach the built book to a permanent GitHub Release —

@@ -1,0 +1,13 @@
+{
+  "_comment": "TEMPLATE CONTENT: placeholder inputs. The numbers in the report come from here through scripts/make_figures.py; the prose never types them.",
+  "trip": {
+    "days": 5,
+    "people": 4,
+    "miles": 412,
+    "cost_per_mile": 0.21,
+    "lodging_per_night": 145,
+    "slowest_pace_mph": 1.0,
+    "daylight_hours": 13.5
+  },
+  "route_miles": 17.4
+}

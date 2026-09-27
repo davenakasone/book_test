@@ -8,7 +8,7 @@
 The loop this enables:
     edit -> git commit -> python check.py PROJECT -> read report -> repeat
 
-Works on any Quarto project (book, article, datasheet): the project is the
+Works on any Quarto project (book, article, datasheet, report): the project is the
 path you pass, else the current folder. Book projects also get chapter-list
 and per-chapter checks. A `codespell-ignore.txt` in the project allowlists
 words the spell check should accept.

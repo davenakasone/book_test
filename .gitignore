@@ -49,3 +49,6 @@ templates/*/.quarto/
 templates/article/figures/results.svg
 templates/datasheet/figures/efficiency.svg
 templates/datasheet/figures/line-regulation.svg
+templates/report/_variables.yml
+templates/report/tables/
+templates/report/figures/elevation.svg

@@ -82,6 +82,24 @@ def check_prose_unicode(proj):
     print("→ prose-unicode guard: clean")
 
 
+def check_pdf_glyphs(pdfs):
+    """Warn when a PDF embeds a last-resort font: some character had no font
+    on this machine and prints as a placeholder box (Typst on macOS embeds
+    Apple's LastResort face for it; seen with ☐ checklists and CJK text)."""
+    try:
+        import fitz  # pymupdf, in requirements.txt
+    except ImportError:
+        return
+    for pdf in pdfs:
+        with fitz.open(pdf) as doc:
+            pages = sorted({n + 1 for n in range(len(doc))
+                            for f in doc.get_page_fonts(n) if "LastResort" in f[3]})
+        if pages:
+            print(f"WARNING: {pdf.name} has characters no installed font covers "
+                  f"(page {', '.join(map(str, pages))}); they print as boxes. "
+                  "Set a font that has them (mainfont, or cjk-font for Japanese/Chinese).")
+
+
 def find_quarto(required=True):
     hit = shutil.which("quarto")
     if hit:
@@ -168,7 +186,7 @@ def doctor():
     rows = [
         ("python", True, sys.version.split()[0], "everything", ""),
         ("quarto", q_ok, q_ver, "rendering", "python -m pip install -r requirements.txt"),
-        ("typst", t_ok, t_ver, "article + datasheet PDFs", "comes with quarto"),
+        ("typst", t_ok, t_ver, "article, datasheet, report PDFs", "comes with quarto"),
         ("LaTeX", bool(tex), tex or "", "book PDF", "quarto install tinytex"),
         ("pandoc", bool(pandoc or q_ok), pandoc or "via quarto", "scripts/ingest.py", "comes with quarto"),
         ("matplotlib", module("matplotlib"), "", "plotted figures", "pip install -r requirements.txt"),
@@ -234,6 +252,7 @@ def main():
     for p in built:
         print(f"   {p.relative_to(proj)}")
     pdfs = [p for p in built if p.suffix == ".pdf" and not p.name.endswith("-PDFX.pdf")]
+    check_pdf_glyphs(pdfs)
 
     if args.ingram:
         if not pdfs:

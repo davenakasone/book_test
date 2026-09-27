@@ -1,4 +1,4 @@
-# doc_writer — Markdown to books, papers, and datasheets, free and open source
+# doc_writer — Markdown to books, papers, reports, and datasheets, free and open source
 
 Write in Markdown; get publication-grade output. One command builds
 print-ready PDFs, ebooks, websites, and Word files through
@@ -10,6 +10,7 @@ rights, and runs on macOS, Linux, and Windows.
 | **book** | 6×9" print PDF with index and citations, EPUB3 ebook, HTML site, PDF/X-1a for commercial print | LaTeX |
 | **article** | paper, report, or white paper: PDF, HTML, Word; authors, abstract, citations, cross-references | Typst |
 | **datasheet** | product datasheet: title band, spec tables, curves plotted from your CSV data, PRELIMINARY watermark | Typst |
+| **report** | guide, plan, trip packet, or playbook: PDF, HTML, Word; numbers flow from your model into the prose, tables from CSV, callouts, full-page maps, phone-sized pages | Typst |
 
 ## Quick start
 
@@ -36,7 +37,7 @@ Three places, kept apart:
 | project folder | the document as Markdown, figures, settings, review reports | the author (and tools that scaffold) |
 | output (`--out`) | the finished PDF, EPUB, Word, and web version | `build.py`, which adds and overwrites but never deletes |
 
-`python new.py --list` shows the kinds; articles and datasheets start
+`python new.py --list` shows the kinds; articles, datasheets, and reports start
 from placeholder content (`--from` is books-only so far). A project holds
 no copies of the tools, so a fix here reaches every project on the next
 build. Books also need LaTeX once: `quarto install tinytex` (about 150 MB,
@@ -96,7 +97,7 @@ page:
 | Path | What |
 |---|---|
 | `new.py`, `build.py`, `check.py` | start, build, and check a project |
-| `templates/` | the book, article, and datasheet starters |
+| `templates/` | the book, article, datasheet, and report starters |
 | `scripts/` | ingest, EPUB fix, feedback extraction, TikZ, PDF/X |
 | `book/` | the demo book (a project like any other) |
 | `parked/` | publishing material, on hold: specs, economics, author-platform kit, LaTeX memoir comparison |

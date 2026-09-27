@@ -235,3 +235,43 @@ aren't obvious from the code:
 - **CI trap:** under `set -e`, `! cmd` never fails a step (bash exempts
   inverted commands from errexit). Negative checks are written
   `if cmd; then exit 1; fi`.
+
+## Report kind: what sibling documents need (2026-09-27)
+
+A crawl of the claude_stuff sibling projects found every human-read document
+built by hand: about 9,800 lines of reportlab and matplotlib `fig.text`
+layout across seven scripts (trip packets, a decision packet, family
+guides, an action plan, a 57-page bilingual review). They share one shape:
+numbers from a model script, figures from the owner's code, and prose laid
+out line by line. The `report` kind is that shape in Quarto: prose in
+Markdown, numbers through `_variables.yml` (`{{< var >}}`, written by the
+project's `scripts/make_figures.py`), tables from CSV as `{{< include >}}`
+files, callouts, full-page figures, phone-sized pages, and a CJK font.
+
+Traps hit building it:
+
+- **A Typst `set` inside an `if` block ends with the block.** The custom
+  page size did nothing until it moved into the one `set page(..)` call as
+  spread arguments (`..if custom { (width: w, height: h) }`).
+- **Quarto owns some front-matter names.** `page-width` is Quarto's own
+  option (docx/html), so it never reached the Typst template; `page-height`
+  did. Custom template variables need names Quarto doesn't use
+  (`paper-width`, `paper-height`). Check `keep-typ: true` output when a
+  variable seems ignored.
+- **Typst's last-resort fallback hides missing glyphs.** Without a listed
+  font for them, Japanese came out in a Chinese face (STSong) and ☐ came
+  out as Apple's LastResort placeholder box, with no build warning. Fixes:
+  the theme lists DejaVu Sans Mono (bundled) for symbols and takes
+  `cjk-font:`; `build.py` now warns when a PDF embeds LastResort.
+- **Listing absent fonts is noisy.** A fallback list naming fonts for every
+  OS prints "unknown font family" for each missing one on every build; the
+  theme names only bundled fonts plus the one the author chooses.
+- **CJK embedding: Typst gets it right, matplotlib didn't.** matplotlib
+  embeds macOS Hiragino as "CID Type 0C (OT)", which only Preview/poppler
+  draw (a sibling converted the fonts to TrueType to work around it).
+  Typst embeds bare CFF ("CID Type 0C" in `pdffonts`), and pdf.js renders
+  it correctly. Not yet opened in Chrome itself: the Browser pane downloads
+  PDFs instead of showing them.
+- **Fixed-height full-page figures overflow phone pages.** `height=7.5in`
+  spilled off a 4.5×8 in page; `height=75%` is a share of the page body and
+  fits both letter and phone.

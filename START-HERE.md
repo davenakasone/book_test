@@ -1,4 +1,4 @@
-# START HERE — make your own book, paper, or datasheet
+# START HERE — make your own book, paper, report, or datasheet
 
 This repo is a toolkit plus a demo book. The tools stay here. Every job
 names three places, and they stay apart:
@@ -27,6 +27,7 @@ python new.py --list
 python new.py book      ../my-book    --title "My Book" --from ../manuscript
 python new.py article   ../my-paper   --title "My Paper"
 python new.py datasheet ../xr-2000    --title "XR-2000"
+python new.py report    ../trip-plan  --title "Trip Plan"
 ```
 
 Put the folder **outside** this repo; `new.py` gives it its own git
