@@ -20,12 +20,14 @@ extension-less paths, and check.py caption-link and extension fixes.
 
 **Verified:** the four-kind e2e test exits 0 under the Windows-encoding guard
 after c1c78fa. The drop package rebuilds from a fresh copy (8 pp, 0 break).
-gis's tree was untouched (git clean; its .pyc dates from 09-25). CI for
-c1c78fa not yet read.
+gis's tree was untouched (git clean; its .pyc dates from 09-25). CI green
+for c1c78fa.
 
 **Next:**
-- blocked on David/foreman: open the gis session so it can adopt the drop
-  (add `--export`, keep maps, drop its page layout)
+- blocked on foreman: David said gis should be open, but no gis session is
+  in ListAgents; paged `foreman` (2026-09-27) to stand gis up and relay the
+  drop (add `--export`, keep maps, drop its page layout). gis can message
+  doc_writer directly
 - actionable: reproduce gis Pemi ford packet (18 pp, most prose) the same
   way in scratch; then judy, then doris, only inside their `private/` with
   their sessions open
