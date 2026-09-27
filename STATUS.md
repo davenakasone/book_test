@@ -22,8 +22,9 @@ appendices, now with a References page. Releases via `v*` tags.
 **Machine:** quarto 1.9.38 at `~/dkn314/bin/quarto` (off PATH), TinyTeX,
 Typst 0.14.2 (bundled), ghostscript. No Java (epubcheck is CI-only).
 
-**Open:** CI `templates` job failed on Linux at 0046b65 (passes locally on
-macOS); failures now self-report as public annotations. Read them first.
+**CI:** all green at 87480a8, including the templates job and epubcheck on
+the template book. The 0046b65 templates failure never reproduced (cause
+unknown, likely transient). Failures now self-report as public annotations.
 
 **Next candidates:**
 - slides template (reveal.js / PowerPoint) if a real deck needs it
