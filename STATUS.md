@@ -24,14 +24,13 @@ gis's tree was untouched (git clean; its .pyc dates from 09-25). CI green
 for c1c78fa.
 
 **Next:**
-- in gis's hands: gis is up (2026-09-27) with the foreman; the drop and
-  B-260927-8 ask it to add `--export`, keep its maps, and drop its page
-  layout. Answer gis's questions when it messages doc_writer
+- actionable, FIRST (blocks gis's full swap): letter + phone PDF from one
+  report source in one build (a Quarto profile + build.py flag); message
+  gis when it lands. gis (up, pending David's go) is adding `--export` per
+  HANDOFF.md, additively; it keeps its PDF + phone PNG until then
 - actionable: reproduce gis Pemi ford packet (18 pp, most prose) the same
   way in scratch; then judy, then doris, only inside their `private/` with
   their sessions open
-- actionable (gap found): a phone variant from the same source (a Quarto
-  profile with `paper-width`), since gis also ships a phone page
 - actionable: `--from` for article/report (PLAN.md 2.2); slides (2.1)
 - actionable: Windows runner in CI (PLAN.md 2.4)
 - 2026-10-19: `ubuntu-latest` → Ubuntu 26 (DEADLINES.md); check CI after
