@@ -14,6 +14,7 @@ format:
     # mainfont: "Verdana"    # any installed font; default is Typst's bundled Libertinus Serif
     # paper-width: 4.5in      # set both for a phone-shaped PDF
     # paper-height: 8in
+    # page-margin: 0.5in     # tighter margins for map-heavy documents
     keep-typ: false
   html:
     toc: true

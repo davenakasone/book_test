@@ -39,7 +39,8 @@ DROP_RE = re.compile("[⁰-₟←↔⇐-⇿]")
 REF_RE = re.compile(r"@(sec|fig|tbl|eq)-[\w-]+")
 ANCHOR_RE = re.compile(r"\{#((?:sec|fig|tbl|eq)-[\w-]+)")
 CITE_RE = re.compile(r"\[@([\w:-]+)[\],; ]|[^\w\[]@([\w:-]+)")
-IMG_RE = re.compile(r"!\[[^\]]*\]\(([^)\s]+)\)(\{[^}]*\})?")
+# the caption may hold one level of brackets: a link, [@cite], or [span]{.class}
+IMG_RE = re.compile(r"!\[(?:[^\[\]]|\[[^\[\]]*\])*\]\(([^)\s]+)\)(\{[^}]*\})?")
 TODO_RE = re.compile(r"\b(TODO|FIXME|XXX|TK)\b")
 
 
@@ -185,7 +186,10 @@ def main():
             if re.match(r"https?://", path):
                 continue
             img = (proj / path.lstrip("/")) if path.startswith("/") else (q.parent / path)
-            if not img.resolve().exists():
+            # no extension: Quarto picks one per format (default-image-extension)
+            found = img.resolve().exists() or (not img.suffix and any(
+                img.with_suffix(e).exists() for e in (".pdf", ".png", ".jpg", ".jpeg", ".svg")))
+            if not found:
                 add("BREAK", q, f"image missing on disk: {path}")
             if "alt=" not in attrs:
                 add("WARN", q, f"image without fig-alt (accessibility): {path}")

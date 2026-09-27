@@ -69,6 +69,17 @@ its output as an image, and put it on a page with `![caption](path)`.
 - **Phones:** set `paper-width: 4.5in` and `paper-height: 8in` in
   `_quarto.yml` for a PDF shaped like a phone screen; margins shrink to
   match.
+- **Maps and big figures:** `page-margin: 0.5in` in `_quarto.yml` widens
+  every page's text area (letter default: 0.85 in at the sides), so a map
+  prints larger.
+- **Maps with labels:** export each map twice, `map.pdf` (labels stay
+  vector: sharp when zoomed, searchable) and `map.jpg`, and write
+  `![caption](figures/map)` with no extension. Set
+  `default-image-extension: pdf` under `typst:` and `jpg` under `html:` and
+  `docx:`, and each format picks its file. A matplotlib PDF over satellite
+  tiles stores the tiles losslessly (often 10x a JPEG); re-encode them with
+  `gs -sDEVICE=pdfwrite -dAutoFilterColorImages=false
+  -dColorImageFilter=/DCTEncode -dNOPAUSE -dBATCH -sOutputFile=map.pdf raw.pdf`.
 - **Names with marks** (Hawaiʻi, Kōkua, São Paulo) work in the default
   font.
 - **Japanese or Chinese:** add `cjk-font:` to the front matter with a

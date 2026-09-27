@@ -41,6 +41,9 @@ $endif$
 $if(paper-height)$
   paper-height: $paper-height$,
 $endif$
+$if(page-margin)$
+  page-margin: $page-margin$,
+$endif$
 $if(section-numbering)$
   sectionnumbering: "$section-numbering$",
 $endif$

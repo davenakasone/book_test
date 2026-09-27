@@ -7,7 +7,8 @@
 // version / date / "Page X of Y", optional diagonal watermark (DRAFT,
 // TEMPLATE, ...). Ragged-right body text, easier to read than justified on
 // a phone or for older readers. Page size is letter unless the front matter
-// gives `paper-width` and `paper-height` (e.g. a phone-shaped PDF).
+// gives `paper-width` and `paper-height` (e.g. a phone-shaped PDF), and
+// the margins shrink with it unless `page-margin` sets them.
 
 #let report(
   title: none,
@@ -25,6 +26,7 @@
   region: "US",
   paper-width: none,     // both set: a custom page (e.g. 4.5in x 8in for phones)
   paper-height: none,
+  page-margin: none,     // e.g. 0.5in: more room for maps; default depends on page size
   sectionnumbering: none,
   doc,
 ) = {
@@ -49,7 +51,8 @@
 
   set page(
     ..if custom { (width: paper-width, height: paper-height) },
-    margin: if small { (x: 0.4in, top: 0.6in, bottom: 0.55in) }
+    margin: if page-margin != none { page-margin }
+            else if small { (x: 0.4in, top: 0.6in, bottom: 0.55in) }
             else { (x: 0.85in, top: 0.9in, bottom: 0.8in) },
     header: context {
       if here().page() > 1 {

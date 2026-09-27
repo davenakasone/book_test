@@ -275,3 +275,40 @@ Traps hit building it:
 - **Fixed-height full-page figures overflow phone pages.** `height=7.5in`
   spilled off a 4.5×8 in page; `height=75%` is a share of the page body and
   fits both letter and phone.
+
+## First reproduction: a map-heavy trip packet (2026-09-27)
+
+A sibling's 6-page matplotlib trip packet, rebuilt as a `report` project in
+scratch space (its content stays out of this repo). The owner's analysis
+and maps stayed the owner's; the report read an export (numbers JSON, table
+CSV, map images) and owned the prose, tables, and a chart.
+
+- **Score: not a line-count win.** The hand-rolled layout was 71 lines of
+  pure layout (241 counting two mixed page functions); the report took
+  140 lines of qmd + 275 of `make_figures.py`, plus a 107-line export
+  prototype the owner would adopt. The wins: every number from the model
+  (the original hard-coded its tide and daylight tables as strings), real
+  text at 10 pt instead of 6-7 pt, HTML and Word for free, the plan's
+  Markdown tables and bullets kept instead of stripped, and 1.8 MB instead
+  of 3.7 MB. Costs: the page-1 map prints 5.6 in square instead of 8.2 in,
+  and 8 pages instead of 6.
+- **Letter margins cap a map at 6.8 in.** Added `page-margin:` to the
+  report template (0.5 in gives 7.5 in).
+- **Rasterized maps lose their labels as text.** Fixed with PDF maps and
+  extension-less image paths (template README, "Maps with labels").
+- **A table cell starting with `+ ` becomes a list** ("1." in the PDF).
+  Don't lead a cell with `+`, `-`, or `1.`.
+- **Subfigure widths:** a figure div with `layout="[[56,44]]"` stacked its
+  two panels in Typst; `layout-ncol=2` put them side by side. A plain div
+  (image + table) with `layout="[[35,65]]"` worked.
+- **`check.py` read a link inside an image caption as the image path**
+  (false BREAK); it now allows one level of brackets in a caption and
+  resolves extension-less image paths.
+- **Double rounding in an export shows.** Rounding to 3 decimals and then
+  printing `:.1f` turned 66.25 into 66.2 where the original said 66.3.
+  Exports carry full precision; the report rounds once.
+- **Tide hi/lo from 6-minute predictions:** a parabola through the peak
+  sample and its neighbours recovers NOAA's high/low times to the minute
+  and heights to 0.1 ft (all 8 times and 7 heights the original printed);
+  take the first sample of a tie.
+
