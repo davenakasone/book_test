@@ -92,6 +92,30 @@ gone, so a Windows (or Linux) collaborator can build everything:
 - `requirements.txt` covers the whole Python side, including quarto-cli
   itself (`pip install quarto-cli` works on Windows too — no admin).
 
+**What this pass missed: text encoding (found 2026-09-27 by another
+session's fresh-clone Windows run).** It was a code read, not a Windows
+run, and CI is ubuntu-only, so "any OS" was never tested. Every
+`read_text()`/`write_text()`/`open()` used the locale encoding, which is
+cp1252 on Windows:
+
+- the prose-unicode guard **crashed** on `10¹⁷` (`⁷` is UTF-8 `e2 81 b7`,
+  and cp1252 leaves 0x81 undefined) and was **blind** to `↔` (mojibake);
+- `→` progress lines crashed any piped or redirected run
+  (`UnicodeEncodeError`), which is how agents run tools;
+- check.py would crash writing a report that quotes `Ω`;
+- `postrender-fix-epub.py` printed the EPUB name, so a book titled in
+  Greek or CJK failed `quarto render` (found by the guard below, not the
+  report).
+
+Fix: `encoding="utf-8"` on every text read, write, and subprocess
+capture; every tool's `main()` reconfigures stdout to UTF-8. **Guard:**
+CI's lint and templates jobs set `PYTHONWARNDEFAULTENCODING=1`,
+`PYTHONWARNINGS=error::EncodingWarning:__main__`, and
+`PYTHONIOENCODING=cp1252`. That makes a missing `encoding=` fatal and gives
+stdout the encoding of a Windows pipe, so both failure classes reproduce on
+Linux or macOS. Before the fix, both reproduced locally on
+`build.py --check-only`.
+
 ## One-command build + CI (2026-07-04)
 
 - **`build.py`** at repo root — one command runs figures → TikZ → `quarto

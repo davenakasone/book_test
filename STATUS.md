@@ -3,6 +3,14 @@
 NEEDS DAVID (INSTALL): `brew install gh && gh auth login` — lets sessions read CI
 logs (the public API returns 403 for logs; this session diagnosed CI blind).
 
+**2026-09-27 — Windows encoding fix.** A fresh-clone Windows run from another
+session found cp1252 bugs: the glyph guard crashed on `¹⁷` and missed `↔`, and
+`→` prints crashed piped runs. All text I/O is now explicit UTF-8. CI's lint and
+templates jobs run a Windows-encoding guard, which also caught a fourth bug
+(EPUB post-render crashed on non-cp1252 book titles). NOTES.md, Windows pass.
+Open: the report's structural points (copied tools don't pick up fixes, ingest
+defaults into the demo book) await David's call.
+
 **2026-09-26 — v1.7: from book pipeline to document toolkit.**
 `python new.py <book|article|datasheet> <folder>` makes a self-contained
 project (template content, copies of build/check/review tools, a README,
@@ -12,9 +20,7 @@ abstract, citations), datasheet template (Typst theme: title band,
 watermark, spec tables, curves plotted from CSV), book starter (the demo's
 proven 6×9/EPUB/HTML config without the satire), `build.py --doctor`,
 `build.py`/`check.py`/`ingest.py` work on any project folder, CI `templates`
-job builds all three. Fixed: book reference list had no heading (ran into
-the last appendix in the demo; `references.qmd` added). Reviewed by an adversarial
-verifier + a fresh-clone newcomer run; all findings fixed (LOG.md).
+job builds all three. Fixes and review in LOG.md.
 
 **Demo book:** *The Starlight Engine*, 21 chapters, 7 parts, 3
 appendices, now with a References page. Releases via `v*` tags.

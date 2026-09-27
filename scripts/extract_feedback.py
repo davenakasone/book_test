@@ -64,6 +64,7 @@ def docx_comments(docx: Path):
 
 
 def main():
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows pipes default to cp1252
     if len(sys.argv) < 2:
         sys.exit("usage: python scripts/extract_feedback.py feedback/<round-dir>/")
     rd = Path(sys.argv[1])
@@ -90,12 +91,12 @@ def main():
                 lines.append(f"- **{author}**: {text}")
             lines.append("")
         elif f.suffix.lower() in (".txt", ".md") and f.name != "extracted.md":
-            body = f.read_text().strip()
+            body = f.read_text(encoding="utf-8").strip()
             n += 1
             lines.append(f"## {f.name} (verbatim)\n\n{body}\n")
 
     out = rd / "extracted.md"
-    out.write_text("\n".join(lines) + "\n")
+    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"{n} item(s) → {out}")
     print("Next: open Claude Code and run  /feedback " + str(rd))
 

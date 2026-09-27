@@ -34,7 +34,7 @@ Two things in one repo:
 and `python check.py` (exit 0; TEMPLATE-CONTENT warnings are expected). CI's
 `templates` job does the same on every push.
 
-## Build (any OS — macOS / Linux / Windows)
+## Build (any OS — macOS / Linux / Windows; CI runs Linux only, with a Windows-encoding guard)
 
 ```sh
 python -m pip install -r requirements.txt   # pinned deps, includes quarto-cli
@@ -95,6 +95,13 @@ Windows use PowerShell; `py` if `python` isn't on PATH.
   correctly. A template must never pass as a real document.
 - Book infrastructure is single-sourced from `book/` (`postrender-fix-epub.py`,
   `latex/`); `new.py` copies it. Fix it there.
+- **UTF-8 explicitly, everywhere.** Every text read, write, and subprocess
+  capture passes `encoding="utf-8"`, and every script's `main()` starts
+  with `sys.stdout.reconfigure(encoding="utf-8", errors="replace")`.
+  Windows defaults to cp1252 and breaks on `¹⁷`, `→`, and `Ω` (NOTES.md,
+  Windows pass). CI enforces this; to reproduce locally, set
+  `PYTHONWARNDEFAULTENCODING=1 PYTHONWARNINGS=error::EncodingWarning:__main__
+  PYTHONIOENCODING=cp1252` and pipe the output.
 
 ## Layout
 
@@ -119,6 +126,10 @@ PUBLISHING.md    KDP/IngramSpark/D2D specs   BUSINESS.md  money reality   LICENS
   `~/dkn314/bin/quarto` (pip `quarto-cli`, **not on PATH** — `which quarto`
   misses it; `build.py` finds it next to the interpreter). TinyTeX is in
   `~/Library/TinyTeX`. No Java here, so epubcheck runs in CI only.
+- dkn314 is shared: don't run `pip install -r requirements.txt` into it
+  blind. Its `==` pins and quarto-cli's jupyter dependencies can move
+  packages other projects use. Every pin matched on 2026-09-27; compare
+  with `pip show` first.
 - This folder sits inside David's `claude_stuff/` foreman ecosystem; the
   foreman index (`../CLAUDE.md`) is not ours to edit.
 - Pushes to the GitHub remote are authorized by David (2026-07-02, again

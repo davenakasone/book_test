@@ -67,21 +67,26 @@ def convert(src, dst):
              f"--extract-media={MEDIA}", "-o", str(dst)],
             check=True,
         )
-        body = dst.read_text()
+        body = dst.read_text(encoding="utf-8")
         # ensure a top-level H1 title; pandoc rarely emits one from docx
         if not re.match(r"^\s*#\s", body):
-            dst.write_text(f"# {title}\n\n{body}")
+            dst.write_text(f"# {title}\n\n{body}", encoding="utf-8")
     elif ext in TEXT_EXT:
-        body = src.read_text()
+        raw = src.read_bytes()
+        try:  # UTF-8 (Notepad adds a BOM), else legacy Windows "ANSI"
+            body = raw.decode("utf-8-sig")
+        except UnicodeDecodeError:
+            body = raw.decode("cp1252", errors="replace")
         if not re.match(r"^\s*#\s", body):
             body = f"# {title}\n\n{body}"
-        dst.write_text(body)
+        dst.write_text(body, encoding="utf-8")
     else:
         return False
     return True
 
 
 def main():
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows pipes default to cp1252
     global INCOMING, CHAPTERS, MEDIA
     ap = argparse.ArgumentParser(description="Turn incoming/ files into chapters.")
     ap.add_argument("--project", help="book project folder (default: auto)")

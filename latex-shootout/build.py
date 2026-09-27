@@ -36,6 +36,7 @@ def find_tex(cmd="pdflatex"):
 
 
 def main():
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows pipes default to cp1252
     BUILD.mkdir(exist_ok=True)
     pdflatex = find_tex()
     for _pass in (1, 2):
@@ -44,7 +45,7 @@ def main():
              "giza-memoir.tex"],
             cwd=HERE,
             capture_output=True,
-            text=True,
+            encoding="utf-8", errors="replace",
         )
         if proc.returncode != 0 and not (BUILD / "giza-memoir.pdf").exists():
             print(proc.stdout[-2000:])

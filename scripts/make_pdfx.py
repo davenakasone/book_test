@@ -95,6 +95,7 @@ def verify(out_pdf):
 
 
 def main():
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows pipes default to cp1252
     args = sys.argv[1:]
     src = Path(args[0]) if len(args) >= 1 else DEFAULT_IN
     dst = Path(args[1]) if len(args) >= 2 else DEFAULT_OUT
@@ -105,7 +106,7 @@ def main():
     gs = find_gs()
     icc = find_cmyk_icc(gs)
 
-    with tempfile.NamedTemporaryFile("w", suffix=".ps", delete=False) as f:
+    with tempfile.NamedTemporaryFile("w", suffix=".ps", delete=False, encoding="utf-8") as f:
         f.write(pdfx_def(icc, src.stem.replace("-", " ")))
         defps = f.name
 
@@ -124,7 +125,7 @@ def main():
         defps, str(src),
     ]
     print(f"→ gs {gs}\n→ CMYK profile {icc}\n→ converting {src.name} → {dst.name}")
-    proc = subprocess.run(cmd, capture_output=True, text=True)
+    proc = subprocess.run(cmd, capture_output=True, encoding="utf-8", errors="replace")
     Path(defps).unlink(missing_ok=True)
     if proc.returncode != 0 or not dst.exists():
         print(proc.stdout[-1500:])

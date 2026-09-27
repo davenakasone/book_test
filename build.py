@@ -59,7 +59,7 @@ def sources(proj):
 
 def uses_latex(proj):
     """True when the project renders a LaTeX PDF (format `pdf`, not `typst`)."""
-    yml = (proj / "_quarto.yml").read_text()
+    yml = (proj / "_quarto.yml").read_text(encoding="utf-8")
     return bool(re.search(r"^\s*(format:\s*)?pdf\s*:|^\s*format:\s*pdf\s*$", yml, re.M))
 
 
@@ -70,7 +70,7 @@ def check_prose_unicode(proj):
         return
     offenders = []
     for qmd in sources(proj):
-        for lineno, line in enumerate(qmd.read_text().splitlines(), 1):
+        for lineno, line in enumerate(qmd.read_text(encoding="utf-8").splitlines(), 1):
             prose = re.sub(r"\$[^$]*\$", "", line)  # math-mode glyphs render fine
             for m in _DROP_RE.finditer(prose):
                 offenders.append(
@@ -118,7 +118,8 @@ def run(desc, cmd, cwd=ROOT):
 
 
 def output_dir(proj):
-    m = re.search(r"^\s*output-dir:\s*(\S+)", (proj / "_quarto.yml").read_text(), re.M)
+    yml = (proj / "_quarto.yml").read_text(encoding="utf-8")
+    m = re.search(r"^\s*output-dir:\s*(\S+)", yml, re.M)
     return proj / m.group(1) if m else proj
 
 
@@ -126,7 +127,8 @@ def doctor():
     """Report each tool: found or not, and what needs it."""
     def cmd_ok(*cmd):
         try:
-            r = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+            r = subprocess.run(cmd, capture_output=True, encoding="utf-8", errors="replace",
+                               timeout=30)
             out = (r.stdout or r.stderr).strip().splitlines()
             return r.returncode == 0, (out[0] if out else "")
         except (OSError, subprocess.TimeoutExpired):
@@ -169,7 +171,8 @@ def doctor():
 
 
 def main():
-    sys.stdout.reconfigure(line_buffering=True)  # our lines interleave with quarto's
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace",  # cp1252 on Windows pipes
+                           line_buffering=True)  # our lines interleave with quarto's
     ap = argparse.ArgumentParser()
     ap.add_argument("project", nargs="?", help="Quarto project folder (default: auto)")
     ap.add_argument("--skip-figures", action="store_true")

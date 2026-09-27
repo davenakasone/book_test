@@ -41,6 +41,7 @@ def find_tex(cmd="pdflatex"):
 
 
 def main():
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows pipes default to cp1252
     ap = argparse.ArgumentParser()
     ap.add_argument("--width", type=int, default=1800, help="PNG pixel width")
     ap.add_argument("--project", help="Quarto project folder (default: auto)")
@@ -56,7 +57,7 @@ def main():
             [pdflatex, "-interaction=nonstopmode", tex.name],
             cwd=SRC,
             capture_output=True,
-            text=True,
+            encoding="utf-8", errors="replace",
         )
         if proc.returncode != 0:
             print(proc.stdout[-2000:])

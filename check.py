@@ -23,6 +23,7 @@ Exit code: 1 if any BREAK-severity finding (CI-able), else 0.
 import argparse
 import datetime
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -59,7 +60,7 @@ def workspace(proj):
 def git(cwd, *args):
     try:
         return subprocess.run(["git", *args], cwd=cwd, capture_output=True,
-                              text=True, check=True).stdout.strip()
+                              encoding="utf-8", errors="replace", check=True).stdout.strip()
     except Exception:
         return ""
 
@@ -68,7 +69,7 @@ def last_run_sha(out):
     log = out / "log.jsonl"
     if not log.exists():
         return None
-    for line in reversed(log.read_text().strip().splitlines()):
+    for line in reversed(log.read_text(encoding="utf-8").strip().splitlines()):
         e = json.loads(line)
         if e.get("type", "check") == "check":
             return e["sha"]
@@ -103,6 +104,7 @@ def front_matter(text):
 
 
 def main():
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows pipes default to cp1252
     ap = argparse.ArgumentParser()
     ap.add_argument("project", nargs="?", help="Quarto project folder (default: auto)")
     ap.add_argument("--changed-only", action="store_true")
@@ -115,7 +117,7 @@ def main():
     out_dir = ws / "tool_output"
     out_dir.mkdir(exist_ok=True)
     top = Path(git(proj, "rev-parse", "--show-toplevel") or ws)
-    yml = (proj / "_quarto.yml").read_text()
+    yml = (proj / "_quarto.yml").read_text(encoding="utf-8")
     is_book = bool(re.search(r"^\s*type:\s*book\b", yml, re.M))
     latex = bool(re.search(r"^\s*(format:\s*)?pdf\s*:|^\s*format:\s*pdf\s*$", yml, re.M))
 
@@ -129,7 +131,7 @@ def main():
 
     qmds = sorted(q for q in proj.rglob("*.qmd")
                   if not SKIP_DIRS & set(q.relative_to(proj).parts))
-    texts = {q: q.read_text() for q in qmds}
+    texts = {q: q.read_text(encoding="utf-8") for q in qmds}
     clean = {q: scrub(t) for q, t in texts.items()}
     findings = []  # (severity, file, msg)
 
@@ -220,7 +222,8 @@ def main():
                *(str(b) for b in bibs if b.exists())]
         if ignore.exists():
             cmd[1:1] = ["-I", str(ignore)]
-        cs_out = subprocess.run(cmd, capture_output=True, text=True).stdout
+        cs_out = subprocess.run(cmd, capture_output=True, encoding="utf-8", errors="replace",
+                                env={**os.environ, "PYTHONIOENCODING": "utf-8"}).stdout
         for line in cs_out.strip().splitlines():
             # format: path:line: word ==> correction
             parts = line.split(":", 2)
@@ -237,7 +240,8 @@ def main():
             urls |= set(re.findall(r"https?://[^\s)\]}>\"']+", texts[q]))
         for bib in bibs:
             if bib.exists():
-                urls |= set(re.findall(r"https?://[^\s)\]}>\"']+", bib.read_text()))
+                bib_text = bib.read_text(encoding="utf-8")
+                urls |= set(re.findall(r"https?://[^\s)\]}>\"']+", bib_text))
         for u in sorted(urls):
             try:
                 req = urllib.request.Request(u, method="HEAD",
@@ -259,7 +263,7 @@ def main():
     if existing:
         keys = set()
         for b in existing:
-            keys |= set(re.findall(r"^@\w+\{([^,]+),", b.read_text(), re.M))
+            keys |= set(re.findall(r"^@\w+\{([^,]+),", b.read_text(encoding="utf-8"), re.M))
         for c in sorted(cites - keys):
             add("BREAK", existing[0], f"cited key not in bib: @{c}")
         for k in sorted(keys - cites):
@@ -303,8 +307,8 @@ def main():
         lines.append("clean. render it: `python build.py`")
 
     report = out_dir / f"report-{ts}-{sha}.md"
-    report.write_text("\n".join(lines) + "\n")
-    with (out_dir / "log.jsonl").open("a") as f:
+    report.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    with (out_dir / "log.jsonl").open("a", encoding="utf-8") as f:
         f.write(json.dumps({"type": "check", "ts": ts, "sha": sha, "dirty": dirty, "words": total_words, **counts}) + "\n")
 
     print("\n".join(lines))

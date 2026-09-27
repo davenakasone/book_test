@@ -40,7 +40,7 @@ plt.rcParams.update({
 
 
 def plot(csv_name, svg_name, ylabel, logx):
-    with open(DATA / csv_name, newline="") as f:
+    with open(DATA / csv_name, newline="", encoding="utf-8") as f:
         rows = list(csv.reader(f))
     header, body = rows[0], [[float(v) for v in r] for r in rows[1:] if r]
     x = [r[0] for r in body]

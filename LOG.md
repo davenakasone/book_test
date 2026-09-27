@@ -3,6 +3,15 @@
 Moved out of CLAUDE.md's STATUS block at the 2026-09-26 split (house rule
 6). Current state lives in STATUS.md; standing rules in CLAUDE.md.
 
+**2026-09-27 — Windows encoding fix.** Every text read, write, and subprocess
+capture passes `encoding="utf-8"`, and every script's `main()` reconfigures
+stdout to UTF-8. Fixed the four cp1252 failure modes in NOTES.md (Windows pass).
+CI guard env: `PYTHONWARNDEFAULTENCODING=1`, EncodingWarning as an error in
+`__main__`, `PYTHONIOENCODING=cp1252`. Verified locally under the guard,
+output piped: all three kinds build and check clean (book titled `Ωmega`), the
+glyph guard flags U+2077 and U+2194, check.py quotes `Ω` without crashing, and
+ingest, extract_feedback, build_tikz, shootout, and make_pdfx all exit 0.
+
 **2026-09-26 — v1.7: document toolkit.** `new.py <book|article|datasheet>
 <folder>` → self-contained project (template content, copies of
 build/check/ingest/feedback tools, per-kind README, generated CLAUDE.md,

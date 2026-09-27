@@ -106,31 +106,34 @@ def copy(src, dst):
 
 
 def set_title(path, title):
-    text = path.read_text()
+    text = path.read_text(encoding="utf-8")
     quoted = title.replace("\\", "\\\\").replace('"', '\\"')  # YAML double-quoted
     new, n = re.subn(r'^(\s*title:\s*)".*"', lambda m: f'{m.group(1)}"{quoted}"',
                      text, count=1, flags=re.M)
     if n:
-        path.write_text(new)
+        path.write_text(new, encoding="utf-8")
 
 
 def rename_part(dest, part):
     """Datasheet: the placeholder part number appears in the body, the doc
     number, and the block diagram, not just the title."""
     qmd = dest / "datasheet.qmd"
-    text = qmd.read_text().replace("DS-XR1000", f"DS-{part}").replace("XR-1000", part)
-    qmd.write_text(text)
+    text = qmd.read_text(encoding="utf-8")
+    text = text.replace("DS-XR1000", f"DS-{part}").replace("XR-1000", part)
+    qmd.write_text(text, encoding="utf-8")
     for svg in (dest / "figures").glob("*.svg"):
-        svg.write_text(svg.read_text().replace("XR-1000", html.escape(part)))
+        art = svg.read_text(encoding="utf-8").replace("XR-1000", html.escape(part))
+        svg.write_text(art, encoding="utf-8")
 
 
 def in_git_repo(path):
     r = subprocess.run(["git", "rev-parse", "--is-inside-work-tree"], cwd=path,
-                       capture_output=True, text=True)
+                       capture_output=True, encoding="utf-8", errors="replace")
     return r.returncode == 0
 
 
 def main():
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows pipes default to cp1252
     ap = argparse.ArgumentParser(description="Start a new document project.")
     ap.add_argument("kind", nargs="?", choices=sorted(KINDS))
     ap.add_argument("dest", nargs="?", help="folder to create (outside this repo)")
@@ -159,7 +162,7 @@ def main():
                                                   "tool_output", "*_files"))
     for src, rel in TOOLS + EXTRA_TOOLS.get(args.kind, []):
         copy(ROOT / src, dest / rel)
-    (dest / ".gitignore").write_text(GITIGNORE)
+    (dest / ".gitignore").write_text(GITIGNORE, encoding="utf-8")
 
     title = args.title or {"book": "Book Title", "article": "Title of the Paper",
                            "datasheet": "XR-1000"}[args.kind]
@@ -174,7 +177,8 @@ def main():
                       "figures/typical-application.svg by hand.")
     if args.kind == "book":
         (dest / "incoming").mkdir()  # the author's raw files go here (gitignored)
-    (dest / "CLAUDE.md").write_text(CLAUDE_MD.format(title=title, kind=args.kind))
+    (dest / "CLAUDE.md").write_text(CLAUDE_MD.format(title=title, kind=args.kind),
+                                    encoding="utf-8")
 
     # generate plotted figures now, so a bare `quarto render` works too
     figs = dest / "scripts" / "make_figures.py"

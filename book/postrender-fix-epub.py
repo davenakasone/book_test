@@ -48,6 +48,7 @@ def fix(epub: Path):
 
 
 def main():
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows pipes default to cp1252
     epubs = list(OUT.glob("*.epub"))
     if not epubs:
         return  # html/pdf-only render; nothing to do
