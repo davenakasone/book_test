@@ -18,10 +18,8 @@ takes more lines than gis's layout code (NOTES, "First reproduction").
 Toolkit gains (c1c78fa, pushed): `page-margin:`, vector PDF maps via
 extension-less paths, and check.py caption-link and extension fixes.
 
-**Verified:** the four-kind e2e test exits 0 under the Windows-encoding guard
-after c1c78fa. The drop package rebuilds from a fresh copy (8 pp, 0 break).
-gis's tree was untouched (git clean; its .pyc dates from 09-25). CI green
-for c1c78fa.
+**Verified:** four-kind e2e exits 0 under the Windows-encoding guard, and CI
+is green, after c1c78fa. The drop rebuilds from a fresh copy (8 pp, 0 break).
 
 **Next:**
 - actionable, FIRST (blocks gis's full swap): letter + phone PDF from one
@@ -38,8 +36,8 @@ for c1c78fa.
 - NEEDS DAVID (RULING): two new documents, neither requested yet: a falcon
   ID write-up for its observer group (article kind), and the Christmas trip
   packet once booked (birds + gis → report, the first trip packet born here)
-- actionable: `--from` for article/report (PLAN.md 2.2); slides (2.1)
-- actionable: Windows runner in CI (PLAN.md 2.4)
-- 2026-10-19: `ubuntu-latest` → Ubuntu 26 (DEADLINES.md); check CI after
-- when the kinds settle: widen the GitHub repo description to say "reports"
+- actionable: `--from` for article/report (PLAN.md 2.2); slides (2.1);
+  Windows runner in CI (2.4)
+- 2026-10-19: `ubuntu-latest` → Ubuntu 26 (DEADLINES.md); check CI after.
+  When the kinds settle: widen the GitHub repo description to say "reports"
 - parked: publishing and demo polish (`parked/README.md`)
