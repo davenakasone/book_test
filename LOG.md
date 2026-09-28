@@ -16,7 +16,10 @@ carries `doc_writer (<folder>) via <engine>` in Creator;
 80 PDFs, 10 hand-laid). CI asserts the phone page size, the hidden section,
 the mark, and the census on a two-page matplotlib PDF. Moved two stale
 untracked PDFs (an old demo copy at the root, a parked shootout render)
-into scratch space. NOTES "Phone version and the source mark".
+into scratch space. NOTES "Phone version and the source mark". CI green
+on 0fee6b1 (the red run before it, 60346ec, was a TinyTeX-install 403
+from GitHub's API, not our code). Handoff dropped in gis's `in/` (gis
+closed); house rule + /board census line pitched to the foreman.
 
 **2026-09-27 — first sibling reproduction (a map-heavy trip packet).**
 Rebuilt a sibling's 6-page matplotlib packet as a `report` project in
