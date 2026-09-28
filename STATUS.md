@@ -1,40 +1,40 @@
-# STATUS — 2026-09-27
+# STATUS — 2026-09-28
 
 **Where it stands:** `doc_writer`, one document toolkit for every
-claude_stuff project (David, 2026-09-27: "crawl claude_stuff … unify doc
-writing into one tool"). A job is `new.py <kind> <project> [--from RAW]` →
+claude_stuff project. A job is `new.py <kind> <project> [--from RAW]` →
 `build.py <project> --out OUT` → `check.py <project>`. Kinds: book, article,
-datasheet, report. PLAN.md Phases 0 and 1 are done; publishing is parked.
-**Finish line (David):** once every sibling's document flow runs here and I
-judge it good, message `foreman`, who tells every session to come here for
-documents. Not yet: 1 of 4 sibling documents reproduced.
+datasheet, report. **Finish line (David):** once every sibling's document
+flow runs here and I judge it good, message `foreman`, who tells every
+session to come here for documents. Not yet: 1 of 4 sibling documents ported.
 
-**Reproduction 1 done: gis storm-weekend packet** (drop + HANDOFF.md at
-`gis/in/from_doc_writer_2026-09-27_storm/`). 8 pp / 1.8 MB against gis's
-6 pp / 3.7 MB; every number a var; HTML + Word too. Costs: a smaller page-1
-map, and more lines than gis's layout code (NOTES, "First reproduction").
-Toolkit gains (c1c78fa): `page-margin:`, vector PDF maps, check.py fixes.
+**David's ruling 2026-09-28 (option A): stop PDFs with no tooling behind
+them.** Done in the toolkit: every PDF `build.py` makes carries
+`doc_writer (<folder>) via <engine>` in Creator; `scripts/pdf_census.py`
+counts PDFs by origin. First run over claude_stuff: 80 PDFs, 10 hand-laid
+(2 are pre-mark doc_writer builds in gis). Still to do: the pitch below.
 
-**Verified:** four-kind e2e exits 0 under the Windows-encoding guard, and CI
-is green, after c1c78fa. The drop rebuilds from a fresh copy (8 pp, 0 break).
+**Phone version done:** each `_quarto-<name>.yml` profile builds one more PDF
+(`report-phone.pdf`, 4.5 x 8 in); the report template ships one. Theme fixes
+(long tables break, height-sized maps shrink, phone hyphenation) kept the
+gis storm packet's letter PDF pixel-identical, 8 of 8 pages (scratch copy).
+
+**Verified:** four-kind e2e exits 0 under the Windows-encoding guard (a book
+`_quarto-large.yml` built too: 10.9 → 14.3 pt). The new CI step passes
+locally. CI on push: check it.
 
 **Next:**
-- actionable, FIRST (blocks gis's full swap): letter + phone PDF from one
-  report source in one build (a Quarto profile + build.py flag); message
-  gis when it lands. gis adopted the export (gis 9f1c6b5): report at
-  gis/reports/storm_weekend/, 8 pp / 1.57 MB; it keeps its PDF + phone PNG
-  until the phone page exists
-- reproduction order is by trigger (survey 2026-09-27): port a document
-  when it next needs a real edit. doris's action plan by 10-14 (a figure it
-  quotes changes then; page `foreman` ~10-07 to open doris); judy's guide
-  when its v2 inputs arrive; gis Pemi (no trigger) in scratch between, as a
-  stress test (18 pp, a chooser, a two-column packlist). judy and doris
-  only inside their `private/`, with their sessions open
-- NEEDS DAVID (RULING): two new documents, neither requested yet: a falcon
-  ID write-up for its observer group (article kind), and the Christmas trip
-  packet once booked (birds + gis → report, the first trip packet born here)
+- actionable, NOW: push; check CI. Message gis: phone page landed; to get
+  it, copy `templates/report/theme/typst-template.typ` + `_quarto-phone.yml`
+  into gis/reports/storm_weekend/ and rebuild (also marks its PDFs). David
+  then rules whether the phone PDF retires gis's 240-dpi phone PNG
+- actionable, NOW: pitch `foreman` the house rule (a document a person reads
+  is built by doc_writer from source kept in the owner's folder) and one
+  /board line from `pdf_census.py <claude_stuff> --skip _archive`
+- port on the next real edit: doris action plan by 10-14 (page `foreman`
+  ~10-07 to open doris); judy guide when its v2 inputs arrive; gis Pemi in
+  scratch between (no trigger). judy, doris only in their `private/`
+- NEEDS DAVID (RULING): falcon ID write-up for its observer group; the
+  Christmas trip packet once booked. Neither requested yet
 - actionable: `--from` for article/report (PLAN.md 2.2); slides (2.1);
-  Windows runner in CI (2.4)
-- 2026-10-19: `ubuntu-latest` → Ubuntu 26 (DEADLINES.md); check CI after.
-  When the kinds settle: widen the GitHub repo description to say "reports"
+  Windows CI runner (2.4). 2026-10-19: Ubuntu 26 on CI; check after
 - parked: publishing and demo polish (`parked/README.md`)

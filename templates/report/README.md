@@ -32,6 +32,7 @@ Once per machine: `python -m pip install -r <toolkit>/requirements.txt`.
 | `figures/` | other images: maps, diagrams, photos (PNG, PDF, or SVG) |
 | `theme/typst-template.typ` | the page design: title band, header, footer, colors |
 | `_quarto.yml` | formats, font size, page size |
+| `_quarto-phone.yml` | the phone version (`_output/report-phone.pdf`); delete it if you don't want one |
 
 `build.py` runs `scripts/make_figures.py` before every render, so the PDF
 always matches the data.
@@ -66,9 +67,17 @@ its output as an image, and put it on a page with `![caption](path)`.
 
 - **Older readers:** `fontsize: 12pt` or `13pt` in `_quarto.yml`, and a
   plain sans font such as `mainfont: "Verdana"`.
-- **Phones:** set `paper-width: 4.5in` and `paper-height: 8in` in
-  `_quarto.yml` for a PDF shaped like a phone screen; margins shrink to
-  match.
+- **Phones:** every build also makes `report-phone.pdf`, the same report
+  on a 4.5 x 8 in page, from `_quarto-phone.yml` (a Quarto profile: its
+  settings override `_quarto.yml` for that PDF only). Leave a part out of
+  the phone version by wrapping it in
+  `::: {.content-hidden when-profile="phone"}` … `:::`, or show a part only
+  there with `content-visible`. Pictures sized by height shrink to the page
+  width, a table taller than the page breaks across pages with its header
+  repeated, and table words hyphenate. Any other `_quarto-<name>.yml` works
+  the same way (say, `_quarto-large.yml` with `fontsize: 14pt`, built as
+  `report-large.pdf`). Skip the extra PDFs while drafting:
+  `build.py . --no-variants`.
 - **Maps and big figures:** `page-margin: 0.5in` in `_quarto.yml` widens
   every page's text area (letter default: 0.85 in at the sides), so a map
   prints larger.

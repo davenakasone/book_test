@@ -7,11 +7,17 @@
     python build.py PROJECT --skip-figures     # just render
     python build.py PROJECT --ingram           # + PDF/X-1a CMYK print interior (books)
     python build.py PROJECT --check-only       # only the prose-unicode guard, don't build
+    python build.py PROJECT --no-variants      # skip the extra PDFs from _quarto-<name>.yml
 
 The project is the folder holding `_quarto.yml`: the path you pass, else the
 current folder. `<project>/scripts/make_figures.py`, if present, regenerates
 plotted figures first; TikZ sources in `<project>/figures-src/` are compiled
 next; after the render, an EPUB gets the epubcheck fix (scripts/fix_epub.py).
+
+Each Quarto profile in the project (`_quarto-<name>.yml`, e.g. `_quarto-phone.yml`)
+is rendered too, as an extra PDF named `<file>-<name>.pdf`: the same source on
+another page shape or type size. Every PDF built here carries the doc_writer
+mark in its Creator field (scripts/pdf_census.py counts PDFs without it).
 
 --out copies PDF, EPUB, and Word files to DIR and the web version to
 DIR/html/. It adds and overwrites; it never deletes anything in DIR.
@@ -24,6 +30,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -98,6 +105,55 @@ def check_pdf_glyphs(pdfs):
             print(f"WARNING: {pdf.name} has characters no installed font covers "
                   f"(page {', '.join(map(str, pages))}); they print as boxes. "
                   "Set a font that has them (mainfont, or cjk-font for Japanese/Chinese).")
+
+
+def profiles(proj):
+    """The project's Quarto profiles, from `_quarto-<name>.yml` files."""
+    return sorted({re.sub(r"^_quarto-|\.ya?ml$", "", p.name)
+                   for p in proj.glob("_quarto-*.y*ml")})
+
+
+def render_variant(proj, name, out):
+    """Render profile `name` to PDF only, in a temporary folder so the main
+    render in `out` stays untouched, then move each PDF to `out` as
+    `<stem>-<name>.pdf`."""
+    fmt = "pdf" if uses_latex(proj) else "typst"
+    with tempfile.TemporaryDirectory() as tmp:
+        run(f"{name} version (profile '{name}', PDF only)",
+            [find_quarto(), "render", "--profile", name, "--to", fmt, "--output-dir", tmp],
+            cwd=proj)
+        made = []
+        for pdf in sorted(Path(tmp).glob("*.pdf")):
+            dest = out / f"{pdf.stem}-{name}.pdf"
+            shutil.move(str(pdf), str(dest))
+            made.append(dest)
+    if not made:
+        sys.exit(f"profile '{name}' rendered no PDF (does the project have a PDF format?)")
+    return made
+
+
+MARK = "doc_writer"
+
+
+def stamp(pdfs, proj):
+    """Put the doc_writer mark in each PDF's Creator field, with the project
+    folder's name and never a full path (these files get shared). This is how
+    scripts/pdf_census.py tells a PDF built from source from a hand-laid one."""
+    try:
+        import fitz  # pymupdf, in requirements.txt
+    except ImportError:
+        print("WARNING: pymupdf is missing, so these PDFs carry no doc_writer mark "
+              "and pdf_census.py will count them as hand-laid.")
+        return
+    for pdf in pdfs:
+        with fitz.open(pdf) as doc:
+            meta = dict(doc.metadata)
+            engine = meta.get("creator") or ""
+            if engine.startswith(MARK):
+                continue
+            meta["creator"] = f"{MARK} ({proj.name})" + (f" via {engine}" if engine else "")
+            doc.set_metadata(meta)
+            doc.saveIncr()
 
 
 def find_quarto(required=True):
@@ -219,6 +275,8 @@ def main():
                     help="also emit the PDF/X-1a CMYK interior for IngramSpark")
     ap.add_argument("--check-only", action="store_true",
                     help="run the prose-unicode guard and exit")
+    ap.add_argument("--no-variants", action="store_true",
+                    help="skip the extra PDFs from the project's _quarto-<name>.yml profiles")
     ap.add_argument("--doctor", action="store_true",
                     help="report which tools are installed and what needs them")
     args = ap.parse_args()
@@ -247,12 +305,20 @@ def main():
     if list(out.glob("*.epub")):
         run("EPUB fix (epubcheck-clean alt text)",
             [py, str(ROOT / "scripts" / "fix_epub.py"), str(out)])
-    built = sorted(p for p in out.glob("*")
-                   if p.suffix in {".pdf", ".epub", ".docx", ".html"})
-    for p in built:
+    names = profiles(proj)
+    variant_suffixes = tuple(f"-{n}.pdf" for n in names) + ("-PDFX.pdf",)
+    built = sorted(p for p in out.glob("*")  # this render's files, not last build's variants
+                   if p.suffix in {".pdf", ".epub", ".docx", ".html"}
+                   and not p.name.endswith(variant_suffixes))
+    pdfs = [p for p in built if p.suffix == ".pdf"]
+    variants = []
+    if not args.no_variants:
+        for name in names:
+            variants += render_variant(proj, name, out)
+    for p in built + variants:
         print(f"   {p.relative_to(proj)}")
-    pdfs = [p for p in built if p.suffix == ".pdf" and not p.name.endswith("-PDFX.pdf")]
-    check_pdf_glyphs(pdfs)
+    stamp(pdfs + variants, proj)
+    check_pdf_glyphs(pdfs + variants)
 
     if args.ingram:
         if not pdfs:

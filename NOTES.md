@@ -318,3 +318,49 @@ CSV, map images) and owned the prose, tables, and a chart.
   and heights to 0.1 ft (all 8 times and 7 heights the original printed);
   take the first sample of a tie.
 
+
+## Phone version and the source mark (2026-09-28)
+
+One report source now builds a letter PDF and a phone PDF, and every PDF
+built here says so in its metadata (David, 2026-09-28: stop PDFs with no
+tooling behind them).
+
+- **Variants are Quarto profiles.** `build.py` renders each
+  `_quarto-<name>.yml` with `quarto render --profile <name> --to typst
+  --output-dir <temp dir>` (an absolute path outside the project works), so
+  the main render in `_output/` is untouched, then moves each PDF back as
+  `<stem>-<name>.pdf`. LaTeX books go the same way with `--to pdf`: a
+  `_quarto-large.yml` with `fontsize: 14pt` took body text from 10.9 to
+  14.3 pt. Per-variant content: `.content-hidden when-profile="phone"`.
+- **A captioned table never breaks across pages in Typst.** Quarto wraps it
+  in a figure, and figures don't break, so on a 4.5 x 8 in page a long
+  table ran over the footer. The theme now lets a table break only when it
+  is taller than the page body (a shorter one still moves to the next page
+  whole, as before). Decide that inside `context`, not `layout`: content
+  inside `layout` never breaks, whatever the block says (tried; the table
+  still ran off).
+- **A picture sized by height gets cropped on a narrow page.** Typst gives
+  it the full text width and crops the sides (image `fit` defaults to
+  "cover"), and `measure()` reports the cropped width, so the theme compares
+  the picture's natural aspect ratio with the text width and, when it is
+  too wide, rebuilds it sized by width.
+- **Hyphenation in tables fixed the phone and moved the letter.** Words
+  wider than a narrow column spilled into the next cell; `hyphenate: true`
+  fixed that but changed three letter pages, so it is on for small pages
+  only.
+- **Proof on a real document:** a sibling's map-heavy trip packet (a copy
+  in scratch space). With all theme changes, its letter PDF is
+  pixel-identical to the owner's build at 40 dpi, all 8 pages; the phone
+  PDF is 14 pages at 4.5 x 8 in, whole maps, tables breaking with repeated
+  headers.
+- **Theme fixes don't reach existing projects on their own.** Typography
+  is per-project config, so a report project made before this copies the
+  new `theme/typst-template.typ` from `templates/report/` to get them.
+- **The mark:** PyMuPDF `set_metadata` + `saveIncr()`; Creator becomes
+  `doc_writer (<project folder name>) via <engine>`. No paths.
+- **`scripts/pdf_census.py`:** first run over the sibling projects: 80 PDFs,
+  24 built, 10 hand-laid (2 of them doc_writer builds from before the mark),
+  5 figures, 41 received. Heuristics that mattered: match `TeX`
+  case-sensitively (a bank-statement producer is "OpenText"); a PDF printed
+  from a regular Chrome window is a saved web page (received), headless
+  Chrome is a script (hand-laid); a one-page matplotlib PDF is a figure.

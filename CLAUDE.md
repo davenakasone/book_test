@@ -57,6 +57,8 @@ python build.py PROJECT                     # figures → TikZ → render → EP
 python build.py PROJECT --out DIR           # + copy PDF/EPUB/Word to DIR, web version to DIR/html/
 python build.py PROJECT --ingram            # + PDF/X-1a CMYK interior for IngramSpark (needs ghostscript)
 python build.py PROJECT --check-only        # just the prose-unicode guard
+python build.py PROJECT --no-variants       # skip the extra PDF per _quarto-<name>.yml profile
+python scripts/pdf_census.py FOLDER         # PDFs by origin; lists the ones no build here made
 python check.py PROJECT                     # mechanical review → PROJECT/tool_output/report-*.md
 ```
 
@@ -113,6 +115,11 @@ Writing demo-book prose? Its voice rule is in `parked/README.md`.
 - **Templates stay placeholder-honest.** The datasheet ships with a
   `TEMPLATE` watermark and a fictional part; the article cites real papers
   correctly. A template must never pass as a real document.
+- **Every PDF built here carries the mark.** `build.py` writes
+  `doc_writer (<project folder name>) via <engine>` into the Creator field;
+  `scripts/pdf_census.py` counts PDFs without it as hand-laid (David,
+  2026-09-28: stop PDFs with no tooling behind them). Never put a full path
+  in the mark: these files get shared.
 - `templates/book/latex/` and `book/latex/` are separate copies (typography
   is per-project config). The EPUB fix is a tool (`scripts/fix_epub.py`).
 - **UTF-8 explicitly, everywhere.** Every text read, write, and subprocess
@@ -127,12 +134,12 @@ Writing demo-book prose? Its voice rule is in `parked/README.md`.
 
 ```
 new.py           start a project: python new.py <book|article|datasheet|report> <folder> [--from RAW]
-build.py         build any project (--out, --doctor, --ingram, --check-only)
+build.py         build any project (--out, --doctor, --ingram, --check-only, --no-variants)
 check.py         mechanical review of any project → <project>/tool_output/
 templates/       book/ article/ datasheet/ report/ — starter content + per-kind README (<toolkit> filled in)
 book/            the demo book, an ordinary project (_quarto.yml is its source of truth)
   chapters/ appendices/ references.bib latex/ figures-src/ figures/ html/ scripts/make_figures.py
-scripts/         ingest · fix_epub · build_tikz · make_pdfx · extract_feedback
+scripts/         ingest · fix_epub · build_tikz · make_pdfx · extract_feedback · pdf_census
 parked/          publishing on hold: PUBLISHING.md BUSINESS.md platform/ latex-shootout/ (README.md says why)
 .claude/commands/ /review <project> and /feedback <project>/feedback/<round>
 START-HERE.md    newcomer runbook   NOTES.md  every trap hit   LOG.md  finished work

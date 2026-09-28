@@ -1,0 +1,13 @@
+# The phone version: the same report on a page shaped like a phone screen.
+# build.py renders it after the letter PDF, as _output/report-phone.pdf.
+# Delete this file if the report doesn't need one.
+#
+# Anything here overrides _quarto.yml for the phone version only. To leave a
+# part out of it, wrap that part in report.qmd:
+#   ::: {.content-hidden when-profile="phone"}
+#   ...
+#   :::
+format:
+  typst:
+    paper-width: 4.5in
+    paper-height: 8in

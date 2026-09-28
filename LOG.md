@@ -3,6 +3,21 @@
 Moved out of CLAUDE.md's STATUS block at the 2026-09-26 split (house rule
 6). Current state lives in STATUS.md; standing rules in CLAUDE.md.
 
+**2026-09-28 — phone version; every PDF marked; PDF census.** One report
+source builds letter + phone PDFs: `build.py` renders each
+`_quarto-<name>.yml` profile as `<stem>-<name>.pdf` (`--no-variants` skips);
+the report template ships `_quarto-phone.yml` (4.5 x 8 in) and a
+`when-profile` example. Theme fixes found on a sibling's trip packet: long
+tables break across pages (only when taller than a page), height-sized
+pictures shrink instead of cropping, table words hyphenate on small pages;
+its letter PDF stayed pixel-identical (8 of 8 pages). Every PDF built here
+carries `doc_writer (<folder>) via <engine>` in Creator;
+`scripts/pdf_census.py` counts PDFs by origin (first run over the siblings:
+80 PDFs, 10 hand-laid). CI asserts the phone page size, the hidden section,
+the mark, and the census on a two-page matplotlib PDF. Moved two stale
+untracked PDFs (an old demo copy at the root, a parked shootout render)
+into scratch space. NOTES "Phone version and the source mark".
+
 **2026-09-27 — first sibling reproduction (a map-heavy trip packet).**
 Rebuilt a sibling's 6-page matplotlib packet as a `report` project in
 scratch space (content kept out of this repo; handed to the owner in its

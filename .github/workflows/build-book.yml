@@ -170,6 +170,32 @@ jobs:
           grep -q '\$87' "$RUNNER_TEMP"/out-report/html/report.html  # a {{< var >}} number from data/model.json reached the page
           if grep -q '?var' "$RUNNER_TEMP"/out-report/html/report.html; then exit 1; fi  # no unresolved {{< var >}}
           if ls "$RUNNER_TEMP"/t-*/build.py 2>/dev/null; then exit 1; fi  # projects carry no copies of the tools
+      - name: Phone version, the doc_writer mark, and pdf_census
+        env:
+          PYTHONIOENCODING: cp1252
+        run: |
+          set -x
+          # The report template's _quarto-phone.yml: a 4.5 x 8 in PDF that leaves
+          # out the section marked content-hidden when-profile="phone"; both marked.
+          python - "$RUNNER_TEMP/out-report" <<'EOF'
+          import sys, fitz
+          letter = fitz.open(sys.argv[1] + "/report.pdf")
+          phone = fitz.open(sys.argv[1] + "/report-phone.pdf")
+          r = phone[0].rect
+          assert (round(r.width), round(r.height)) == (324, 576), r
+          hidden = "Say where each number came from"
+          assert hidden in "".join(p.get_text() for p in letter)
+          assert hidden not in "".join(p.get_text() for p in phone)
+          for doc in (letter, phone):
+              assert doc.metadata["creator"].startswith("doc_writer"), doc.metadata
+          EOF
+          # The census counts every PDF built here as built, and a PDF a script
+          # laid out page by page (two matplotlib pages) as hand-laid.
+          c="$RUNNER_TEMP/census"; mkdir -p "$c"; cp "$RUNNER_TEMP"/out-*/*.pdf "$c/"
+          python -c 'import sys, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt; from matplotlib.backends.backend_pdf import PdfPages; pp = PdfPages(sys.argv[1]); [pp.savefig(plt.figure()) for _ in range(2)]; pp.close()' "$c/hand-laid.pdf"
+          python scripts/pdf_census.py "$c" | tee "$RUNNER_TEMP/census.txt"
+          grep -qE '^  hand-laid +1$' "$RUNNER_TEMP/census.txt"
+          grep -q 'hand-laid.pdf  (Matplotlib, 2 pp)' "$RUNNER_TEMP/census.txt"
       - name: Validate the book template's EPUB
         run: epubcheck "$RUNNER_TEMP"/out-book/*.epub
       - uses: actions/upload-artifact@v7
@@ -180,6 +206,7 @@ jobs:
             ${{ runner.temp }}/out-article/article.pdf
             ${{ runner.temp }}/out-datasheet/datasheet.pdf
             ${{ runner.temp }}/out-report/report.pdf
+            ${{ runner.temp }}/out-report/report-phone.pdf
           retention-days: 30
 
   # On a version tag, attach the built book to a permanent GitHub Release —

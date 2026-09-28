@@ -48,12 +48,13 @@
   // size goes into the one `set page` below as spread arguments.)
   let custom = paper-width != none and paper-height != none
   let small = custom and paper-width < 6in
+  let margin = if page-margin != none { (x: page-margin, top: page-margin, bottom: page-margin) }
+               else if small { (x: 0.4in, top: 0.6in, bottom: 0.55in) }
+               else { (x: 0.85in, top: 0.9in, bottom: 0.8in) }
 
   set page(
     ..if custom { (width: paper-width, height: paper-height) },
-    margin: if page-margin != none { page-margin }
-            else if small { (x: 0.4in, top: 0.6in, bottom: 0.55in) }
-            else { (x: 0.85in, top: 0.9in, bottom: 0.8in) },
+    margin: margin,
     header: context {
       if here().page() > 1 {
         set text(size: 0.72em, fill: luma(35%))
@@ -93,6 +94,9 @@
 
   // Tables: hairline grid, shaded header row, a little smaller than body text.
   show table: set text(size: 0.9em)
+  // On a narrow page a word wider than its column spills into the next
+  // cell unless it may hyphenate (letter pages keep whole words).
+  show table: set text(hyphenate: small)
   show table.cell.where(y: 0): set text(weight: "bold")
   set table(
     inset: (x: 5pt, y: 4pt),
@@ -100,6 +104,26 @@
     fill: (_, y) => if y == 0 { accent.lighten(85%) },
   )
   show figure.caption: set text(size: 0.85em)
+  // Quarto puts every captioned table in a figure, and a Typst figure never
+  // breaks across pages: a table taller than a whole page ran off the bottom
+  // and over the footer (seen on a 4.5 x 8 in phone page). Let only those
+  // break; a table that fits on a page still moves to the next one whole.
+  // (`context`, not `layout`: content inside `layout` never breaks.)
+  show figure.where(kind: "quarto-float-tbl"): it => context {
+    let body = page.height - margin.top - margin.bottom
+    set block(breakable: measure(it, width: page.width - 2 * margin.x).height > body)
+    it
+  }
+  // A picture sized by height (`height=80%` in the .qmd) would be wider than
+  // a narrow page, and Typst then crops its sides to the text width (image
+  // fit defaults to "cover"). Size it by width instead, so it shrinks whole.
+  show image: it => layout(size => {
+    if it.height == auto or it.width != auto { return it }
+    let natural = measure(image(it.source))
+    let h = measure(it, width: size.width, height: size.height).height
+    if h * (natural.width / natural.height) <= size.width { it }
+    else { image(it.source, width: size.width, alt: it.alt) }
+  })
 
   // Page-1 title band.
   block(width: 100%, below: 1.4em)[

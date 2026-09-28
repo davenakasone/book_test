@@ -53,6 +53,12 @@ tool drafts stays marked until the author replaces it.
 - `build.py PROJECT`: figures, then render every format, in one command.
   `--out DIR` copies the finished documents out. `--doctor` reports missing
   tools. `--ingram` makes the PDF/X-1a CMYK file IngramSpark requires.
+  Each Quarto profile in the project (`_quarto-phone.yml`, `_quarto-large.yml`)
+  becomes one more PDF from the same source (`report-phone.pdf`), and every
+  PDF gets a `doc_writer` mark in its metadata.
+- `scripts/pdf_census.py FOLDER`: counts the PDFs under a folder by origin
+  (built here, laid out by a script, figures, received) and lists the ones a
+  script laid out, so documents with no source in this toolkit can be found.
 - `check.py`: a mechanical review that recommends and never edits. It
   checks broken cross-references and citations, missing images, missing
   alt text, spelling, repeated words, glyphs that vanish in LaTeX PDFs, and

@@ -76,6 +76,7 @@ code where it lives; point the report at its output.
 
 ![The whole route on one page.](figures/full-page.svg){#fig-map height=75% fig-alt="Placeholder map: a dashed red route through three numbered stops on a grid."}
 
+::: {.content-hidden when-profile="phone"}
 {{< pagebreak >}}
 
 # Sources
@@ -85,3 +86,7 @@ check it and you can refresh it:
 
 - Drive times: a routing service, pulled on the build date.
 - Daylight: a sunrise and sunset table for the location and date.
+
+This section is left out of the phone version (`_output/report-phone.pdf`):
+it sits inside a `content-hidden when-profile="phone"` block.
+:::
