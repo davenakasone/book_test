@@ -12,8 +12,9 @@ them.** Toolkit side done (0fee6b1, CI green, all 4 jobs): every PDF
 `build.py` makes carries `doc_writer (<folder>) via <engine>` in Creator;
 `scripts/pdf_census.py` counts PDFs by origin (claude_stuff: 80 PDFs, 10
 hand-laid, 2 of them pre-mark builds in gis). Pitched to `foreman`: it
-widened SERVICES row 21 (root 4ff2542); the house rule and the /board census
-line wait on David's yes in the foreman's chat. It will message me.
+widened SERVICES row 21 (root 4ff2542). David said yes: RULES.md rule 11
+"Documents are built by doc_writer" and a /board census step are live (root
+325f577; baseline hand-laid 10). Projects ask me for their ports.
 
 **Phone version done:** each `_quarto-<name>.yml` profile builds one more PDF
 (`report-phone.pdf`, 4.5 x 8 in); the report template ships one. On a
@@ -23,8 +24,6 @@ scratch copy of gis's storm packet the letter PDF stayed pixel-identical
 rebuild); foreman put it first in gis's next brief (B-260928-2).
 
 **Next:**
-- blocked on David (via foreman): house rule "a document a person reads is
-  built by doc_writer" + the /board census line. On yes, nothing to do here
 - blocked on gis waking: it adopts the phone drop; then David rules whether
   the phone PDF retires gis's 240-dpi phone PNG
 - port on the next real edit: doris action plan by 10-14 (DEADLINES
