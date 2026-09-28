@@ -9,14 +9,11 @@ datasheet, report. PLAN.md Phases 0 and 1 are done; publishing is parked.
 judge it good, message `foreman`, who tells every session to come here for
 documents. Not yet: 1 of 4 sibling documents reproduced.
 
-**Reproduction 1 done: gis storm-weekend packet** (scratch, then dropped at
-`gis/in/from_doc_writer_2026-09-27_storm/`, with HANDOFF.md holding the
-`--export` spec and two gis findings). 8 pp / 1.8 MB against gis's
-6 pp / 3.7 MB; every number a var; the plan text keeps its Markdown; HTML +
-Word too. Costs: the page-1 map is 5.6 in against 8.2 in, and the report
-takes more lines than gis's layout code (NOTES, "First reproduction").
-Toolkit gains (c1c78fa, pushed): `page-margin:`, vector PDF maps via
-extension-less paths, and check.py caption-link and extension fixes.
+**Reproduction 1 done: gis storm-weekend packet** (drop + HANDOFF.md at
+`gis/in/from_doc_writer_2026-09-27_storm/`). 8 pp / 1.8 MB against gis's
+6 pp / 3.7 MB; every number a var; HTML + Word too. Costs: a smaller page-1
+map, and more lines than gis's layout code (NOTES, "First reproduction").
+Toolkit gains (c1c78fa): `page-margin:`, vector PDF maps, check.py fixes.
 
 **Verified:** four-kind e2e exits 0 under the Windows-encoding guard, and CI
 is green, after c1c78fa. The drop rebuilds from a fresh copy (8 pp, 0 break).
