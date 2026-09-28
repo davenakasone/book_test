@@ -29,9 +29,15 @@ for c1c78fa.
   gis when it lands. gis adopted the export (gis 9f1c6b5): report at
   gis/reports/storm_weekend/, 8 pp / 1.57 MB; it keeps its PDF + phone PNG
   until the phone page exists
-- actionable: reproduce gis Pemi ford packet (18 pp, most prose) the same
-  way in scratch; then judy, then doris, only inside their `private/` with
-  their sessions open
+- reproduction order is by trigger (survey 2026-09-27): port a document
+  when it next needs a real edit. doris's action plan by 10-14 (a figure it
+  quotes changes then; page `foreman` ~10-07 to open doris); judy's guide
+  when its v2 inputs arrive; gis Pemi (no trigger) in scratch between, as a
+  stress test (18 pp, a chooser, a two-column packlist). judy and doris
+  only inside their `private/`, with their sessions open
+- NEEDS DAVID (RULING): two new documents, neither requested yet: a falcon
+  ID write-up for its observer group (article kind), and the Christmas trip
+  packet once booked (birds + gis → report, the first trip packet born here)
 - actionable: `--from` for article/report (PLAN.md 2.2); slides (2.1)
 - actionable: Windows runner in CI (PLAN.md 2.4)
 - 2026-10-19: `ubuntu-latest` → Ubuntu 26 (DEADLINES.md); check CI after
