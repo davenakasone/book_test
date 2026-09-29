@@ -3,6 +3,16 @@
 Moved out of CLAUDE.md's STATUS block at the 2026-09-26 split (house rule
 6). Current state lives in STATUS.md; standing rules in CLAUDE.md.
 
+**2026-09-28 — check.py catches three layout traps.** From a peer's
+field report (`__hub__`, an article whose PDF passed check.py but rendered
+wrong). New: BREAK on a line pandoc reads as an example-list marker
+(`@fig-x.` starting a block or inside a list/table; it drops the ref), WARN
+on a table code span wider than its dash-share column, WARN on Markdown
+emphasis in author names. Each was reproduced by rendering, and each fix was proved by a
+re-render. The column widths come from Typst and LaTeX renders (NOTES
+"Layout traps the source hides"). All four kinds pass end to end, and the
+templates raise no new findings.
+
 **2026-09-28 — phone version; every PDF marked; PDF census.** One report
 source builds letter + phone PDFs: `build.py` renders each
 `_quarto-<name>.yml` profile as `<stem>-<name>.pdf` (`--no-variants` skips);

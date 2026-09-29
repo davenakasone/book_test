@@ -364,3 +364,22 @@ tooling behind them).
   case-sensitively (a bank-statement producer is "OpenText"); a PDF printed
   from a regular Chrome window is a saved web page (received), headless
   Chrome is a script (hand-laid); a one-page matplotlib PDF is a figure.
+
+## Layout traps the source hides (2026-09-28, from `__hub__`)
+
+A peer session's article passed every check, yet its PDF had three defects.
+All three reproduced here, and `check.py` now flags each:
+- **A line starting with `@fig-x.`, `@key)` or `(@x)` is an example-list
+  marker** wherever it starts a block (after a blank line, heading, `:::`,
+  comment, or code fence) or sits in a list-item or table block: pandoc
+  renders `1. The ...` and drops the cross-ref. Inside a plain paragraph,
+  a quote, or a callout it's safe. BREAK. On a 16-case file, check.py
+  flagged the same 9 lines pandoc listed. The demo book has 4 safe ones.
+- **Monospace can't wrap.** In a pipe table with a row over 72 chars,
+  pandoc sizes columns by dash ratio (colons count). A code span wider than
+  its column overprints the next column, in both Typst and LaTeX. Rendered,
+  25% column: Typst (letter, 10pt) fits 21 chars and 26 overprints; LaTeX
+  (6x9, 11pt) fits 13 and 17 overprints. Fix with dashes or `tbl-colwidths`.
+  The check reads the main format's fontsize only; a phone profile is narrower.
+- **Author names are Markdown.** `name: __hub__` renders as bold "hub".
+  Write `\_\_hub\_\_` (plain scalar).

@@ -42,6 +42,10 @@ CITE_RE = re.compile(r"\[@([\w:-]+)[\],; ]|[^\w\[]@([\w:-]+)")
 # the caption may hold one level of brackets: a link, [@cite], or [span]{.class}
 IMG_RE = re.compile(r"!\[(?:[^\[\]]|\[[^\[\]]*\])*\]\(([^)\s]+)\)(\{[^}]*\})?")
 TODO_RE = re.compile(r"\b(TODO|FIXME|XXX|TK)\b")
+# "@fig-x." / "@key)" / "(@x)" first on a line: pandoc's example-list marker
+EXAMPLE_RE = re.compile(r"\s*(\(@[\w-]*\)|@[\w-]+[.)])(?=\s|$)")
+PIPE_SEP_RE = re.compile(r"\s*\|[\s|:-]*-[\s|:-]*$")
+EMPH_RE = re.compile(r"(?<![\w\\])(\*{1,2}|_{1,2})(?=\S)(.+?)(?<=\S)\1(?!\w)")
 
 
 def project_dir(arg=None):
@@ -205,6 +209,69 @@ def main():
         long_s = [len(s) for s in sentences if len(s) > 40]
         if long_s:
             add("INFO", q, f"{len(long_s)} sentence(s) over 40 words (longest {max(long_s)})")
+
+    # -- layout traps pandoc parses without complaint (seen in a rendered PDF
+    #    that passed every other check, 2026-09-28)
+    # monospace chars across the text width, scaled by fontsize. Rendered, 25%
+    # column: Typst letter 10pt fits 21, 26 overprints (84); LaTeX 6x9 11pt
+    # fits 13, 17 overprints (56). Only the main format: a phone profile is narrower
+    fs = re.search(r"^\s*fontsize:\s*([\d.]+)pt", yml, re.M)
+    fs = float(fs.group(1)) if fs else 11
+    col_w = int((56 * 11 if latex else 84 * 10) / fs) // (
+        2 if re.search(r"^\s*columns:\s*2\b", yml, re.M) else 1)
+    for q in qmds:
+        raw, cl = texts[q].split("\n"), clean[q].split("\n")
+        for i, l in enumerate(cl):
+            m = EXAMPLE_RE.match(l)
+            if not m:
+                continue
+            # safe only inside a plain paragraph; walk back to the block's first line
+            j = i
+            while j > 0 and cl[j - 1].strip() and not re.match(r"\s*(#|:::|<!--)|.*-->\s*$", cl[j - 1]):
+                j -= 1
+            if j == i or re.match(r"\s*(\||[-*+]\s|\d+[.)]\s|\(?@[\w-]*[.)]\s)", cl[j]):
+                add("BREAK", q, f"line {i + 1}: starts with '{m.group(1)}', which pandoc reads here "
+                    "as an example list ('1.'), dropping the ref; rewrap so it isn't first")
+        i = 0
+        while i < len(cl) - 1:
+            if not (cl[i].lstrip().startswith("|") and PIPE_SEP_RE.match(cl[i + 1])):
+                i += 1
+                continue
+            j = i + 2
+            while j < len(cl) and cl[j].lstrip().startswith("|"):
+                j += 1
+            near = " ".join(cl[max(0, i - 2):i] + cl[j:j + 2])
+            cw = re.search(r'tbl-colwidths="\[([\d.,\s]+)\]"', near)
+            shares = ([float(x) for x in cw.group(1).split(",")] if cw else
+                      [len(s.strip()) for s in cl[i + 1].strip().strip("|").split("|")])
+            # pandoc sizes columns by dashes only when a row is wider than 72 chars
+            if cw or max(len(raw[k]) for k in range(i, j)) > 72:
+                for k in [i, *range(i + 2, j)]:
+                    for m in re.finditer(r"`([^`\n]+)`", raw[k]):
+                        col = len(re.findall(r"(?<!\\)\|", cl[k][:m.start()])) - 1
+                        word = max(m.group(1).split() or [""], key=len)  # breaks only at spaces
+                        fit = int(shares[col] / sum(shares) * col_w) if col < len(shares) else 999
+                        if len(word) > fit:
+                            add("WARN", q, f"line {k + 1}: `{word}` ({len(word)} chars, can't wrap) is wider "
+                                f"than its column (~{fit}): it overprints the next column in the PDF; "
+                                "give that column more dashes, or set tbl-colwidths")
+            i = j
+
+    # -- author names are Markdown: `__hub__` renders as bold "hub"
+    for src, fm, off in [(proj / "_quarto.yml", yml, 0),
+                         *((q, front_matter(texts[q]), 1) for q in qmds)]:
+        block = None
+        for n, line in enumerate(fm.splitlines(), 1):
+            m = re.match(r"\s*(?:-\s+)?([\w-]+):\s*(.*)$", line)
+            if m and not m.group(2):
+                block = m.group(1)
+            val = (m.group(2) if m and m.group(1) in ("author", "editor", "name") else
+                   line.split("-", 1)[1] if not m and block in ("author", "editor")
+                   and line.lstrip().startswith("- ") else "")
+            e = EMPH_RE.search(val.strip().strip("\"'"))
+            if e:
+                add("WARN", src, f"line {n + off}: name {e.group(0)!r} is Markdown and renders as "
+                    f"emphasis {e.group(2)!r}; escape the marks ({e.group(1)[0]} -> \\{e.group(1)[0]})")
 
     # -- bibliography: _quarto.yml or any front matter
     bib_names = re.findall(r"^\s*bibliography:\s*(\S+)", yml, re.M)
